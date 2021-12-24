@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-网络协议_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/11/01/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_hexo/" class="article-date">
+  <time datetime="2021-11-01T08:34:18.000Z" itemprop="datePublished">2021-11-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/01/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_hexo/">网络协议（转）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="网络基础之网络协议篇"><a href="#网络基础之网络协议篇" class="headerlink" title="网络基础之网络协议篇"></a>网络基础之网络协议篇</h1><p>本文转自<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaifeng/articles/5937962.html">https://www.cnblogs.com/linhaifeng/articles/5937962.html</a></p>
+<h1 id="一-操作系统基础"><a href="#一-操作系统基础" class="headerlink" title="一.操作系统基础"></a>一.操作系统基础</h1><p> 操作系统:(Operating System，简称OS)是管理和控制计算机硬件与软件资源的计算机程序，是直接运行在“裸机”上的最基本的系统软件，任何其他软件都必须在操作系统的支持下才能运行。</p>
+<p>注：计算机(硬件)－&gt;os－&gt;应用软件</p>
+<h1 id="二-网络通信原理"><a href="#二-网络通信原理" class="headerlink" title="二.网络通信原理"></a>二.网络通信原理</h1><h2 id="2-1-互联网的本质就是一系列的网络协议"><a href="#2-1-互联网的本质就是一系列的网络协议" class="headerlink" title="2.1 互联网的本质就是一系列的网络协议"></a>2.1 互联网的本质就是一系列的网络协议</h2><p>一台硬设有了操作系统，然后装上软件你就可以正常使用了，然而你也只能自己使用</p>
+<p>像这样，每个人都拥有一台自己的机器，然而彼此孤立</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008115246442-867569611.png" alt="img"></p>
+<p>如何能大家一起玩耍</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008115341598-934171433.png" alt="img"></p>
+<p>然而internet为何物？</p>
+<p>其实两台计算机之间通信与两个人打电话之间通信的原理是一样的（中国有很多地区，不同的地区有不同的方言，为了全中国人都可以听懂，大家统一讲普通话）</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008131010254-430615122.png" alt="img"></p>
+<p>普通话属于中国国内人与人之间通信的标准，那如果是两个国家的人交流呢？</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008131301051-196580728.png" alt="img"></p>
+<p>问题是，你不可能要求一个人／计算机掌握全世界的语言／标准，于是有了世界统一的通信标准：英语</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008131410957-1579746437.png" alt="img"></p>
+<p>结论：英语成为世界上所有人通信的统一标准，如果把计算机看成分布于世界各地的人，那么连接两台计算机之间的internet实际上就是</p>
+<p>一系列统一的标准，这些标准称之为互联网协议，互联网的本质就是一系列的协议，总称为‘互联网协议’（Internet Protocol Suite).</p>
+<p>互联网协议的功能：定义计算机如何接入internet，以及接入internet的计算机通信的标准。</p>
+<h2 id="2-2-osi七层协议"><a href="#2-2-osi七层协议" class="headerlink" title="2.2 osi七层协议"></a>2.2 osi七层协议</h2><p>互联网协议按照功能不同分为osi七层或tcp/ip五层或tcp/ip四层</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008145544426-736439132.png" alt="img"></p>
+<p>每层运行常见物理设备</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008144925254-1398507493.png" alt="img"></p>
+<p>OSI七层协议数据传输的封包与解包过程 </p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20200415215541847-564448301.gif" alt="img"></p>
+<h2 id="2-3-tcp-ip五层模型讲解"><a href="#2-3-tcp-ip五层模型讲解" class="headerlink" title="2.3 tcp/ip五层模型讲解"></a>2.3 tcp/ip五层模型讲解</h2><p>我们将应用层，表示层，会话层并作应用层，从tcp／ip五层协议的角度来阐述每层的由来与功能，搞清楚了每层的主要协议</p>
+<p>就理解了整个互联网通信的原理。</p>
+<p>首先，用户感知到的只是最上面一层应用层，自上而下每层都依赖于下一层，所以我们从最下一层开始切入，比较好理解</p>
+<p>每层都运行特定的协议，越往上越靠近用户，越往下越靠近硬件</p>
+<h3 id="2-3-1-物理层"><a href="#2-3-1-物理层" class="headerlink" title="2.3.1 物理层"></a>2.3.1 物理层</h3><p>物理层由来：上面提到，孤立的计算机之间要想一起玩，就必须接入internet，言外之意就是计算机之间必须完成组网</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008154500754-704720294.png" alt="img"></p>
+<p>物理层功能：主要是基于电器特性发送高低电压(电信号)，高电压对应数字1，低电压对应数字0</p>
+<h3 id="2-3-2-数据链路层"><a href="#2-3-2-数据链路层" class="headerlink" title="2.3.2 数据链路层"></a>2.3.2 数据链路层</h3><p>数据链路层由来：单纯的电信号0和1没有任何意义，必须规定电信号多少位一组，每组什么意思</p>
+<p>数据链路层的功能：定义了电信号的分组方式</p>
+<p><em><strong>以太网协议：</strong></em></p>
+<p>早期的时候各个公司都有自己的分组方式，后来形成了统一的标准，即以太网协议ethernet</p>
+<p>ethernet规定</p>
+<ul>
+<li>一组电信号构成一个数据包，叫做‘帧’</li>
+<li>每一数据帧分成：报头head和数据data两部分</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>head</th>
+<th>data</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>head包含：(固定18个字节)</p>
+<ul>
+<li>发送者／源地址，6个字节</li>
+<li>接收者／目标地址，6个字节</li>
+<li>数据类型，6个字节</li>
+</ul>
+<p>data包含：(最短46字节，最长1500字节)</p>
+<ul>
+<li>数据包的具体内容</li>
+</ul>
+<p>head长度＋data长度＝最短64字节，最长1518字节，超过最大限制就分片发送</p>
+<p><em><strong>mac地址：</strong></em></p>
+<p>head中包含的源和目标地址由来：ethernet规定接入internet的设备都必须具备网卡，发送端和接收端的地址便是指网卡的地址，即mac地址</p>
+<p>mac地址：每块网卡出厂时都被烧制上一个世界唯一的mac地址，长度为48位2进制，通常由12位16进制数表示（前六位是厂商编号，后六位是流水线号）</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008164852129-1597186542.png" alt="img"></p>
+<p>*<strong>广播：*</strong></p>
+<p>有了mac地址，同一网络内的两台主机就可以通信了（一台主机通过arp协议获取另外一台主机的mac地址）</p>
+<p>ethernet采用最原始的方式，广播的方式进行通信，即计算机通信基本靠吼</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008171118317-164674895.png" alt="img"></p>
+<h3 id="2-3-3-网络层"><a href="#2-3-3-网络层" class="headerlink" title="2.3.3 网络层"></a>2.3.3 网络层</h3><p>网络层由来：有了ethernet、mac地址、广播的发送方式，世界上的计算机就可以彼此通信了，问题是世界范围的互联网是由</p>
+<p>一个个彼此隔离的小的局域网组成的，那么如果所有的通信都采用以太网的广播方式，那么一台机器发送的包全世界都会收到，</p>
+<p>这就不仅仅是效率低的问题了，这会是一种灾难</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008172732957-102296982.png" alt="img"></p>
+<p>上图结论：必须找出一种方法来区分哪些计算机属于同一广播域，哪些不是，如果是就采用广播的方式发送，如果不是，</p>
+<p>就采用路由的方式（向不同广播域／子网分发数据包），mac地址是无法区分的，它只跟厂商有关</p>
+<p>网络层功能：引入一套新的地址用来区分不同的广播域／子网，这套地址即网络地址</p>
+<p><em><strong>IP协议：</strong></em></p>
+<ul>
+<li>规定网络地址的协议叫ip协议，它定义的地址称之为ip地址，广泛采用的v4版本即ipv4，它规定网络地址由32位2进制表示</li>
+<li>范围0.0.0.0-255.255.255.255</li>
+<li>一个ip地址通常写成四段十进制数，例：172.16.10.1</li>
+</ul>
+<p>*<strong>ip地址分成两部分*</strong></p>
+<ul>
+<li>网络部分：标识子网</li>
+<li>主机部分：标识主机</li>
+</ul>
+<p>注意：单纯的ip地址段只是标识了ip地址的种类，从网络部分或主机部分都无法辨识一个ip所处的子网</p>
+<p>例：172.16.10.1与172.16.10.2并不能确定二者处于同一子网</p>
+<p><em><strong>子网掩码</strong></em></p>
+<p>所谓”子网掩码”，就是表示子网络特征的一个参数。它在形式上等同于IP地址，也是一个32位二进制数字，它的网络部分全部为1，主机部分全部为0。比如，IP地址172.16.10.1，如果已知网络部分是前24位，主机部分是后8位，那么子网络掩码就是11111111.11111111.11111111.00000000，写成十进制就是255.255.255.0。</p>
+<p>知道”子网掩码”，我们就能判断，任意两个IP地址是否处在同一个子网络。方法是将两个IP地址与子网掩码分别进行AND运算（两个数位都为1，运算结果为1，否则为0），然后比较结果是否相同，如果是的话，就表明它们在同一个子网络中，否则就不是。</p>
+<p>比如，已知IP地址172.16.10.1和172.16.10.2的子网掩码都是255.255.255.0，请问它们是否在同一个子网络？两者与子网掩码分别进行AND运算，</p>
+<p>172.16.10.1：10101100.00010000.00001010.000000001</p>
+<p>255255.255.255.0:11111111.11111111.11111111.00000000</p>
+<p>AND运算得网络地址结果：10101100.00010000.00001010.000000001-&gt;172.16.10.0</p>
+<p>172.16.10.2：10101100.00010000.00001010.000000010</p>
+<p>255255.255.255.0:11111111.11111111.11111111.00000000</p>
+<p>AND运算得网络地址结果：10101100.00010000.00001010.000000001-&gt;172.16.10.0</p>
+<p>结果都是172.16.10.0，因此它们在同一个子网络。</p>
+<p>总结一下，IP协议的作用主要有两个，一个是为每一台计算机分配IP地址，另一个是确定哪些地址在同一个子网络。</p>
+<p><em><strong>ip数据包</strong></em></p>
+<p>ip数据包也分为head和data部分，无须为ip包定义单独的栏位，直接放入以太网包的data部分</p>
+<p>head：长度为20到60字节</p>
+<p>data：最长为65,515字节。</p>
+<p>而以太网数据包的”数据”部分，最长只有1500字节。因此，如果IP数据包超过了1500字节，它就需要分割成几个以太网数据包，分开发送了。</p>
+<table>
+<thead>
+<tr>
+<th>以太网头</th>
+<th>ip 头</th>
+<th>ip数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p> <em><strong>ARP协议</strong></em></p>
+<p>arp协议由来：计算机通信基本靠吼，即广播的方式，所有上层的包到最后都要封装上以太网头，然后通过以太网协议发送，在谈及以太网协议时候，我门了解到</p>
+<p>通信是基于mac的广播方式实现，计算机在发包时，获取自身的mac是容易的，如何获取目标主机的mac，就需要通过arp协议</p>
+<p>arp协议功能：广播的方式发送数据包，获取目标主机的mac地址</p>
+<p>协议工作方式：每台主机ip都是已知的</p>
+<p>例如：主机172.16.10.10/24访问172.16.10.11/24</p>
+<p>一：首先通过ip地址和子网掩码区分出自己所处的子网</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>数据包地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>同一子网</td>
+<td>目标主机mac，目标主机ip</td>
+</tr>
+<tr>
+<td>不同子网</td>
+<td>网关mac，目标主机ip</td>
+</tr>
+</tbody></table>
+<p>二：分析172.16.10.10/24与172.16.10.11/24处于同一网络(如果不是同一网络，那么下表中目标ip为172.16.10.1,通过arp获取的是网关的mac)</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>源mac</th>
+<th>目标mac</th>
+<th>源ip</th>
+<th>目标ip</th>
+<th>数据部分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发送端主机</td>
+<td>发送端mac</td>
+<td>FF:FF:FF:FF:FF:FF</td>
+<td>172.16.10.10/24</td>
+<td>172.16.10.11/24</td>
+<td>数据</td>
+</tr>
+</tbody></table>
+<p>三：这个包会以广播的方式在发送端所处的自网内传输，所有主机接收后拆开包，发现目标ip为自己的，就响应，返回自己的mac</p>
+<h3 id="2-3-4-传输层"><a href="#2-3-4-传输层" class="headerlink" title="2.3.4 传输层"></a>2.3.4 传输层</h3><p>传输层的由来：网络层的ip帮我们区分子网，以太网层的mac帮我们找到主机，然后大家使用的都是应用程序，你的电脑上可能同时开启qq，暴风影音，等多个应用程序，</p>
+<p>那么我们通过ip和mac找到了一台特定的主机，如何标识这台主机上的应用程序，答案就是端口，端口即应用程序与网卡关联的编号。</p>
+<p>传输层功能：建立端口到端口的通信</p>
+<p>补充：端口范围0-65535，0-1023为系统占用端口</p>
+<p>tcp协议：</p>
+<p>可靠传输，TCP数据包没有长度限制，理论上可以无限长，但是为了保证网络的效率，通常TCP数据包的长度不会超过IP数据包的长度，以确保单个TCP数据包不必再分割。</p>
+<table>
+<thead>
+<tr>
+<th>以太网头</th>
+<th>ip 头</th>
+<th>tcp头</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>udp协议：</p>
+<p>不可靠传输，”报头”部分一共只有8个字节，总长度不超过65,535字节，正好放进一个IP数据包。</p>
+<table>
+<thead>
+<tr>
+<th>以太网头</th>
+<th>ip头</th>
+<th>udp头</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>tcp报文</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008185553973-1895926477.png" alt="img"></p>
+<p>tcp三次握手和四次挥手</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008185648160-191189690.png" alt="img"></p>
+<h3 id="2-3-5-应用层"><a href="#2-3-5-应用层" class="headerlink" title="2.3.5 应用层"></a>2.3.5 应用层</h3><p>应用层由来：用户使用的都是应用程序，均工作于应用层，互联网是开发的，大家都可以开发自己的应用程序，数据多种多样，必须规定好数据的组织形式 </p>
+<p>应用层功能：规定应用程序的数据格式。</p>
+<p>例：TCP协议可以为各种各样的程序传递数据，比如Email、WWW、FTP等等。那么，必须有不同协议规定电子邮件、网页、FTP数据的格式，这些应用程序协议就构成了”应用层”。</p>
+<p> <img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161008190023098-992049015.png" alt="img"></p>
+<h3 id="2-3-6-socket"><a href="#2-3-6-socket" class="headerlink" title="2.3.6 socket"></a>2.3.6 socket</h3><p>我们知道两个进程如果需要进行通讯最基本的一个前提能能够唯一的标示一个进程，在本地进程通讯中我们可以使用PID来唯一标示一个进程，但PID只在本地唯一，网络中的两个进程PID冲突几率很大，这时候我们需要另辟它径了，我们知道IP层的ip地址可以唯一标示主机，而TCP层协议和端口号可以唯一标示主机的一个进程，这样我们可以利用ip地址＋协议＋端口号唯一标示网络中的一个进程。</p>
+<p>能够唯一标示网络中的进程后，它们就可以利用socket进行通信了，什么是socket呢？我们经常把socket翻译为套接字，socket是在应用层和传输层之间的一个抽象层，它把TCP/IP层复杂的操作抽象为几个简单的接口供应用层调用已实现进程在网络中通信。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20161013091647484-1707663286.png" alt="img"></p>
+<p>socket起源于UNIX，在Unix一切皆文件哲学的思想下，socket是一种”打开—读/写—关闭”模式的实现，服务器和客户端各自维护一个”文件”，在建立连接打开后，可以向自己文件写入内容供对方读取或者读取对方内容，通讯结束时关闭文件。</p>
+<h3 id="2-3-7-小结"><a href="#2-3-7-小结" class="headerlink" title="2.3.7 小结"></a>2.3.7 小结</h3><p><strong>总结图如下：</strong></p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20200415222138157-249976328.png" alt="img"></p>
+<p><strong>数据传输动图如下：</strong></p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20200415220004538-1827984001.gif" alt="img"></p>
+<h1 id="三-网络通信实现"><a href="#三-网络通信实现" class="headerlink" title="三.网络通信实现"></a>三.网络通信实现</h1><p>想实现网络通信，每台主机需具备四要素</p>
+<ul>
+<li>本机的IP地址</li>
+<li>子网掩码</li>
+<li>网关的IP地址</li>
+<li>DNS的IP地址</li>
+</ul>
+<p>获取这四要素分两种方式</p>
+<p>1.静态获取</p>
+<p>即手动配置</p>
+<p>2.动态获取</p>
+<p>通过dhcp获取</p>
+<table>
+<thead>
+<tr>
+<th>以太网头</th>
+<th>ip头</th>
+<th>udp头</th>
+<th>dhcp数据包</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>（1）最前面的”以太网标头”，设置发出方（本机）的MAC地址和接收方（DHCP服务器）的MAC地址。前者就是本机网卡的MAC地址，后者这时不知道，就填入一个广播地址：FF-FF-FF-FF-FF-FF。</p>
+<p>（2）后面的”IP标头”，设置发出方的IP地址和接收方的IP地址。这时，对于这两者，本机都不知道。于是，发出方的IP地址就设为0.0.0.0，接收方的IP地址设为255.255.255.255。</p>
+<p>（3）最后的”UDP标头”，设置发出方的端口和接收方的端口。这一部分是DHCP协议规定好的，发出方是68端口，接收方是67端口。</p>
+<p>这个数据包构造完成后，就可以发出了。以太网是广播发送，同一个子网络的每台计算机都收到了这个包。因为接收方的MAC地址是FF-FF-FF-FF-FF-FF，看不出是发给谁的，所以每台收到这个包的计算机，还必须分析这个包的IP地址，才能确定是不是发给自己的。当看到发出方IP地址是0.0.0.0，接收方是255.255.255.255，于是DHCP服务器知道”这个包是发给我的”，而其他计算机就可以丢弃这个包。</p>
+<p>接下来，DHCP服务器读出这个包的数据内容，分配好IP地址，发送回去一个”DHCP响应”数据包。这个响应包的结构也是类似的，以太网标头的MAC地址是双方的网卡地址，IP标头的IP地址是DHCP服务器的IP地址（发出方）和255.255.255.255（接收方），UDP标头的端口是67（发出方）和68（接收方），分配给请求端的IP地址和本网络的具体参数则包含在Data部分。</p>
+<p>新加入的计算机收到这个响应包，于是就知道了自己的IP地址、子网掩码、网关地址、DNS服务器等等参数</p>
+<h1 id="四-DNS域名解析"><a href="#四-DNS域名解析" class="headerlink" title="四.DNS域名解析"></a>四.DNS域名解析</h1><h3 id="4-1-dns的作用"><a href="#4-1-dns的作用" class="headerlink" title="4.1 dns的作用"></a>4.1 dns的作用</h3><p>DNS的作用：在互联网中，其实没有类似于<a target="_blank" rel="noopener" href="http://www.xxx.com/">www.xxx.com</a>这种域名方式，而替代的是以IP地址，如222.222.222.222，那我们在IE地址栏中应当输入222.222.222.222才能打开网站<a target="_blank" rel="noopener" href="http://www.xxx.com,但我们细想一下,互联网上的网站成千上万,如果每个网站登陆都需要记住一大串数字,那是不是特别不方便,对于记忆力不强的人,根本无法记住这么烦琐的数字.这个时候dns就出现了,它的作用就是将222.222.222.222解析为www.xxx.com,那么我们登陆的时候就直接输入域名就可以了./">www.xxx.com，但我们细想一下，互联网上的网站成千上万，如果每个网站登陆都需要记住一大串数字，那是不是特别不方便，对于记忆力不强的人，根本无法记住这么烦琐的数字。这个时候DNS就出现了，它的作用就是将222.222.222.222解析为www.xxx.com，那么我们登陆的时候就直接输入域名就可以了。</a></p>
+<p>为什么一定要设置DNS才能上网？有些朋友可能会发现，为什么我可能登陆QQ、MSN，但却打不开网页呢？其实大部分原因都是因为DNS服务器故障造成的，DNS服务器地址是唯一的，是运营商提供给终端用户用来解析IP地址及域名的关系，而如果不设定DNS服务器地址，那么就无法查询地址的去向，自然也就打不开网页，而QQ、MSN等即时聊天软件，采用的是UDP传输协议，即不可靠传输协议，无需提供DNS服务器地址，也同样可以登陆。</p>
+<h3 id="4-2-dns的两种查询方式"><a href="#4-2-dns的两种查询方式" class="headerlink" title="4.2 dns的两种查询方式"></a>4.2 dns的两种查询方式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#一 ：递归</span><br><span class="line">主机向本地域名服务器的查询一般都是采用递归查询。所谓递归查询就是：如果主机所询问的本地域名服务器不知道被查询的域名的IP地址，那么本地域名服务器就以DNS客户的身份，向其它根域名服务器继续发出查询请求报文(即替主机继续查询)，而不是让主机自己进行下一步查询。因此，递归查询返回的查询结果或者是所要查询的IP地址，或者是报错，表示无法查询到所需的IP地址。</span><br><span class="line"></span><br><span class="line"># 二：迭代</span><br><span class="line">本地域名服务器向根域名服务器的查询的迭代查询。迭代查询的特点：当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的IP地址，要么告诉本地服务器：“你下一步应当向哪一个域名服务器进行查询”。然后让本地服务器进行后续的查询。根域名服务器通常是把自己知道的顶级域名服务器的IP地址告诉本地域名服务器，让本地域名服务器再向顶级域名服务器查询。顶级域名服务器在收到本地域名服务器的查询请求后，要么给出所要查询的IP地址，要么告诉本地服务器下一步应当向哪一个权限域名服务器进行查询。最后，知道了所要解析的IP地址或报错，然后把这个结果返回给发起查询的主机。 </span><br></pre></td></tr></table></figure>
+
+<p>下图给出了这两种查询的差别</p>
+<p>图1</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20201012174443242-1565501096.png" alt="img"></p>
+<p>图2</p>
+<p> <img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20201012174541729-1246240693.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#下面举一个例子演示整个查询过程：</span><br><span class="line"></span><br><span class="line">        假定域名为m.xyz.com的主机想知道另一个主机y.abc.com的IP地址。例如，主机m.xyz.com打算发送邮件给y.abc.com。这时就必须知道主机y.abc.com的IP地址。下面是图2的几个查询步骤：</span><br><span class="line"></span><br><span class="line">        1、主机m.abc.com先向本地服务器dns.xyz.com进行递归查询。</span><br><span class="line"></span><br><span class="line">        2、本地服务器采用迭代查询。它先向一个根域名服务器查询。</span><br><span class="line"></span><br><span class="line">        3、根域名服务器告诉本地服务器，下一次应查询的顶级域名服务器dns.com的IP地址。</span><br><span class="line"></span><br><span class="line">        4、本地域名服务器向顶级域名服务器dns.com进行查询。</span><br><span class="line"></span><br><span class="line">        5、顶级域名服务器dns.com告诉本地域名服务器，下一步应查询的权限服务器dns.abc.com的IP地址。</span><br><span class="line"></span><br><span class="line">        6、本地域名服务器向权限域名服务器dns.abc.com进行查询。</span><br><span class="line"></span><br><span class="line">        7、权限域名服务器dns.abc.com告诉本地域名服务器，所查询的主机的IP地址。</span><br><span class="line"></span><br><span class="line">        8、本地域名服务器最后把查询结果告诉m.xyz.com。</span><br><span class="line"></span><br><span class="line">        # 整个查询过程共用到了8个UDP报文。</span><br><span class="line"></span><br><span class="line">        为了提高DNS查询效率，并减轻服务器的负荷和减少因特网上的DNS查询报文数量，在域名服务器中广泛使用了高速缓存，用来存放最近查询过的域名以及从何处获得域名映射信息的记录。</span><br><span class="line"></span><br><span class="line">        例如，在上面的查询过程中，如果在m.xyz.com的主机上不久前已经有用户查询过y.abc.com的IP地址，那么本地域名服务器就不必向根域名服务器重新查询y.abc.com的IP地址，而是直接把告诉缓存中存放的上次查询结果(即y.abc.com的IP地址)告诉用户。</span><br><span class="line"></span><br><span class="line">        由于名字到地址的绑定并不经常改变，为保持告诉缓存中的内容正确，域名服务器应为每项内容设置计时器并处理超过合理时间的项(例如每个项目两天)。当域名服务器已从缓存中删去某项信息后又被请求查询该项信息，就必须重新到授权管理该项的域名服务器绑定信息。当权限服务器回答一个查询请求时，在响应中都指明绑定有效存在的时间值。增加此时间值可减少网络开销，而减少此时间值可提高域名解析的正确性。</span><br><span class="line"></span><br><span class="line">        不仅在本地域名服务器中需要高速缓存，在主机中也需要。许多主机在启动时从本地服务器下载名字和地址的全部数据库，维护存放自己最近使用的域名的高速缓存，并且只在从缓存中找不到名字时才使用域名服务器。维护本地域名服务器数据库的主机应当定期地检查域名服务器以获取新的映射信息，而且主机必须从缓存中删除无效的项。由于域名改动并不频繁，大多数网点不需花精力就能维护数据库的一致性。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20201012174943786-1550814066.png" alt="img"></p>
+<h3 id="4-3-DNS解析流程举例"><a href="#4-3-DNS解析流程举例" class="headerlink" title="4.3 DNS解析流程举例"></a>4.3 DNS解析流程举例</h3><p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20201012175307563-473595213.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">如上图所示，我们将详细阐述DNS解析流程。</span><br><span class="line"></span><br><span class="line">1、首先客户端位置是一台电脑或手机，在打开浏览器以后，比如输入http://www.zdns.cn的域名，它首先是由浏览器发起一个DNS解析请求，如果本地缓存服务器中找不到结果，则首先会向根服务器查询，根服务器里面记录的都是各个顶级域所在的服务器的位置，当向根请求http://www.zdns.cn的时候，根服务器就会返回.cn服务器的位置信息。</span><br><span class="line"></span><br><span class="line">2、递归服务器拿到.cn的权威服务器地址以后，就会寻问cn的权威服务器，知不知道http://www.zdns.cn的位置。这个时候cn权威服务器查找并返回http://zdns.cn服务器的地址。</span><br><span class="line"></span><br><span class="line">3、继续向http://zdns.cn的权威服务器去查询这个地址，由http://zdns.cn的服务器给出了地址：202.173.11.10</span><br><span class="line"></span><br><span class="line">4、最终才能进行http的链接，顺利访问网站。</span><br><span class="line"></span><br><span class="line">5、这里补充说明，一旦递归服务器拿到解析记录以后，就会在本地进行缓存，如果下次客户端再请求本地的递归域名服务器相同域名的时候，就不会再这样一层一层查了，因为本地服务器里面已经有缓存了，这个时候就直接把http://www.zdns.cn的A记录返回给客户端就可以了。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/ContractedBlock.gif" alt="img"> 了解：DNS查询类型</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/ContractedBlock.gif" alt="img"> 了解：DNS资源记录</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20201012175158975-374415105.png" alt="img"></p>
+<h3 id="4-4-DNS缓存"><a href="#4-4-DNS缓存" class="headerlink" title="4.4 DNS缓存"></a>4.4 DNS缓存</h3><p>DNS缓存指DNS返回了正确的IP之后，系统就会将这个结果临时储存起来。并且它会为缓存设定一个失效时间 (例如N小时)，在这N小时之内，当你再次访问这个网站时，系统就会直接从你电脑本地的DNS缓存中把结果交还给你，而不必再去询问DNS服务器，变相“加速”了网址的解析。</p>
+<p>当然，在超过N小时之后，系统会自动再次去询问DNS服务器获得新的结果。所以，当你修改了 DNS 服务器，并且不希望电脑继续使用之前的DNS缓存时，就需要手动去清除本地的缓存了。</p>
+<h3 id="4-5-DNS缓存分类"><a href="#4-5-DNS缓存分类" class="headerlink" title="4.5 DNS缓存分类"></a>4.5 DNS缓存分类</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1）浏览器DNS缓存（内存中): 浏览器会按照一定频率缓存DNS记录</span><br><span class="line"></span><br><span class="line">2）本地操作系统DNS缓存(内存中): 如果浏览器缓存中找不到需要的DNS记录，那就去操作系统找。</span><br><span class="line"></span><br><span class="line">3）本地HOSTS文件（硬盘中）: Windows系统中位于C:\Windows\System32\drivers\etc</span><br><span class="line"></span><br><span class="line">4）路由器指定的DNS(远程): 路由器自动获取DNS地址，也可以手动修改-登录后台设置DNS服务器地址</span><br><span class="line">　　ps：路由器DNS被篡改会造成域名劫持，你访问的网址都会被定位到同一个位置，但是IP直接可以访问</span><br><span class="line"></span><br><span class="line">5）ISP的DNS服务器（远程）:  ISP(Internet Service Provider互联网服务提供商、联通电信移动)，ISP有专门的DNS服务器应 对DNS查询请求 6）根服务器（远程，跨国）: ISP的DNS服务器还找不到的话，它就会向根服务器发出查询请求</span><br></pre></td></tr></table></figure>
+
+
+
+<p>调用系统缓存需要跨进程，消耗大，因此为了解析速度的方便，就有了一系列缓存来加快IP查找速度。 </p>
+<h3 id="4-6-浏览器DNS查找顺序"><a href="#4-6-浏览器DNS查找顺序" class="headerlink" title="4.6 浏览器DNS查找顺序"></a>4.6 浏览器DNS查找顺序</h3><p><strong>浏览器DNS缓存-&gt;本地系统DNS缓存-&gt;本地计算机HOSTS文件-&gt;ISP DNS缓存-&gt;递归or迭代搜索</strong></p>
+<p>期间如果查询到了，也就直接访问ip地址了，这个就像三级缓存原理一样，例如，能够在hosts文件中找到就不会再去查其他的</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/1036857-20201012181341361-436742942.png" alt="img"></p>
+<h3 id="4-7-清除DNS缓存"><a href="#4-7-清除DNS缓存" class="headerlink" title="4.7 清除DNS缓存"></a>4.7 清除DNS缓存</h3><p>打开cmd执行命令：ipconfig /all</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">全国通用DNS地址（国内用户推荐使用，速度较快！）</span><br><span class="line">首先DNS服务器地址添：114.114.114.114  (位于北京人民英雄纪念碑）</span><br><span class="line">备用DNS服务器地址添：114.114.115.115</span><br><span class="line">全球通用DNS地址（此DNS地址为谷歌服务器的）</span><br><span class="line">首选DNS服务器地址添：8.8.8.8</span><br><span class="line">备用DNS服务器地址添：8.8.4.4</span><br></pre></td></tr></table></figure>
+
+<p>查看本地dns缓存命令：ipconfig /displaydns</p>
+<p>清除本地dns缓存命令：ipconfig /flushdns</p>
+<p>清除浏览器缓存：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">我们在开发的时候，有时候会给某个域名绑hosts，用于本地开发测试，但是绑了之后，用谷歌浏览器访问会发现并没有生效，按F12会发现访问的还是线上的ip，说明浏览器是有该域名的dns缓存的，那么如何清除浏览器的dns缓存呢？</span><br><span class="line"></span><br><span class="line"># 1、针对谷歌浏览器</span><br><span class="line">谷歌浏览器清除方法如下：打开浏览器，访问如下地址</span><br><span class="line">chrome://net-internals/#dns</span><br><span class="line"></span><br><span class="line">点击 clear host cache，就清楚了浏览器的dns缓存，再访问绑hosts的域名，就会发现ip变啦</span><br><span class="line"></span><br><span class="line"># 2、针对火狐浏览器</span><br><span class="line">如果是firefox火狐浏览器的话，可以按照以下方式：</span><br><span class="line"></span><br><span class="line">在地址栏中 about:config 并回车，可能会出现一个警告信息，直接点击按钮进入，会出现firefox的所有配置信息，通过搜索dns 进行过滤，可以看到一项名为 network.dnsCacheExpirationGracePeriod 项，它对应的值就是DNS缓存的时间，双击此项，会出现修改的提示框，填入 0 （不缓存DNS）即可。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-8-其他了解"><a href="#4-8-其他了解" class="headerlink" title="4.8 其他了解"></a>4.8 其他了解</h3><p>13台根dns：</p>
+<p>A.root-servers.net198.41.0.4美国<br>B.root-servers.net192.228.79.201美国（另支持<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=IPv6&tn=44039180_cpr&fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d9ryR4nhnsn1b3ujfYPAfk0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3ErH0YPW6snH0">IPv6</a>）<br>C.root-servers.net192.33.4.12法国<br>D.root-servers.net128.8.10.90美国<br>E.root-servers.net192.203.230.10美国<br>F.root-servers.net192.5.5.241美国（另支持<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=IPv6&tn=44039180_cpr&fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d9ryR4nhnsn1b3ujfYPAfk0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3ErH0YPW6snH0">IPv6</a>）<br>G.root-servers.net192.112.36.4美国<br>H.root-servers.net128.63.2.53美国（另支持<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=IPv6&tn=44039180_cpr&fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d9ryR4nhnsn1b3ujfYPAfk0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3ErH0YPW6snH0">IPv6</a>）<br>I.root-servers.net192.36.148.17瑞典<br>J.root-servers.net192.58.128.30美国<br>K.root-servers.net193.0.14.129英国（另支持IPv6）<br>L.root-servers.net198.32.64.12美国<br>M.root-servers.net202.12.27.33日本（另支持IPv6）</p>
+<p>域名定义：<a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/1974b289a649daf4b1f774cb.html">http://jingyan.baidu.com/article/1974b289a649daf4b1f774cb.html</a></p>
+<p>顶级域名：以.com,.net,.org,.cn等等属于国际顶级域名，根据目前的国际互联网域名体系，国际顶级域名分为两类：类别顶级域名(gTLD)和地理顶级域名(ccTLD)两种。类别顶级域名是　　　　　　　　       以”COM”、”NET”、”ORG”、”BIZ”、”INFO”等结尾的域名，均由国外公司负责管理。地理顶级域名是以国家或地区代码为结尾的域名，如”CN”代表中国，”UK”代表英国。地理顶级域名一般由各个国家或地区负责管理。</p>
+<p>二级域名：二级域名是以顶级域名为基础的地理域名，比喻中国的二级域有，.com.cn,.net.cn,.org.cn,.gd.cn等.子域名是其父域名的子域名，比喻父域名是abc.com,子域名就是<a target="_blank" rel="noopener" href="http://www.abc.com或者*.abc.com/">www.abc.com或者*.abc.com</a>.<br>一般来说，二级域名是域名的一条记录，比如alidiedie.com是一个域名，<a target="_blank" rel="noopener" href="http://www.alidiedie.com是其中比较常用的记录,一般默认是用这个,但是类似*.alidiedie.com的域名全部称作是alidiedie.com的二级/">www.alidiedie.com是其中比较常用的记录，一般默认是用这个，但是类似*.alidiedie.com的域名全部称作是alidiedie.com的二级</a></p>
+<h1 id="五-网络通信流程"><a href="#五-网络通信流程" class="headerlink" title="五 网络通信流程"></a>五 网络通信流程</h1><p>1.本机获取</p>
+<ul>
+<li>本机的IP地址：192.168.1.100</li>
+<li>子网掩码：255.255.255.0</li>
+<li>网关的IP地址：192.168.1.1</li>
+<li>DNS的IP地址：8.8.8.8</li>
+</ul>
+<p>2.打开浏览器，想要访问Google，在地址栏输入了网址：<a target="_blank" rel="noopener" href="http://www.google.com./">www.google.com。</a></p>
+<p>3.dns协议(基于udp协议)</p>
+<p>4.HTTP部分的内容，类似于下面这样：</p>
+<blockquote>
+<p>GET / HTTP/1.1<br>Host: <a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a><br>Connection: keep-alive<br>User-Agent: Mozilla/5.0 (Windows NT 6.1) ……<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8<br>Accept-Encoding: gzip,deflate,sdch<br>Accept-Language: zh-CN,zh;q=0.8<br>Accept-Charset: GBK,utf-8;q=0.7,*;q=0.3<br>Cookie: … …</p>
+</blockquote>
+<p>我们假定这个部分的长度为4960字节，它会被嵌在TCP数据包之中。</p>
+<p>5 TCP协议</p>
+<p>TCP数据包需要设置端口，接收方（Google）的HTTP端口默认是80，发送方（本机）的端口是一个随机生成的1024-65535之间的整数，假定为51775。</p>
+<p>TCP数据包的标头长度为20字节，加上嵌入HTTP的数据包，总长度变为4980字节。</p>
+<p>6 IP协议</p>
+<p>然后，TCP数据包再嵌入IP数据包。IP数据包需要设置双方的IP地址，这是已知的，发送方是192.168.1.100（本机），接收方是172.194.72.105（Google）。</p>
+<p>IP数据包的标头长度为20字节，加上嵌入的TCP数据包，总长度变为5000字节。</p>
+<p>7 以太网协议</p>
+<p>最后，IP数据包嵌入以太网数据包。以太网数据包需要设置双方的MAC地址，发送方为本机的网卡MAC地址，接收方为网关192.168.1.1的MAC地址（通过ARP协议得到）。</p>
+<p>以太网数据包的数据部分，最大长度为1500字节，而现在的IP数据包长度为5000字节。因此，IP数据包必须分割成四个包。因为每个包都有自己的IP标头（20字节），所以四个包的IP数据包的长度分别为1500、1500、1500、560。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.%E6%9C%AA%E5%91%BD%E5%90%8D/640.jpeg" alt="img"></p>
+<p>8 服务器端响应</p>
+<p>经过多个网关的转发，Google的服务器172.194.72.105，收到了这四个以太网数据包。</p>
+<p>根据IP标头的序号，Google将四个包拼起来，取出完整的TCP数据包，然后读出里面的”HTTP请求”，接着做出”HTTP响应”，再用TCP协议发回来。</p>
+<p>本机收到HTTP响应以后，就可以将网页显示出来，完成一次网络通信。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/11/01/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_hexo/" data-id="ckxjra7pk002hr0v1dg0g50t6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexo_blog添加标签_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/29/hexo_blog%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE_hexo/" class="article-date">
+  <time datetime="2021-10-29T03:10:14.000Z" itemprop="datePublished">2021-10-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/29/hexo_blog%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE_hexo/">hexoblog添加hexo标签</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">zhuti=&#x27;python&#x27;</span><br><span class="line">tags=&#x27;&#x27;&#x27;- python&#x27;&#x27;&#x27;</span><br><span class="line">path=&quot;E:\\笔记\\python&quot;</span><br><span class="line">backup_path=f&#x27;&#123;path&#125;\\backup&#x27;</span><br><span class="line">##fenlei为其分类，tags为其标签，path为读取文件的路径,backuppath为备份目录，主题title为其文件名</span><br><span class="line">#读取后会自动将文件备份，然后写入hexo标签，为防止第二次再对相同文件进行写入标签，所以会使其写入后改名为原名_hexo.md</span><br><span class="line">import os</span><br><span class="line">import datetime</span><br><span class="line">#这里walk拿到的三个值为根文件夹目录，根文件目录中的文件夹和根文件目录中的文件</span><br><span class="line">for root,dirs,files in os.walk(path):#这个会递归查询所有子文件夹的文件</span><br><span class="line">    #由于walk会无限递归而这里我们只需要根文件夹下为.md结尾的文件则加入一个判断</span><br><span class="line">    if root == &quot;E:\\笔记\\python&quot;:</span><br><span class="line">      for file in files: #循环每个文件</span><br><span class="line">          #文件备份功能</span><br><span class="line">          file1 = os.path.join(root,file) #拼接文件与文件夹路径</span><br><span class="line">          file2=file.split(&quot;.&quot;) #将文件名和文件扩展名分开，用于判断文件名，下面if只取md类型文件</span><br><span class="line">          if file2[1] == &quot;md&quot;:</span><br><span class="line">              if &quot;hexo&quot; in file2[0]:</span><br><span class="line">                  print(f&quot;文件&#123;file&#125;的文件名包含hexo，所以不会备份文件&quot;)</span><br><span class="line">                  continue</span><br><span class="line">              else:</span><br><span class="line">                   if not os.path.isdir(backup_path):</span><br><span class="line">                       os.mkdir(backup_path)</span><br><span class="line">                   with open(f&quot;&#123;backup_path&#125;\\&#123;file&#125;&quot;, &quot;a+&quot;, encoding=&quot;utf-8&quot;) as f1:  # 备份到的路径   首先先打开被备份的路径是怕被备份文件本身不存在，所以这里如果没有则提前创建一个</span><br><span class="line">                        with open(f&quot;&#123;file1&#125;&quot;, &quot;r+&quot;, encoding=&quot;utf-8&quot;) as f: #备份的md文件</span><br><span class="line">                                a = f.read()</span><br><span class="line">                                f1.seek(0) #由于这里是r+模式打开文件，所以需要跳到开头然后再覆盖写入</span><br><span class="line">                                f1.write(a)</span><br><span class="line">                                print(f&quot;文件：[&#123;file&#125;]已备份为E:\\笔记\\python\\backup\\&#123;file&#125;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                       #备份完成之后开始将hexo博客的标签格式写入每一个md文件。</span><br><span class="line">                        datetime1 = datetime.datetime.now().strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;)</span><br><span class="line">                        with open(f&#x27;&#123;file1&#125;&#x27;,&#x27;r+&#x27;,encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">                                    a = f.read()</span><br><span class="line">                                    f.seek(0)</span><br><span class="line">                                    b = f.write(f&quot;&quot;&quot;---</span><br><span class="line">title: &#123;file2[0]&#125;</span><br><span class="line">date: &#123;datetime1&#125;</span><br><span class="line">categories: &#123;zhuti&#125;</span><br><span class="line">tags:</span><br><span class="line">    &#123;tags&#125;</span><br><span class="line">---</span><br><span class="line">&quot;&quot;&quot;)</span><br><span class="line">                                    f.write(a)</span><br><span class="line">                                    f.close()</span><br><span class="line">                                    os.rename(file1,f&quot;&#123;root&#125;\\&#123;file2[0]&#125;_hexo.&#123;file2[1]&#125;&quot;)  #将已经写入hexo标签的文件改名</span><br><span class="line">                                    print(f&quot;&#123;file&#125;标签写入完成&quot;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-typora更改图片位置代码"><a href="#2-typora更改图片位置代码" class="headerlink" title="2.typora更改图片位置代码"></a>2.typora更改图片位置代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">file=&quot;E:\\笔记\\python\\面向对象_hexo.md&quot;</span><br><span class="line">import re,os</span><br><span class="line">def alter(old_str,new_str):</span><br><span class="line">    path = &quot;E:\\笔记\\python&quot;</span><br><span class="line">    # 这里walk拿到的三个值为根文件夹目录，根文件目录中的文件夹和根文件目录中的文件</span><br><span class="line">    for root, dirs, files in os.walk(path):  # 这个会递归查询所有子文件夹的文件</span><br><span class="line">        # 由于walk会无限递归而这里我们只需要根文件夹下为.md结尾的文件则加入一个判断</span><br><span class="line">        if root == &quot;E:\\笔记\\python&quot;:</span><br><span class="line">            for file in files:  # 循环每个文件</span><br><span class="line">                file1 = os.path.join(root,file)</span><br><span class="line">                file2=file.split(&quot;.&quot;) #将文件名和文件扩展名分开，用于判断文件名，下面if只取md类型文件</span><br><span class="line">                if file2[1] == &quot;md&quot;:</span><br><span class="line">                    with open(file1, &quot;r&quot;, encoding=&quot;utf-8&quot;) as f1,open(&quot;%s.bak&quot; % file1, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f2:</span><br><span class="line">                        for line in f1:</span><br><span class="line">                            f2.write(re.sub(old_str,new_str,line))</span><br><span class="line">                    os.remove(file1)</span><br><span class="line">                    os.rename(&quot;%s.bak&quot; % file1, file1)</span><br><span class="line">alter(https://yinshiweiysw.github.io/images/assets/&#x27;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/29/hexo_blog%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE_hexo/" data-id="ckxjra7oz000ir0v16st22kaj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面向对象_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:06.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_hexo/">面向对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h2><p>核心是过程二字，过程是流水线，用来分步骤解决问题的</p>
+<p>过程的核心思想是将<strong>程序流程化</strong>。</p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><p>核心是对象二字。</p>
+<p>对象是“容器”，用来盛放东西。</p>
+<p>类也是“容器”，该容器用来存放同类对象共有的数据与功能。</p>
+<p>对象的核心思想是将<strong>程序容器化</strong>。将程序整合</p>
+<h3 id="类："><a href="#类：" class="headerlink" title="类："></a>类：</h3><p>类似对象相似数据与功能的集合体</p>
+<p>所以类体最常见的是变量与函数的定义，但是类体其实是可以包含任意其他代码</p>
+<p>类体代码是在类定义阶段就会立即执行，会产生类的名称空间</p>
+<p>调用类的过程又称为实例化。发生了三件事</p>
+<p>1.先产生一个空对象</p>
+<p>2.调用类中的__init__方法（对象初始化属性），然后将空对象(self)以及调用类时括号内传入的参数一同传入init方法，相当于定义对象时类传递的属性为对象属性</p>
+<p>例：</p>
+<p>duixiang=lei(‘1s’,2,3)</p>
+<h3 id="init方法"><a href="#init方法" class="headerlink" title="init方法"></a>init方法</h3><p>1、会在调用类时自动触发执行，用来为对象初始化自己独有的数据<br>        2、__init__内应该存放是为对象初始化属性的功能，但是是可以存放任意其他代码，想要在<br>        类调用时就立刻执行的代码都可以放到该方法内<br>        3、__init__方法必须返回None ,</p>
+<p>python中所有数据类型都为类（class），而将数据类型传入参数（数值）定义为变量本质上就是在定义对象，所有python一切皆为对象。</p>
+<h3 id="对象代码示例："><a href="#对象代码示例：" class="headerlink" title="对象代码示例："></a>对象代码示例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">class school:</span><br><span class="line">    school_name=&#x27;OLDBOY&#x27;</span><br><span class="line">    def __init__(self,a,b):</span><br><span class="line">        self.address=a</span><br><span class="line">        self.nickname=b</span><br><span class="line">        self.classes=[]</span><br><span class="line">    def rekated_class(self,classobj):</span><br><span class="line">        self.classes.append(classobj)</span><br><span class="line">    def tell_class(self):</span><br><span class="line">        print(self.nickname,end=&#x27;,&#x27;)</span><br><span class="line">        for class_obj in self.classes:</span><br><span class="line">            class_obj.tell_course()</span><br><span class="line">        class_obj.tell_student()</span><br><span class="line"></span><br><span class="line">class Class:</span><br><span class="line">    def __init__(self,name):</span><br><span class="line">        self.name=name</span><br><span class="line">    def related_course(self,coursename,student):</span><br><span class="line">        self.course=coursename</span><br><span class="line">        self.student=student</span><br><span class="line">    def tell_course(self):</span><br><span class="line">        print(self.name,end=&#x27;,&#x27;)</span><br><span class="line">        self.course.tell_info()</span><br><span class="line">    def tell_student(self):</span><br><span class="line">        self.student.tell_info()</span><br><span class="line"></span><br><span class="line"># print(Class1.name,Class1.course)</span><br><span class="line"># print(Class2.name,Class2.course)</span><br><span class="line"></span><br><span class="line">class student:</span><br><span class="line">    def __init__(self,name,age,):</span><br><span class="line">        self.name=name</span><br><span class="line">        self.age=age</span><br><span class="line">    def tell_info(self):</span><br><span class="line">        print(f&#x27;学生:&#123;self.name&#125;,年龄&#123;self.age&#125;&#x27;)</span><br><span class="line">class course:</span><br><span class="line">    def __init__(self,name,period,price):</span><br><span class="line">        self.name=name</span><br><span class="line">        self.period=period</span><br><span class="line">        self.price=price</span><br><span class="line">    def tell_info(self):</span><br><span class="line">        print(self.name,self.period,self.price)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">student1=student(&#x27;张三&#x27;,15)</span><br><span class="line">student2=student(&#x27;李四&#x27;,20)</span><br><span class="line"></span><br><span class="line">#定义两门课程以及其相关信息</span><br><span class="line">course1=course(&#x27;linux课程&#x27;,&#x27;6mons&#x27;,2000)</span><br><span class="line">course2=course(&#x27;python课程&#x27;,&#x27;6mons&#x27;,3000)</span><br><span class="line"></span><br><span class="line">#定义两个班，将两门课程分别传入两个班</span><br><span class="line">Class1 =Class(&#x27;1班&#x27;)</span><br><span class="line">Class2 =Class(&#x27;2班&#x27;)</span><br><span class="line">Class1.related_course(course1,student1)</span><br><span class="line">Class2.related_course(course2,student2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#定义两个校区，将班级传入两个校区</span><br><span class="line">school1 = school(&#x27;北京&#x27;,&#x27;北京校区&#x27;)</span><br><span class="line">school2 = school(&#x27;上海&#x27;,&#x27;上海校区&#x27;)</span><br><span class="line">school1.rekated_class(Class1)</span><br><span class="line">school2.rekated_class(Class2)</span><br><span class="line">school1.tell_class()</span><br><span class="line">school2.tell_class()</span><br><span class="line"></span><br><span class="line">#学校中的班级带入班级对象，班级中的课程再调用课程对象 课程对象-》班级对象-》学校对象</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义私有属性"><a href="#自定义私有属性" class="headerlink" title="自定义私有属性"></a>自定义私有属性</h3><p>在定义类属性时，若在该属性前加上__，则该属性被定义为私有属性，即该属性不可被外部直接引用，只能在类的内部使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">	</span><br><span class="line">	def __init__(self):</span><br><span class="line">		self.__a = 1</span><br><span class="line"></span><br><span class="line">	def func(self):</span><br><span class="line">		print self.__a</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.func()</span><br><span class="line">#输出</span><br><span class="line">1</span><br><span class="line">a.__a</span><br><span class="line">#输出</span><br><span class="line">AttributeError: &#x27;A&#x27; object has no attribute &#x27;__a&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>然而Python对__a这个属性做了什么呢？实际上该属性并不是不存在的，当在某个属性前加上两个下划线后，python自动将其所在的类名追加在属性前导致其拥有了新的属性名，也由此实现了该属性不可引用的假象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">	</span><br><span class="line">	def __init__(self):</span><br><span class="line">		self.__a = 1</span><br><span class="line"></span><br><span class="line">	def func(self):</span><br><span class="line">		print self.__a</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a._A__a</span><br><span class="line">#输出</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h3 id="property："><a href="#property：" class="headerlink" title="property："></a>property：</h3><p>property是一个装饰器，用来绑定给对象的方法伪造成一个数据属性。</p>
+<p>相当于对象中定义的函数正常情况下是 对象名.函数名(“参数”)来进行调用，如果是property装饰情况下调用方式将变为：</p>
+<p>对象名.函数名,本质上调用方式和对象属性变为一至。</p>
+<h4 id="例："><a href="#例：" class="headerlink" title="例："></a>例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class someone(object):</span><br><span class="line">    def __init__(self,name,weight,height):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.weight = weight</span><br><span class="line">        self.height = height</span><br><span class="line">    @property</span><br><span class="line">    def bmi(self):</span><br><span class="line">        return self.weight / (self.height ** 2)</span><br><span class="line">obj1 = someone(&#x27;张三&#x27;,70,1.80)</span><br><span class="line">print(obj1.bmi)</span><br><span class="line">#这里的bmi为计算其人体bmi值的方法，但如果按人类正常思考模式，其调用应该和身高体重一样是一个属性值，而非方法。</span><br><span class="line">#@property可以定义@property装饰器 </span><br></pre></td></tr></table></figure>
+
+<h4 id="例2："><a href="#例2：" class="headerlink" title="例2："></a>例2：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class someone(object):</span><br><span class="line">    def __init__(self,name):</span><br><span class="line">        self.__name = name</span><br><span class="line">    @property</span><br><span class="line">    def name(self):</span><br><span class="line">        return self.__name</span><br><span class="line">    @name.setter</span><br><span class="line">    def name(self,val):</span><br><span class="line">        if type(val) is not str:</span><br><span class="line">            print(&#x27;请传入str类型&#x27;)</span><br><span class="line">            return</span><br><span class="line">        self.__name = val</span><br><span class="line">    @name.deleter</span><br><span class="line">    def name(self):</span><br><span class="line">        print(&#x27;无法删除&#x27;)</span><br><span class="line">object1 = someone(&quot;张三&quot;)</span><br><span class="line">print(object1.name)</span><br><span class="line">object1.name = &quot;李四&quot;</span><br><span class="line">print(object1.name)</span><br><span class="line">del object1.name</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p>张三<br>        李四<br>        无法删除</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承是一种创建新类的方式，新建的类可以成为子类或者派生类，父类又可称为基类或超类</p>
+<p>python支持多继承，在python中新建的类可以继承一个或多个父类</p>
+<p>python2中有经典类和新式类：</p>
+<p>​    新式类是指继承了object类的子类，经典类是指没有继承object类的子类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class cs1(object):</span><br><span class="line">    x=111</span><br><span class="line">class cs2(object):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class cs3(cs1):</span><br><span class="line">    pass</span><br><span class="line">class cs4(cs2,cs1):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">print(cs3.x)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p>111</p>
+<p>这里cs1和cs2为顶级类，下面的类定义时如果继承了cs1，则可拥有cs1的方法和属性，通过继承。</p>
+<p><strong>继承作用：解决类与类之间代码冗余问题</strong></p>
+<p>优点：子类可以同时遗传多个父类的属性，最大限度重用代码</p>
+<p>缺点：</p>
+<p>​    1.违背人的思维习惯：继承表达的是一种什么“是”什么的关系</p>
+<p>​    2.代码可读性会变差</p>
+<p>​    3.扩展性变差，不建议使用多继承</p>
+<p>​    4.如果无法避免使用多继承，应该使用Mixins</p>
+<h4 id="例：-1"><a href="#例：-1" class="headerlink" title="例："></a>例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class OldboyPeople:</span><br><span class="line">    school = &#x27;OLDBOY&#x27;</span><br><span class="line"></span><br><span class="line">    def __init__(self, name, age, sex):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.sex = sex</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Student(OldboyPeople):</span><br><span class="line">    def choose_course(self):</span><br><span class="line">        print(&#x27;学生%s 正在选课&#x27; % self.name)</span><br><span class="line"># stu_obj = Student(&#x27;lili&#x27;, 18, &#x27;female&#x27;)</span><br><span class="line"># print(stu_obj.__dict__)</span><br><span class="line"># print(stu_obj.school)</span><br><span class="line"># stu_obj.choose_course()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Teacher(OldboyPeople):</span><br><span class="line">    #           老师的空对象，&#x27;egon&#x27;,18,&#x27;male&#x27;,3000,10</span><br><span class="line">    def __init__(self, name, age, sex, salary, level):</span><br><span class="line">        # 指名道姓地跟父类OldboyPeople去要__init__</span><br><span class="line">        OldboyPeople.__init__(self,name,age, sex)</span><br><span class="line">        self.salary = salary</span><br><span class="line">        self.level = level</span><br><span class="line"></span><br><span class="line">    def score(self):</span><br><span class="line">        print(&#x27;老师 %s 正在给学生打分&#x27; % self.name)</span><br><span class="line"></span><br><span class="line">tea_obj=Teacher(&#x27;egon&#x27;,18,&#x27;male&#x27;,3000,10)</span><br><span class="line"># print(tea_obj.__dict__)</span><br><span class="line"># print(tea_obj.school)</span><br><span class="line"></span><br><span class="line">tea_obj.score()</span><br></pre></td></tr></table></figure>
+
+<p>teacher这里在继承父类__init__属性name,age,sex的时候需要通过OldboyPeople.<strong>init</strong>(self,name,age, sex)来调用到自己的init方法里面。</p>
+<p>如果子类中没有方法或属性而父类拥有，这个时候会调用父类的方法属性。而如果子类的父类都有情况下，会优先使用子类的。如果这时子类拥有与父类同名的方法属性且仍需要调用父类方法属性时需要在子类的单独定义出来，例如这里的init方法。</p>
+<h4 id="菱形问题"><a href="#菱形问题" class="headerlink" title="菱形问题"></a>菱形问题</h4><p> 大多数面向对象语言都不支持多继承，而在Python中，一个子类是可以同时继承多个父类的，这固然可以带来一个子类可以对多个不同父类加以重用的好处，但也有可能引发著名的 <a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/Diamond_problem">Diamond problem</a>菱形问题(或称钻石问题，有时候也被称为“死亡钻石”)，菱形其实就是对下面这种继承结构的形象比喻</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/v2-7c6088a106bbf1fc46de0cca9c03a037_720w.png" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A类在顶部，B类和C类分别位于其下方，D类在底部将两者连接在一起形成菱形。</span><br></pre></td></tr></table></figure>
+
+<p>这种继承结构下导致的问题称之为菱形问题：如果A中有一个方法，B和/或C都重写了该方法，而D没有重写它，那么D继承的是哪个版本的方法：B的还是C的？如下所示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from A&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from B&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from C&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>(<span class="params">B,C</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">obj = D()</span><br><span class="line">obj.test() <span class="comment"># 结果为：from B</span></span><br></pre></td></tr></table></figure>
+
+<p>要想搞明白obj.test()是如何找到方法test的，需要了解python的继承实现原理</p>
+<h4 id="继承原理"><a href="#继承原理" class="headerlink" title="继承原理"></a>继承原理</h4><p>python到底是如何实现继承的呢？ 对于你定义的每一个类，Python都会计算出一个方法解析顺序(MRO)列表，该MRO列表就是一个简单的所有基类的线性顺序列表，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>D.mro() <span class="comment"># 新式类内置了mro方法可以查看线性列表的内容，经典类没有该内置该方法</span></span><br><span class="line">[&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">D</span>&#x27;&gt;, &lt;<span class="title">class</span> &#x27;<span class="title">__main__</span>.<span class="title">B</span>&#x27;&gt;, &lt;<span class="title">class</span> &#x27;<span class="title">__main__</span>.<span class="title">C</span>&#x27;&gt;, &lt;<span class="title">class</span> &#x27;<span class="title">__main__</span>.<span class="title">A</span>&#x27;&gt;, &lt;<span class="title">class</span> &#x27;<span class="title">object</span>&#x27;&gt;]</span></span><br></pre></td></tr></table></figure>
+
+<p>python会在MRO列表上从左到右开始查找基类,直到找到第一个匹配这个属性的类为止。 而这个MRO列表的构造是通过一个C3线性化算法来实现的。我们不去深究这个算法的数学原理,它实际上就是合并所有父类的MRO列表并遵循如下三条准则:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>子类会先于父类被检查</span><br><span class="line"><span class="number">2.</span>多个父类会根据它们在列表中的顺序被检查</span><br><span class="line"><span class="number">3.</span>如果对下一个类存在两个合法的选择,选择第一个父类</span><br></pre></td></tr></table></figure>
+
+<p>所以obj.test()的查找顺序是，先从对象obj本身的属性里找方法test，没有找到，则参照属性查找的发起者(即obj)所处类D的MRO列表来依次检索，首先在类D中未找到，然后再B中找到方法test</p>
+<p>ps：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>由对象发起的属性查找，会从对象自身的属性里检索，没有则会按照对象的类.mro()规定的顺序依次找下去，</span><br><span class="line"><span class="number">2.</span>由类发起的属性查找，会按照当前类.mro()规定的顺序依次找下去，</span><br></pre></td></tr></table></figure>
+
+<h4 id="深度优先和广度优先"><a href="#深度优先和广度优先" class="headerlink" title="深度优先和广度优先"></a>深度优先和广度优先</h4><p>参照下述代码，多继承结构为非菱形结构，此时，会按照先找B这一条分支，然后再找C这一条分支，最后找D这一条分支的顺序直到找到我们想要的属性</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/v2-64faa1a6e825277233fe2bf40401b99b_720w.jpg" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from E&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from F&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">E</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from B&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>(<span class="params">F</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from C&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from D&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params">B, C, D</span>):</span></span><br><span class="line">    <span class="comment"># def test(self):</span></span><br><span class="line">    <span class="comment">#     print(&#x27;from A&#x27;)</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(A.mro())</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">[&lt;class &#x27;__main__.A&#x27;&gt;, &lt;class &#x27;__main__.B&#x27;&gt;, &lt;class &#x27;__main__.E&#x27;&gt;, &lt;class &#x27;__main__.C&#x27;&gt;, &lt;class &#x27;__main__.F&#x27;&gt;, &lt;class &#x27;__main__.D&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;]</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">obj = A()</span><br><span class="line">obj.test() <span class="comment"># 结果为：from B</span></span><br><span class="line"><span class="comment"># 可依次注释上述类中的方法test来进行验证</span></span><br></pre></td></tr></table></figure>
+
+<p>如果继承关系为菱形结构，那么经典类与新式类会有不同MRO，分别对应属性的两种查找方式：深度优先和广度优先</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/v2-e95d9f13b01af6eb7da3b5043442f697_720w.jpg" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">G</span>:</span> <span class="comment"># 在python2中，未继承object的类及其子类，都是经典类</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from G&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span>(<span class="params">G</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from E&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span>(<span class="params">G</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from F&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">E</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from B&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>(<span class="params">F</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from C&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>(<span class="params">G</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from D&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params">B,C,D</span>):</span></span><br><span class="line">    <span class="comment"># def test(self):</span></span><br><span class="line">    <span class="comment">#     print(&#x27;from A&#x27;)</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">obj = A()</span><br><span class="line">obj.test() <span class="comment"># 如上图，查找顺序为:obj-&gt;A-&gt;B-&gt;E-&gt;G-&gt;C-&gt;F-&gt;D-&gt;object</span></span><br><span class="line"><span class="comment"># 可依次注释上述类中的方法test来进行验证,注意请在python2.x中进行测试</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yinshiweiysw.github.io/images/assets/v2-08eb8fd2226110ae845da74805cb98fb_720w.jpg" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">G</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from G&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span>(<span class="params">G</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from E&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span>(<span class="params">G</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from F&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">E</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from B&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>(<span class="params">F</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from C&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>(<span class="params">G</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from D&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params">B,C,D</span>):</span></span><br><span class="line">    <span class="comment"># def test(self):</span></span><br><span class="line">    <span class="comment">#     print(&#x27;from A&#x27;)</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">obj = A()</span><br><span class="line">obj.test() <span class="comment"># 如上图，查找顺序为:obj-&gt;A-&gt;B-&gt;E-&gt;C-&gt;F-&gt;D-&gt;G-&gt;object</span></span><br><span class="line"><span class="comment"># 可依次注释上述类中的方法test来进行验证</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="mixins"><a href="#mixins" class="headerlink" title="mixins"></a>mixins</h4><p>mixins是多继承的正确打开方式，其核心要素为：</p>
+<p>在多继承背景下尽可能的提升多继承代码可读性</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_hexo/" data-id="ckxjra7pn002ur0v1gwjcc6sv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx_locationANDrewrite_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/nginx_locationANDrewrite_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/nginx_locationANDrewrite_hexo/">nginx_locationANDrewrite</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nginx-location"><a href="#nginx-location" class="headerlink" title="nginx location"></a>nginx location</h2><p>Location匹配规则 </p>
+<p>语法规则： 【= | ^~ | ~ | ~* | / | /uri 】</p>
+<p> location = /uri                 = 表示精确匹配，只有完全匹配上才能生效，若找到，停止搜索； </p>
+<p> location ^~ /uri               ^~开头表示对URL路径进行前缀匹配，并且在正则匹配之前，若找到，停止搜索； </p>
+<p> location ~ pattern           ~开头表示区分大小写的正则匹配，按配置文件顺序匹配； </p>
+<p> location ~* pattern          ~*开头表示不区分大小写的正则匹配，按配置文件顺序匹配； </p>
+<p> location /uri                    不带任何修饰符，表示前缀匹配，在正则匹配之后； </p>
+<p> location /                        通用匹配，任何未匹配到其他location的请求都会匹配到，相当于default； </p>
+<p>多个location配置的情况匹配顺序为</p>
+<p>首先精确匹配 = ；</p>
+<p>其次前缀匹配 ^~；</p>
+<p>其次是按照配置文件中的正则匹配； </p>
+<p>然后匹配不带任何修饰符的前缀匹配； </p>
+<p>最后交给/通用匹配</p>
+<p>注意点：</p>
+<p>^~无法使用正则匹配</p>
+<h2 id="rewrite"><a href="#rewrite" class="headerlink" title="rewrite:"></a>rewrite:</h2><p>  rewrite  <regex>  <replacement>  [flag];</p>
+<p>  关键字    正则     替代内容      flag标记</p>
+<p>  关键字：其中关键字error_log不能改变</p>
+<p>  正则：perl兼容正则表达式语句进行规则匹配</p>
+<p>  替代内容：将正则匹配的内容替换成replacement</p>
+<p>  flag标记：rewrite支持的flag标记</p>
+<p>flag标记说明：</p>
+<p>last #本条规则匹配完成后，继续向下匹配新的location URI规则</p>
+<p>break #本条规则匹配完成即终止，不再匹配后面的任何规则</p>
+<p>redirect #返回302临时重定向，浏览器地址会显示跳转后的URL地址</p>
+<p>permanent #返回301永久重定向，浏览器地址栏会显示跳转后的URL地址</p>
+<h3 id="rewrite参数的标签段位置："><a href="#rewrite参数的标签段位置：" class="headerlink" title="rewrite参数的标签段位置："></a>rewrite参数的标签段位置：</h3><p>server,location,if</p>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><p>rewrite ^/(.*) <a target="_blank" rel="noopener" href="http://www.czlun.com/$1">http://www.czlun.com/$1</a> permanent;</p>
+<p>说明：                    </p>
+<p>rewrite为固定关键字，表示开始进行rewrite匹配规则</p>
+<p>regex部分是 ^/(.*) ，这是一个正则表达式，匹配完整的域名和后面的路径地址</p>
+<p>replacement部分是<a target="_blank" rel="noopener" href="http://www.czlun.com/$1">http://www.czlun.com/$1</a> $1，是取自regex部分()里的内容。匹配成功后跳转到的URL。</p>
+<p>flag部分 permanent表示永久301重定向标记，即跳转到新的 <a target="_blank" rel="noopener" href="http://www.czlun.com/$1">http://www.czlun.com/$1</a> 地址上</p>
+<p>这里匹配的时候如果不是break最好要让其重写后不再会匹配回来，否则会无限重写。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/nginx_locationANDrewrite_hexo/" data-id="ckxjra7p8001dr0v1cw5ghw3u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-二分法_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E4%BA%8C%E5%88%86%E6%B3%95_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E4%BA%8C%E5%88%86%E6%B3%95_hexo/">二分法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 二分法<br>date: 2021-10-20 20:19:11<br>tags:<br>    - Typora<br>    - Python</p>
+<hr>
+<hr>
+<p>title: 二分法<br>date: 2021-10-20 20:18:43<br>tags:<br>    - Typora<br>    - Python</p>
+<hr>
+<p>​    </p>
+<p>算法：是高效解决问题的方法</p>
+<p>算法之二分法</p>
+<p>​    需求：有一个按照从小到大顺序排序的数字列表，需要从该数字列表中找到我们想要的那个一个数字。</p>
+<p>​    例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a = [1,2,3,7,89,877,999,6888,56757,575657]</span><br><span class="line">b = 6888</span><br><span class="line"></span><br><span class="line">def bibary(a,b):</span><br><span class="line">    print(a)</span><br><span class="line">    e = len(a) // 2</span><br><span class="line">    if b &gt; a[e]:</span><br><span class="line">        a=a[e:]</span><br><span class="line">        bibary(a, b)</span><br><span class="line">    elif b &lt; a[e]:</span><br><span class="line">        a = a[:e]</span><br><span class="line">        bibary(a, b)</span><br><span class="line">    else:</span><br><span class="line">        print(&#x27;have find it &#x27;)</span><br><span class="line"></span><br><span class="line">bibary(a,b)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="函数式编程："><a href="#函数式编程：" class="headerlink" title="函数式编程："></a>函数式编程：</h2><p>函数式编程并非用函数编程这么简单，而是将计算机的运算视为数学意义上的运算，比起面向过程，函数式更加注重的是执行结果而非执行的过程，代表语言有:Haskell、Erlang。而python并不是一门函数式编程语言，但是仍为我们提饪了很多函数式编程好的特性，如lambda，map,reduce，filter</p>
+<h3 id="匿名函数lambda："><a href="#匿名函数lambda：" class="headerlink" title="匿名函数lambda："></a>匿名函数lambda：</h3><p>​    1.有名函数</p>
+<p>​    func=函数的内存地址</p>
+<p>​    def fun(a,b)</p>
+<p>​        return x+y</p>
+<p>​    2.匿名函数</p>
+<p>​        lambda a,b:x+y #a,b为参数，无需加括号</p>
+<p>​         这个x+y等于上面有名代码的return x+y</p>
+<h4 id="调用匿名函数："><a href="#调用匿名函数：" class="headerlink" title="调用匿名函数："></a>调用匿名函数：</h4><p>​            方式一：</p>
+<p>​                res=（lambda x,y:x+y）(1,2)</p>
+<p>​                print(res)                </p>
+<p>​            相当于 匿名地址内存地址加上传递的参数    </p>
+<p>​            方式二：</p>
+<p>​                func=lambda x,y:x+y</p>
+<p>​                res=func(1,2)</p>
+<p>​                print(res)</p>
+<p>​            匿名函数本质不应加函数名字，可以加函数名字实现但没必要。</p>
+<h4 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h4><p>​        用于临时使用（调用）一次。</p>
+<p>​        </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">salaries=&#123;</span><br><span class="line">    &#x27;siry&#x27;:3000,</span><br><span class="line">    &#x27;tom&#x27;:7000,</span><br><span class="line">    &#x27;lili&#x27;:10000,</span><br><span class="line">    &#x27;jack&#x27;:2000</span><br><span class="line">&#125;</span><br><span class="line"># 迭代出的内容    比较的值</span><br><span class="line"># &#x27;siry&#x27;         3000</span><br><span class="line"># &#x27;tom&#x27;          7000</span><br><span class="line"># &#x27;lili&#x27;         10000</span><br><span class="line"># &#x27;jack&#x27;         2000</span><br><span class="line"></span><br><span class="line"># def func(k):</span><br><span class="line">#     return salaries[k]</span><br><span class="line"></span><br><span class="line"># ========================max的应用</span><br><span class="line"># res=max(salaries,key=func) # 返回值=func(&#x27;siry&#x27;)</span><br><span class="line"># print(res)</span><br><span class="line">#这里再max迭代其字典salaries时，迭代的是其key而非value，所以比较的也是key非value，想要比较key就把max中传入key=func参数，func为定义的函数(这里无需跟括号和参数因为max会自动传入参数)，其功能为返回字典key对应的value，使其用value进行比较，但因这里只临时调用一次，顾应该定义为lambda函数，而无需专门定义一个有名函数。写法如下：</span><br><span class="line">res = max(salaries,key=lambda k:salaries[k])</span><br><span class="line">print(res)</span><br><span class="line"># ========================min的应用</span><br><span class="line"># res=min(salaries,key=lambda k:salaries[k])</span><br><span class="line"># print(res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ========================sorted排序</span><br><span class="line"></span><br><span class="line">#res=sorted(salaries,key=lambda k:salaries[k],reverse=True)</span><br><span class="line"># print(res)</span><br><span class="line">#这里sorted为排序，默认为key排序，传入key参数（lamdda）找到其key对应value，使其用value排序。</span><br></pre></td></tr></table></figure>
+
+<p>​            </p>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E4%BA%8C%E5%88%86%E6%B3%95_hexo/" data-id="ckxjra7pc001rr0v1c6zs1fys" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-名称空间_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4_hexo/">名称空间</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    1.三种名称空间用途与存货周期</p>
+<p>​    2.三种名称空间的加载顺序</p>
+<p>​    3.三种名称空间的查找名字的优先级</p>
+<p>名称空间存放在栈区里面，栈区存放了三种名称空间，分别为：</p>
+<p>​    内置名称空间，全局名称空间，局部名称空间</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210909154939000.png" alt="image-20210909154939000"></p>
+<h2 id="1-内置名称空间"><a href="#1-内置名称空间" class="headerlink" title="1.内置名称空间"></a>1.内置名称空间</h2><p>​    例如：print，input</p>
+<p>​    存货周期：python解释器 启动则产生，解释器关闭则销毁。</p>
+<h2 id="2-全局名称空间："><a href="#2-全局名称空间：" class="headerlink" title="2.全局名称空间："></a>2.全局名称空间：</h2><p>​    运行顶级代码所产生的名字，或者说不是函数内定义，也非内置的就是全局名称空间</p>
+<p>​    python是靠缩进进行嵌套代码的，顶级代码就是第一级代码，非嵌套代码。</p>
+<p>例如：</p>
+<p> <code>x=10</code></p>
+<p><code>def func():</code></p>
+<p>​    <code>a=1</code></p>
+<p>​    <code>b=2</code></p>
+<p>这里func和x就是全局名称空间存储的，但a和b是局部名称空间。</p>
+<p>存货周期：python文件执行则产生，运行完毕便销毁。</p>
+<h2 id="3-局部名称空间"><a href="#3-局部名称空间" class="headerlink" title="3.局部名称空间"></a>3.局部名称空间</h2><p>​    在调用函数时，运行函数体代码过程中产生的函数内的名字。 </p>
+<p>​    存货周期：在调用函数时存货，函数调用完毕后摧毁。</p>
+<p>名称空间加载顺序：</p>
+<pre><code> 内置名称空间》 全局名称空间 》 局部名称空间
+</code></pre>
+<p>销毁顺序：</p>
+<p>​    局部名称空间》 全局名称空间 》内置名称空间</p>
+<p>名字的查找优先级：</p>
+<p>​    内置名称空间》 全局名称空间 》 局部名称空间</p>
+<h2 id="全局作用域与局部作用域"><a href="#全局作用域与局部作用域" class="headerlink" title="全局作用域与局部作用域"></a>全局作用域与局部作用域</h2><p>按照名字作用范围的不同可以将三个名称空间划分为两个区域：</p>
+<ol>
+<li>全局作用域:位于全局名称空间、内建名称空间中的名字属于全局范围，该范围内的名字全局存活（除非被删除，否则在整个文件执行过程中存活）、全局有效（在任意位置都可以使用）；</li>
+<li> 局部作用域:位于局部名称空间中的名字属于局部范围。该范围内的名字临时存活（即在函数调用时临时生成，函数调用结束后就释放）、局部有效（只能在函数内使用）。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4_hexo/" data-id="ckxjra7pf001yr0v1h33sh5p0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-序列化_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E5%BA%8F%E5%88%97%E5%8C%96_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E5%BA%8F%E5%88%97%E5%8C%96_hexo/">序列化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>序列化指的是把内存的数据类型转换成一个特定的格式的内容。</p>
+<p>该格式的内容可用于存储或传输给其他平台使用</p>
+<p>内存中的数据类型–》序列化–》特定的格式（json格式或者pickle格式）</p>
+<p>内存中的数据类型《–反序列化《–特定的格式（json格式或者pickle格式）</p>
+<p>反序列化：相当于把json格式转为内存中的数据类型。</p>
+<h2 id="序列化的作用："><a href="#序列化的作用：" class="headerlink" title="序列化的作用："></a>序列化的作用：</h2><p>序列化得到的结果：特定的格式的内容有两种用途</p>
+<p>1.可用于存储-》用于存档</p>
+<p>2.传输给其他平台使用-》跨平台数据交互</p>
+<p>用途1：可以是一种专用的格式-》pickle只有python可以识别。因为用于存储本身是从内存数据类型转换到序列化格式存储然后使用时又调用反序列化到内存中去，本质上是自己和自己玩，无需与其他语言进行交互</p>
+<p>用途2:应该是一种通用，能被其他语言所是识别的语言-》json。</p>
+<h2 id="json"><a href="#json" class="headerlink" title="json"></a><strong>json</strong></h2><p>如果我们要在不同的编程语言之间传递对象，就必须把对象序列化为标准格式，比如XML，但更好的方法是序列化为JSON，因为JSON表示出来就是一个字符串，可以被所有语言读取，也可以方便地存储到磁盘或者通过网络传输。JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。</p>
+<p>JSON表示的对象就是标准的JavaScript语言的对象，JSON和Python内置的数据类型对应如下：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210927145134605.png" alt="image-20210927145134605"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E5%BA%8F%E5%88%97%E5%8C%96_hexo/" data-id="ckxjra7pg0021r0v1ecjec28n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-形参与实参介绍_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E5%BD%A2%E5%8F%82%E4%B8%8E%E5%AE%9E%E5%8F%82%E4%BB%8B%E7%BB%8D_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E5%BD%A2%E5%8F%82%E4%B8%8E%E5%AE%9E%E5%8F%82%E4%BB%8B%E7%BB%8D_hexo/">形参与实参介绍</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">@作者: egon老湿</span><br><span class="line">@微信:18611453110</span><br><span class="line">@专栏: https://zhuanlan.zhihu.com/c_1189883314197168128</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 一 形参与实参介绍</span><br><span class="line"># 形参：在定义函数阶段定义的参数称之为形式参数，简称形参,相当于变量名</span><br><span class="line">def func(x, y):  # x=1，y=2</span><br><span class="line">    print(x, y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 实参：在调用函数阶段传入的值称之为实际参数，简称实参，相当于变量值</span><br><span class="line"># func(1,2)</span><br><span class="line"></span><br><span class="line"># 形参与实参的关系：</span><br><span class="line"># 1、在调用阶段，实参（变量值）会绑定给形参（变量名）</span><br><span class="line"># 2、这种绑定关系只能在函数体内使用</span><br><span class="line"># 3、实参与形参的绑定关系在函数调用时生效，函数调用结束后解除绑定关系</span><br><span class="line"></span><br><span class="line"># 实参是传入的值，但值可以是以下形式</span><br><span class="line"># 形式一：</span><br><span class="line"># func(1,2)</span><br><span class="line"></span><br><span class="line"># 形式二：</span><br><span class="line"># a=1</span><br><span class="line"># b=2</span><br><span class="line"># func(a,b)</span><br><span class="line"></span><br><span class="line"># 形式三：</span><br><span class="line"># func(int(&#x27;1&#x27;),2)</span><br><span class="line"># func(func1(1,2,),func2(2,3),333)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 二 形参与实参的具体使用</span><br><span class="line"># 2.1 位置参数：按照从左到右的顺序依次定义的参数称之为位置参数</span><br><span class="line"># 位置形参:在函数定义阶段，按照从左到右的顺序直接定义的&quot;变量名&quot;</span><br><span class="line">#        特点：必须被传值，多一个不行少一个也不行</span><br><span class="line"># def func(x,y):</span><br><span class="line">#     print(x,y)</span><br><span class="line"># func(1,2,3)</span><br><span class="line"># func(1,)</span><br><span class="line"></span><br><span class="line"># 位置实参:在函数调用阶段， 按照从左到有的顺序依次传入的值</span><br><span class="line">#        特点：按照顺序与形参一一对应</span><br><span class="line"></span><br><span class="line"># func(1,2)</span><br><span class="line"># func(2,1)</span><br><span class="line"></span><br><span class="line"># 2.2 关键字参数</span><br><span class="line"># 关键字实参：在函数调用阶段，按照key=value的形式传入的值</span><br><span class="line">#       特点：指名道姓给某个形参传值，可以完全不参照顺序</span><br><span class="line"># def func(x,y):</span><br><span class="line">#     print(x,y)</span><br><span class="line"></span><br><span class="line"># func(y=2,x=1)</span><br><span class="line"># func(1,2)</span><br><span class="line"></span><br><span class="line"># 混合使用，强调</span><br><span class="line"># 1、位置实参必须放在关键字实参前</span><br><span class="line"># func(1,y=2)</span><br><span class="line"># func(y=2,1)</span><br><span class="line"></span><br><span class="line"># 2、不能能为同一个形参重复传值</span><br><span class="line"># func(1,y=2,x=3)</span><br><span class="line"># func(1,2,x=3,y=4)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 2.3 默认参数</span><br><span class="line"># 默认形参：在定义函数阶段，就已经被赋值的形参，称之为默认参数</span><br><span class="line">#       特点：在定义阶段就已经被赋值，意味着在调用阶段可以不用为其赋值</span><br><span class="line"># def func(x,y=3):</span><br><span class="line">#     print(x,y)</span><br><span class="line">#</span><br><span class="line"># # func(x=1)</span><br><span class="line"># func(x=1,y=44444)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># def register(name,age,gender=&#x27;男&#x27;):</span><br><span class="line">#     print(name,age,gender)</span><br><span class="line">#</span><br><span class="line"># register(&#x27;三炮&#x27;,18)</span><br><span class="line"># register(&#x27;二炮&#x27;,19)</span><br><span class="line"># register(&#x27;大炮&#x27;,19)</span><br><span class="line"># register(&#x27;没炮&#x27;,19,&#x27;女&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 位置形参与默认形参混用，强调：</span><br><span class="line"># 1、位置形参必须在默认形参的左边</span><br><span class="line"># def func(y=2,x):</span><br><span class="line">#     pass</span><br><span class="line"></span><br><span class="line"># 2、默认参数的值是在函数定义阶段被赋值的，准确地说被赋予的是值的内存地址</span><br><span class="line"># 示范1：</span><br><span class="line"># m=2</span><br><span class="line"># def func(x,y=m): # y=&gt;2的内存地址</span><br><span class="line">#     print(x,y</span><br><span class="line"># m=3333333333333333333</span><br><span class="line"># func(1)</span><br><span class="line"></span><br><span class="line"># 示范2：</span><br><span class="line"># m = [111111, ]</span><br><span class="line">#</span><br><span class="line"># def func(x, y=m): # y=&gt;[111111, ]的内存地址</span><br><span class="line">#     print(x, y)</span><br><span class="line">#</span><br><span class="line"># m.append(3333333)</span><br><span class="line"># func(1)</span><br><span class="line"></span><br><span class="line"># 3、虽然默认值可以被指定为任意数据类型，但是不推荐使用可变类型</span><br><span class="line"># 函数最理想的状态：函数的调用只跟函数本身有关系，不外界代码的影响</span><br><span class="line"># m = [111111, ]</span><br><span class="line">#</span><br><span class="line"># def func(x, y=m):</span><br><span class="line">#     print(x, y)</span><br><span class="line">#</span><br><span class="line"># m.append(3333333)</span><br><span class="line"># m.append(444444)</span><br><span class="line"># m.append(5555)</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"># func(1)</span><br><span class="line"># func(2)</span><br><span class="line"># func(3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># def func(x,y,z,l=None):</span><br><span class="line">#     if l is None:</span><br><span class="line">#         l=[]</span><br><span class="line">#     l.append(x)</span><br><span class="line">#     l.append(y)</span><br><span class="line">#     l.append(z)</span><br><span class="line">#     print(l)</span><br><span class="line"></span><br><span class="line"># func(1,2,3)</span><br><span class="line"># func(4,5,6)</span><br><span class="line"></span><br><span class="line"># new_l=[111,222]</span><br><span class="line"># func(1,2,3,new_l)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 2.4 可变长度的参数（*与**的用法）</span><br><span class="line"># 可变长度指的是在调用函数时，传入的值（实参）的个数不固定</span><br><span class="line"># 而实参是用来为形参赋值的，所以对应着，针对溢出的实参必须有对应的形参来接收</span><br><span class="line"></span><br><span class="line"># 2.4.1 可变长度的位置参数</span><br><span class="line"># I：*形参名：用来接收溢出的位置实参，溢出的位置实参会被*保存成元组的格式然后赋值紧跟其后的形参名</span><br><span class="line">#           *后跟的可以是任意名字，但是约定俗成应该是args</span><br><span class="line"></span><br><span class="line"># def func(x,y,*z): # z =（3,4,5,6）</span><br><span class="line">#     print(x,y,z)</span><br><span class="line"></span><br><span class="line"># func(1,2,3,4,5,6)</span><br><span class="line"></span><br><span class="line"># def my_sum(*args):</span><br><span class="line">#     res=0</span><br><span class="line">#     for item in args:</span><br><span class="line">#         res+=item</span><br><span class="line">#     return res</span><br><span class="line">#</span><br><span class="line"># res=my_sum(1,2,3,4,)</span><br><span class="line"># print(res)</span><br><span class="line"></span><br><span class="line"># II: *可以用在实参中，实参中带*，先*后的值打散成位置实参</span><br><span class="line"># def func(x,y,z):</span><br><span class="line">#     print(x,y,z)</span><br><span class="line">#</span><br><span class="line"># # func(*[11,22,33]) # func(11，22，33)</span><br><span class="line"># # func(*[11,22]) # func(11，22)</span><br><span class="line">#</span><br><span class="line"># l=[11,22,33]</span><br><span class="line"># func(*l)</span><br><span class="line"></span><br><span class="line"># III: 形参与实参中都带*</span><br><span class="line"># def func(x,y,*args): # args=(3,4,5,6)</span><br><span class="line">#     print(x,y,args)</span><br><span class="line"></span><br><span class="line"># func(1,2,[3,4,5,6])</span><br><span class="line"># func(1,2,*[3,4,5,6]) # func(1,2,3,4,5,6)</span><br><span class="line"># func(*&#x27;hello&#x27;) # func(&#x27;h&#x27;,&#x27;e&#x27;,&#x27;l&#x27;,&#x27;l&#x27;,&#x27;o&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 2.4.2 可变长度的关键字参数</span><br><span class="line"># I：**形参名：用来接收溢出的关键字实参，**会将溢出的关键字实参保存成字典格式，然后赋值给紧跟其后的形参名</span><br><span class="line">#           **后跟的可以是任意名字，但是约定俗成应该是kwargs</span><br><span class="line"># def func(x,y,**kwargs):</span><br><span class="line">#     print(x,y,kwargs)</span><br><span class="line">#</span><br><span class="line"># func(1,y=2,a=1,b=2,c=3)</span><br><span class="line"></span><br><span class="line"># II: **可以用在实参中(**后跟的只能是字典)，实参中带**，先**后的值打散成关键字实参</span><br><span class="line"># def func(x,y,z):</span><br><span class="line">#     print(x,y,z)</span><br><span class="line"></span><br><span class="line"># func(*&#123;&#x27;x&#x27;:1,&#x27;y&#x27;:2,&#x27;z&#x27;:3&#125;) # func(&#x27;x&#x27;,&#x27;y&#x27;,&#x27;z&#x27;)</span><br><span class="line"># func(**&#123;&#x27;x&#x27;:1,&#x27;y&#x27;:2,&#x27;z&#x27;:3&#125;) # func(x=1,y=2,z=3)</span><br><span class="line"></span><br><span class="line"># 错误</span><br><span class="line"># func(**&#123;&#x27;x&#x27;:1,&#x27;y&#x27;:2,&#125;) # func(x=1,y=2)</span><br><span class="line"># func(**&#123;&#x27;x&#x27;:1,&#x27;a&#x27;:2,&#x27;z&#x27;:3&#125;) # func(x=1,a=2,z=3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># III: 形参与实参中都带**</span><br><span class="line"># def func(x,y,**kwargs):</span><br><span class="line">#     print(x,y,kwargs)</span><br><span class="line"></span><br><span class="line"># func(y=222,x=111,a=333,b=444)</span><br><span class="line"># func(**&#123;&#x27;y&#x27;:222,&#x27;x&#x27;:111,&#x27;a&#x27;:333,&#x27;b&#x27;:4444&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 混用*与**：*args必须在**kwargs之前</span><br><span class="line"># def func(x,*args,**kwargs):</span><br><span class="line">#     print(args)</span><br><span class="line">#     print(kwargs)</span><br><span class="line">#</span><br><span class="line"># func(1,2,3,4,5,6,7,8,x=1,y=2,z=3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def index(x,y,z):</span><br><span class="line">    print(&#x27;index=&gt;&gt;&gt; &#x27;,x,y,z)</span><br><span class="line"></span><br><span class="line">def wrapper(*args,**kwargs): #args=(1,) kwargs=&#123;&#x27;z&#x27;:3,&#x27;y&#x27;:2&#125;</span><br><span class="line">    index(*args,**kwargs)</span><br><span class="line">    # index(*(1,),**&#123;&#x27;z&#x27;:3,&#x27;y&#x27;:2&#125;)</span><br><span class="line">    # index(1,z=3,y=2)</span><br><span class="line"></span><br><span class="line">wrapper(1,z=3,y=2) # 为wrapper传递的参数是给index用的</span><br><span class="line"># 原格式---》汇总-----》打回原形</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 2.5 命名关键字参数（了解）</span><br><span class="line"># 2.6 组合使用（了解）</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E5%BD%A2%E5%8F%82%E4%B8%8E%E5%AE%9E%E5%8F%82%E4%BB%8B%E7%BB%8D_hexo/" data-id="ckxjra7pi0028r0v187dnebfg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-模块导入_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5_hexo/">模块导入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>import导入模块，在模块调用时必须加上模块名.方法名()</p>
+<p>例：</p>
+<p>import time</p>
+<p>time.time</p>
+<p>优点：所有属性和方法都属于模块所在的名称空间，不会与当前名称空间产生冲突</p>
+<p>缺点：加前缀调用麻烦</p>
+<p>from 模块名 import 方法名 </p>
+<p>1.产生一个模块的名称空间</p>
+<p>2.运行模块文件将允许过程中产生的名字都对到模块的名称空间中去</p>
+<p>3.在当前名称空间中拿到一个名字，该名字与模块名称空间中的内存地址</p>
+<p>例：</p>
+<p>from time import time </p>
+<p>time()</p>
+<p>优点：不用加前缀</p>
+<p>缺点：容易与当前名称空间混淆，如果当前空间中本身还有一个time，这个会造成覆盖。</p>
+<h2 id="循环导入："><a href="#循环导入：" class="headerlink" title="循环导入："></a>循环导入：</h2><p>​    导入模块1时模块1中导入了模块2，且模块2中导入了m1，则造成了循环导入。</p>
+<h2 id="查看已经加载到内存中的模块："><a href="#查看已经加载到内存中的模块：" class="headerlink" title="查看已经加载到内存中的模块："></a>查看已经加载到内存中的模块：</h2><p>import sys</p>
+<p>print(sys.modules)</p>
+<h2 id="加载本地路径模块："><a href="#加载本地路径模块：" class="headerlink" title="加载本地路径模块："></a>加载本地路径模块：</h2><p>import sys</p>
+<p>sys.path.append(r’文件绝对路径’)</p>
+<p>import foo(加载的模块名)</p>
+<h2 id="包："><a href="#包：" class="headerlink" title="包："></a>包：</h2><p>1.包就是一个包含有__init__.py文件的文件夹</p>
+<p>2.为何要有包</p>
+<p>​    包的本质是模块的一种形式，包是用来被当做模块导入</p>
+<p>​    导入模块(包)的流程：</p>
+<p>​        1.产生一个名称空间</p>
+<p>​        2.运行包下的init.py(这里的init左右有两个下划线),将运行过程中产生的名字都丢到1的名称空间中</p>
+<p>​        3.再当前执行文件的名称空间中拿到一个名字mmm,mmm指向1的名称空间</p>
+<p>​        import mmm #这里的mmm是一个文件夹，本质上是在导入mmm下的init.py</p>
+<pre><code>     #本质上把功能都写进init.py，可以直接调用。
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5_hexo/" data-id="ckxjra7pj002br0v1a60l3hvl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-文件_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E6%96%87%E4%BB%B6_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E6%96%87%E4%BB%B6_hexo/">文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-打开文件"><a href="#1-打开文件" class="headerlink" title="1.打开文件"></a>1.打开文件</h2><p>open()</p>
+<p>windows路径分隔符问题：</p>
+<p>open(‘C:\a\nb\c\d.txt’)</p>
+<p>这里由于\是转义符且\n为换行符，无法直接找到需要的文件</p>
+<p>解放方案1：</p>
+<p>​    open(r’C:\a\nb\c\d.txt’)</p>
+<p>​                2:</p>
+<p>​    open(‘C:/a/nb/c/d.txt’)</p>
+<p>open参数：</p>
+<p>​    mode:</p>
+<p>​    mode代表其操作文件的权限以及方式，权限有三种，方式有两种</p>
+<pre><code>      权限：
+          r只读模式（带r的文件必须先存在）
+        w只写模式
+        a只追加写模式
+        +：r+、w+、a+
+        
+      读写模式：
+          t和b
+            强调：t和b不能单独使用，必须跟r/w/a连用
+            t文本（默认的模式）
+                1、读写都以str（unicode）为单位的
+                2、文本文件
+                3、必须指定encoding=&#39;utf-8&#39;
+            b二进制/bytes
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/2019030514425285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xvbmdlMjAxMTExMDQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>例：</p>
+<p>​    f=open(r’aaa/a.txt’,mode=’rt’)</p>
+<h2 id="2-操作文件"><a href="#2-操作文件" class="headerlink" title="2.操作文件"></a>2.操作文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res=f.read()</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-关闭文件"><a href="#3-关闭文件" class="headerlink" title="3.关闭文件"></a>3.关闭文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-with-open"><a href="#4-with-open" class="headerlink" title="4.with open"></a>4.with open</h2><p>​    在使用open时文件必须进行close操作，但with open无需主动进行关闭，系统会自动进行close</p>
+<p>例：    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;a.txt&#x27;</span>,mode=<span class="string">&#x27;rt&#x27;</span>) <span class="keyword">as</span> f1：</span><br><span class="line"></span><br><span class="line">					f=f1.read()</span><br><span class="line"></span><br><span class="line">					<span class="built_in">print</span>(f)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-指定字符编码"><a href="#5-指定字符编码" class="headerlink" title="5.指定字符编码"></a>5.指定字符编码</h2><p>encoding=’字符编码’</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with open(&#x27;c.txt&#x27;,mode=&#x27;rt&#x27;,encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">    res=f.read() # t模式会将f.read()读出的结果解码成unicode</span><br><span class="line">    print(res,type(res))</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-实例"><a href="#6-实例" class="headerlink" title="6.实例"></a>6.实例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">#1、编写文件copy工具</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">a = input(&#x27;请输入您复制的文件名:&#x27;)</span><br><span class="line">b = input(&#x27;您将要复制的文件名:&#x27;)</span><br><span class="line">with open(a,mode=&#x27;rb&#x27;) as file,\</span><br><span class="line">        open(b,mode=&#x27;wb+&#x27;) as file2:</span><br><span class="line">    c=file.read()</span><br><span class="line">    d=file2.write(c)</span><br><span class="line">    print(f&#x27;您复制的文件&#123;a&#125;,现在&#123;b&#125;文件的内容为&#123;d&#125;&#x27;)</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">#2、编写登录程序，账号密码来自于文件</span><br><span class="line">#用户登陆</span><br><span class="line">import re</span><br><span class="line">&#x27;&#x27;&#x27;用户登陆</span><br><span class="line">a = input(&quot;请输入您的账号：&quot;)</span><br><span class="line">b = input(&quot;请输入密码：&quot;)</span><br><span class="line"></span><br><span class="line">with open(&#x27;static/c.txt&#x27;,mode=&#x27;r+&#x27;) as c:</span><br><span class="line">    while True:</span><br><span class="line">        d = c.readline()</span><br><span class="line">        e = a + &quot;:&quot; + b + &#x27;\n&#x27;</span><br><span class="line">        if e == d:</span><br><span class="line">            print(&quot;账号密码正确，登陆成功&quot;)</span><br><span class="line">            exit(0)</span><br><span class="line">        print(len(d))</span><br><span class="line">        if len(d) == 0:</span><br><span class="line">            print(&#x27;登陆失败&#x27;)</span><br><span class="line">            exit(1)</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">&#x27;&#x27;&#x27;注册账号</span><br><span class="line">a = input(&quot;请输入您要注册的账号：&quot;)</span><br><span class="line">b = input(&quot;请输入要注册的密码：&quot;)</span><br><span class="line">with open(&#x27;static/c.txt&#x27;,mode=&#x27;r+&#x27;) as c:</span><br><span class="line">        while True:</span><br><span class="line">            d = c.readline()</span><br><span class="line">            f= d.split(&#x27;:&#x27;)</span><br><span class="line">            if a == f[0]:</span><br><span class="line">                print(&quot;账号已存在，请重新输入&quot;)</span><br><span class="line">                exit(1)</span><br><span class="line">            if len(d) == 0:</span><br><span class="line">                e =  a + &quot;:&quot; + b + &quot;\n&quot;</span><br><span class="line">                c.seek(0,2)</span><br><span class="line">                c.write(e)</span><br><span class="line">                print(&#x27;账号已注册成功&#x27;)</span><br><span class="line">                exit(0)</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">#面向对象</span><br><span class="line">class zcdl():</span><br><span class="line">    def start(self):</span><br><span class="line">        self.start1 = input(&#x27;&#x27;&#x27;请输入要选择的功能:</span><br><span class="line">     1.登陆账号</span><br><span class="line">     2.注册账号</span><br><span class="line">     :&#x27;&#x27;&#x27;)</span><br><span class="line">        if self.start1 == &#x27;1&#x27;:</span><br><span class="line">            self.denglu()</span><br><span class="line">        if self.start1 == &#x27;2&#x27;:</span><br><span class="line">            self.zhuce()</span><br><span class="line">    def denglu(self):</span><br><span class="line">        a = input(&quot;请输入您的账号：&quot;)</span><br><span class="line">        b = input(&quot;请输入密码：&quot;)</span><br><span class="line"></span><br><span class="line">        with open(&#x27;c.txt&#x27;, mode=&#x27;r+&#x27;) as c:</span><br><span class="line">            while True:</span><br><span class="line">                d = c.readline()</span><br><span class="line">                e = a + &quot;:&quot; + b + &#x27;\n&#x27;</span><br><span class="line">                if e == d:</span><br><span class="line">                    print(&quot;账号密码正确，登陆成功&quot;)</span><br><span class="line">                    exit(0)</span><br><span class="line">                if len(d) == 0:</span><br><span class="line">                    print(&#x27;登陆失败&#x27;)</span><br><span class="line">                    exit(1)</span><br><span class="line">    def zhuce(self):</span><br><span class="line">        a = input(&quot;请输入您要注册的账号：&quot;)</span><br><span class="line">        b = input(&quot;请输入要注册的密码：&quot;)</span><br><span class="line">        with open(&#x27;c.txt&#x27;, mode=&#x27;a+&#x27;) as c:</span><br><span class="line">            c.seek(0, 0)</span><br><span class="line">            while True:</span><br><span class="line">                d = c.readline()</span><br><span class="line">                f = d.split(&#x27;:&#x27;)</span><br><span class="line">                if a == f[0]:</span><br><span class="line">                    print(&quot;账号已存在，请重新输入&quot;)</span><br><span class="line">                    exit(1)</span><br><span class="line">                if len(d) == 0:</span><br><span class="line">                    e = a + &quot;:&quot; + b + &quot;\n&quot;</span><br><span class="line">                    c.seek(0, 2)</span><br><span class="line">                    c.write(e)</span><br><span class="line">                    print(&#x27;账号已注册成功&#x27;)</span><br><span class="line">                    exit(0)</span><br><span class="line"></span><br><span class="line">duixiang = zcdl()</span><br><span class="line">duixiang.start()</span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<p>1.在打开文件时需要注意rwa这三种模式每一种模式所在的指针位置以及是否会清空文件，还需要需要根据具体需求来移动指针位置。通过seek函数 </p>
+<p>2.seek(number,number) 第一个参数表示移动的位置为几个符号，正数右移动，负数左移动。第二个参数表示其在文件哪个位置。</p>
+<p>0代表从文件开头开始算起，1代表从当前位置开始算起，2代表从文件末尾算起。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E6%96%87%E4%BB%B6_hexo/" data-id="ckxjra7pj002er0v1evrqh3ov" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

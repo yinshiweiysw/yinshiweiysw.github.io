@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>python异常 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="异常：异常是程序发生错误的信号，程序一旦出错就会抛出异常，从而导致程序运行的终止。 异常处理： 捕捉其异常，使其在程序出错时执行某些操作或打印记录日志或反馈某些信息，而非直接终止运行。 异常处理的特征： 异常的追踪信息，异常的类型，异常的内容。 异常问题以及其处理方式： 语法上的错误：“SyntaxError”, 处理方式:必须在程序运行前就改正 if 1&gt;3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python异常">
+<meta property="og:url" content="http://example.com/2021/11/01/python%E5%BC%82%E5%B8%B8_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="异常：异常是程序发生错误的信号，程序一旦出错就会抛出异常，从而导致程序运行的终止。 异常处理： 捕捉其异常，使其在程序出错时执行某些操作或打印记录日志或反馈某些信息，而非直接终止运行。 异常处理的特征： 异常的追踪信息，异常的类型，异常的内容。 异常问题以及其处理方式： 语法上的错误：“SyntaxError”, 处理方式:必须在程序运行前就改正 if 1&gt;3">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-01T08:34:18.000Z">
+<meta property="article:modified_time" content="2021-11-19T03:54:22.871Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python异常_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/11/01/python%E5%BC%82%E5%B8%B8_hexo/" class="article-date">
+  <time datetime="2021-11-01T08:34:18.000Z" itemprop="datePublished">2021-11-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python异常
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="异常："><a href="#异常：" class="headerlink" title="异常："></a>异常：</h2><p>异常是程序发生错误的信号，程序一旦出错就会抛出异常，从而导致程序运行的终止。</p>
+<p>异常处理：</p>
+<p>捕捉其异常，使其在程序出错时执行某些操作或打印记录日志或反馈某些信息，而非直接终止运行。</p>
+<p>异常处理的特征：</p>
+<p>异常的追踪信息，异常的类型，异常的内容。</p>
+<h2 id="异常问题以及其处理方式："><a href="#异常问题以及其处理方式：" class="headerlink" title="异常问题以及其处理方式："></a>异常问题以及其处理方式：</h2><p> 语法上的错误：“SyntaxError”,</p>
+<p>处理方式:必须在程序运行前就改正</p>
+<p>if 1&gt;3<br>                print( “run. . . “)</p>
+<p>逻辑上的错误：</p>
+<p>例如：dic={‘name’:’saf’}</p>
+<p>​            dic[‘age’]</p>
+<p>针对逻辑上的异常又分为两种处理方式</p>
+<p>​    1.错误的发生可以预知：        </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">age=input(&#x27;请输入年龄&#x27;).strip()</span><br><span class="line">age=int(age)</span><br><span class="line">if age &gt; 18:</span><br><span class="line">	print(&#x27;猜大了&#x27;)</span><br><span class="line">elif age &lt; 18:</span><br><span class="line">	print(&#x27;猜小了&#x27;)</span><br><span class="line">else:</span><br><span class="line">	print(&#x27;猜对了&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>本代码中的逻辑漏洞在于，如果这里输入的不是数字而是字母或字符串，在进行数字大小比较时，就会出错，属于代码逻辑错误，可以预知。</p>
+<p>2.无法预知的错误：</p>
+<p>这时只能使用</p>
+<p>try函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">  # 主代码块</span><br><span class="line">  pass</span><br><span class="line">except KeyError,e:</span><br><span class="line">  # 异常时，执行该块</span><br><span class="line">  pass</span><br><span class="line">else:</span><br><span class="line">  # 主代码块执行完，执行该块</span><br><span class="line">  pass</span><br><span class="line">finally:</span><br><span class="line">  # 无论异常与否，最终执行该块</span><br><span class="line">  pass</span><br></pre></td></tr></table></figure>
+
+<p>常见异常：</p>
+<p>​    IndexError,NameError,KeyError 等</p>
+<p>​    第一个对应集合索引名错误，第二个对应运行的命令名错误，第三个为字典错误。每一种错误</p>
+<p>python所有的标准异常类：</p>
+<table>
+<thead>
+<tr>
+<th align="left">异常名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">BaseException</td>
+<td align="left">所有异常的基类</td>
+</tr>
+<tr>
+<td align="left">SystemExit</td>
+<td align="left">解释器请求退出</td>
+</tr>
+<tr>
+<td align="left">KeyboardInterrupt</td>
+<td align="left">用户中断执行(通常是输入^C)</td>
+</tr>
+<tr>
+<td align="left">Exception</td>
+<td align="left">常规错误的基类</td>
+</tr>
+<tr>
+<td align="left">StopIteration</td>
+<td align="left">迭代器没有更多的值</td>
+</tr>
+<tr>
+<td align="left">GeneratorExit</td>
+<td align="left">生成器(generator)发生异常来通知退出</td>
+</tr>
+<tr>
+<td align="left">SystemExit</td>
+<td align="left">Python 解释器请求退出</td>
+</tr>
+<tr>
+<td align="left">StandardError</td>
+<td align="left">所有的内建标准异常的基类</td>
+</tr>
+<tr>
+<td align="left">ArithmeticError</td>
+<td align="left">所有数值计算错误的基类</td>
+</tr>
+<tr>
+<td align="left">FloatingPointError</td>
+<td align="left">浮点计算错误</td>
+</tr>
+<tr>
+<td align="left">OverflowError</td>
+<td align="left">数值运算超出最大限制</td>
+</tr>
+<tr>
+<td align="left">ZeroDivisionError</td>
+<td align="left">除(或取模)零 (所有数据类型)</td>
+</tr>
+<tr>
+<td align="left">AssertionError</td>
+<td align="left">断言语句失败</td>
+</tr>
+<tr>
+<td align="left">AttributeError</td>
+<td align="left">对象没有这个属性</td>
+</tr>
+<tr>
+<td align="left">EOFError</td>
+<td align="left">没有内建输入,到达EOF 标记</td>
+</tr>
+<tr>
+<td align="left">EnvironmentError</td>
+<td align="left">操作系统错误的基类</td>
+</tr>
+<tr>
+<td align="left">IOError</td>
+<td align="left">输入/输出操作失败</td>
+</tr>
+<tr>
+<td align="left">OSError</td>
+<td align="left">操作系统错误</td>
+</tr>
+<tr>
+<td align="left">WindowsError</td>
+<td align="left">系统调用失败</td>
+</tr>
+<tr>
+<td align="left">ImportError</td>
+<td align="left">导入模块/对象失败</td>
+</tr>
+<tr>
+<td align="left">KeyboardInterrupt</td>
+<td align="left">用户中断执行(通常是输入^C)</td>
+</tr>
+<tr>
+<td align="left">LookupError</td>
+<td align="left">无效数据查询的基类</td>
+</tr>
+<tr>
+<td align="left">IndexError</td>
+<td align="left">序列中没有没有此索引(index)</td>
+</tr>
+<tr>
+<td align="left">KeyError</td>
+<td align="left">映射中没有这个键</td>
+</tr>
+<tr>
+<td align="left">MemoryError</td>
+<td align="left">内存溢出错误(对于Python 解释器不是致命的)</td>
+</tr>
+<tr>
+<td align="left">NameError</td>
+<td align="left">未声明/初始化对象 (没有属性)</td>
+</tr>
+<tr>
+<td align="left">UnboundLocalError</td>
+<td align="left">访问未初始化的本地变量</td>
+</tr>
+<tr>
+<td align="left">ReferenceError</td>
+<td align="left">弱引用(Weak reference)试图访问已经垃圾回收了的对象</td>
+</tr>
+<tr>
+<td align="left">RuntimeError</td>
+<td align="left">一般的运行时错误</td>
+</tr>
+<tr>
+<td align="left">NotImplementedError</td>
+<td align="left">尚未实现的方法</td>
+</tr>
+<tr>
+<td align="left">SyntaxError</td>
+<td align="left">Python 语法错误</td>
+</tr>
+<tr>
+<td align="left">IndentationError</td>
+<td align="left">缩进错误</td>
+</tr>
+<tr>
+<td align="left">TabError</td>
+<td align="left">Tab 和空格混用</td>
+</tr>
+<tr>
+<td align="left">SystemError</td>
+<td align="left">一般的解释器系统错误</td>
+</tr>
+<tr>
+<td align="left">TypeError</td>
+<td align="left">对类型无效的操作</td>
+</tr>
+<tr>
+<td align="left">ValueError</td>
+<td align="left">传入无效的参数</td>
+</tr>
+<tr>
+<td align="left">UnicodeError</td>
+<td align="left">Unicode 相关的错误</td>
+</tr>
+<tr>
+<td align="left">UnicodeDecodeError</td>
+<td align="left">Unicode 解码时的错误</td>
+</tr>
+<tr>
+<td align="left">UnicodeEncodeError</td>
+<td align="left">Unicode 编码时错误</td>
+</tr>
+<tr>
+<td align="left">UnicodeTranslateError</td>
+<td align="left">Unicode 转换时错误</td>
+</tr>
+<tr>
+<td align="left">Warning</td>
+<td align="left">警告的基类</td>
+</tr>
+<tr>
+<td align="left">DeprecationWarning</td>
+<td align="left">关于被弃用的特征的警告</td>
+</tr>
+<tr>
+<td align="left">FutureWarning</td>
+<td align="left">关于构造将来语义会有改变的警告</td>
+</tr>
+<tr>
+<td align="left">OverflowWarning</td>
+<td align="left">旧的关于自动提升为长整型(long)的警告</td>
+</tr>
+<tr>
+<td align="left">PendingDeprecationWarning</td>
+<td align="left">关于特性将会被废弃的警告</td>
+</tr>
+<tr>
+<td align="left">RuntimeWarning</td>
+<td align="left">可疑的运行时行为(runtime behavior)的警告</td>
+</tr>
+<tr>
+<td align="left">SyntaxWarning</td>
+<td align="left">可疑的语法的警告</td>
+</tr>
+<tr>
+<td align="left">UserWarning</td>
+<td align="left">用户代码生成的警告</td>
+</tr>
+</tbody></table>
+<p>无法判断具体错误的情况可以使用捕捉所有异常：</p>
+<p>Exception或BaseException</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/11/01/python%E5%BC%82%E5%B8%B8_hexo/" data-id="ckxjra7p8001ar0v1f1c00bjx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/11/18/socket_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          socket
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/01/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网络协议（转）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

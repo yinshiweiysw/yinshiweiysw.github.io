@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-模块_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E6%A8%A1%E5%9D%97_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E6%A8%A1%E5%9D%97_hexo/">模块</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="时间相关命令"><a href="#时间相关命令" class="headerlink" title="时间相关命令"></a>时间相关命令</h3><p>时间分为三种格式</p>
+<p>1.时间戳：从1970年到现在的秒数</p>
+<p>​            time.time</p>
+<p>2.格式化的字符串形式</p>
+<p>​            time.strftime(‘%Y-%m-%d %H:%M%S %p’)</p>
+<p>3.结构化的时间</p>
+<p>​            res=time.localtime</p>
+<p>​            print(res)</p>
+<p>​            print(res.tm_year)</p>
+<p>4.datetime</p>
+<p>​    import datetime</p>
+<p>​    print(datetime.datetime.now())</p>
+<p>​    直接获取到格式化的时间格式</p>
+<h3 id="时间格式的转换"><a href="#时间格式的转换" class="headerlink" title="时间格式的转换"></a>时间格式的转换</h3><p>时间格式转换是其三种时间格式的相互转换，结构化时间（struct_time）,时间戳（timestamp）,格式化的字符串（format_string）</p>
+<h4 id="struct-time转换成时间戳"><a href="#struct-time转换成时间戳" class="headerlink" title="struct_time转换成时间戳"></a>struct_time转换成时间戳</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">s_time=time.localtime()</span><br><span class="line">print(time.mktime(s_time))</span><br></pre></td></tr></table></figure>
+
+<h4 id="时间戳转换成struct-time"><a href="#时间戳转换成struct-time" class="headerlink" title="时间戳转换成struct_time"></a>时间戳转换成struct_time</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tp_time=time.time()</span><br><span class="line">print(time.localtime(tp_time))</span><br></pre></td></tr></table></figure>
+
+<h4 id="strcut-time转换成格式化的字符串"><a href="#strcut-time转换成格式化的字符串" class="headerlink" title="strcut_time转换成格式化的字符串"></a>strcut_time转换成格式化的字符串</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s_time=time.localtime()</span><br><span class="line">time.strftime(&#x27;%Y-%m-%d %H:%M%S %p&#x27;,s_time)</span><br></pre></td></tr></table></figure>
+
+<p>真正需要掌握的是format string &lt;—&gt; timestamp</p>
+<h2 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a>random模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"></span><br><span class="line">print(random.random()) #的到0到1之间的小数</span><br><span class="line">	  random.randint(1,3) #大于等于1小于等于3的数</span><br><span class="line">	  random.randrange(1,3) #大于等于1 小于3 </span><br><span class="line">	  	   ~.choice(1,&#x27;aaa&#x27;,[2,3]) #定义几个数随机取一个</span><br><span class="line">	  	   ~.sample(1,&#x27;23131d&#x27;,[4,5]) #列表元素任意2个组合</span><br><span class="line">	  	   ~.uniform(1,3) #大于1小于3 的小树</span><br><span class="line">	  	   item =[1,2,3,4,5]</span><br><span class="line">	  	   random.shuffle(item)#打乱顺序</span><br></pre></td></tr></table></figure>
+
+<h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a>os模块</h2><p>os模块是与操作系统交互的一个接口</p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">os.getcwd() 获取当前工作目录，即当前python脚本工作的目录路径</span><br><span class="line">os.chdir(&quot;dirname&quot;)  改变当前脚本工作目录；相当于shell下cd</span><br><span class="line">os.curdir  返回当前目录: (&#x27;.&#x27;)</span><br><span class="line">os.pardir  获取当前目录的父目录字符串名：(&#x27;..&#x27;)</span><br><span class="line">os.makedirs(&#x27;dirname1/dirname2&#x27;)    可生成多层递归目录</span><br><span class="line">os.removedirs(&#x27;dirname1&#x27;)    若目录为空，则删除，并递归到上一级目录，如若也为空，则删除，依此类推</span><br><span class="line">os.mkdir(&#x27;dirname&#x27;)    生成单级目录；相当于shell中mkdir dirname</span><br><span class="line">os.rmdir(&#x27;dirname&#x27;)    删除单级空目录，若目录不为空则无法删除，报错；相当于shell中rmdir dirname</span><br><span class="line">os.listdir(&#x27;dirname&#x27;)    列出指定目录下的所有文件和子目录，包括隐藏文件，并以列表方式打印</span><br><span class="line">os.remove()  删除一个文件</span><br><span class="line">os.rename(&quot;oldname&quot;,&quot;newname&quot;)  重命名文件/目录</span><br><span class="line">os.stat(&#x27;path/filename&#x27;)  获取文件/目录信息</span><br><span class="line">os.sep    输出操作系统特定的路径分隔符，win下为&quot;\\&quot;,Linux下为&quot;/&quot;</span><br><span class="line">os.linesep    输出当前平台使用的行终止符，win下为&quot;\t\n&quot;,Linux下为&quot;\n&quot;</span><br><span class="line">os.pathsep    输出用于分割文件路径的字符串 win下为;,Linux下为:</span><br><span class="line">os.name    输出字符串指示当前使用平台。win-&gt;&#x27;nt&#x27;; Linux-&gt;&#x27;posix&#x27;</span><br><span class="line">os.system(&quot;bash command&quot;)  运行shell命令，直接显示</span><br><span class="line">os.environ  获取系统环境变量</span><br><span class="line">os.path.abspath(path)  返回path规范化的绝对路径</span><br><span class="line">os.path.split(path)  将path分割成目录和文件名二元组返回</span><br><span class="line">os.path.dirname(path)  返回path的目录。其实就是os.path.split(path)的第一个元素</span><br><span class="line">os.path.basename(path)  返回path最后的文件名。如何path以／或\结尾，那么就会返回空值。即os.path.split(path)的第二个元素</span><br><span class="line">os.path.exists(path)  如果path存在，返回True；如果path不存在，返回False</span><br><span class="line">os.path.isabs(path)  如果path是绝对路径，返回True</span><br><span class="line">os.path.isfile(path)  如果path是一个存在的文件，返回True。否则返回False</span><br><span class="line">os.path.isdir(path)  如果path是一个存在的目录，则返回True。否则返回False</span><br><span class="line">os.path.join(path1[, path2[, ...]])  将多个路径组合后返回，第一个绝对路径之前的参数将被忽略</span><br><span class="line">os.path.getatime(path)  返回path所指向的文件或者目录的最后存取时间</span><br><span class="line">os.path.getmtime(path)  返回path所指向的文件或者目录的最后修改时间</span><br><span class="line">os.path.getsize(path) 返回path的大小</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">在Linux和Mac平台上，该函数会原样返回path，在windows平台上会将路径中所有字符转换为小写，并将所有斜杠转换为饭斜杠。</span><br><span class="line">&gt;&gt;&gt; os.path.normcase(&#x27;c:/windows\\system32\\&#x27;)   </span><br><span class="line">&#x27;c:\\windows\\system32\\&#x27;   </span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">规范化路径，如..和/</span><br><span class="line">&gt;&gt;&gt; os.path.normpath(&#x27;c://windows\\System32\\../Temp/&#x27;)   </span><br><span class="line">&#x27;c:\\windows\\Temp&#x27;   </span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; a=&#x27;/Users/jieli/test1/\\\a1/\\\\aa.py/../..&#x27;</span><br><span class="line">&gt;&gt;&gt; print(os.path.normpath(a))</span><br><span class="line">/Users/jieli/test1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">os路径处理</span><br><span class="line">#方式一：推荐使用</span><br><span class="line">import os</span><br><span class="line">#具体应用</span><br><span class="line">import os,sys</span><br><span class="line">possible_topdir = os.path.normpath(os.path.join(</span><br><span class="line">    os.path.abspath(__file__),</span><br><span class="line">    os.pardir, #上一级</span><br><span class="line">    os.pardir,</span><br><span class="line">    os.pardir</span><br><span class="line">))</span><br><span class="line">sys.path.insert(0,possible_topdir)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#方式二：不推荐使用</span><br><span class="line">os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a>sys模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">print(sys.argv)</span><br></pre></td></tr></table></figure>
+
+<p>sys.argv用于获取向文件传递的参数</p>
+<p>例如：</p>
+<p>python3 run.py 1 2 3</p>
+<p>其中的1, 2,3就分别是三个参数</p>
+<p>sys.argv[0]为文件名， 123，分别就是后面对应的位置参数。</p>
+<p>例如:</p>
+<p>以argv来实现cp命令（cp 源文件 目标文件），实现复制粘贴文件的效果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">cs_1=sys.argv[1]</span><br><span class="line">cs_2=sys.argv[2]</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    with open(r&#x27;%s&#x27; %cs_1,mode=&quot;rb&quot;) as file1:</span><br><span class="line">        a=file1.read()</span><br><span class="line">        with open(r&#x27;%s&#x27; %cs_2,mode=&quot;wb+&quot;) as file2:</span><br><span class="line">            b=file2.write(a)</span><br><span class="line">except IOError:</span><br><span class="line">    print(&quot;没有该文件&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;内容写入文件成功&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>执行效果：（得在Windows命令行console执行）</p>
+<p>(pyproject) E:\pyproject\py_study1&gt;python study1.py upload_file.py 2.py<br>内容写入文件成功</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210924160248941.png" alt="image-20210924160248941"></p>
+<h2 id="打印进度条："><a href="#打印进度条：" class="headerlink" title="打印进度条："></a>打印进度条：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">res = &#x27;&#x27;</span><br><span class="line">for i in range(50):</span><br><span class="line">	res+=&#x27;#&#x27;</span><br><span class="line">	time.sleep(0.5)</span><br><span class="line">	print(&#x27;\r[%-50s]&#x27; % res,end=&#x27;&#x27;)</span><br><span class="line">	#%s 为百分号替代符号，中间的-50，-为左对齐，50为其长度固定为50，由于只输出一行，让其为每次叠加一个#的进度条，所以其换行符为空，并且\r跳到其行首，使其覆盖</span><br></pre></td></tr></table></figure>
+
+<h3 id="模拟打印下载进度条："><a href="#模拟打印下载进度条：" class="headerlink" title="模拟打印下载进度条："></a>模拟打印下载进度条：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">recv_size=0</span><br><span class="line"></span><br><span class="line">total_size=30000</span><br><span class="line"></span><br><span class="line">while recv_size &lt; total_size:</span><br><span class="line">	time.sleep(0.1)</span><br><span class="line">	recv_size+=1024</span><br><span class="line">	</span><br><span class="line">	percent= recv_size / total_size</span><br><span class="line">	if percent &gt; 1:</span><br><span class="line">        percent = 1</span><br><span class="line">	res= int(50 * percent) * &#x27;#&#x27;</span><br><span class="line">	print(&#x27;\r[%-50s] %d%%&#x27;) % (res,int(100*percent)),end=&#x27;&#x27;)</span><br><span class="line">	#recv_size和total_size模拟其文件大小以及已下载的数据大小</span><br><span class="line">	#sleep模拟下载速度，使其不会太快加载完。</span><br><span class="line">	#recv_size/total_size得到的分数为其下载进度，\r[%-50s]为其打印进度条，%d%%显示百分比，百分比为其下载进度分数x100.但recv_size一直累加可能会超出总大小本身，其比例也会超过100%，这是可以用if 判断其大于1时使其等于1.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a>shutil模块</h2><p>引入： import shutil</p>
+<p>copy()<br>功能：复制文件<br>格式：shutil.copy(‘来源文件’,’目标地址’)<br>返回值：复制之后的路径</p>
+<p>copy2()<br>功能：复制文件，保留元数据<br>格式：shutil.copy2(‘来源文件’,’目标地址’)<br>返回值：复制之后的路径</p>
+<p>copyfileobj()<br>将一个文件的内容拷贝的另外一个文件当中<br>格式：shutil.copyfileobj(open(来源文件,’r’),open（’目标文件’,’w’）)<br>返回值：无</p>
+<p>copyfile()<br>功能：将一个文件的内容拷贝的另外一个文件当中<br>格式:shutil.copyfile(来源文件,目标文件)<br>返回值：目标文件的路径</p>
+<p>copytree()<br>功能：复制整个文件目录<br>格式:shutil.copytree(来源目录,目标目录)<br>返回值：目标目录的路径<br>注意：无论文件夹是否为空，均可以复制，而且会复制文件夹中的所有内容</p>
+<p>copymode()<br>功能：拷贝权限</p>
+<p>copystat()<br>功能：拷贝元数据（状态）</p>
+<p>rmtree()<br>功能：移除整个目录，无论是否空<br>格式：shutil.rmtree(目录路径)<br>返回值：无</p>
+<p>move()<br>功能：移动文件或者文件夹<br>格式：shutil.move(来源地址,目标地址)<br>返回值：目标地址</p>
+<p>which()<br>功能：检测命令对应的文件路径<br>格式：shutil.which(‘命令字符串’)<br>返回值：命令文件所在位置<br>注意：window和linux不太一样。 window的命令都是.exe结尾，linux则不是</p>
+<p>disk_usage()<br>功能：检测磁盘使用信息<br>格式：disk_usage(‘盘符’)<br>返回值：元组</p>
+<p>归档和解包操作<br>归档：将多个文件合并到一个文件当中，这种操作方式就是归档。</p>
+<p>解包：将归档的文件进行释放。</p>
+<p>压缩：压缩时将多个文件进行有损或者无损的合并到一个文件当中。</p>
+<p>解压缩：就是压缩的反向操作，将压缩文件中的多个文件，释放出来。</p>
+<p>注意：压缩属于归档！<br>        make_archive()<br>功能：归档函数，归档操作<br>格式：shutil.make_archive(‘目标文件路径’,’归档文件后缀’,’需要归档的目录’)<br>返回值：归档文件的最终路径</p>
+<p>unpack_archive()<br>功能：解包操作<br>格式：shutil.unpack_archive(‘归档文件路径’,’解包目标文件夹’)<br>返回值:None<br>注意：文件夹不存在会新建文件夹</p>
+<p>get_archive_formats()<br>功能：获取当前系统已注册的归档文件格式（后缀）<br>格式：shutil.get_archive_formats()</p>
+<p>get_unpack_formats()<br>功能：获取当前系统已经注册的解包文件格式(后缀)<br>格式:shutil.get_unpack_formats()<br>返回值：列表   [(后缀,解释),(后缀,解释),(后缀,解释)…]</p>
+<h2 id="json-amp-pickle模块"><a href="#json-amp-pickle模块" class="headerlink" title="json&amp;pickle模块"></a>json&amp;pickle模块</h2><p>之前我们学习过用eval内置方法可以将一个字符串转成python对象，不过，eval方法是有局限性的，对于普通的数据类型，json.loads和eval都能用，但遇到特殊类型的时候，eval就不管用了,所以eval的重点还是通常用来执行一个字符串表达式，并返回表达式的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 import json</span><br><span class="line">2 x=&quot;[null,true,false,1]&quot;</span><br><span class="line">3 print(eval(x)) #报错，无法解析null类型，而json就可以</span><br><span class="line">4 print(json.loads(x)) </span><br></pre></td></tr></table></figure>
+
+<p><strong>什么是序列化？</strong></p>
+<p>我们把对象(变量)从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等，都是一个意思。</p>
+<p><strong>为什么要序列化？</strong></p>
+<p>1：持久保存状态</p>
+<p>需知一个软件/程序的执行就在处理一系列状态的变化，在编程语言中，’状态’会以各种各样有结构的数据类型(也可简单的理解为变量)的形式被保存在内存中。</p>
+<p>内存是无法永久保存数据的，当程序运行了一段时间，我们断电或者重启程序，内存中关于这个程序的之前一段时间的数据（有结构）都被清空了。</p>
+<p>在断电或重启程序之前将程序当前内存中所有的数据都保存下来（保存到文件中），以便于下次程序执行能够从文件中载入之前的数据，然后继续执行，这就是序列化。</p>
+<p>具体的来说，你玩使命召唤闯到了第13关，你保存游戏状态，关机走人，下次再玩，还能从上次的位置开始继续闯关。或如，虚拟机状态的挂起等。</p>
+<p>2：跨平台数据交互</p>
+<p>序列化之后，不仅可以把序列化后的内容写入磁盘，还可以通过网络传输到别的机器上，如果收发的双方约定好实用一种序列化的格式，那么便打破了平台/语言差异化带来的限制，实现了跨平台数据交互。</p>
+<p>反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。</p>
+<h3 id="json"><a href="#json" class="headerlink" title="json"></a><strong>json</strong></h3><p>如果我们要在不同的编程语言之间传递对象，就必须把对象序列化为标准格式，比如XML，但更好的方法是序列化为JSON，因为JSON表示出来就是一个字符串，可以被所有语言读取，也可以方便地存储到磁盘或者通过网络传输。JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。</p>
+<p>JSON表示的对象就是标准的JavaScript语言的对象，JSON和Python内置的数据类型对应如下：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210927145134605.png" alt="image-20210927145134605"></p>
+<h3 id="如何序列化与反序列化"><a href="#如何序列化与反序列化" class="headerlink" title="如何序列化与反序列化"></a>如何序列化与反序列化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">res=json.dumps([1,&#x27;aaa&#x27;,True,False])</span><br><span class="line">print(res.type(res))</span><br><span class="line">l=json.loads(res)</span><br><span class="line">print(l,type(l))</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>[1, “aaa”, true, false] &lt;class ‘str’&gt;<br>        [1, ‘aaa’, True, False] &lt;class ‘list’&gt;</p>
+<p>json.dumps是序列化转换，将列表转换为json格式，其格式变为了str。</p>
+<p>json.loads是反序列化转换，将其又转回了原来的列表格式。</p>
+<p>示例2：存储为json格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">res=json.dumps([1,&#x27;aaa&#x27;,True,False])</span><br><span class="line">with open(&quot;1.json&quot;,mode=&quot;wt&quot;,encoding=&#x27;utf-8&#x27;) as file:</span><br><span class="line">    file.write(res)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210927151042187.png" alt="image-20210927151042187"></p>
+<p>再读取json格式将其反序列化转换成原格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">with open(&quot;1.json&quot;,mode=&#x27;rt&#x27;) as file:</span><br><span class="line">    a=file.read()</span><br><span class="line">    b=json.loads(a)</span><br><span class="line">    print(b)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>[1, ‘aaa’, True, False]</p>
+<p>简单方法实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">with open(&quot;1.json&quot;,mode=&quot;wt&quot;,encoding=&#x27;utf-8&#x27;) as file:</span><br><span class="line">    json.dump([1, &#x27;aaa&#x27;, True, False],file)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">with open(&quot;1.json&quot;,mode=&#x27;rt&#x27;) as file:</span><br><span class="line">    l=json.load(file)</span><br><span class="line">    print(l)</span><br></pre></td></tr></table></figure>
+
+<p>dump和load可以省略其文件的write和read方法</p>
+<h3 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import pickle</span><br><span class="line">res=pickle.dumps(&#123;1,2,3,4,5&#125;)</span><br><span class="line">print(res,type(res))</span><br></pre></td></tr></table></figure>
+
+<p>将python序列化转换成pickle形式，反序列化为loads，与json一致。</p>
+<h2 id="configparser模块"><a href="#configparser模块" class="headerlink" title="configparser模块"></a>configparser模块</h2><p><strong>配置文件如下：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 注释1</span><br><span class="line">; 注释2</span><br><span class="line"></span><br><span class="line">[section1]</span><br><span class="line">k1 = v1</span><br><span class="line">k2:v2</span><br><span class="line">user=egon</span><br><span class="line">age=18</span><br><span class="line">is_admin=true</span><br><span class="line">salary=31</span><br><span class="line">[section2]</span><br><span class="line">k1 = v1</span><br></pre></td></tr></table></figure>
+
+<p><strong>读取</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import configparser</span><br><span class="line"></span><br><span class="line">config=configparser.ConfigParser()</span><br><span class="line">config.read(&#x27;a.cfg&#x27;)</span><br><span class="line"></span><br><span class="line">#查看所有的标题</span><br><span class="line">res=config.sections() #[&#x27;section1&#x27;, &#x27;section2&#x27;]</span><br><span class="line">print(res)</span><br><span class="line"></span><br><span class="line">#查看标题section1下所有key=value的key</span><br><span class="line">options=config.options(&#x27;section1&#x27;)</span><br><span class="line">print(options) #[&#x27;k1&#x27;, &#x27;k2&#x27;, &#x27;user&#x27;, &#x27;age&#x27;, &#x27;is_admin&#x27;, &#x27;salary&#x27;]</span><br><span class="line"></span><br><span class="line">#查看标题section1下所有key=value的(key,value)格式</span><br><span class="line">item_list=config.items(&#x27;section1&#x27;)</span><br><span class="line">print(item_list) #[(&#x27;k1&#x27;, &#x27;v1&#x27;), (&#x27;k2&#x27;, &#x27;v2&#x27;), (&#x27;user&#x27;, &#x27;egon&#x27;), (&#x27;age&#x27;, &#x27;18&#x27;), (&#x27;is_admin&#x27;, &#x27;true&#x27;), (&#x27;salary&#x27;, &#x27;31&#x27;)]</span><br><span class="line"></span><br><span class="line">#查看标题section1下user的值=&gt;字符串格式</span><br><span class="line">val=config.get(&#x27;section1&#x27;,&#x27;user&#x27;)</span><br><span class="line">print(val) #egon</span><br><span class="line"></span><br><span class="line">#查看标题section1下age的值=&gt;整数格式</span><br><span class="line">val1=config.getint(&#x27;section1&#x27;,&#x27;age&#x27;)</span><br><span class="line">print(val1) #18</span><br><span class="line"></span><br><span class="line">#查看标题section1下is_admin的值=&gt;布尔值格式</span><br><span class="line">val2=config.getboolean(&#x27;section1&#x27;,&#x27;is_admin&#x27;)</span><br><span class="line">print(val2) #True</span><br><span class="line"></span><br><span class="line">#查看标题section1下salary的值=&gt;浮点型格式</span><br><span class="line">val3=config.getfloat(&#x27;section1&#x27;,&#x27;salary&#x27;)</span><br><span class="line">print(val3) #31.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>改写</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import configparser</span><br><span class="line"></span><br><span class="line">config=configparser.ConfigParser()</span><br><span class="line">config.read(&#x27;a.cfg&#x27;,encoding=&#x27;utf-8&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#删除整个标题section2</span><br><span class="line">config.remove_section(&#x27;section2&#x27;)</span><br><span class="line"></span><br><span class="line">#删除标题section1下的某个k1和k2</span><br><span class="line">config.remove_option(&#x27;section1&#x27;,&#x27;k1&#x27;)</span><br><span class="line">config.remove_option(&#x27;section1&#x27;,&#x27;k2&#x27;)</span><br><span class="line"></span><br><span class="line">#判断是否存在某个标题</span><br><span class="line">print(config.has_section(&#x27;section1&#x27;))</span><br><span class="line"></span><br><span class="line">#判断标题section1下是否有user</span><br><span class="line">print(config.has_option(&#x27;section1&#x27;,&#x27;&#x27;))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#添加一个标题</span><br><span class="line">config.add_section(&#x27;egon&#x27;)</span><br><span class="line"></span><br><span class="line">#在标题egon下添加name=egon,age=18的配置</span><br><span class="line">config.set(&#x27;egon&#x27;,&#x27;name&#x27;,&#x27;egon&#x27;)</span><br><span class="line">config.set(&#x27;egon&#x27;,&#x27;age&#x27;,18) #报错,必须是字符串</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#最后将修改的内容写入文件,完成最终的修改</span><br><span class="line">config.write(open(&#x27;a.cfg&#x27;,&#x27;w&#x27;))</span><br></pre></td></tr></table></figure>
+
+<p>基于上述方法添加一个ini文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import configparser</span><br><span class="line">  </span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line">config[&quot;DEFAULT&quot;] = &#123;&#x27;ServerAliveInterval&#x27;: &#x27;45&#x27;,</span><br><span class="line">                      &#x27;Compression&#x27;: &#x27;yes&#x27;,</span><br><span class="line">                     &#x27;CompressionLevel&#x27;: &#x27;9&#x27;&#125;</span><br><span class="line">  </span><br><span class="line">config[&#x27;bitbucket.org&#x27;] = &#123;&#125;</span><br><span class="line">config[&#x27;bitbucket.org&#x27;][&#x27;User&#x27;] = &#x27;hg&#x27;</span><br><span class="line">config[&#x27;topsecret.server.com&#x27;] = &#123;&#125;</span><br><span class="line">topsecret = config[&#x27;topsecret.server.com&#x27;]</span><br><span class="line">topsecret[&#x27;Host Port&#x27;] = &#x27;50022&#x27;     # mutates the parser</span><br><span class="line">topsecret[&#x27;ForwardX11&#x27;] = &#x27;no&#x27;  # same here</span><br><span class="line">config[&#x27;DEFAULT&#x27;][&#x27;ForwardX11&#x27;] = &#x27;yes&#x27;</span><br><span class="line">with open(&#x27;example.ini&#x27;, &#x27;w&#x27;) as configfile:</span><br><span class="line">   config.write(configfile)</span><br></pre></td></tr></table></figure>
+
+<h2 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a>hashlib模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 1、什么叫hash:hash是一种算法（3.x里代替了md5模块和sha模块，主要提供 SHA1, SHA224, SHA256, SHA384, SHA512 ，MD5 算法），该算法接受传入的内容，经过运算得到一串hash值</span><br><span class="line"># 2、hash值的特点是：</span><br><span class="line">#2.1 只要传入的内容一样，得到的hash值必然一样=====&gt;要用明文传输密码文件完整性校验</span><br><span class="line">#2.2 不能由hash值返解成内容=======》把密码做成hash值，不应该在网络传输明文密码</span><br><span class="line">#2.3 只要使用的hash算法不变，无论校验的内容有多大，得到的hash值长度是固定的</span><br></pre></td></tr></table></figure>
+
+<p> hash算法就像一座工厂，工厂接收你送来的原材料（可以用m.update()为工厂运送原材料），经过加工返回的产品就是hash值</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/1036857-20180410101832069-1144106861.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> 1 import hashlib</span><br><span class="line"> 2  </span><br><span class="line"> 3 m=hashlib.md5()# m=hashlib.sha256()</span><br><span class="line"> 4  </span><br><span class="line"> 5 m.update(&#x27;hello&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line"> 6 print(m.hexdigest())  #5d41402abc4b2a76b9719d911017c592</span><br><span class="line"> 7  </span><br><span class="line"> 8 m.update(&#x27;alvin&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line"> 9  </span><br><span class="line">10 print(m.hexdigest())  #92a7e713c30abbb0319fa07da2a5c4af</span><br><span class="line">11  </span><br><span class="line">12 m2=hashlib.md5()</span><br><span class="line">13 m2.update(&#x27;helloalvin&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line">14 print(m2.hexdigest()) #92a7e713c30abbb0319fa07da2a5c4af</span><br><span class="line">15 </span><br><span class="line">16 &#x27;&#x27;&#x27;</span><br><span class="line">17 注意：把一段很长的数据update多次，与一次update这段长数据，得到的结果一样</span><br><span class="line">18 但是update多次为校验大文件提供了可能。</span><br><span class="line">19 &#x27;&#x27;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>以上加密算法虽然依然非常厉害，但时候存在缺陷，即：通过撞库可以反解。所以，有必要对加密算法中添加自定义key再来做加密。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 import hashlib</span><br><span class="line">2  </span><br><span class="line">3 # ######## 256 ########</span><br><span class="line">4  </span><br><span class="line">5 hash = hashlib.sha256(&#x27;898oaFs09f&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line">6 hash.update(&#x27;alvin&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line">7 print (hash.hexdigest())#e79e68f070cdedcfe63eaf1a2e92c83b4cfb1b5c6bc452d214c1b7e77cdfd1c7</span><br></pre></td></tr></table></figure>
+
+<p>python 还有一个 hmac 模块，它内部对我们创建 key 和 内容 进行进一步的处理然后再加密:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import hmac</span><br><span class="line">h1=hmac.new(&#x27;hello&#x27;.encode(&#x27;utf-8&#x27;),digestmod=&#x27;md5&#x27;)</span><br><span class="line">h1.update(&#x27;world&#x27;.encode(&#x27;utf-8&#x27;))</span><br><span class="line"></span><br><span class="line">print(h1.hexdigest())</span><br></pre></td></tr></table></figure>
+
+<h2 id="suprocess模块"><a href="#suprocess模块" class="headerlink" title="suprocess模块"></a>suprocess模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> 1 import  subprocess</span><br><span class="line"> 2 </span><br><span class="line"> 3 &#x27;&#x27;&#x27;</span><br><span class="line"> 4 sh-3.2# ls /Users/egon/Desktop |grep txt$</span><br><span class="line"> 5 mysql.txt</span><br><span class="line"> 6 tt.txt</span><br><span class="line"> 7 事物.txt</span><br><span class="line"> 8 &#x27;&#x27;&#x27;</span><br><span class="line"> 9 </span><br><span class="line">10 res1=subprocess.Popen(&#x27;ls /Users/jieli/Desktop&#x27;,shell=True,stdout=subprocess.PIPE)</span><br><span class="line">11 res=subprocess.Popen(&#x27;grep txt$&#x27;,shell=True,stdin=res1.stdout,</span><br><span class="line">12                  stdout=subprocess.PIPE)</span><br><span class="line">13 </span><br><span class="line">14 print(res.stdout.read().decode(&#x27;utf-8&#x27;))</span><br><span class="line">15 </span><br><span class="line">16 </span><br><span class="line">17 #等同于上面,但是上面的优势在于,一个数据流可以和另外一个数据流交互,可以通过爬虫得到结果然后交给grep</span><br><span class="line">18 res1=subprocess.Popen(&#x27;ls /Users/jieli/Desktop |grep txt$&#x27;,shell=True,stdout=subprocess.PIPE)</span><br><span class="line">19 print(res1.stdout.read().decode(&#x27;utf-8&#x27;))</span><br><span class="line">20 </span><br><span class="line">21 </span><br><span class="line">22 #windows下:</span><br><span class="line">23 # dir | findstr &#x27;test*&#x27;</span><br><span class="line">24 # dir | findstr &#x27;txt$&#x27;</span><br><span class="line">25 import subprocess</span><br><span class="line">26 res1=subprocess.Popen(r&#x27;dir C:\Users\Administrator\PycharmProjects\test\函数备课&#x27;,shell=True,stdout=subprocess.PIPE)</span><br><span class="line">27 res=subprocess.Popen(&#x27;findstr test*&#x27;,shell=True,stdin=res1.stdout,</span><br><span class="line">28                  stdout=subprocess.PIPE)</span><br><span class="line">29 </span><br><span class="line">30 print(res.stdout.read().decode(&#x27;gbk&#x27;)) #subprocess使用当前系统默认编码，得到结果为bytes类型，在windows下需要用gbk解码</span><br></pre></td></tr></table></figure>
+
+<h2 id="logging模块"><a href="#logging模块" class="headerlink" title="logging模块"></a>logging模块</h2><h3 id="1-日志级别以及模块"><a href="#1-日志级别以及模块" class="headerlink" title="1.日志级别以及模块"></a>1.日志级别以及模块</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import logging</span><br><span class="line">logging.debug(&quot;调试&quot;)</span><br><span class="line">logging.info(&quot;消息信息&quot;)</span><br><span class="line">logging.warning(&quot;警告信息&quot;)</span><br><span class="line">logging.error(&quot;错误error信息&quot;)</span><br><span class="line">logging.critical(&quot;严重信息&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>logging为模块名，有5种输出级别，对应调试，信息，警告，错误，严重错误。</p>
+<p>该段代码运行效果：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008145648843.png" alt="image-20211008145648843"></p>
+<p>logging.告警级别 本质上就是直接在对应位置输出对应信息，信息内容包含在括号里面，这里打印时默认只输出了warning及其以上的信息，说明默认输出日志级别为warning。</p>
+<h3 id="logging-basicConfig"><a href="#logging-basicConfig" class="headerlink" title="logging.basicConfig"></a>logging.basicConfig</h3><p>#======介绍<br>    可在logging.basicConfig()函数中可通过具体参数来更改logging模块默认行为，可用参数有<br>    filename：用指定的文件名创建FiledHandler（后边会具体讲解handler的概念），这样日志会被存储在指定的文件中。<br>    filemode：文件打开方式，在指定了filename时使用这个参数，默认值为“a”还可指定为“w”。<br>    format：指定handler使用的日志显示格式。<br>    datefmt：指定日期时间格式。<br>    level：设置rootlogger（后边会讲解具体概念）的日志级别<br>    stream：用指定的stream创建StreamHandler。可以指定输出到    sys.stderr,sys.stdout或者文件，默认为sys.stderr。若同时列出了filename和stream两个参数，则stream参数会被忽略。</p>
+<p>format参数中可能用到的格式化串：<br>%(name)s Logger的名字<br>%(levelno)s 数字形式的日志级别<br>%(levelname)s 文本形式的日志级别<br>%(pathname)s 调用日志输出函数的模块的完整路径名，可能没有<br>%(filename)s 调用日志输出函数的模块的文件名<br>%(module)s 调用日志输出函数的模块名<br>%(funcName)s 调用日志输出函数的函数名<br>%(lineno)d 调用日志输出函数的语句所在的代码行<br>%(created)f 当前时间，用UNIX标准的表示时间的浮 点数表示<br>%(relativeCreated)d 输出日志信息时的，自Logger创建以 来的毫秒数<br>%(asctime)s 字符串形式的当前时间。默认格式是 “2003-07-08 16:49:45,896”。逗号后面的是毫秒<br>%(thread)d 线程ID。可能没有<br>%(threadName)s 线程名。可能没有<br>%(process)d 进程ID。可能没有<br>%(message)s用户输出的消息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#========使用</span><br><span class="line">import logging</span><br><span class="line">logging.basicConfig(filename=&#x27;access.log&#x27;,</span><br><span class="line">                    format=&#x27;%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s&#x27;,</span><br><span class="line">                    datefmt=&#x27;%Y-%m-%d %H:%M:%S %p&#x27;,</span><br><span class="line">                    level=10)</span><br><span class="line"></span><br><span class="line">logging.debug(&#x27;调试debug&#x27;)</span><br><span class="line">logging.info(&#x27;消息info&#x27;)</span><br><span class="line">logging.warning(&#x27;警告warn&#x27;)</span><br><span class="line">logging.error(&#x27;错误error&#x27;)</span><br><span class="line">logging.critical(&#x27;严重critical&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">part2: 可以为logging模块指定模块级的配置,即所有logger的配置</span><br></pre></td></tr></table></figure>
+
+<p>filename指定了日志文件，format指定其日志输出格式，datefmt指定日志输出时间的格式，level指定其日志输出级别，默认为30</p>
+<p><strong>level为10,20,30,40,50，对应调试，信息，警告，错误和严重错误。</strong></p>
+<h4 id="日志输出结果："><a href="#日志输出结果：" class="headerlink" title="日志输出结果："></a>日志输出结果：</h4><p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008151019274.png" alt="image-20211008151019274"></p>
+<p>如果这里不指定filename则默认输出到pycharm屏幕（python屏幕）</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008151301307.png" alt="image-20211008151301307"></p>
+<h3 id="日志字典"><a href="#日志字典" class="headerlink" title="日志字典"></a>日志字典</h3><p>其作用为让日志在读取格式时直接通过自身模块从字典里读取形成多种格式的方法，字典本身多个key固定的名称。</p>
+<h4 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py:"></a>settings.py:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">standard_format = &#x27;%(asctime)s - %(threadName)s:%(thread)d - 日志名字:%(name)s - %(filename)s:%(lineno)d -&#x27; \</span><br><span class="line">                  &#x27;%(levelname)s - %(message)s&#x27;</span><br><span class="line"></span><br><span class="line">simple_format = &#x27;[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)s&#x27;</span><br><span class="line"></span><br><span class="line">test_format = &#x27;%(asctime)s] %(message)s&#x27;</span><br><span class="line"></span><br><span class="line"># 3、日志配置字典</span><br><span class="line">LOGGING_DIC = &#123;</span><br><span class="line">    &#x27;version&#x27;: 1,  #版本，可以随意定义</span><br><span class="line">    &#x27;disable_existing_loggers&#x27;: False,  # 禁用已经存在的logger实例，固定格式</span><br><span class="line">    &#x27;formatters&#x27;: &#123;</span><br><span class="line">        &#x27;standard&#x27;: &#123;</span><br><span class="line">            &#x27;format&#x27;: standard_format</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;simple&#x27;: &#123;</span><br><span class="line">            &#x27;format&#x27;: simple_format</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;test&#x27;: &#123;</span><br><span class="line">            &#x27;format&#x27;: test_format</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;, # 定义日志 格式化的 工具，上面定义的standard_format，simple_format，test_format对应三种输出格式</span><br><span class="line">    &#x27;filters&#x27;: &#123;&#125;,# 过滤</span><br><span class="line">    # handlers是日志的接收者，不同的handler会将日志输出到不同的位置</span><br><span class="line">    &#x27;handlers&#x27;: &#123;</span><br><span class="line">        #打印到终端的日志</span><br><span class="line">        &#x27;console&#x27;: &#123;</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,</span><br><span class="line">            &#x27;class&#x27;: &#x27;logging.StreamHandler&#x27;,  # 打印到屏幕</span><br><span class="line">            &#x27;formatter&#x27;: &#x27;simple&#x27;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;default&#x27;: &#123;</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,</span><br><span class="line">            &#x27;class&#x27;: &#x27;logging.handlers.RotatingFileHandler&#x27;,  # 保存到文件</span><br><span class="line">            # &#x27;maxBytes&#x27;: 1024*1024*5,  # 日志大小 5M</span><br><span class="line">            &#x27;maxBytes&#x27;: 1000,</span><br><span class="line">            &#x27;backupCount&#x27;: 5,</span><br><span class="line">            &#x27;filename&#x27;: &#x27;a1.log&#x27;,  # os.path.join(os.path.dirname(os.path.dirname(__file__)),&#x27;log&#x27;,&#x27;a2.log&#x27;)</span><br><span class="line">            &#x27;encoding&#x27;: &#x27;utf-8&#x27;,</span><br><span class="line">            &#x27;formatter&#x27;: &#x27;standard&#x27;,</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        #打印到文件的日志,收集info及以上的日志</span><br><span class="line">        &#x27;other&#x27;: &#123;</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,</span><br><span class="line">            &#x27;class&#x27;: &#x27;logging.FileHandler&#x27;,  # 保存到文件</span><br><span class="line">            &#x27;filename&#x27;: &#x27;a2.log&#x27;, # os.path.join(os.path.dirname(os.path.dirname(__file__)),&#x27;log&#x27;,&#x27;a2.log&#x27;)</span><br><span class="line">            &#x27;encoding&#x27;: &#x27;utf-8&#x27;,</span><br><span class="line">            &#x27;formatter&#x27;: &#x27;test&#x27;,</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    # loggers是日志的产生者，产生的日志会传递给handler然后控制输出</span><br><span class="line">    &#x27;loggers&#x27;: &#123;</span><br><span class="line">        #logging.getLogger(__name__)拿到的logger配置</span><br><span class="line">        &#x27;kkk&#x27;: &#123;</span><br><span class="line">            &#x27;handlers&#x27;: [&#x27;console&#x27;,&#x27;other&#x27;],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;, # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)</span><br><span class="line">            &#x27;propagate&#x27;: False,  # 默认为True，向上（更高level的logger）传递，通常设置为False即可，否则会一份日志向上层层传递</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;终端提示&#x27;: &#123;</span><br><span class="line">            &#x27;handlers&#x27;: [&#x27;console&#x27;,],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,  # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)</span><br><span class="line">            &#x27;propagate&#x27;: False,  # 默认为True，向上（更高level的logger）传递，通常设置为False即可，否则会一份日志向上层层传递</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;&#x27;: &#123;</span><br><span class="line">            &#x27;handlers&#x27;: [&#x27;default&#x27;, ],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,  # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)</span><br><span class="line">            &#x27;propagate&#x27;: False,  # 默认为True，向上（更高level的logger）传递，通常设置为False即可，否则会一份日志向上层层传递</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="src-py-主文件-："><a href="#src-py-主文件-：" class="headerlink" title="src.py(主文件)："></a>src.py(主文件)：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import logging #导入logging模块</span><br><span class="line"></span><br><span class="line">import settings #导入settings文件，上面定义的settings.py</span><br><span class="line">from logging import config,getLogger  #导入config和getlogger 这里需要单独导入</span><br><span class="line"></span><br><span class="line">config.dictConfig(settings.LOGGING_DIC) #LOGGING_DIC为字典名，这里settings导入字典名，然后dictconfig解析。固定格式，只需将LOGGING_DIC替换为需要的字典名即可</span><br><span class="line">logger4=getLogger(&#x27;终端提示&#x27;) #loggers为发送者，这里也是将日志输出者定义为对应的loggers，并将其定义成一个变量。</span><br><span class="line">logger4.info(&#x27;logger4产生的info日志&#x27;)#调用info发送日志。</span><br></pre></td></tr></table></figure>
+
+<h4 id="代码步骤"><a href="#代码步骤" class="headerlink" title="代码步骤:"></a>代码步骤:</h4><h5 id="settings-py-1"><a href="#settings-py-1" class="headerlink" title="settings.py:"></a>settings.py:</h5><p>standard_format,simple_format,test_format定义三种输出格式</p>
+<p><strong>LOGGING_DIC</strong>:</p>
+<p>​    字典定义了日志输出相关配置</p>
+<p>1.version，disable_existing_loggers 其格式固定就行</p>
+<p>2.formatters 其中key也是固定的，里面定义了三种日志输出格式，这里里面的key和value都是自己定义的，其三种value也对应一开始定义的三种变量。</p>
+<p>3.filters 略（过滤）</p>
+<p>4.handlers：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handlers是日志的接收者，不同的handler会将日志输出到不同的位置</span><br></pre></td></tr></table></figure>
+
+<p>这里定义了两种输出位置。level为输出级别，class为输出方式，formatter为其对应输出格式,filename输出文件,encoding输出字符。这里相当于定义其日志输出位置以及将上面定义的日志输出格式赋给日志这个日志输出位置。</p>
+<p>5.loggers：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># loggers是日志的产生者，产生的日志会传递给handler然后控制输出</span><br></pre></td></tr></table></figure>
+
+<p>这里loggers与handlers相当于是下级对上级，loggers产生日志，handlers接受日志，两边都可以设置其level，如果loggers的level低于handlers，那么实际日志输出只会根据handlers的level来进行输出（因为loggers发送了低于handlers的日志，但handlers只会接受并输出自己的level以上的。），正常情况两边level应一致。</p>
+<p>handlers定义其输出位置（方式），level为其输出级别，propagate固定false。</p>
+<p>如果定义的loggers为空 ‘’ 的话，后面在使用getlogger找不到loggers的所有日志名都会匹配到空。</p>
+<h5 id="src-py"><a href="#src-py" class="headerlink" title="src.py"></a>src.py</h5><p>如上备注所示。</p>
+<p><strong>其本身格式基本上为固定，直接拿着两个文件稍作修改就可以用于各种工作场景，无需过分理解，能看懂代码格式即可</strong></p>
+<p><strong>日志字典本身就算是python日志的功能之一，所以其字典里面需要定义固定的key让其logging模块去解析它。而非自己定义一个字典再自己去解析，其格式固定。</strong></p>
+<p>字典顺序：</p>
+<p>loggers（日志输出者）-》handlers（接受者）-》formatters（日志输出格式（standard_format,simple_format,test_format）</p>
+<h3 id="日志轮转："><a href="#日志轮转：" class="headerlink" title="日志轮转："></a>日志轮转：</h3><p>相当于日志备份，logging自带日志备份，可以设置日志最大大小和备份日志最大个数</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211009154143282.png" alt="image-20211009154143282"></p>
+<p>在字典handlers中有两个设置：maxbytes和backupcount</p>
+<p>maxbytes为最大大小，其格式为字节</p>
+<p>backupcount是最大备份文件为多少</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import settings #导入settings文件，上面定义的settings.py</span><br><span class="line">from logging import config,getLogger  #导入config和getlogger 这里需要单独导入</span><br><span class="line"></span><br><span class="line">config.dictConfig(settings.LOGGING_DIC) #LOGGING_DIC为字典名，这里settings导入字典名，然后dictconfig解析。固定格式，只需将LOGGING_DIC替换为需要的字典名即可</span><br><span class="line">logger4=getLogger(&#x27;随便输入&#x27;) #loggers为发送者，这里也是将日志输出者定义为对应的loggers，并将其定义成一个变量。</span><br><span class="line">logger4.info(&#x27;logger4产生的info日志&#x27;)#调用info发送日志。</span><br></pre></td></tr></table></figure>
+
+<p>运行主代码程序输出日志以后，当日志大小大于5字节，就会备份成”文件名.1”,然后如果再执行程序，则会将1备份成2，将源文件备份成1，依次类推到5。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211009154312364.png" alt="image-20211009154312364"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E6%A8%A1%E5%9D%97_hexo/" data-id="ckxjra7pl002kr0v1alwico8v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-闭包与装饰器_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8_hexo/">闭包与装饰器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>闭包：<br>    在函数嵌套的前提下，内部函数使用了外部函数的变量，并且外部函数返回了内部函数，我们把这个使用外部函数变量的内部函数称为闭包。<br>    闭包就是在函数内再定义一个内部函数，用内部函数来保存外部函数的的变量，其变量不会随着外部函数调用完而销毁</p>
+<pre><code>简单闭包的示例代码：
+     定义一个外部函数
+    def func_out(num1):
+         定义一个内部函数
+        def func_inner(num2):
+             内部函数使用了外部函数的变量(num1)
+            result = num1 + num2
+            print(&quot;结果是:&quot;, result)
+         外部函数返回了内部函数，这里返回的内部函数就是闭包
+        return func_inner
+
+     创建闭包实例    
+    f = func_out(1)
+     执行闭包
+    f(2)
+    f(3)
+    运行结果:
+
+    结果是: 3
+    结果是: 4
+    
+    通过上面的输出结果可以看出闭包保存了外部函数内的变量num1，每次执行闭包都是在num1 = 1 基础上进行计算
+例2：
+     外部函数
+    def config_name(name):
+         内部函数
+        def say_info(info):
+            print(name + &quot;: &quot; + info)
+
+        return say_info
+
+    tom = config_name(&quot;Tom&quot;)
+
+    tom(&quot;你好!&quot;)
+    tom(&quot;你好, 在吗?&quot;)
+
+    jerry = config_name(&quot;jerry&quot;)
+
+    jerry(&quot;不在, 不和玩!&quot;)
+    运行结果:
+
+    Tom: 你好!
+    Tom: 你好, 在吗?
+    jerry: 不在, 不和玩!
+
+修改闭包内的外部变量：
+修改闭包内使用的外部函数变量使用 nonlocal 关键字来完成。
+ 定义一个外部函数
+    def func_out(num1):
+
+         定义一个内部函数
+        def func_inner(num2):
+             这里本意想要修改外部num1的值，实际上是在内部函数定义了一个局部变量num1
+            nonlocal num1   告诉解释器，此处使用的是 外部变量a
+             修改外部变量num1
+            num1 = 10
+             内部函数使用了外部函数的变量(num1)
+            result = num1 + num2
+            print(&quot;结果是:&quot;, result)
+
+        print(num1)
+        func_inner(1)
+        print(num1)
+
+         外部函数返回了内部函数，这里返回的内部函数就是闭包
+        return func_inner
+
+     创建闭包实例
+    f = func_out(1)
+     执行闭包
+    f(2)
+</code></pre>
+<p>装饰器：<br>    装饰器的目的是为了实现在原本函数之上添加功能（代码），本身不影响源代码。其目的是真正作为装饰而存在。<br>    装饰器的功能特点:<br>        不修改已有函数的源代码<br>        不修改已有函数的调用方式<br>        给已有函数增加额外的功能<br>        装饰器本质上就是一个闭包函数<br>    示例：<br>        def check(fn):<br>            def inner():<br>                print(“请先登录….”)<br>                fn()<br>            return inner<br>        def comment():<br>            print(“发表评论”)<br>        comment = check(comment)<br>        comment()</p>
+<pre><code>    打印结果：
+        请先登录....
+        发表评论
+    可以看到，此处先定义了一个comment函数（发表评论），但是在添加功能（打印：请先登录）时，并没有直接在原有函数上添加代码，而是重新创建了一个函数，并在其内部函数中添加代码并调用源函数，以实现装饰器。并且由于装饰器其调用方式不能改变，所以最后再check调用时，把函数check赋给了comment，此时的comment其实就是check调用原来comment的新函数。把外部函数保存（调用）到内部函数本质上也是属于闭包。
+    装饰器本身就是套用函数，在原函数上面套用一个内部函数，也就是在这里添加代码实现装饰，再在内部函数外面套用一个外部函数，实现调用（调用最里面的函数，也是装饰器需要装饰的那个函数）。
+
+装饰器的语法糖写法：    
+    Python给提供了一个装饰函数更加简单的写法，那就是语法糖，语法糖的书写格式是: @装饰器名字，通过语法糖的方式也可以完成对已有函数的装饰
+    如果有多个函数都需要添加登录验证的功能，每次都需要编写func = check(func)这样代码对已有函数进行装饰，这种做法还是比较麻烦。
+    例：
+    def check(fn):
+        def inner():
+            print(&quot;请先登录....&quot;)
+            fn()
+        return inner
+    @check @check 等价于 comment = check(comment)
+    def comment():
+        print(&quot;发表评论&quot;)
+    comment()
+
+
+装饰器的使用：
+
+    1.通过装饰器给原函数传递参数
+        如果在添加装饰器时，原函数需要传递参数，则装饰器也需要和原函数一样传递参数
+        例：
+        def zsq_sum(s):
+            def inner(a,b):
+                print(&#39;正在执行计算&#39;)
+                s(a,b)
+            return inner
+        @zsq_sum
+        def sum_(a,b):
+            result = a + b
+            print(result)
+        sum_(1,2)
+        
+        原函数在此处需要传递两个函数来实现相加，但添加装饰器以后，装饰器内部函数也需要传递参数，因执行@zsq_sum（sum_=zsq_sum(sum_)）后，此时原函数sum_ 等于s(),则此时真正在执行代码传递参数时，此时的参数是传递到inner函数中的s中，然后再传递到sum_。
+        
+    2.装饰带有返回值的函数
+        以上面的代码为例，在result变量执行后 sum_并没有真正返回函数值，而是print打印了其函数值，下面的代码是将其原本的print改为返回函数值，使外部变量zsq_sum在调用时能直接拿到该值：
+        def zsq_sum(s):
+            def inner(a,b):
+                print(&#39;正在执行计算&#39;)
+                result = s(a,b)
+                return result
+            return inner
+        @zsq_sum
+        def sum_(a,b):
+            result = a + b
+            return result
+        result = sum_(1,2)
+        print(result)
+        
+        此处sum_返回了result，则sum_函数返回值为result，inner中此处把s函数（也就是sum_）赋给了变量result，然后返回变量值（这里直接打印函数不会得到返回值，只能返回其内存地址信息，所以需要赋值）。
+    3.装饰带有不定长参数的函数
+        def zsq_sum(s):
+            def inner(*args,**kwargs):
+                print(&#39;正在执行计算&#39;)
+                result = s(*args,**kwargs)
+                return result
+            return inner
+        @zsq_sum
+        def sum_(*args,**kwargs):
+            result = 0
+            for i in args:
+                result += i
+            for i in kwargs.values:
+                result += i
+            return result
+        result = sum_(1,2)
+        print(result)
+        这里用args和kwargs接受位置参数和非位置参数（字典参数），然后for读取里面里面的值，字典需要跟上.values来读取值，否则为读取字典名。最内部的函数sum_和inner都需要传递参数（因其本身是从inner进去的）。
+    4.多个装饰器的使用示例代码
+        def make_div(func):
+            &quot;&quot;&quot;对被装饰的函数的返回值 div标签&quot;&quot;&quot;
+            def inner(*args, **kwargs):
+                return &quot;&lt;div&gt;&quot; + func() + &quot;&lt;/div&gt;&quot;
+            return inner
+
+
+        def make_p(func):
+            &quot;&quot;&quot;对被装饰的函数的返回值 p标签&quot;&quot;&quot;
+            def inner(*args, **kwargs):
+                return &quot;&lt;p&gt;&quot; + func() + &quot;&lt;/p&gt;&quot;
+            return inner
+
+
+         装饰过程: 1 content = make_p(content) 2 content = make_div(content)
+         content = make_div(make_p(content))
+        @make_div
+        @make_p
+        def content():
+            return &quot;人生苦短&quot;
+
+        result = content()
+
+        print(result)
+        代码说明:
+
+        多个装饰器的装饰过程是: 离函数最近的装饰器先装饰，然后外面的装饰器再进行装饰，由内到外的装饰过程    
+    5.带有参数的装饰器介绍
+        带有参数的装饰器就是使用装饰器装饰函数的时候可以传入指定参数，语法格式: @装饰器(参数,...)
+        装饰器只能接收一个参数，并且还是函数类型。所以必须在装饰器外面再包裹上一个函数，让最外面的函数接收参数，返回的是装饰器，因为@符号后面必须是装饰器实例。
+         添加输出日志的功能
+            def logging(flag):
+
+                def decorator(fn):
+                    def inner(num1, num2):
+                        if flag == &quot;+&quot;:
+                            print(&quot;--正在努力加法计算--&quot;)
+                        elif flag == &quot;-&quot;:
+                            print(&quot;--正在努力减法计算--&quot;)
+                        result = fn(num1, num2)
+                        return result
+                    return inner
+
+                 返回装饰器
+                return decorator
+
+
+             使用装饰器装饰函数
+            @logging(&quot;+&quot;)
+            def add(a, b):
+                result = a + b
+                return result
+
+
+            @logging(&quot;-&quot;)
+            def sub(a, b):
+                result = a - b
+                return result
+
+            result = add(1, 2)
+            print(result)
+
+            result = sub(1, 2)
+            print(result)
+</code></pre>
+<p>​<br>        6.类装饰器<br>        类装饰器的介绍<br>        装饰器还有一种特殊的用法就是类装饰器，就是通过定义一个类来装饰函数。</p>
+<pre><code>    类装饰器示例代码:
+
+        class Check(object):
+            def __init__(self, fn):
+                 初始化操作在此完成
+                self.__fn = fn
+             实现__call__方法，表示对象是一个可调用对象，可以像调用函数一样进行调用。
+            def __call__(self, *args, **kwargs):
+                 添加装饰功能
+                print(&quot;请先登陆...&quot;)
+                self.__fn()
+        @Check
+        def comment():
+            print(&quot;发表评论&quot;)
+        comment()
+    @Check 等价于 comment = Check(comment), 所以需要提供一个init方法，并多增加一个fn参数。
+    要想类的实例对象能够像函数一样调用，需要在类里面使用call方法，把类的实例变成可调用对象(callable)，也就是说可以像调用函数一样进行调用。
+    在call方法里进行对fn函数的装饰，可以添加额外的功能。
+    执行结果:
+    请先登陆...
+    发表评论
+</code></pre>
+<p>迭代器：<br>    迭代器指的是迭代取值的工具，迭代是一个重复的过程，每次重复都是基于上一次的结果而继续的，单纯的重复并非迭代。</p>
+<pre><code>为何要有迭代器
+    迭代器是用来迭代取值的工具，而涉及到把多个值循环取出来的类型
+    有：列表、字符串、元组、字典、集合、打开文件
+    
+    l=[&#39;egon&#39;,&#39;liu&#39;,&#39;alex&#39;]
+    i=0
+    while i &lt; len(l):
+        print(l[i])
+        i+=1
+        
+    上述迭代取值的方式只适用于有索引的数据类型：列表、字符串、元组
+    为了解决基于索引迭代器取值的局限性
+    python必须提供一种能够不依赖于索引的取值方式，这就是迭代器
+    
+
+如何用迭代器
+    可迭代的对象：但凡内置有__iter__方法的都称之为可迭代的对象，文件对象本身就是可迭代对象，无需再定义。      
+    s1=&#39;&#39;
+    s1.__iter__()
+    l=[]
+    l.__iter__()
+    .....
+    测试所有类型的对象皆有iter方法。
+ 调用可迭代对象下的__iter__方法会将其转换成迭代器对象
+    d=&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3&#125;
+    d_iterator=d.__iter__()
+     print(d_iterator)
+
+     print(d_iterator.__next__())  结果 1
+     print(d_iterator.__next__())   结果 2 
+     print(d_iterator.__next__())   结果 3
+     print(d_iterator.__next__())  抛出异常StopIteration
+例子：
+ while True:
+     try:
+         print(d_iterator.__next__())
+     except StopIteration:
+         break
+
+ print(&#39;====&gt;&gt;&gt;&gt;&gt;&gt;&#39;)  在一个迭代器取值取干净的情况下，再对其取值娶不到
+ d_iterator=d.__iter__()
+ while True:
+     try:
+         print(d_iterator.__next__())
+     except StopIteration:
+         break
+可迭代对象与迭代器对象详解
+  可迭代对象（&quot;可以转换成迭代器的对象&quot;）：内置有__iter__方法对象
+        可迭代对象.__iter__(): 得到迭代器对象
+
+  迭代器对象：内置有__next__方法并且内置有__iter__方法的对象
+        迭代器对象.__next__（）：得到迭代器的下一个值
+        迭代器对象.__iter__（）：得到迭代器的本身，说白了调了跟没调一个样子
+     dic=&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3&#125;
+    
+     dic_iterator=dic.__iter__()
+     print(dic_iterator is dic_iterator.__iter__().__iter__().__iter__())
+for循环的工作原理：for循环可以称之为叫迭代器循环
+     d=&#123;&#39;a&#39;:1,&#39;b&#39;:2,&#39;c&#39;:3&#125;
+
+     1、d.__iter__()得到一个迭代器对象
+     2、迭代器对象.__next__()拿到一个返回值，然后将该返回值赋值给k
+     3、循环往复步骤2，直到抛出StopIteration异常for循环会捕捉异常然后结束循环
+     for k in d:
+         print(k)
+ with open(&#39;a.txt&#39;,mode=&#39;rt&#39;,encoding=&#39;utf-8&#39;) as f:
+     for line in f:  f.__iter__()
+         print(line)
+
+
+ list(&#39;hello&#39;) 原理同for循环
+
+6、迭代器优缺点总结
+ 6.1 缺点：
+ I、为序列和非序列类型提供了一种统一的迭代取值方式。
+ II、惰性计算：迭代器对象表示的是一个数据流，可以只在需要时才去调用next来计算出一个值，就迭代器本身来说，同一时刻在内存中只有一个值，因而可以存放无限大的数据流，而对于其他容器类型，如列表，需要把所有的元素都存放于内存中，受内存大小的限制，可以存放的值的个数是有限的。
+
+ 6.2 缺点：
+ I、除非取尽，否则无法获取迭代器的长度
+
+ II、只能取下一个值，不能回到开始，更像是‘一次性的’，迭代器产生后的唯一目标就是重复执行next方法直到值取尽，否则就会停留在某个位置，等待下一次调用next；若是要再次迭代同个对象，你只能重新调用iter方法去创建一个新的迭代器对象，如果有两个或者多个循环使用同一个迭代器，必然只会有一个循环能取到值。
+</code></pre>
+<p>生成器：<br>    生成器就是自定义迭代器。</p>
+<pre><code> 如何得到自定义的迭代器：
+ 在函数内一旦存在yield关键字，调用函数并不会执行函数体代码
+ 会返回一个生成器对象，生成器即自定义的迭代器
+    def func():
+        print(&#39;第一次&#39;)
+        yield 1
+        print(&#39;第二次&#39;)
+        yield 2
+        print(&#39;第三次&#39;)
+        yield 3
+        print(&#39;第四次&#39;)
+
+
+     g=func()
+     print(g)
+     生成器就是迭代器
+     g.__iter__()
+     g.__next__()
+
+
+     会触发函数体代码的运行，然后遇到yield停下来，将yield后的值
+     当做本次调用的结果返回
+     res1=g.__next__()
+     print(res1)
+    
+     res2=g.__next__()
+     print(res2)
+    
+     res3=g.__next__()
+     print(res3)
+    
+     res4=g.__next__()
+ 应用案列
+    def my_range(start,stop,step=1):
+         print(&#39;start...&#39;)
+        while start &lt; stop:
+            yield start
+            start+=step
+         print(&#39;end....&#39;)
+
+
+     g=my_range(1,5,2)  1 3
+     print(next(g))
+     print(next(g))
+     print(next(g))
+
+    for n in my_range(1,7,2):
+        print(n)
+
+
+     总结yield：
+     有了yield关键字，我们就有了一种自定义迭代器的实现方式。yield可以用于返回值，但不同于return，函数一旦遇到return就结束了，而yield可以保存函数的运行状态挂起函数，用来返回多次值
+     
+</code></pre>
+<p>生成式：<br>            # 1、列表生成式<br>                l = [‘alex_dsb’, ‘lxx_dsb’, ‘wxx_dsb’, “xxq_dsb”, ‘egon’]<br>                # new_l=[]<br>                # for name in l:<br>                #     if name.endswith(‘dsb’):<br>                #         new_l.append(name)</p>
+<pre><code>            # new_l=[name for name in l if name.endswith(&#39;dsb&#39;)]
+            # new_l=[name for name in l]
+
+            # print(new_l)
+
+            # 把所有小写字母全变成大写
+            # new_l=[name.upper() for name in l]
+            # print(new_l)
+
+            # 把所有的名字去掉后缀_dsb
+            # new_l=[name.replace(&#39;_dsb&#39;,&#39;&#39;) for name in l]
+            # print(new_l)
+        # 2、字典生成式
+            # keys=[&#39;name&#39;,&#39;age&#39;,&#39;gender&#39;]
+            # dic=&#123;key:None for key in keys&#125;
+            # print(dic)
+
+            # items=[(&#39;name&#39;,&#39;egon&#39;),(&#39;age&#39;,18),(&#39;gender&#39;,&#39;male&#39;)]
+            # res=&#123;k:v for k,v in items if k != &#39;gender&#39;&#125;
+            # print(res)
+
+        # 3、集合生成式
+            # keys=[&#39;name&#39;,&#39;age&#39;,&#39;gender&#39;]
+            # set1=&#123;key for key in keys&#125;
+            # print(set1,type(set1))
+        # 4、生成器表达式
+            # g=(i for i in range(10) if i &gt; 3)
+            # ！！！！！！！！！！！强调！！！！！！！！！！！！！！！
+            # 此刻g内部一个值也没有
+
+            # print(g,type(g))
+
+            # print(g)
+            # print(next(g))
+            # print(next(g))
+            # print(next(g))
+            # print(next(g))
+            # print(next(g))
+            # print(next(g))
+            # print(next(g))
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8_hexo/" data-id="ckxjra7pm002rr0v1dcee17dh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-http_python_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/http_python_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:04.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/http_python_hexo/">http for python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>—-http get请求报文<br>—-请求行—–<br>GET / HTTP/1.1 =&gt; 请求方法(方式) 请求的资源路径 http协议的版本<br>—-请求头—-<br>Host: <a target="_blank" rel="noopener" href="http://www.itcast.cn/">www.itcast.cn</a>  =&gt; 服务器的主机ip地址和端口号，提示如果看不到端口号默认是80<br>Connection: keep-alive =&gt; 和服务端程序保存长连接，当客户端和服务端有一段时间(3-5)没有进行通信，那么服务器程序会主动向客户端断开连接<br>Upgrade-Insecure-Requests: 1 =&gt; 让客户端请求不安全请求，以后要使用https<br>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36 =&gt; 用户代理，客户端程序名称，当后续讲爬虫的时候可以根据是否有User-Agent进行反爬机制<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8,application/signed-exchange;v=b3 =&gt; 告诉服务端程序可以接受的数据类型<br>Accept-Encoding: gzip, deflate =&gt; 告诉服务端程序支持的压缩算法<br>Accept-Language: zh-CN,zh;q=0.9,en;q=0.8 =&gt; 告诉服务端程序支持的语言<br>Cookie: UM_distinctid=169f06ab9d21a-0a52d93224ce3-12376d57-13c680-169f06ab9d571a; accessId=22bdcd10-6250-11e8-917f-9fb8db4dc43c; bad_id22bdcd10-6250-11e8-917f-9fb8db4dc43c=5c8a5a11-5811-11e9-975d-5932d6370ce7; parent_qimo_sid_22bdcd10-6250-11e8-917f-9fb8db4dc43c=69928890-5811-11e9-ac5b-eb2506ccad9a; CNZZDATA4617777=cnzz_eid%3D324231225-1554516145-%26ntime%3D1554521548; href=http%3A%2F%2F<a href="http://www.itcast.cn%2F">www.itcast.cn%2F</a>; pageViewNum=5; Hm_lvt_0cb375a2e834821b74efffa6c71ee607=1554516722,1554523431; Hm_lpvt_0cb375a2e834821b74efffa6c71ee607=1554523431; nice_id22bdcd10-6250-11e8-917f-9fb8db4dc43c=fc5f90f1-5820-11e9-b896-dba72e2578c0; openChat22bdcd10-6250-11e8-917f-9fb8db4dc43c=true =&gt; 客户端用户身份的标识<br>—–空行—–<br>\r\n</p>
+<p>—–http get请求的原始报文数据————</p>
+<p>—-请求行—–<br>GET / HTTP/1.1\r\n<br>—-请求头—-<br>Host: <a target="_blank" rel="noopener" href="http://www.itcast.cn/r/n">www.itcast.cn\r\n</a><br>Connection: keep-alive\r\n<br>Upgrade-Insecure-Requests: 1\r\n<br>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36\r\n<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8,application/signed-exchange;v=b3\r\n<br>Accept-Encoding: gzip, deflate\r\n<br>Accept-Language: zh-CN,zh;q=0.9,en;q=0.8\r\n<br>Cookie: UM_distinctid=169f06ab9d21a-0a52d93224ce3-12376d57-13c680-169f06ab9d571a; accessId=22bdcd10-6250-11e8-917f-9fb8db4dc43c; bad_id22bdcd10-6250-11e8-917f-9fb8db4dc43c=5c8a5a11-5811-11e9-975d-5932d6370ce7; parent_qimo_sid_22bdcd10-6250-11e8-917f-9fb8db4dc43c=69928890-5811-11e9-ac5b-eb2506ccad9a; CNZZDATA4617777=cnzz_eid%3D324231225-1554516145-%26ntime%3D1554521548; href=http%3A%2F%2F<a href="http://www.itcast.cn%2F">www.itcast.cn%2F</a>; pageViewNum=5; Hm_lvt_0cb375a2e834821b74efffa6c71ee607=1554516722,1554523431; Hm_lpvt_0cb375a2e834821b74efffa6c71ee607=1554523431; nice_id22bdcd10-6250-11e8-917f-9fb8db4dc43c=fc5f90f1-5820-11e9-b896-dba72e2578c0; openChat22bdcd10-6250-11e8-917f-9fb8db4dc43c=true\r\n<br>—–空行—–<br>\r\n</p>
+<p>—–http get请求报文的格式—-<br>请求行\r\n<br>请求头\r\n<br>空行(\r\n)</p>
+<p>提示: 每项信息之间都需要一个\r\n，是要http协议规定</p>
+<p>—–http post请求报文的格式—-<br>请求行\r\n<br>请求头\r\n<br>空行(\r\n)<br>请求体</p>
+<p>提示: 请求体就是浏览器发送给服务器的数据</p>
+<p>—-http 响应报文解析—-<br>—- 响应行(状态行) ——–<br>HTTP/1.1 200 OK =&gt; http协议版本 状态码 状态描述<br>—- 响应头 ———-<br>Server: Tengine =&gt; 服务器的名称<br>Content-Type: text/html; charset=UTF-8  =&gt; 服务器发送给浏览器的内容类型及编码格式<br>Transfer-Encoding: chunked =&gt; 服务器发送给客户端程序(浏览器)的数据不确定数据长度， 数据发送结束的接收标识: 0\r\n，Content-Length: 200（字节），服务器发送给客户端程序的数据确定长度。 内容长度这两个选项只能二选一<br>Connection: keep-alive  =&gt; 和客户端保持长连接<br>Date: Sat, 06 Apr 2019 08:49:57 GMT =&gt; 服务器的时间<br>— 以下都是自定义响应头信息，字节定义响应头的名字和响应头的值，比如: is_login: True<br>Accept-Ranges: bytes<br>Ali-Swift-Global-Savetime: 1554540597<br>Via: cache45.l2nu29-1[3,200-0,M], cache11.l2nu29-1[4,0], kunlun2.cn249[30,200-0,M], kunlun2.cn249[33,0]<br>X-Cache: MISS TCP_MISS dirn:-2:-2<br>X-Swift-SaveTime: Sat, 06 Apr 2019 08:49:57 GMT<br>X-Swift-CacheTime: 0<br>Timing-Allow-Origin: *<br>EagleId: 2a51041615545405973986157e<br>—– 空行 —-<br>\r\n<br>—– 响应体 就是真正意义上给浏览器解析使用的数据—-<br>网页数据</p>
+<p>提示： 对于请求头和响应头信息程序员都可以进行自定义，按照客户端和服务器约定好的方式来制定即可。</p>
+<p>—-http 响应原始报文解析—-<br>—- 响应行(状态行) ——–<br>HTTP/1.1 200 OK\r\n<br>—- 响应头 ———-<br>Server: Tengine\r\n<br>Content-Type: text/html; charset=UTF-8\r\n<br>Transfer-Encoding: chunked\r\n<br>Connection: keep-alive\r\n<br>Date: Sat, 06 Apr 2019 08:49:57 GMT\r\n<br>— 以下都是自定义响应头信息，字节定义响应头的名字和响应头的值，比如: is_login: True<br>Accept-Ranges: bytes\r\n<br>Ali-Swift-Global-Savetime: 1554540597\r\n<br>Via: cache45.l2nu29-1[3,200-0,M], cache11.l2nu29-1[4,0], kunlun2.cn249[30,200-0,M], kunlun2.cn249[33,0]\r\n<br>X-Cache: MISS TCP_MISS dirn:-2:-2\r\n<br>X-Swift-SaveTime: Sat, 06 Apr 2019 08:49:57 GMT\r\n<br>X-Swift-CacheTime: 0\r\n<br>Timing-Allow-Origin: *\r\n<br>EagleId: 2a51041615545405973986157e\r\n<br>—– 空行 —-<br>\r\n<br>—– 响应体 就是真正意义上给浏览器解析使用的数据—-<br>网页数据</p>
+<p>—- http响应报文的格式 —–</p>
+<p>响应行\r\n<br>响应头\r\n<br>空行\r\n<br>响应体\r\n</p>
+<p>提示: 每项信息之间都要有一个\r\n进行分割</p>
+<p>http编程：<br>    http编程大体与网络编程一致，下面是网络编程步骤：<br>        tcp客户端:<br>            创建客户端套接字对象<br>            和服务端套接字建立连接<br>            发送数据<br>            接收数据<br>            关闭客户端套接字<br>            socket() -&gt; connect() -&gt; send() -&gt; recv () -&gt;close()<br>        tcp服务器：<br>            创建服务端端套接字对象<br>            绑定端口号<br>            设置监听<br>            等待接受客户端的连接请求<br>            接收数据<br>            发送数据<br>            关闭套接字<br>            socket()-&gt;bind()-&gt;listen()-&gt;accept()-&gt;recv()-send()-&gt;close()<br>    由于程序员在编程时基本只用考虑服务器端的编程，所以这里以服务器端为主。<br>    步骤对应的代码为：<br>        创建服务端端套接字对象：<br>            tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>            一般创建套接字后为了让程序退出端口后立即释放会加上复用端口号<br>                复用端口号：<br>                     tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)<br>        绑定端口号：<br>            tcp_server_socket.bind((“”, 9000))<br>        设置监听：<br>            tcp_server_socket.listen(128)<br>        等待接受客户端的连接请求：<br>            new_socket, ip_port = self.tcp_server_socket.accept()<br>            #这里的new_socket为接受到的新套接字，ip_port为其请求的ip以及端口<br>        接收数据：<br>            recv_client_data = new_socket.recv(4096)<br>        发送数据：<br>            new_socket.send(response_data)<br>        关闭套接字：<br>            new_socket.close()<br>    http编程时其发送数据时应发送为http响应报文，其步骤与socket编程一致（因http本身基于socket）</p>
+<pre><code>实例代码：
+import socket
+import threading
+
+import framework
+
+
+class Lei():
+    def __init__(self):
+        # 创建tcp服务端套接字
+        tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # 设置端口号复用, 程序退出端口立即释放
+        tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+        # 绑定端口号
+        tcp_server_socket.bind((&quot;&quot;, 9000))
+        # 设置监听
+        tcp_server_socket.listen(128)
+        self.tcp_server_socket = tcp_server_socket
+
+    @staticmethod
+    def thead_http(new_socket):
+        recv_client_data = new_socket.recv(4096)
+        # 对二进制数据进行解码
+        if len(recv_client_data) == 0:
+            print(&quot;关闭浏览器了&quot;)
+            new_socket.close()
+            return
+        recv_client_content = recv_client_data.decode(&quot;utf-8&quot;)
+        #print(recv_client_content)
+        qiege = recv_client_content.split(&quot; &quot;,maxsplit=5)
+        uri = qiege[1]
+        if uri == &quot;/&quot;:
+            uri = &quot;/index.html&quot;
+        if uri.endswith(&quot;.html&quot;):
+             env = &#123;
+                 &quot;uri&quot; : uri,
+                 &quot;host&quot; : host,
+             &#125;
+             status,response_header,response_body=framework.handle_request(env)
+             print(&quot;返还给客户端的请求报文&quot;,status,response_header,response_body)
+             response_line = &quot;HTTP/1.1 %s\r\n&quot; %status
+             headers = &quot;&quot;
+             for header in response_header:
+                 headers += &quot;%s: %s\r\n&quot; % header
+             response_data = (response_line + headers + &quot;\r\n&quot; + response_body).encode(&quot;utf-8&quot;)
+             new_socket.send(response_data)
+             new_socket.close()
+        else:
+            try:
+                with open(&quot;static&quot; + uri, &quot;rb&quot;) as file:
+                    # 读取文件数据
+                    file_data = file.read()
+            except Exception as e:
+                with open(&quot;static/error.html&quot;,&quot;rb&quot;) as file:
+                    # 读取文件数据
+                    file_data = file.read()
+                # 响应行
+                response_line = &quot;HTTP/1.1 404 not found\r\n&quot;
+                # 响应头
+                response_header = &quot;Server: PWS1.0\r\n&quot;
+                # 响应体
+                response_body = file_data
+                # 拼接响应报文
+                response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+                # 发送数据
+                new_socket.send(response_data)
+            else:
+                # 响应行
+                response_line = &quot;HTTP/1.1 200 OK\r\n&quot;
+                # 响应头
+                response_header = &quot;Server: PWS1.0\r\n&quot;
+                # 响应体
+                response_body = file_data
+                # 拼接响应报文
+                response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+                # 发送数据
+                new_socket.send(response_data)
+                # 关闭服务与客户端的套接字
+            finally:
+                new_socket.close()
+
+    def start(self):
+            while True:
+                # 等待接受客户端的连接请求
+                new_socket, ip_port = self.tcp_server_socket.accept()
+                # 代码执行到此，说明连接建立成功
+                threading_http = threading.Thread(target=self.thead_http, args=(new_socket,))
+                threading_http.start()
+def main():
+    duixiang=Lei()
+    duixiang.start()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+
+
+该代码步骤：
+    1.首先定义了两个类 Lei(),和main（），将Lei定义成对象，调用其start方法。if name等于main魔法方法则执行main()表示其需要是主文件才会执行。
+    2.首先定义了对象方法，将创建tcp服务端套接字，绑定端口号，设置监听都直接定义在init魔法方法中，则在对象执行时，就会直接监听到端口，并把socket定义成了self.socket，以便于对象中其他类可以直接调用套接字。
+    3.此时因为main中执行了start方法，所以应该是从lei()中的start开始执行，首先执行类对象属性（init），然后此时创建套接字连接请求，并将其赋给new_socket,这里用while true死循环是因为可以（一直接受请求），多线程实现接收多个请求（同时）。此时调用多线程与thead_http上（也就是真正处理客户端请求的类），将接受到的数据参数传递到该类中，并启动该线程。
+    4.thead_http：建立连接后recv接受请求，首先判断其长度是否为0，如为0直接关闭套接字。decode将其转码，然后切割（split）拿到请求的uri，如果是/则重写为/index.html，然后当期为.html结尾（endswith取其拓展名）。此处html请求这里成为动态请求，因这里有index.html和center.html两个文件，所以会涉及两种请求，并且数据取自数据库。还需要建立一个framework.py的文件来写入其处理方法，并在这里调用，具体后面解释。
+    5.这里用了if else，并在里面套用了try，except，else，finally。如果不是html文件，则进入else，并执行try模块，这里则以其uri作为路径读取文件内容，如果有该文件则以http报文形式进行返回（如果有该文件进入else）。如果没有该文件则进入except，读取了error.html并封装为http响应报文，返回其错误信息。finally最后关闭这个套接字（执行完也相当于关闭这个线程）
+    6.最后是html动态请求，这里是framework.py
+    import pymysql
+
+    def index():
+        #返回的状态码以及请求头请求体
+        status = &quot;200 ok&quot;
+        response_header = [(&quot;server&quot;, &quot;PWS/1.1&quot;)]
+        with open(&quot;template/index.html&quot;, &quot;rb&quot;) as file:
+            file_data = file.read()
+        conn = pymysql.connect(host=&quot;10.10.10.85&quot;,
+                               port=3306,
+                               user=&quot;root&quot;,
+                               password=&quot;123456&quot;,
+                               database=&quot;python&quot;,
+                               charset=&quot;utf8&quot;)
+        cursor = conn.cursor()
+        sql = &quot;select * from info;&quot;
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        data = &quot;&quot;
+        for row in result:
+            data += &quot;&quot;&quot;&lt;tr&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;&lt;input type=&quot;button&quot; value=&quot;添加&quot; id=&quot;toAdd&quot; name=&quot;toAdd&quot; systemidvaule=&quot;000007&quot;&gt;&lt;/td&gt;
+                      &lt;/tr&gt;&quot;&quot;&quot; %row
+        response_body = file_data.decode().replace(&quot;&#123;%content%&#125;&quot;, data)
+        return status, response_header, response_body
+    def center():
+        #返回的状态码以及请求头请求体
+        status = &quot;200 ok&quot;
+        response_header = [(&quot;server&quot;, &quot;PWS/1.1&quot;)]
+        with open(&quot;template/center.html&quot;, &quot;rb&quot;) as file:
+            file_data = file.read()
+        conn = pymysql.connect(host=&quot;10.10.10.85&quot;,
+                               port=3306,
+                               user=&quot;root&quot;,
+                               password=&quot;123456&quot;,
+                               database=&quot;python&quot;,
+                               charset=&quot;utf8&quot;)
+        cursor = conn.cursor()
+        sql = &quot;select a.code,a.short,a.chg,a.turnover,a.price,a.highs,b.note_info from info as a inner join focus as b on a.id = b.info_id;&quot;
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        data = &quot;&quot;
+        for row in result:
+            data += &quot;&quot;&quot;&lt;tr&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;/tr&gt;&quot;&quot;&quot; %row
+        response_body = file_data.decode().replace(&quot;&#123;%content%&#125;&quot;, data)
+        return status, response_header, response_body
+    def notfound():
+        status = &quot;404 notfound&quot;
+        response_header = [(&quot;server&quot;,&quot;PWS/1.1&quot;)]
+        response_body = &quot;not found&quot;
+        return  status,response_header,response_body
+    def handle_request(env):
+        uri = env[&quot;uri&quot;]
+        print (&quot;动态资源请求uri:&quot;, uri )
+        for path,func in route_list:
+             if uri == path:
+                 result = func()
+                 return  result
+
+       # if uri == &quot;/index.html&quot;:
+         #   #如果是index.html则返回index（）
+         #   result = index()
+         #   return result
+        else:
+            result = notfound()
+            return result
+    route_list = [
+         (&quot;/index.html&quot;, index),
+         (&quot;/center.html&quot;, center),
+    ]
+</code></pre>
+<p>​<br>​          这里其实总结为三种处理方式，一种是没找到的，则返回notfound，一种是index.html,还有一种是center.html,所以这里一共4个类，index请求处理方式为一个类，center为一个类，notfound处理方式为一个类，最后handle_request是对这三种方式进行分发的方法类。<br>​            首先取到uri（这个uri首先是通过split切割得到然后再动态请求类中定义为字典并传递到framework.py中的）<br>​            然后if方法分析uri，这里if后面将route_list分隔为两个变量，route_list为集合，里面有两个元组，其数据有两个，第一个为uri，第二个则是其处理的类。则在这里赋给path和func，当uri变量等于path则执行器方法func。如果不等于，则else执行notefound，则三个类书写完毕。<br>​            需要注意的是center和index都使用了pymsql模块，在其本身html文件中有一处是”content”，这里则通过调用mysql查询将其替换为查询语句。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/http_python_hexo/" data-id="ckxjra7p1000nr0v18h88bekt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

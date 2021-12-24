@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>vmware问题及解决方法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ovf导入到vsphere client失败 具体问题：导入镜像到客户方的服务器，客户方使用的是esxi，然后这台计算机通过vsphereclient连接到server的，需要将已经准备好的ova导入到客户方，但在ovf部署时出现该报错。 解决方法：这个问题是说OVF文件的hash值，与.mf文件中记录的hash值不同导致。解决方法简单，可以重新生成OVF文件的hash(256)值，也可以直接把.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vmware问题及解决方法">
+<meta property="og:url" content="http://example.com/2021/12/23/vmware%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ovf导入到vsphere client失败 具体问题：导入镜像到客户方的服务器，客户方使用的是esxi，然后这台计算机通过vsphereclient连接到server的，需要将已经准备好的ova导入到客户方，但在ovf部署时出现该报错。 解决方法：这个问题是说OVF文件的hash值，与.mf文件中记录的hash值不同导致。解决方法简单，可以重新生成OVF文件的hash(256)值，也可以直接把.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049312.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231050340.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049355.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049410.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231050117.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049322.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049694.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049720.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049641.jpeg">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.475Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049312.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vmware问题及解决方法_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/vmware%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vmware问题及解决方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ovf导入到vsphere-client失败"><a href="#ovf导入到vsphere-client失败" class="headerlink" title="ovf导入到vsphere client失败"></a>ovf导入到vsphere client失败</h1><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049312.jpeg" alt="image.png"></p>
+<h2 id="具体问题："><a href="#具体问题：" class="headerlink" title="具体问题："></a>具体问题：</h2><p>导入镜像到客户方的服务器，客户方使用的是esxi，然后这台计算机通过vsphereclient连接到server的，需要将已经准备好的ova导入到客户方，但在ovf部署时出现该报错。</p>
+<h2 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h2><p>这个问题是说OVF文件的hash值，与.mf文件中记录的hash值不同导致。解决方法简单，可以重新生成OVF文件的hash(256)值，也可以直接把.mf文件删掉。</p>
+<p>直接删除掉.mf文件即可，如为.ova文件则改名为.rar，解压以后将其中的.mf删掉然后导入其中的.ovf文件。</p>
+<h2 id="其他报错："><a href="#其他报错：" class="headerlink" title="其他报错："></a>其他报错：</h2><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231050340.jpeg" alt="image.png"></p>
+<p>这个错误的意思是说，用VWware导出的OVF文件中，有些功能设置在vSphere中无法找到，即功能模块不兼容的情况。这时就需要修改OVF文件，把用不上的功能设置点去掉。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049355.jpeg" alt="image.png"></p>
+<p>打开ovf文件，找到vmx-16的system项设置，这里意思是vmx输出的ovf模板兼容类型是16版本，而vSphere不支持这么高版本，所以只要把它降低就行了。由于不知道服务器上部署的是什么版本，所以这里可以逐个降低进行尝试，直到可以为止。我的最高兼容11版本。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049410.jpeg" alt="image.png"></p>
+<p>修改之后就可以了：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231050117.jpeg" alt="image.png"></p>
+<p>然后一路向下，根据提示进行部署。</p>
+<p>然后又出现一个设备配置无效的错误；</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049322.jpeg" alt="image.png"></p>
+<p>这个错误的意思是说，用VWware导出的OVF文件中，有些功能设置在vSphere中无法找到，即功能模块不兼容的情况。这时就需要修改OVF文件，把用不上的功能设置点去掉。</p>
+<p>这里要注意一个点，就是仅靠这个错误提示：设备“0”的配置无效，是无法确切定位到哪个功能在vSphere中是不受支持的，所以还是要逐个尝试，直到找到为止。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049694.jpeg" alt="image.png"></p>
+<p>ovf里面的每个item都是一个功能点配置信息，逐个删除、恢复进行尝试，我这里是这一项配置不兼容。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049720.jpeg" alt="image.png"></p>
+<p>直接删掉，再导入，就成功了。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231049641.jpeg" alt="image.png"></p>
+<h1 id="FTP上传或下载文件提示错误：421-Data-timeout-Reconnect-Sorry的解决方法"><a href="#FTP上传或下载文件提示错误：421-Data-timeout-Reconnect-Sorry的解决方法" class="headerlink" title="FTP上传或下载文件提示错误：421 Data timeout. Reconnect. Sorry的解决方法"></a>FTP上传或下载文件提示错误：421 Data timeout. Reconnect. Sorry的解决方法</h1><p>data_connection_timeout，网上是这样解释这个参数的：数据连接后数据连接等待的空闲时间超时，超过时间后，数据连接将断开连接；我发现这个参数在vsftpd安装之后的默认值是1，也就是说，在数据连接后数据连接等待空闲时间超过1秒后，数据连接将断开，那么看来可能就是这个问题导致的，我将参数值改为10之后，发现文件传输马上正常了。</p>
+<p>总结：ftp传输文件错误“421 Data timeout. Reconnect”，代表数据连接超时，连接被服务器强制断开了，只要我们找到vsftpd.conf文件，将文件里面的data_connection_timeout参数值改大一点的就可以解决问题了，特别是当我们网络环境不好的时候特别容易出现这个问题。</p>
+<h1 id="windows-VMWARE虚拟机开机自启动设置"><a href="#windows-VMWARE虚拟机开机自启动设置" class="headerlink" title="windows VMWARE虚拟机开机自启动设置"></a>windows VMWARE虚拟机开机自启动设置</h1><p>在<strong>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</strong> 或 <strong>%programdata%\Microsoft\Windows\Start Menu\Programs\Startup</strong></p>
+<p>里面写入start.bat(名字自定义，需设置为bat脚本执行文件)</p>
+<p><strong>“C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe” -X “C:\Users\93202\Documents\Virtual Machines\macOS 10.12\macOS 10.12.vmx”</strong></p>
+<p>里面的内容指定其vmware位置和需要启动的虚拟机镜像位置</p>
+<p>网上有很多用start参数启动的，但应该是版本问题，我用start测试都会失败，所以这里用-x</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/vmware%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95_hexo/" data-id="ckxjra7pb001nr0v14d5hb5bv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/23/rsync_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          rsync
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/23/%E5%A2%9E%E5%8A%A0Swap%E5%88%86%E5%8C%BA_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">增加Swap分区</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

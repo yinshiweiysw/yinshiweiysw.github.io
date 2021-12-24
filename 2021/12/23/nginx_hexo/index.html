@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>nginx | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一.nginx概述nginx是一款开源的http，web应用服务器，其功能模块化，高性能高可靠。 特性：功能模块少：源代码仅保留http与核心模块代码，其余不够核心代码会作为插件来安装代码模块化：易读，便于二次开发优势：适合当前主流架构趋势，微服务，云架构，中间层统一技术栈，降低维护成本，降低技术成本更新成本 Nginx特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx">
+<meta property="og:url" content="http://example.com/2021/12/23/nginx_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一.nginx概述nginx是一款开源的http，web应用服务器，其功能模块化，高性能高可靠。 特性：功能模块少：源代码仅保留http与核心模块代码，其余不够核心代码会作为插件来安装代码模块化：易读，便于二次开发优势：适合当前主流架构趋势，微服务，云架构，中间层统一技术栈，降低维护成本，降低技术成本更新成本 Nginx特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109524.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109551.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109509.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231110021.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109487.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231110203.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109831.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231110808.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109047.jpeg">
+<meta property="og:image" content="https://b3logfile.com/file/2021/02/image-677a1224.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109366.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231111658.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109353.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231111912.jpeg">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.370Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109524.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nginx_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/nginx_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nginx
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一-nginx概述"><a href="#一-nginx概述" class="headerlink" title="一.nginx概述"></a>一.nginx概述</h1><p>nginx是一款开源的http，web应用服务器，其功能模块化，高性能高可靠。</p>
+<p>特性：<br>功能模块少：源代码仅保留http与核心模块代码，其余不够核心代码会作为插件来安装<br>代码模块化：易读，便于二次开发<br>优势：<br>适合当前主流架构趋势，微服务，云架构，中间层<br>统一技术栈，降低维护成本，降低技术成本更新成本</p>
+<p>Nginx特点是占有<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/1082.htm">内存</a>少，<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/684757.htm">并发</a>能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好。</p>
+<p><strong>Nginx由内核和模块组成，其中，内核的设计非常微小和简洁，完成的工作也非常简单，仅仅通过查找配置文件将客户端请求映射到一个location block（location是Nginx配置中的一个指令，用于URL匹配），而在这个location中所配置的每个指令将会启动不同的模块去完成相应的工作。</strong></p>
+<h2 id="Nginx相对于Apache优点："><a href="#Nginx相对于Apache优点：" class="headerlink" title="Nginx相对于Apache优点："></a>Nginx相对于Apache优点：</h2><ol>
+<li><strong>高并发响应性能非常好，官方Nginx处理静态文件并发5w/s</strong></li>
+<li><strong>反向代理性能非常强。（可用于负载均衡）</strong></li>
+<li><strong>内存和cpu占用率低。（为Apache的1/5-1/10）</strong></li>
+<li><strong>对后端服务有健康检查功能。</strong></li>
+<li><strong>支持PHP cgi方式和fastcgi方式。</strong></li>
+<li>配置代码简洁且容易上手。</li>
+<li>nginx采用epoll模型（异步非阻塞），而apache采用select模型。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">select 和epoll模型的区别</span><br><span class="line">	select:当用户发起一次请求，select模型就会进行一次遍历扫描，从而导致性能低下</span><br><span class="line">	epoll：当用户发起请求，epoll模型会直接进行处理，效率高效，并无连接限制。</span><br><span class="line"></span><br><span class="line">	select和epoll对比</span><br><span class="line"></span><br><span class="line">select</span><br><span class="line">随着连接数增加，急剧下降。处理成千上万并发连接数时，性能很差。</span><br><span class="line">连接数有限制，处理的最大连接数不超过1024。如果要处理超过1024个连接数，则需要修改FD_SETSIZE宏，并重新编译 。</span><br><span class="line">线性轮询</span><br><span class="line">开发复杂性低</span><br><span class="line">epoll</span><br><span class="line">随着连接数增加，性能基本上没有下降。处理成千上万并发连接时，性能很好。</span><br><span class="line">连接数无限制。</span><br><span class="line">回调callback</span><br><span class="line">开发复杂性中</span><br></pre></td></tr></table></figure>
+
+<h2 id="nginx应用场景："><a href="#nginx应用场景：" class="headerlink" title="nginx应用场景："></a>nginx应用场景：</h2><p>静态服务：<br>浏览器缓存，防资源盗用，资源分类，资源压缩，资源缓存，跨域访问<br>代理服务：<br>协议类型，正向代理，反向代理，负载均衡，代理缓存，动静分离<br>安全服务：<br>访问控制，访问限制，流量限制，拦截共计，拦截异常请求，拦截sql注入<br>流行框架<br>nginx+php，nginx+java ，nginx+python</p>
+<h1 id="二-nginx安装"><a href="#二-nginx安装" class="headerlink" title="二.nginx安装"></a>二.nginx安装</h1><p><a target="_blank" rel="noopener" href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a> #nginx官网地址</p>
+<p>nginx一般有两种安装方式：</p>
+<p>源码安装和rpm安装：</p>
+<p>rpm安装：</p>
+<p>epel源：版本低，功能少<br>官方源：官方编译好的，封装成rpm包，提供yum源 版本新</p>
+<h2 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h2><h3 id="官方源："><a href="#官方源：" class="headerlink" title="官方源："></a>官方源：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install yum-utils</span><br></pre></td></tr></table></figure>
+
+<p>To set up the yum repository, create the file named <strong>/etc/yum.repos.d/nginx.repo</strong> with the following contents:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[nginx-stable]</span><br><span class="line">name=nginx stable repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br><span class="line"></span><br><span class="line">[nginx-mainline]</span><br><span class="line">name=nginx mainline repo</span><br><span class="line">baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br></pre></td></tr></table></figure>
+
+<p>By default, the repository for stable nginx packages is used. If you would like to use mainline nginx packages, run the following command:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --enable nginx-mainline</span><br></pre></td></tr></table></figure>
+
+<p>To install nginx, run the following command:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install nginx</span><br></pre></td></tr></table></figure>
+
+<p>When prompted to accept the GPG key, verify that the fingerprint matches 573B FD6B 3D8F BC64 1079 A6AB ABF5 BD82 7BD9 BF62, and if so, accept it.</p>
+<p>上面的为最新包的安装，下面的为稳定版的安装，文档内容截自官方文档，如为其他系统则参考官方文档 ：<strong><a target="_blank" rel="noopener" href="http://nginx.org/en/linux_packages.html#RHEL-CentOS">http://nginx.org/en/linux_packages.html#RHEL-CentOS</a></strong></p>
+<h3 id="epel源："><a href="#epel源：" class="headerlink" title="epel源："></a>epel源：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release.noarch  ```#首先安装epel源，如已有则跳过，如还没有yum源则先把yum源配置好</span><br><span class="line">yum makecache #加载epel源</span><br><span class="line">yum -y install nginx #安装nginx</span><br><span class="line">安装完成以后</span><br><span class="line">nginx -V 查看nginx安装配置以及版本</span><br></pre></td></tr></table></figure>
+
+<h2 id="源码安装："><a href="#源码安装：" class="headerlink" title="源码安装："></a>源码安装：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.19.6.tar.gz #下载nginx</span><br><span class="line"></span><br><span class="line">useradd -s /sbin/nologin -M nginx #添加nginx用户</span><br><span class="line"></span><br><span class="line">tar -xvf nginx-1.19.6.tar.gz &amp;&amp; cd nginx-1.19.6/</span><br><span class="line"></span><br><span class="line">yum install -y gcc gcc-c++ make libtool zlib zlib-devel openssl openssl-devel pcre pcre-devel #解决依赖</span><br><span class="line"></span><br><span class="line">./configure --prefix=/usr/local/nginx --user=nginx --group=nginx --with-file-aio --with-ipv6 --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module=dynamic --with-http_image_filter_module=dynamic --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-http_perl_module=dynamic --with-http_auth_request_module --with-mail=dynamic --with-mail_ssl_module --with-pcre --with-pcre-jit --with-stream=dynamic --with-stream_ssl_module --with-debug</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">make &amp;&amp; make install  #编译</span><br><span class="line"></span><br><span class="line">ll /usr/local/nginx/  #查看nginx</span><br></pre></td></tr></table></figure>
+
+<p>源码安装的好处在于其所有nginx相关文件都可以放在一起，方便数据迁移。相比于yum麻烦的是：</p>
+<p>源码安装完成以后linux环境变量没有nginx路径，需要配置（才能直接在命令行找到命令）</p>
+<p>systemd不会自动生成nginx启动文件（无法通过systemctl直接启动关闭nginx）</p>
+<p>所以这两个都需要手动进行生成</p>
+<h3 id="systemd"><a href="#systemd" class="headerlink" title="systemd:"></a>systemd:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/systemd/system/nginx.service &lt;&lt; EOF</span><br><span class="line">[Unit]</span><br><span class="line">Description=The nginx HTTP and reverse proxy server</span><br><span class="line">After=network.target remote-fs.target nss-lookup.target[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line"># Nginx will fail to start if /run/nginx.pid already exists but has the wrong</span><br><span class="line"># SELinux context. This might happen when running `nginx -t` from the cmdline.</span><br><span class="line"># https://bugzilla.redhat.com/show_bug.cgi?id=1268621</span><br><span class="line">ExecStartPre=/usr/bin/rm -f $PIDFile</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/bin/kill -s HUP PIDFileExecStartPre=/usr/local/nginx/sbin/nginx−tExecStart=/usr/local/nginx/sbin/nginxExecReload=/bin/kill−sHUP$MAINPID</span><br><span class="line">KillSignal=SIGQUIT</span><br><span class="line">TimeoutStopSec=5</span><br><span class="line">KillMode=mixed</span><br><span class="line">PrivateTmp=true[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>将systemd文件写入以后可以使用systemctl start nginx测试一下</p>
+<h3 id="加入环境变量"><a href="#加入环境变量" class="headerlink" title="加入环境变量"></a>加入环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/profile.d/nginx.sh &lt;&lt; EOF</span><br><span class="line">export PATH=/usr/local/nginx/sbin:$PATH</span><br><span class="line">EOF</span><br><span class="line">source /etc/profile.d/nginx.sh #生效到当前环境变量</span><br><span class="line">nginx -V #使用命令测试一下</span><br></pre></td></tr></table></figure>
+
+<h1 id="三-nginx配置文件"><a href="#三-nginx配置文件" class="headerlink" title="三. nginx配置文件"></a>三. nginx配置文件</h1><blockquote>
+<p>nginx配置文件：<br>主配置文件：<br>/etc/nginx<br>/etc/nginx/nginx.conf<br>/etc/nginx/conf.d/*<br>cgi,fastcgi,uwcgi配置文件<br>/etc/nginx/fastcgi_params<br>/etc/nginx/scgi_params<br>/etc/nginx/uwsgi_params<br>编码转换映射文件<br>/etc/nginx/win-utf<br>/etc/nginx/koi-utf<br>/etc/nginx/koi-win<br>http协议的conten-type与扩展名<br>/etc/nginx/mime.types<br>systemd：<br>/usr/lib/systemd/system/nginx.service<br>nginx日志轮询，日志切割<br>/etc/logrotate.d/nginx<br>模块目录<br>/etc/nginx/modules<br>/usr/lib64/nginx<br>/usr/lib64/nginx/modules<br>默认站点目录<br>/usr/share/nginx<br>/usr/share/nginx/html/*.html<br>logs:<br>/var/log/nginx<br>缓存：<br>/var/cache/nginx</p>
+</blockquote>
+<p>默认使用rpm包的nginx相关配置文件如上，如果是源码安装的如果没特别指定路径一般在编译安装prefix指定的nginx根目录下，也有些文件夹不会自动生成可以手动生成。比较重要的配置文件有</p>
+<p><strong>conf/nginx.conf：这个是nginx的根配置文件</strong></p>
+<p><strong>html站点目录：这个是网站文件夹的路径（也可以不用默认的路径）</strong></p>
+<p><strong>nginx.logs:nginx日志生成目录</strong></p>
+<h2 id="nginx-conf"><a href="#nginx-conf" class="headerlink" title="nginx.conf"></a>nginx.conf</h2><h3 id="nginx配置文件格式一般为："><a href="#nginx配置文件格式一般为：" class="headerlink" title="nginx配置文件格式一般为："></a>nginx配置文件格式一般为：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">...   # 全局配置段，例如nginx日志文件路径，pid文件路径，nginx用户，进程信息在这里配置</span><br><span class="line">events&#123;</span><br><span class="line"></span><br><span class="line">...  #事件驱动配置端，可定义nginx的事件驱动模型，最大连接数等信息</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line"></span><br><span class="line">...  #http定义一个http服务的相关配置，一般下面会包含多个server，一个server又会包含多个location</span><br><span class="line">server&#123;</span><br><span class="line"></span><br><span class="line">... #server定义的是一个虚拟主机的信息，下面可能会有多个location</span><br><span class="line">location &#123;</span><br><span class="line"></span><br><span class="line">.. #location定义的是虚拟主机，location 指令的功能是用来匹配不同的 URI 请求，进而对请求做不同的处理和响应。例如一个网站的/根目录会匹配到服务器主机的哪个文件目录，就是在这里定义的</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; #一个配置段由&#123; 开始 &#125; 结尾,  ...表示省略的具体配置信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整配置文件以及常用到的一些配置："><a href="#完整配置文件以及常用到的一些配置：" class="headerlink" title="完整配置文件以及常用到的一些配置："></a>完整配置文件以及常用到的一些配置：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">#定义Nginx运行的用户和用户组</span><br><span class="line">user  www www;</span><br><span class="line">#启动进程,通常设置成和cpu的数量相等</span><br><span class="line">worker_processes  8;</span><br><span class="line">worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;</span><br><span class="line">#为每个进程分配cpu，上例中将8个进程分配到8个cpu，当然可以写多个，或者将一个进程分配到多个cpu。</span><br><span class="line">worker_rlimit_nofile 102400;</span><br><span class="line">#这个指令是指当一个nginx进程打开的最多文件描述符数目，理论值应该是最多打</span><br><span class="line">#开文件数（ulimit -n）与nginx进程数相除，但是nginx分配请求并不是那么均匀</span><br><span class="line">#，所以最好与ulimit -n的值保持一致。</span><br><span class="line">#全局错误日志及PID文件</span><br><span class="line">error_log  /usr/local/nginx/logs/error.log; </span><br><span class="line">#错误日志定义等级，[ debug | info | notice | warn | error | crit ]</span><br><span class="line">pid        /usr/local/nginx/nginx.pid;</span><br><span class="line">#一个nginx进程打开的最多文件描述符数目，理论值应该是最多打开文件数（系统的值ulimit -n）与nginx进程数相除，但是nginx分配请求并不均匀.</span><br><span class="line">#所以建议与ulimit -n的值保持一致。</span><br><span class="line">worker_rlimit_nofile 65535;</span><br><span class="line">#工作模式及连接数上限</span><br><span class="line">events &#123;</span><br><span class="line">    use   epoll;             	#epoll是多路复用IO(I/O Multiplexing)中的一种方式,但是仅用于linux2.6以上内核,可以大大提高nginx的性能</span><br><span class="line">    worker_connections  102400;	#单个后台worker process进程的最大并发链接数 （最大连接数=连接数*进程数）</span><br><span class="line">    multi_accept  on; #尽可能多的接受请求</span><br><span class="line">&#125;</span><br><span class="line">#设定http服务器，利用它的反向代理功能提供负载均衡支持</span><br><span class="line">http &#123;</span><br><span class="line">    #设定mime类型,类型由mime.type文件定义</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    #设定日志格式</span><br><span class="line">    access_log    /usr/local/nginx/log/nginx/access.log;</span><br><span class="line">	 sendfile      on;</span><br><span class="line">    #sendfile 指令指定 nginx 是否调用 sendfile 函数（zero copy 方式）来输出文件，对于普通应用必须设为 on</span><br><span class="line">	#如果用来进行下载等应用磁盘IO重负载应用，可设置为 off，以平衡磁盘与网络I/O处理速度，降低系统的uptime.</span><br><span class="line">	#autoindex  on;  #开启目录列表访问，合适下载服务器，默认关闭。</span><br><span class="line">	tcp_nopush on; #防止网络阻塞</span><br><span class="line">	keepalive_timeout  60;</span><br><span class="line">	#keepalive超时时间，客户端到服务器端的连接持续有效时间,当出现对服务器的后,继请求时,keepalive-timeout功能可避免建立或重新建立连接。</span><br><span class="line">    tcp_nodelay   on; #提高数据的实时响应性</span><br><span class="line">   #开启gzip压缩</span><br><span class="line">   gzip on;</span><br><span class="line">	gzip_min_length  1k;</span><br><span class="line">	gzip_buffers     4 16k;</span><br><span class="line">	gzip_http_version 1.1;</span><br><span class="line">	gzip_comp_level  4; #压缩级别大小，最大为9，值越小，压缩后比例越小，CPU处理更快。</span><br><span class="line">	#值越大，消耗CPU比较高。</span><br><span class="line">	gzip_types       text/plain application/x-javascript text/css application/xml;</span><br><span class="line">	gzip_vary on;</span><br><span class="line">	client_max_body_size 10m;      #允许客户端请求的最大单文件字节数</span><br><span class="line">    client_body_buffer_size 128k;  #缓冲区代理缓冲用户端请求的最大字节数，</span><br><span class="line">    proxy_connect_timeout 120;      #nginx跟后端服务器连接超时时间(代理连接超时)</span><br><span class="line">    proxy_send_timeout 120;         #后端服务器数据回传时间(代理发送超时)</span><br><span class="line">    proxy_read_timeout 120;         #连接成功后，后端服务器响应时间(代理接收超时)</span><br><span class="line">    proxy_buffer_size 4k;          #设置代理服务器（nginx）保存用户头信息的缓冲区大小</span><br><span class="line">    proxy_buffers 4 32k;           #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置</span><br><span class="line">    proxy_busy_buffers_size 64k;   #高负荷下缓冲大小（proxy_buffers*2）</span><br><span class="line"></span><br><span class="line">    #设定请求缓冲</span><br><span class="line">    large_client_header_buffers  4 4k;</span><br><span class="line">	client_header_buffer_size 4k;</span><br><span class="line">	#客户端请求头部的缓冲区大小，这个可以根据你的系统分页大小来设置，一般一个请求的头部大小不会超过1k</span><br><span class="line">	#不过由于一般系统分页都要大于1k，所以这里设置为分页大小。分页大小可以用命令getconf PAGESIZE取得。</span><br><span class="line">	open_file_cache max=102400 inactive=20s;</span><br><span class="line">	#这个将为打开文件指定缓存，默认是没有启用的，max指定缓存数量，建议和打开文件数一致，inactive是指经过多长时间文件没被请求后删除缓存。</span><br><span class="line">	open_file_cache_valid 30s;</span><br><span class="line">	#这个是指多长时间检查一次缓存的有效信息。</span><br><span class="line">	open_file_cache_min_uses 1;</span><br><span class="line">	#open_file_cache指令中的inactive参数时间内文件的最少使用次数，如果超过这个数字，文件描述符一直是在缓存中打开的，如上例，如果有一个文件在inactive</span><br><span class="line">    #包含其它配置文件，如自定义的虚拟主机</span><br><span class="line">   #include  vhosts.conf;</span><br><span class="line">#这里为后端服务器wugk应用集群配置，根据后端实际情况修改即可，tdt_wugk为负载均衡名称，可以任意指定</span><br><span class="line">	#但必须跟vhosts.conf虚拟主机的pass段一致，否则不能转发后端的请求。weight配置权重，在fail_timeout内检查max_fails次数，失败则剔除均衡。</span><br><span class="line">	upstream tdt_wugk &#123;</span><br><span class="line">		server   127.0.0.1:8080 weight=1 max_fails=2 fail_timeout=30s;</span><br><span class="line">		server   127.0.0.1:8081 weight=1 max_fails=2 fail_timeout=30s;</span><br><span class="line">	&#125;</span><br><span class="line">   #虚拟主机配置</span><br><span class="line">	server &#123;</span><br><span class="line">		#侦听80端口</span><br><span class="line">        listen       80;</span><br><span class="line">        #定义使用www.wuguangke.cn访问</span><br><span class="line">        server_name  www.wuguangke.cn;</span><br><span class="line">        #设定本虚拟主机的访问日志</span><br><span class="line">        access_log  logs/access.log  main;</span><br><span class="line">			root   /data/webapps/wugk;  #定义服务器的默认网站根目录位置</span><br><span class="line">        index index.php index.html index.htm;   #定义首页索引文件的名称</span><br><span class="line">        #默认请求</span><br><span class="line">        location ~ /&#123;</span><br><span class="line">          root   /data/www/wugk;      #定义服务器的默认网站根目录位置</span><br><span class="line">          index index.php index.html index.htm;   #定义首页索引文件的名称</span><br><span class="line">          #以下是一些反向代理的配置.</span><br><span class="line">		  proxy_next_upstream http_502 http_504 error timeout invalid_header;</span><br><span class="line">		  #如果后端的服务器返回502、504、执行超时等错误，自动将请求转发到upstream负载均衡池中的另一台服务器，实现故障转移。</span><br><span class="line">          proxy_redirect off;</span><br><span class="line">          #后端的Web服务器可以通过X-Forwarded-For获取用户真实IP</span><br><span class="line">          proxy_set_header Host $host;</span><br><span class="line">          proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">		   proxy_pass  http://tdt_wugk;     #请求转向后端定义的均衡模块</span><br><span class="line">       &#125;</span><br><span class="line">		#配置Nginx动静分离，定义的静态页面直接从Nginx发布目录读取。</span><br><span class="line">		location ~ .*\.(html|htm|gif|jpg|jpeg|bmp|png|ico|txt|js|css)$</span><br><span class="line">		&#123;</span><br><span class="line">			root /data/www/wugk;</span><br><span class="line">			#expires定义用户浏览器缓存的时间为3天，如果静态页面不常更新，可以设置更长，这样可以节省带宽和缓解服务器的压力。</span><br><span class="line">			expires      30d;</span><br><span class="line">		&#125;</span><br><span class="line">        #PHP脚本请求全部转发到 FastCGI处理. 使用FastCGI默认配置.</span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">            root /root;</span><br><span class="line">            fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">            fastcgi_index index.php;</span><br><span class="line">            fastcgi_param SCRIPT_FILENAME /data/www/wugk$fastcgi_script_name;</span><br><span class="line">            include fastcgi_params;</span><br><span class="line">        &#125;</span><br><span class="line">        #设定查看Nginx状态的地址</span><br><span class="line">        location /NginxStatus &#123;</span><br><span class="line">            stub_status  on;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="四-nginx常用命令"><a href="#四-nginx常用命令" class="headerlink" title="四.nginx常用命令"></a>四.nginx常用命令</h1><p>nginx -v #查看版本号</p>
+<p>nginx -V #查看版本号以及安装时安装的模块</p>
+<p>nginx -s reload | stop 重新载入配置文件|停止nginx</p>
+<p>nginx -t 检查配置文件语法是否正确</p>
+<p>nginx 直接输入命令表示启动nginx进程</p>
+<h1 id="五-nginx常用模块功能"><a href="#五-nginx常用模块功能" class="headerlink" title="五.nginx常用模块功能"></a>五.nginx常用模块功能</h1><h2 id="1-nginx目录索引"><a href="#1-nginx目录索引" class="headerlink" title="1.nginx目录索引"></a>1.nginx目录索引</h2><p>目录索引模块：ngx_http_autoindex_module</p>
+<p>默认：编译进内核</p>
+<p>编译参数：<code>--without-http_autoindex_module</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">autoindex on;</span><br><span class="line">加在对应location里面即可实现目录索引浏览（autoindex也可加在http，server里面，但一般不这么用）Syntax:autoindex on|off;</span><br><span class="line">default： autoindex off;</span><br><span class="line">context: http server location常用参数</span><br><span class="line">autoindex_exact_size off;</span><br><span class="line">默认为on，显示出文件的确切大小，单位为bytes</span><br><span class="line">off，显示文件的大概大小，单位为kb or MB or GBautoindex_localtime on;</span><br><span class="line">默认为off，显示的文件时间为GMT时间</span><br><span class="line">默认为on，显示的文件时间为文件的服务器时间charset utf-8,gbk;</span><br><span class="line">默认中文目录乱码，添加防止乱码。</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109524.jpeg" alt="image.png"></p>
+<p>nginx -s reload #重载配置文件</p>
+<p>访问：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109551.jpeg" alt="image.png"></p>
+<h2 id="2-nginx状态监控"><a href="#2-nginx状态监控" class="headerlink" title="2.nginx状态监控"></a>2.nginx状态监控</h2><p>状态监控模块：ngx_http_stub_status_module</p>
+<p>默认：不编译进内核</p>
+<p>编译参数：<code>--with-http_stub_status_module</code></p>
+<p>配置实例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location = /status &#123;</span><br><span class="line">stub_status;</span><br><span class="line">access_log off;</span><br><span class="line">&#125;</span><br><span class="line">#启动状态时可关闭日志。</span><br></pre></td></tr></table></figure>
+
+<p>访问：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109509.jpeg" alt="image.png"></p>
+<p>因安全缘由，建议status状态页面仅内网开放访问或限制访问ip访问认证限制。</p>
+<h2 id="3-nginx访问控制"><a href="#3-nginx访问控制" class="headerlink" title="3.nginx访问控制"></a>3.nginx访问控制</h2><p>基于IP的访问控制模块： http_access_module 默认：编译进内核 编译参数：<code>--without-http_access_module</code><br>基于用户登录认证模块： http_auth_basic_module 默认：编译进内核 编译参数：<code>--without-http_auth_basic_module</code></p>
+<h3 id="IP"><a href="#IP" class="headerlink" title="IP:"></a>IP:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">允许:</span><br><span class="line">syntax: allow address |CIDR |unix:  |all;</span><br><span class="line">Default:-</span><br><span class="line">context: httpx server,location,limit_except</span><br><span class="line">拒绝:</span><br><span class="line">syntax: deny address |CIDR |unix:   |all;</span><br><span class="line">context: http, server, location, limit_except</span><br><span class="line">default： -</span><br></pre></td></tr></table></figure>
+
+<p>示例</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231110021.jpeg" alt="image.png"></p>
+<p>本机访问（本机ip为10.10.10.214）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109487.jpeg" alt="image.png"></p>
+<p>已被拒绝，其他同网端服务器访问没问题。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231110203.jpeg" alt="image.png"></p>
+<h3 id="登录认证访问："><a href="#登录认证访问：" class="headerlink" title="登录认证访问："></a>登录认证访问：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//配置语法</span><br><span class="line">syntax: auth_basic string|off;</span><br><span class="line">default: auth_basic off;</span><br><span class="line">Context:</span><br><span class="line">http, server， location，limit_except</span><br><span class="line">//用户密码记录配置文件</span><br><span class="line">syntax: auth_basic_user_file file;</span><br><span class="line">Default: -</span><br><span class="line">Context:</span><br><span class="line">http, server, location，limit_except</span><br></pre></td></tr></table></figure>
+
+<p>yum -y install httpd-tools (安装http工具包)<br>htpasswd -b -c /x/x/x admin 123456</p>
+<p>前面是用户后面是密码，生产用户密码文件</p>
+<p>示例：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109831.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231110808.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109047.jpeg" alt="image.png"></p>
+<h2 id="4-访问限制"><a href="#4-访问限制" class="headerlink" title="4.访问限制"></a>4.访问限制</h2><p>经常会遇到这种情况，服务器流量异常，负载过大等等。对于大流量恶意的攻击访问，会带来带宽的浪费，服务器压力，影响业务，往往考虑对同一个IP的连接数，并发数进行限制。</p>
+<p>限制连接数：<code>ngx_http_limit_req_module</code></p>
+<p>限制请求频率：<code>ngx_http_limit_conn_module</code></p>
+<p>默认：编译进内核</p>
+<p>编译参数：<code>--without-http_limit_conn_module</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--without-http_limit_req_module</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_limit_req_module.html">limit_req_zone</a> 用来限制单位时间内的请求数，即速率限制,采用的<strong>漏桶算法 “leaky bucket”</strong></p>
+<p><a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_limit_conn_module.html">limit_conn_zone</a> 用来限制同一时间连接数，即并发限制</p>
+<h3 id="limit-conn-zone"><a href="#limit-conn-zone" class="headerlink" title="limit_conn_zone:"></a>limit_conn_zone:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">句法：	limit_conn_zone key zone=name:size;</span><br><span class="line">默认：	—</span><br><span class="line">内容：	http </span><br><span class="line">Syntax: limit_conn zone number</span><br><span class="line"> Default: — </span><br><span class="line">Context: http,server, location</span><br><span class="line">可能有几个`limit_conn`指令。例如，以下配置将限制每个客户端IP与服务器的连接数，并同时限制与虚拟服务器的连接总数：</span><br><span class="line">limit_conn_zone <span class="variable">$binary_remote_addr</span> zone=addr:10m;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    location /download/ &#123;</span><br><span class="line">        limit_conn addr 1;<span class="comment">#一次每个IP地址只允许一个连接。</span></span><br><span class="line">    &#125;</span><br><span class="line">limit_conn_zone <span class="variable">$binary_remote_addr</span> zone=perip:10m;</span><br><span class="line">limit_conn_zone <span class="variable">$server_name</span> zone=perserver:10m;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    ...</span><br><span class="line">    limit_conn perip 10;</span><br><span class="line">    limit_conn perserver 100;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当且仅当<code>limit_conn</code>当前级别上未定义任何指令时，这些指令才从先前的配置级别继承。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句法：	limit_conn_dry_run on | off;</span><br><span class="line">默认：</span><br><span class="line">limit_conn_dry_run off;</span><br><span class="line">内容：	http，server，location</span><br></pre></td></tr></table></figure>
+
+<p>启用空运行模式。在这种模式下，连接数不受限制，但是，在共享内存区域中，过多连接的数将照常计算。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句法：	limit_conn_log_level info | notice | warn | error;</span><br><span class="line">默认：</span><br><span class="line">limit_conn_log_level error;</span><br><span class="line">内容：	http，server，location</span><br></pre></td></tr></table></figure>
+
+<p>为服务器限制连接数的情况设置所需的日志记录级别。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句法：	limit_conn_status code;</span><br><span class="line">默认：</span><br><span class="line">limit_conn_status 503;</span><br><span class="line">内容：	http，server，location</span><br></pre></td></tr></table></figure>
+
+<p>设置状态代码以响应被拒绝的请求而返回。</p>
+<h3 id="limit-req-zone"><a href="#limit-req-zone" class="headerlink" title="limit_req_zone:"></a>limit_req_zone:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">句法：	limit_req_zone key zone=name:size rate=rate [sync];</span><br><span class="line">默认：	—</span><br><span class="line">内容：	http</span><br><span class="line"></span><br><span class="line">Sntax:	limit_req zone=name [burst=number] [nodelay | delay=number];</span><br><span class="line">Default:	—</span><br><span class="line">Context:	http, server, location</span><br><span class="line">http &#123;</span><br><span class="line">    limit_req_zone <span class="variable">$binary_remote_addr</span> zone=one:10m rate=1r/s;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        location /search/ &#123;</span><br><span class="line">            limit_req zone=one burst=5;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>http{<br>//http段配置请求限制,rate限制速率，限制一秒钟最多一个IP请求<br>limit_req_zone $binary_remote_addr zone=req_zone:10m rate=1r/s;<br>…<br>server {<br>…<br>location / {<br>//1r/s只接收一个请求,其余请求拒绝处理并返回错误码给客户端..<br>limit_req zone=req_zone;<br>//请求超过1r/s,剩下的将被延迟处理,请求数超过burst定义的数量，多余的请求返回503<br>#limit_req zone=req_zone burst=3 nodelay;<br>}<br>}}<br>rate=1r/s表示每秒最大一个请求，burst=3表示请求队列最大为3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句法：	limit_req_dry_run on | off;</span><br><span class="line">默认：</span><br><span class="line">limit_req_dry_run off;</span><br><span class="line">内容：	http，server，location</span><br></pre></td></tr></table></figure>
+
+<p>启用空运行模式。在这种模式下，请求处理速率不受限制，但是，在共享内存区域中，过多请求的数量将照常计算。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句法：	limit_req_log_level info | notice | warn | error;</span><br><span class="line">默认：</span><br><span class="line">limit_req_log_level error;</span><br><span class="line">内容：	http，server，location</span><br></pre></td></tr></table></figure>
+
+<p>在服务器由于速率超出而拒绝处理请求或延迟请求处理的情况下，设置所需的日志记录级别。延迟的记录级别比拒绝的记录级别少1分；例如，如果<code>limit_req_log_level notice</code>指定“ ” ，则将延迟记录为该<code>info</code>级别。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">句法：	limit_req_status code;</span><br><span class="line">默认：</span><br><span class="line">limit_req_status 503;</span><br><span class="line">内容：	http，server，location</span><br></pre></td></tr></table></figure>
+
+<p>设置状态代码以响应被拒绝的请求而返回。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$server_name</span> 表示服务器的变量</span><br><span class="line"><span class="variable">$binary_remote_addr</span> 变量长度是固定的4字节</span><br><span class="line"><span class="variable">$remote_addr</span> 变量长度是7-15字节</span><br><span class="line">一个IP地址=32bit=4字节，所以一般用第一个变量即可</span><br><span class="line">两个都是代表IP地址的变量，区别在于变量存储长度（也可直接换成某个IP地址，但是限制一般针对所有IP地址，而非一个ip地址，所以使用变量）</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-日志模块"><a href="#5-日志模块" class="headerlink" title="5.日志模块"></a>5.日志模块</h2><p>日志模块：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_log_module.html">ngx_http_log_module</a></li>
+</ul>
+<p>默认：编译进内核（在官方文档的编译模块中，没有日志模块的编译或不编译进内核的选项）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	log_format name [escape=default|json|none] string ...;</span><br><span class="line">Default:</span><br><span class="line">log_format combined &quot;...&quot;;</span><br><span class="line">Context:	http</span><br><span class="line"></span><br><span class="line">Syntax:	access_log path [format [buffer=size] [gzip[=level]] [flush=time] [if=condition]];</span><br><span class="line">access_log off;</span><br><span class="line">Default:</span><br><span class="line">access_log logs/access.log combined;</span><br><span class="line">Context:	http, server, location, if in location, limit_except</span><br></pre></td></tr></table></figure>
+
+<p>配置示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">                      &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">                    &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line"></span><br><span class="line">access_log logs/access.log main;</span><br></pre></td></tr></table></figure>
+
+<p>log_format是定义的日志格式，access_log是存放的位置。main为日志的名称，下面通过这个main来进行调用</p>
+<p>log_format 后面首先定义日志名称，然后’’中间代表日志显示格式，调用的是nginx变量，例如$remote_addr是客户端ip地址 , remote_user是客户端用户,下面是日志实际显示示例：</p>
+<p><img src="https://b3logfile.com/file/2021/02/image-677a1224.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png"></p>
+<p>nginx常见内置变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line">嵌入式变量</span><br><span class="line">该ngx_http_core_module模块支持名称与Apache Server变量匹配的嵌入式变量。首先，这些是代表客户端请求标头字段的变量，例如$http_user_agent，$http_cookie等。另外还有其他变量：</span><br><span class="line"></span><br><span class="line">$arg_name</span><br><span class="line">name请求行中的 参数</span><br><span class="line"></span><br><span class="line">$args</span><br><span class="line">请求行中的参数</span><br><span class="line"></span><br><span class="line">$binary_remote_addr</span><br><span class="line">客户端地址（二进制形式），对于IPv4地址，值的长度始终为4个字节，对于IPv6地址，值的长度始终为16个字节</span><br><span class="line"></span><br><span class="line">$body_bytes_sent</span><br><span class="line">发送给客户端的字节数，不计算响应头；此变量与 Apache模块 的“ %B”参数 兼容mod_log_config</span><br><span class="line"></span><br><span class="line">$bytes_sent</span><br><span class="line">发送给客户端的字节数（1.3.8、1.2.5）</span><br><span class="line"></span><br><span class="line">$connection</span><br><span class="line">连接序列号（1.3.8、1.2.5）</span><br><span class="line"></span><br><span class="line">$connection_requests</span><br><span class="line">通过连接发出的当前请求数（1.3.8、1.2.5）</span><br><span class="line"></span><br><span class="line">$content_length</span><br><span class="line">“内容长度”请求标头字段</span><br><span class="line"></span><br><span class="line">$content_type</span><br><span class="line">“内容类型”请求标头字段</span><br><span class="line"></span><br><span class="line">$cookie_name</span><br><span class="line">该name饼干</span><br><span class="line"></span><br><span class="line">$document_root</span><br><span class="line">当前请求的根或别名指令的值</span><br><span class="line"></span><br><span class="line">$document_uri</span><br><span class="line">和...一样 $uri</span><br><span class="line">$host</span><br><span class="line">优先顺序如下：请求行中的主机名，或“主机”请求标头字段中的主机名，或与请求匹配的服务器名</span><br><span class="line"></span><br><span class="line">$hostname</span><br><span class="line">主机名</span><br><span class="line"></span><br><span class="line">$http_name</span><br><span class="line">任意请求头字段；变量名称的最后一部分是字段名称，该字段名称已转换为小写，并用短划线代替了下划线</span><br><span class="line"></span><br><span class="line">$https</span><br><span class="line">on如果连接以SSL模式运行，则为 “ ”，否则为空字符串</span><br><span class="line"></span><br><span class="line">$is_args</span><br><span class="line">“ ?”（如果请求行包含参数），否则为空字符串</span><br><span class="line"></span><br><span class="line">$limit_rate</span><br><span class="line">设置此变量将启用响应率限制；参见limit_rate</span><br><span class="line"></span><br><span class="line">$msec</span><br><span class="line">以毫秒为单位的当前时间（以秒为单位）（1.3.9，1.2.6）</span><br><span class="line"></span><br><span class="line">$nginx_version</span><br><span class="line">Nginx版本</span><br><span class="line"></span><br><span class="line">$pid</span><br><span class="line">工作进程的PID</span><br><span class="line"></span><br><span class="line">$pipe</span><br><span class="line">“ p”如果请求被流水线.“ ”否则（1.3.12，1.2.7）</span><br><span class="line"></span><br><span class="line">$proxy_protocol_addr</span><br><span class="line">来自PROXY协议标头（1.5.12）的客户端地址</span><br><span class="line">必须通过proxy_protocol在listen指令中设置参数来预先启用PROXY协议 。</span><br><span class="line"></span><br><span class="line">$proxy_protocol_port</span><br><span class="line">PROXY协议标头（1.11.0）中的客户端端口</span><br><span class="line">必须通过proxy_protocol在listen指令中设置参数来预先启用PROXY协议 。</span><br><span class="line"></span><br><span class="line">$proxy_protocol_server_addr</span><br><span class="line">PROXY协议标头中的服务器地址（1.17.6）</span><br><span class="line">必须通过proxy_protocol在listen指令中设置参数来预先启用PROXY协议 。</span><br><span class="line"></span><br><span class="line">$proxy_protocol_server_port</span><br><span class="line">PROXY协议标头中的服务器端口（1.17.6）</span><br><span class="line">必须通过proxy_protocol在listen指令中设置参数来预先启用PROXY协议 。</span><br><span class="line"></span><br><span class="line">$query_string</span><br><span class="line">和...一样 $args</span><br><span class="line">$realpath_root</span><br><span class="line">绝对路径名，对应于当前请求的 根或别名指令的值，所有符号链接都解析为真实路径</span><br><span class="line">$remote_addr</span><br><span class="line">客户地址</span><br><span class="line"></span><br><span class="line">$remote_port</span><br><span class="line">客户端口</span><br><span class="line"></span><br><span class="line">$remote_user</span><br><span class="line">基本身份验证随附的用户名</span><br><span class="line"></span><br><span class="line">$request</span><br><span class="line">完整的原始请求行</span><br><span class="line"></span><br><span class="line">$request_body</span><br><span class="line">请求主体</span><br><span class="line">当将请求正文读取到内存缓冲区时， 该变量的值可在proxy_pass， fastcgi_pass， uwsgi_pass和 scgi_pass指令处理的位置 使用。</span><br><span class="line"></span><br><span class="line">$request_body_file</span><br><span class="line">带有请求正文的临时文件的名称</span><br><span class="line">在处理结束时，需要删除文件。要始终将请求正文写入文件， 需要启用client_body_in_file_only。当在代理请求中或在对FastCGI / uwsgi / SCGI服务器的请求中传递临时文件的名称时，应分别通过 proxy_pass_request_body off， fastcgi_pass_request_body off， uwsgi_pass_request_body off或 scgi_pass_request_body off 指令来禁用传递请求正文。 。</span><br><span class="line"></span><br><span class="line">$request_completion</span><br><span class="line">“ OK”（如果请求已完成），否则为空字符串</span><br><span class="line"></span><br><span class="line">$request_filename</span><br><span class="line">基于root或alias 指令以及请求URI 的当前请求的文件路径</span><br><span class="line"></span><br><span class="line">$request_id</span><br><span class="line">从16个随机字节生成的唯一请求标识符，以十六进制（1.11.0）</span><br><span class="line"></span><br><span class="line">$request_length</span><br><span class="line">请求长度（包括请求行，标头和请求正文）（1.3.12，1.2.7）</span><br><span class="line"></span><br><span class="line">$request_method</span><br><span class="line">请求方法，通常是“ GET”或“ POST”</span><br><span class="line"></span><br><span class="line">$request_time</span><br><span class="line">请求以毫秒为单位的处理时间（以秒为单位）（1.3.9、1.2.6）；从客户端读取第一个字节以来经过的时间</span><br><span class="line"></span><br><span class="line">$request_uri</span><br><span class="line">完整的原始请求URI（带有参数）</span><br><span class="line"></span><br><span class="line">$scheme</span><br><span class="line">请求方案，“ http”或“ https”</span><br><span class="line"></span><br><span class="line">$sent_http_name</span><br><span class="line">任意响应头字段；变量名称的最后一部分是字段名称，该字段名称已转换为小写，并用短划线代替了下划线</span><br><span class="line"></span><br><span class="line">$sent_trailer_name</span><br><span class="line">在响应末尾发送的任意字段（1.13.2）；变量名称的最后一部分是字段名称，该字段名称已转换为小写，并用短划线代替了下划线</span><br><span class="line"></span><br><span class="line">$server_addr</span><br><span class="line">接受请求的服务器的地址</span><br><span class="line">计算此变量的值通常需要一个系统调用。为避免系统调用，listen伪指令必须指定地址并使用bind参数。</span><br><span class="line"></span><br><span class="line">$server_name</span><br><span class="line">接受请求的服务器的名称</span><br><span class="line"></span><br><span class="line">$server_port</span><br><span class="line">接受请求的服务器的端口</span><br><span class="line"></span><br><span class="line">$server_protocol</span><br><span class="line">请求协议，通常是“ HTTP/1.0”，“ HTTP/1.1”或“ HTTP / 2.0 ”</span><br><span class="line"></span><br><span class="line">$status</span><br><span class="line">响应状态（1.3.2、1.2.2）</span><br><span class="line"></span><br><span class="line">$tcpinfo_rtt， $tcpinfo_rttvar， $tcpinfo_snd_cwnd， $tcpinfo_rcv_space</span><br><span class="line">有关客户端TCP连接的信息；在支持TCP_INFO套接字选项的 系统上可用</span><br><span class="line"></span><br><span class="line">$time_iso8601</span><br><span class="line">ISO 8601标准格式（1.3.12，1.2.7）的本地时间</span><br><span class="line"></span><br><span class="line">$time_local</span><br><span class="line">通用日志格式的本地时间（1.3.12，1.2.7）</span><br><span class="line"></span><br><span class="line">$uri</span><br><span class="line">请求中的当前URI，已规范化</span><br><span class="line"></span><br><span class="line">$uri在请求处理期间，例如在进行内部重定向或使用索引文件时， 的值可能会更改。</span><br></pre></td></tr></table></figure>
+
+<p>更多变量：<code>https://nginx.org/en/docs/http/ngx_http_core_module.html#var_status</code></p>
+<p>error_log(核心模块):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	error_log file [level];</span><br><span class="line">Default:</span><br><span class="line">error_log logs/error.log error;</span><br><span class="line">Context:	main, http, mail, stream, server, location</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-虚拟站点"><a href="#6-虚拟站点" class="headerlink" title="6.虚拟站点"></a>6.虚拟站点</h2><p>所属模块：ngx_http_core_module（server和location都属于该模块）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	server &#123; ... &#125;</span><br><span class="line">Default:	—</span><br><span class="line">Context:	http</span><br><span class="line"></span><br><span class="line">Syntax:	server_name name ...;</span><br><span class="line">Default:</span><br><span class="line">server_name <span class="string">&quot;&quot;</span>;</span><br><span class="line">Context:	server</span><br><span class="line"></span><br><span class="line">Syntax:	listen address[:port] [default_server] [ssl] [http2 | spdy] [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [<span class="built_in">bind</span>] [ipv6only=on|off] [reuseport] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];</span><br><span class="line">listen port [default_server] [ssl] [http2 | spdy] [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [<span class="built_in">bind</span>] [ipv6only=on|off] [reuseport] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];</span><br><span class="line">listen unix:path [default_server] [ssl] [http2 | spdy] [proxy_protocol] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [<span class="built_in">bind</span>] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];</span><br><span class="line">Default:</span><br><span class="line">listen *:80 | *:8000;</span><br><span class="line">Context:	server</span><br></pre></td></tr></table></figure>
+
+<p>一个server表示一个虚拟主机，一个服务器可能有多个虚拟主机（多个网站），实现虚拟主机的方式有三种：</p>
+<p>基于IP：</p>
+<p>每个server监听不同的IP地址，用server_name来指定（域名和IP都是通过server_name指定）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109366.jpeg" alt="image.png"></p>
+<p>基于域名：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231111658.jpeg" alt="image.png"></p>
+<p>需要注意的是基于域名的虚拟主机首先需要通过DNS能解析到，所以要么是已经购买的域名并且配置解析到该服务器的IP上，要么是本地内部DNS配置以后整个内网可以访问到。需要基于DNS解析。但这里是测试，所以把解析放在 /etc/hosts文件即可（linux在解析主机名时会优先去查看hosts文件是否有解析条目）。域名相较于IP和端口的优点是只需要一个端口和一个ip地址即可用于多个虚拟主机，但需要多个域名以区分访问地址。</p>
+<p>基于端口：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231109353.jpeg" alt="image.png"></p>
+<p>修改listen后的数字即可，默认是80，如果是https的话需要监听443且拥有证书。改为非80（443）端口后再浏览器访问时需主动输入端口号，不然浏览器默认会访问80端口。</p>
+<h2 id="7-location"><a href="#7-location" class="headerlink" title="7. location"></a>7. location</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	location [ = | ~ | ~* | ^~ ] uri &#123; ... &#125;</span><br><span class="line">location @name &#123; ... &#125;</span><br><span class="line">Default:	—</span><br><span class="line">Context:	server, location</span><br></pre></td></tr></table></figure>
+
+<p>location一般放置与server里面，一个server可以有多个location，location是用于匹配访问地址的uri</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">=  精确匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求。</span><br><span class="line">~  为区分大小写匹配(可用正则表达式)</span><br><span class="line">~*  为不区分大小写匹配(可用正则表达式)</span><br><span class="line">^~  如果把这个前缀用于一个常规字符串,那么告诉nginx 如果路径匹配那么不测试正则表达式。</span><br></pre></td></tr></table></figure>
+
+<p>location匹配优先级：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```(location `=` ) &gt; (location `完整路径` ) &gt; (location `^~` 路径) &gt; (location `~`,`~*` 从上向下正则顺序，匹配在最后一条终止) &gt; (location 部分起始路径) &gt; (`/`)</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">location = / &#123;</span><br><span class="line">[ configuration A ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location / &#123;</span><br><span class="line">[ configuration B ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /documents/ &#123;</span><br><span class="line">[ configuration C ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location ^~ /images/ &#123;</span><br><span class="line">[ configuration D ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location ~* \.(gif|jpg|jpeg)$ &#123;</span><br><span class="line">[ configuration E ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">The “/”  匹配 configuration A,</span><br><span class="line">the “/index.html”  匹配 configuration B,</span><br><span class="line">the “/documents/document.html”  匹配 configuration C,</span><br><span class="line">the “/images/1.gif”  匹配 configuration D,</span><br><span class="line">and the “/documents/1.jpg”  匹配 configuration E.</span><br></pre></td></tr></table></figure>
+
+<p>locaiton定义以后还需要将其匹配到linux服务器上对应的文件，就需要用到两个配置参数，root和index</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	root path;</span><br><span class="line">Default:</span><br><span class="line">root html;</span><br><span class="line">Context:	http, server, location, if in location</span><br><span class="line">Module ngx_http_index_module:(INDEX非core模块，而是单独模块)</span><br><span class="line">Syntax:	index file ...;</span><br><span class="line">Default:</span><br><span class="line">index index.html;</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
+
+<p>root是定义其的路径，如root /tmp 放在/的location里面则，当访问路径为根时，会访问到/tmp目录，但是到具体的访问文件时，是由index定义的，一般index定义为index.html或index.htm，如为.php会涉及到fastcgi协议，因为nginx本身只能处理静态html文件。</p>
+<h2 id="8-rewrite"><a href="#8-rewrite" class="headerlink" title="8.rewrite"></a>8.rewrite</h2><p>所属模块：Module ngx_http_rewrite_module</p>
+<p>默认：编译进模块 编译参数：<code>--without-http_rewrite_module</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	rewrite regex replacement [flag];</span><br><span class="line">Default:	—</span><br><span class="line">Context:	server, location, <span class="keyword">if</span></span><br><span class="line"></span><br><span class="line">rewrite的含义：该指令是实现URL重写的指令。</span><br><span class="line">regex的含义：用于匹配URI的正则表达式。</span><br><span class="line">replacement：将regex正则匹配到的内容替换成 replacement。</span><br><span class="line">flag: flag标记。</span><br><span class="line"></span><br><span class="line">flag有如下值：</span><br><span class="line"></span><br><span class="line">last: 本条规则匹配完成后，继续向下匹配新的location URI 规则。(不常用)</span><br><span class="line"><span class="built_in">break</span>: 本条规则匹配完成即终止，不再匹配后面的任何规则(不常用)。</span><br><span class="line">redirect: 返回302临时重定向，浏览器地址会显示跳转新的URL地址。</span><br><span class="line">permanent: 返回301永久重定向。浏览器地址会显示跳转新的URL地址。</span><br></pre></td></tr></table></figure>
+
+<p>例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rewrite ^(/download/.*)/media/(.*)\..*$ $1/mp3/$2.mp3 break;</span><br><span class="line">rewrite ^(/download/.*)/audio/(.*)\..*$ $1/mp3/$2.ra  break;</span><br><span class="line">rewrite ^/(.*) http://www.test.com/$1 permanent;</span><br></pre></td></tr></table></figure>
+
+<p>服务器如需看rewrite日志需要做以下配置：</p>
+<p>1.设置nginx的错误日志级别为notice<br>error_log /var/log/nginx/error.log notice;<br>2.在http模块层，增加一行rewrite_log日志<br>http{<br>…<br>rewrite_log on;<br>…<br>}</p>
+<h3 id="if"><a href="#if" class="headerlink" title="if:"></a>if:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="keyword">if</span> (condition) &#123; ... &#125;</span><br><span class="line">Default:	—</span><br><span class="line">Context:	server, location</span><br></pre></td></tr></table></figure>
+
+<p>指定的<code>condition</code>被评估。如果为true，则执行括号内指定的此模块伪指令，并在伪指令内为请求分配配置 <code>if</code>。<code>if</code>指令中的配置是从先前的配置级别继承的。</p>
+<p>条件可以是以下任意一种：</p>
+<ul>
+<li><p>变量名；如果变量的值为空字符串或“</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>  ”，则为false；否则为false 。</p>
+<blockquote>
+<p>在1.0.1版之前，任何以“ <code>0</code>”开头的字符串都被视为错误值。</p>
+</blockquote>
+</li>
+<li><p>使用“ <code>=</code>”和“ <code>!=</code>”运算符将变量与字符串进行比较；</p>
+</li>
+<li><p>使用“ <code>~</code>”（区分大小写的匹配）和“ <code>~*</code>”（区分大小写的匹配）运算符将变量与正则表达式进行匹配。正则表达式可以包含捕获，这些捕获可用于以后在<code>$1</code>..<code>$9</code>变量中重用。负运算符“ <code>!~</code>”和“ <code>!~*</code>”也可用。如果正则表达式包含“ <code>&#125;</code>”或“ <code>;</code>”字符，则整个表达式应用单引号或双引号引起来。</p>
+</li>
+<li><p>使用“ <code>-f</code>”和“ <code>!-f</code>”运算符检查文件是否存在；</p>
+</li>
+<li><p>使用“ <code>-d</code>”和“ <code>!-d</code>”运算符检查目录是否存在；</p>
+</li>
+<li><p>使用“ <code>-e</code>”和“ <code>!-e</code>”运算符检查文件，目录或符号链接是否存在；</p>
+</li>
+<li><p>使用“ <code>-x</code>”和“ <code>!-x</code>”运算符检查可执行文件。</p>
+</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">#如果UA包含&quot;MSIE&quot;，rewrite请求到/msid/目录下</span><br><span class="line"></span><br><span class="line">if ($http_user_agent ~ MSIE) &#123;</span><br><span class="line"></span><br><span class="line">    rewrite ^(.*)$ /msie/$1 break;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#如果cookie匹配正则，设置变量$id等于正则引用部分</span><br><span class="line"></span><br><span class="line">if ($http_cookie ~* &quot;id=([^;]+)(?:;|$)&quot;) &#123;</span><br><span class="line"></span><br><span class="line">    set $id $1;</span><br><span class="line"></span><br><span class="line"> &#125;  </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#如果提交方法为POST，则返回状态405（Method not allowed）。return不能返回301,302</span><br><span class="line"></span><br><span class="line">if ($request_method = POST) &#123;</span><br><span class="line"></span><br><span class="line">    return 405;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#限速，$slow可以通过 set 指令设置</span><br><span class="line"></span><br><span class="line">if ($slow) &#123;</span><br><span class="line"></span><br><span class="line">    limit_rate 10k;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#如果请求的文件名不存在，则反向代理到localhost 。这里的break也是停止rewrite检查</span><br><span class="line"></span><br><span class="line">if (!-f $request_filename)&#123;</span><br><span class="line"></span><br><span class="line">    break;</span><br><span class="line"></span><br><span class="line">    proxy_pass  http://127.0.0.1;</span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#如果query string中包含&quot;post=140&quot;，永久重定向到example.com</span><br><span class="line"></span><br><span class="line">if ($args ~ post=140)&#123;</span><br><span class="line"></span><br><span class="line">    rewrite ^ http://example.com/ permanent;</span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#防盗链</span><br><span class="line"></span><br><span class="line">location ~* \.(gif|jpg|png|swf|flv)$ &#123;</span><br><span class="line"></span><br><span class="line">    valid_referers none blocked www.jefflei.com www.leizhenfang.com;</span><br><span class="line"></span><br><span class="line">    if ($invalid_referer) &#123;</span><br><span class="line"></span><br><span class="line">        return 404;</span><br><span class="line"></span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>if可使用的全局变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">变量名称</span><br><span class="line"></span><br><span class="line">变量说明</span><br><span class="line"></span><br><span class="line"><span class="variable">$args</span></span><br><span class="line"></span><br><span class="line">这个变量等于请求行中的参数，同<span class="variable">$query_string</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$content_length</span></span><br><span class="line"></span><br><span class="line">请求头中的Content-length字段</span><br><span class="line"></span><br><span class="line"><span class="variable">$content_type</span></span><br><span class="line"></span><br><span class="line">请求头中的Content-Type字段</span><br><span class="line"></span><br><span class="line"><span class="variable">$document_root</span></span><br><span class="line"></span><br><span class="line">当前请求在root指令中指定的值</span><br><span class="line"></span><br><span class="line"><span class="variable">$host</span></span><br><span class="line"></span><br><span class="line">请求主机头字段，否则为服务器名称</span><br><span class="line"></span><br><span class="line"><span class="variable">$http_user_agent</span></span><br><span class="line"></span><br><span class="line">客户端agent信息</span><br><span class="line"></span><br><span class="line"><span class="variable">$http_cookie</span></span><br><span class="line"></span><br><span class="line">客户端cookie信息</span><br><span class="line"></span><br><span class="line"><span class="variable">$limit_rate</span></span><br><span class="line"></span><br><span class="line">这个变量可以限制连接速率</span><br><span class="line"></span><br><span class="line"><span class="variable">$request_method</span></span><br><span class="line"></span><br><span class="line">客户端请求的动作，通常为GET或POST</span><br><span class="line"></span><br><span class="line"><span class="variable">$remote_addr</span></span><br><span class="line"></span><br><span class="line">客户端的IP地址</span><br><span class="line"></span><br><span class="line"><span class="variable">$remote_port</span></span><br><span class="line"></span><br><span class="line">客户端的端口</span><br><span class="line"></span><br><span class="line"><span class="variable">$remote_user</span></span><br><span class="line"></span><br><span class="line">已经经过Auth Basic Module验证的用户名</span><br><span class="line"></span><br><span class="line"><span class="variable">$request_filename</span></span><br><span class="line"></span><br><span class="line">当前请求的文件路径，由root或<span class="built_in">alias</span>指令与URI请求生成</span><br><span class="line"></span><br><span class="line"><span class="variable">$scheme</span></span><br><span class="line"></span><br><span class="line">HTTP方法（如http，https）</span><br><span class="line"></span><br><span class="line"><span class="variable">$server_protocol</span></span><br><span class="line"></span><br><span class="line">请求使用的协议，通常是HTTP/1.0或HTTP/1.1</span><br><span class="line"></span><br><span class="line"><span class="variable">$server_addr</span></span><br><span class="line"></span><br><span class="line">服务器地址，在完成一次系统调用后可以确定这个值</span><br><span class="line"></span><br><span class="line"><span class="variable">$server_name</span></span><br><span class="line"></span><br><span class="line">服务器名称</span><br><span class="line"></span><br><span class="line"><span class="variable">$server_port</span></span><br><span class="line"></span><br><span class="line">请求到达服务器的端口号</span><br><span class="line"></span><br><span class="line"><span class="variable">$request_uri</span></span><br><span class="line"></span><br><span class="line">包含请求参数的原始URI，不包含主机名，如：”/foo/bar.php?arg=baz”</span><br><span class="line"></span><br><span class="line"><span class="variable">$uri</span></span><br><span class="line"></span><br><span class="line">不带请求参数的当前URI，<span class="variable">$uri</span>不包含主机名，如”/foo/bar.html”</span><br><span class="line"></span><br><span class="line"><span class="variable">$document_uri</span></span><br><span class="line"></span><br><span class="line">与<span class="variable">$uri</span>相同</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-proxy模块"><a href="#9-proxy模块" class="headerlink" title="9.proxy模块"></a>9.proxy模块</h2><p>所属模块：ngx_http_proxy_module</p>
+<p>默认：编译进模块 编译参数：<code>--without-http_proxy_module</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">句法：	proxy_pass URL;</span><br><span class="line">默认：	—</span><br><span class="line">内容：	location，<span class="keyword">if</span> <span class="keyword">in</span> location，limit_except</span><br><span class="line"></span><br><span class="line">Syntax:	proxy_set_header field value;</span><br><span class="line">Default:</span><br><span class="line">proxy_set_header Host <span class="variable">$proxy_host</span>;</span><br><span class="line">proxy_set_header Connection close;</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
+
+<h3 id="proxy："><a href="#proxy：" class="headerlink" title="proxy："></a>proxy：</h3><p>proxy_pass和proxy_set_header是proxy模块中最常用到的两个功能</p>
+<p>proxy_pass例子：</p>
+<blockquote>
+<p>proxy_pass http：// localhost：8000 / uri /;</p>
+</blockquote>
+<blockquote>
+<p>proxy_pass http：//unix/tmp/backend.socket/uri/;</p>
+</blockquote>
+<p>一般放在location下面，当location匹配到对应的uri之后，如果下面是proxy_pass而不是root，就会通过nginx去反向代理到proxy_pass指定的地址上面去请求访问。</p>
+<p>反代的地址可以是ip地址，域名，sock文件地址，也可以是upstream指定的名称。</p>
+<p>这个upstream是nginx的另一个模块叫做：ngx_http_upstream_module</p>
+<h3 id="ngx-http-upstream-module"><a href="#ngx-http-upstream-module" class="headerlink" title="ngx_http_upstream_module"></a>ngx_http_upstream_module</h3><p>upstream最重要的功能是定义一组后端服务器，然后proxy_pass可以根据upstream定义好的直接调用，完成以后proxy_pass收到请求会将反向代理到upstream所定义的一组服务器上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	upstream name &#123; ... &#125;</span><br><span class="line">Default:	—</span><br><span class="line">Context:	http</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">    server backend1.example.com       weight=5;</span><br><span class="line">    server backend2.example.com:8080;</span><br><span class="line">    server unix:/tmp/backend3;</span><br><span class="line"></span><br><span class="line">    server backup1.example.com:8080   backup;</span><br><span class="line">    server backup2.example.com:8080   backup;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://backend;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>upstream定义了一组后端服务器后，当然也会有调度方式：</p>
+<p>1.如不进行任何配置，默认的调度方式为轮训调度。</p>
+<p>2.weight:设置后端服务器的权重，权重大的优先访问</p>
+<p>server 192.168.0.15 weight=10;</p>
+<p>3.ip_hash:每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题</p>
+<p>upstream backend {<br>ip_hash;<br>server 192.168.0.14:88;}</p>
+<p>4.fair（第三方）<br>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
+<p>upstream backend {</p>
+<p>fair;</p>
+<p>server 192.168.0.14:88;}</p>
+<p>5.url_hash（第三方）<br>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。</p>
+<p>6.least_conn:</p>
+<p>最少连接数,那个机器连接数少就分发（lc）<br>7.wlc:<br>加权最少连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">server squid1:3128;</span><br><span class="line">server squid2:3128;</span><br><span class="line"><span class="built_in">hash</span> <span class="variable">$request_uri</span>;</span><br><span class="line">hash_method crc32;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#定义负载均衡设备的Ip及设备状态</span></span><br><span class="line">upstream backend&#123;</span><br><span class="line">ip_hash;</span><br><span class="line">server 127.0.0.1:9090 down;</span><br><span class="line">server 127.0.0.1:8080 weight=2;</span><br><span class="line">server 127.0.0.1:6060;</span><br><span class="line">server 127.0.0.1:7070 backup;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>常用参数：down ,backup,fail_timeout=time,max_fails=number,wight,max_conns=number<br>down:<br>当前的server暂时不参与负载均衡<br>backup:<br>预留的备份服务器<br>max_fails:<br>允许请求失败的次数<br>fail_timeout:<br>经过max_fails夫败后,服务暂停时间<br>max_conns:<br>限制最大的接收连接数</p>
+<h3 id="proxy-set-header"><a href="#proxy-set-header" class="headerlink" title="proxy_set_header:"></a>proxy_set_header:</h3><p>这几个的参数的作用是向后端转发的时候添加头信息；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header   Host    <span class="variable">$host</span>:<span class="variable">$server_port</span>;</span><br><span class="line">proxy_set_header   X-Real-IP   <span class="variable">$remote_addr</span>;</span><br><span class="line">proxy_set_header   X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>本文要说明nginx中的Host、X-Real-IP、X-Forwarded-For。</p>
+<p>先看一个配置示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  192.168.1.2;</span><br><span class="line">    error_log   /usr/local/etc/nginx/logs/test.error.log;</span><br><span class="line">    access_log  /usr/local/etc/nginx/logs/test.access.log;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header   X-Real-IP        $remote_addr;</span><br><span class="line">        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header   Host             $http_host;</span><br><span class="line">        proxy_set_header   X-NginX-Proxy    true;</span><br><span class="line">        proxy_set_header   Connection &quot;&quot;;</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        add_header Access-Control-Allow-Origin *;</span><br><span class="line">        proxy_pass  http://127.0.0.1:8889;</span><br><span class="line">    &#125;  </span><br><span class="line">    location /app &#123;</span><br><span class="line">        proxy_set_header   X-Real-IP        $remote_addr;</span><br><span class="line">        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header   Host             $proxy_host;</span><br><span class="line">        proxy_set_header   X-NginX-Proxy    true;</span><br><span class="line">        proxy_set_header   Connection &quot;&quot;;</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        proxy_pass http://192.168.1.3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端地址（请求服务的地址）：192.168.1.1</p>
+<p>nignx服务器地址：192.168.1.2</p>
+<p>后端服务器地址：192.168.1.3</p>
+<p>首先说明proxy_set_header是用来设置请求头的，设置了请求头后，后端服务器就可以获取到这些变量值。</p>
+<p><strong>一、X-Real-IP</strong></p>
+<p>是指客户端的真实IP，如果设置了$remote_addr这个值，后端服务器就能获取到客户端的真实IP，也就是此例中的192.168.1.1</p>
+<p><strong>二、Host</strong></p>
+<p>host的值设置为$proxy<em>host，</em>是指proxy_pass中设置的host值，也就是192.168.1.3，也就是服务器的IP地址。</p>
+<p>若客户端发过来的请求header中有HOST这个字段，$http_host和$host表示的就是原始请求host，比如请求的时候HOST的值是<a href="https://link.zhihu.com/?target=http://test.com">http://test.com</a>，那么反代后还是<a href="https://link.zhihu.com/?target=http://test.com">http://test.com</a>。</p>
+<p>若客户端发过来的请求header中没有HOST这个字段，$host表示nginx代理服务器的地址，也就是此例中的192.168.1.2。</p>
+<p>$http<em>host不是一个固定的变量，他其实是$http</em>_HEADER通配后的结果，这里的HEADER是一个通配符，通配的是请求头里的header属性，例如<code>$http_content_type</code>表示请求头里<code>content-type</code>属性的值，同理，<code>$http_host</code>指的就是请求头里的<code>host</code>属性。</p>
+<p><strong>三、X-Forwarded-For</strong></p>
+<p>这个变量的值有$proxy_add_x_forwarded_for和$remote_addr，在只有一个代理服务器的转发的情况下，两者的效果貌似差不多，都可以真实的显示出客户端原始ip。</p>
+<p>举例说明，用户A的IP是192.168.1.1，请求一个经过两次nginx转发的应用，在第一台nginx中（192.168.1.2），配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;</span><br></pre></td></tr></table></figure>
+
+<p>现在$proxy_add_x_forwarded_for变量的”X-Forwarded-For”部分是空的，所以只有$remote_addr，而$remote_addr的值是用户的ip，那么X-Forwarded-For变量的值就是用户的ip：192.168.1.1。</p>
+<p>到第二台nginx，配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;</span><br></pre></td></tr></table></figure>
+
+<p>现在的$proxy_add_x_forwarded_for变量，X-Forwarded-For部分包含的是用户的真实ip，$remote_addr部分的值是上一台nginx的ip地址，那么X-Forwarded-For的值就变成了”用户的真实ip，第一台nginx的ip”，也就是“192.168.1.1， 192.168.1.2”</p>
+<p>所以还是建议X-Forwarded-For的值设置成$proxy_add_x_forwarded_for。</p>
+</blockquote>
+<h3 id="nginx正向代理："><a href="#nginx正向代理：" class="headerlink" title="nginx正向代理："></a>nginx正向代理：</h3><p>示例配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">resolver                       223.5.5.5;</span><br><span class="line">location / &#123;</span><br><span class="line">proxy_pass http://$http_host$request_uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中重要的配置主要是：proxy_pass和 resolver</p>
+<p>proxy指定其正向代理所转发的地址 $http_host为其url</p>
+<p>$request_uri为其请求的uri</p>
+<p>resolver后面跟的是其转发时使用的dns地址，如没指定，nginx无法正常解析dns，则无法访问域名网站。</p>
+<h2 id="10-四层负载均衡"><a href="#10-四层负载均衡" class="headerlink" title="10.四层负载均衡"></a>10.四层负载均衡</h2><p>proxy模块默认只支持七层代理，也就是基于http协议代理，如果想要进行四层转发的话（也就是对其他协议进行转发），可以用到stream模块：</p>
+<p>所属模块：ngx_stream_core_module</p>
+<p>默认：该<code>ngx_stream_core_module</code>模块自1.9.0版开始可用。默认情况下未构建此模块，应使用<code>--with-stream</code> 配置参数启用它 。使用官方源默认会编译该模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	stream &#123; ... &#125;</span><br><span class="line">Default:	—</span><br><span class="line">Context:	main</span><br></pre></td></tr></table></figure>
+
+<p>在配置文件里面，其模块位置于http同级，下面是示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">worker_processes auto;</span><br><span class="line"></span><br><span class="line">error_log /var/log/nginx/error.log info;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stream &#123;</span><br><span class="line">    upstream backend &#123;</span><br><span class="line">        hash $remote_addr consistent;</span><br><span class="line"></span><br><span class="line">        server backend1.example.com:12345 weight=5;</span><br><span class="line">        server 127.0.0.1:12345            max_fails=3 fail_timeout=30s;</span><br><span class="line">        server unix:/tmp/backend3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    upstream dns &#123;</span><br><span class="line">       server 192.168.0.1:53535;</span><br><span class="line">       server dns.example.com:53;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen 12345;</span><br><span class="line">        proxy_connect_timeout 1s;</span><br><span class="line">        proxy_timeout 3s;</span><br><span class="line">        proxy_pass backend;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen 127.0.0.1:53 udp reuseport;</span><br><span class="line">        proxy_timeout 20s;</span><br><span class="line">        proxy_pass dns;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen [::1]:12345;</span><br><span class="line">        proxy_pass unix:/tmp/stream.socket;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里于七层代理在配置文件上最大的区别就是http换成了stream</p>
+<p>下面是我在本地做的一个实例：</p>
+<p>效果为将一台服务器的ssh协议转发到后端两台服务器</p>
+<p>调度器：10.10.10.105</p>
+<p>后端服务器：10.10.10.187 ,10.10.10.243</p>
+<p>调度服务器nginx 配置添加如下</p>
+<blockquote>
+<p>stream {<br>upstream backend {<br>server 10.10.10.187:22;<br>server 10.10.10.243:22;<br>}<br>server {<br>listen 88 ;<br>proxy_pass backend;<br>}<br>}</p>
+</blockquote>
+<p>三台服务器都是虚拟机，添加好配置以后使用xshell进行测试</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231111912.jpeg" alt="image.png"></p>
+<p>在弹出的对话框输入账号密码，然后测试成功！</p>
+<p><strong>需要注意的是经过测试，stream模块是转发请求而非代理，严格意义上来说是四层转发，其功能于lvs无异。</strong></p>
+<p>11.HTTPS</p>
+<p>https在http中加入TLS/SSL层，http为明文传输，而https为密文传输，也更为安全。https默认监听端口443，需要证书进行认证，一般证书都有第三方机构或CA颁发。</p>
+<p>所属模块：http_ssl_module</p>
+<p>默认：不编译进内核 编译参数：–with-http_ssl_module</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">syntax: ssl on | off;</span><br><span class="line">Default: ssl off;</span><br><span class="line">context: http, server</span><br><span class="line"></span><br><span class="line">syntax : ssl_certificate file;</span><br><span class="line">Default: -</span><br><span class="line">context: http, server</span><br><span class="line"></span><br><span class="line">syntax: ssl_certificate_key file;</span><br><span class="line">Default: -</span><br><span class="line">context: http, server</span><br></pre></td></tr></table></figure>
+
+<p>nginx.conf配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       443 ssl;</span><br><span class="line">        server_name  www.oldboy.com;</span><br><span class="line"></span><br><span class="line">        ssl_certificate      ssl_key/server.crt;</span><br><span class="line">        ssl_certificate_key  ssl_key/server.key;</span><br><span class="line"></span><br><span class="line">        ssl_session_cache    shared:SSL:1m;</span><br><span class="line">        ssl_session_timeout  5m;</span><br><span class="line">    <span class="comment">#    ssl_ciphers  HIGH:!aNULL:!MD5;</span></span><br><span class="line">    <span class="comment">#    ssl_prefer_server_ciphers  on;</span></span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   /code/https;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中ssl_certificate为证书文件，ssl_certificate_key为秘钥文件。</p>
+<p>在公司内部使用时，也可使用私有证书（公网中无法验证证书）。</p>
+<p>私有证书颁发步骤：</p>
+<p>1.生成key秘钥<br>2.生成证书签名请求文件 csr<br>3.生成证书签名文件 ca</p>
+<p>要求：<br>1.openssl大于1.0.2<br>[root@localhost ~]# openssl version<br>OpenSSL 1.1.1g FIPS 21 Apr 2020</p>
+<p>2.nginx必须有ssl模块<br>nginx -V</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">生成RSA密钥(过程需要设置一个密码,记住这个密码)</span><br><span class="line">openssl genrsa -des3 -out domain.key 1024</span><br><span class="line"></span><br><span class="line">拷贝一个不需要输入密码的密钥文件</span><br><span class="line">openssl rsa -<span class="keyword">in</span> domain.key -out domain_nopass.key</span><br><span class="line">生成一个证书请求</span><br><span class="line">openssl req -new -key domain.key -out domain.csr</span><br><span class="line">这里会提示输入国家,地区组织,email等信息.最重要的一个是<span class="string">&quot;common name&quot;</span>,需要与网站域名相同.</span><br><span class="line"></span><br><span class="line">Enter pass phrase <span class="keyword">for</span> domain.key:              <span class="comment"># 之前设置的密码</span></span><br><span class="line">-----</span><br><span class="line">Country Name (2 letter code) [XX]:CN            <span class="comment"># 国家</span></span><br><span class="line">State or Province Name (full name) []:Jilin         <span class="comment"># 地区或省份</span></span><br><span class="line">Locality Name (eg, city) [Default City]:Changchun      <span class="comment"># 地区局部名</span></span><br><span class="line">Organization Name (eg, company) [Default Company Ltd]:Python <span class="comment"># 机构名称</span></span><br><span class="line">Organizational Unit Name (eg, section) []:Python      <span class="comment"># 组织单位名称</span></span><br><span class="line">Common Name (eg, your name or your server<span class="string">&#x27;s hostname) []:domain.com # 网站域名</span></span><br><span class="line"><span class="string">Email Address []:123@domain.com               # 邮箱</span></span><br><span class="line"><span class="string">A challenge password []:                  # 私钥保护密码,可直接回车</span></span><br><span class="line"><span class="string">An optional company name []:                # 一个可选公司名称,可直接回车</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">输入完这些就会生成一个domain.csr文件,提交给ssl提供商的时候就是这个csr文件.当然这里并没有向任何证书提供商申请,而是自己签发证书.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用上面的密钥和CSR对证书签名</span></span><br><span class="line"><span class="string">openssl x509 -req -days 365 -in domain.csr -signkey domain.key -out domain.crt</span></span><br><span class="line"><span class="string">最后将crt文件与key文件放入nginx配置文件中去</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/nginx_hexo/" data-id="ckxjra7p9001hr0v12n159a42" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/23/lvs_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          lvs
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/23/rsync_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">rsync</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

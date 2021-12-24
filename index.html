@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Linux用户行为日志审计_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="配置调试"><a href="#配置调试" class="headerlink" title="配置调试"></a>配置调试</h2><p>1.创建用户审计文件存放目录和审计日志文件 ；<br>mkdir -p /var/log/usermonitor/</p>
+<p>2.创建用户审计日志文件；<br>echo usermonitor &gt;/var/log/usermonitor/usermonitor.log</p>
+<p>3.将日志文件所有者赋予一个最低权限的用户；<br>chown nobody:nobody /var/log/usermonitor/usermonitor.log</p>
+<p>4.给该日志文件赋予所有人的写权限；<br>chmod 002 /var/log/usermonitor/usermonitor.log</p>
+<p>5.设置文件权限,使所有用户对该文件只有追加权限 ；<br>chattr +a /var/log/usermonitor/usermonitor.log<br>6.编辑/etc/profile文件，添加如下任意脚本命令；</p>
+<h3 id="代码1："><a href="#代码1：" class="headerlink" title="代码1："></a>代码1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HISTORY_FILE=/var/log/usermonitor/usermonitor.log</span><br><span class="line">export PROMPT_COMMAND=&#x27;&#123; date &quot;+%y-%m-%d %T ##### $(who am i |awk &quot;&#123;print \$1\&quot; \&quot;\$2\&quot; \&quot;\$5&#125;&quot;)  #### $(id|awk &quot;&#123;print \$1&#125;&quot;) #### $(history 1 | &#123; read x cmd; echo &quot;$cmd&quot;; &#125;)&quot;; &#125; &gt;&gt;$HISTORY_FILE&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码2："><a href="#代码2：" class="headerlink" title="代码2："></a>代码2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HISTTIMEFORMAT=&quot;%Y%m%d-%H%M%S: &quot;</span><br><span class="line">export HISTTIMEFORMAT</span><br><span class="line"></span><br><span class="line">export HISTORY_FILE=/var/log/usermonitor/usermonitor.log</span><br><span class="line">export PROMPT_COMMAND=&#x27;&#123; command=$(history 1 | &#123; read x y; echo $y; &#125;); logger -p local1.notice -t bash -i &quot;user=$USER,ppid=$PPID,from=$SSH_CLIENT,pwd=$PWD,command:$command&quot;; &#125; &gt;&gt;$HISTORY_FILE&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码3："><a href="#代码3：" class="headerlink" title="代码3："></a>代码3：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HISTORY_FILE=/var/log/usermonitor/usermonitor.log</span><br><span class="line">PROMPT_COMMAND=&#x27;&#123; date &quot;+%Y-%m-%d %T ##### USER:$USER IP:$SSH_CLIENT PS:$SSH_TTY ppid=$PPID pwd=$PWD  #### $(history 1 | &#123; read x cmd; echo &quot;$cmd&quot;; &#125;)&quot;;&#125; &gt;&gt;$HISTORY_FILE&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使配置生效"><a href="#使配置生效" class="headerlink" title="使配置生效"></a>使配置生效</h3><p>source /etc/profile</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/" data-id="ckxjra7oo0001r0v1ani1edlo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-HTTP_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/HTTP_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/HTTP_hexo/">HTTP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、http访问过程：</p>
+<p>1.客户端(用户)通过浏览器输入网站的url</p>
+<p>2.客户端通过dns解析到网站的ip地址。</p>
+<p>3.客户端向服务端发起tcp连接（三次握手）</p>
+<p>4.客户端发起http请求</p>
+<p>5.服务端响应http请求</p>
+<p>6.客户端发起断开tcp连接（四次挥手）</p>
+<p>二、DNS解析过程：</p>
+<ol>
+<li>在浏览器中输入<a target="_blank" rel="noopener" href="http://www.qq.com域名,操作系统会先检查自己本地的hosts文件是否有这个网址映射关系,如果有,就先调用这个ip地址映射,完成域名解析./">www.qq.com域名，操作系统会先检查自己本地的hosts文件是否有这个网址映射关系，如果有，就先调用这个IP地址映射，完成域名解析。</a></li>
+<li>如果hosts里没有这个域名的映射，则查找本地DNS解析器缓存，是否有这个网址映射关系，如果有，直接返回，完成域名解析。</li>
+<li>如果hosts与本地DNS解析器缓存都没有相应的网址映射关系，首先会找TCP/ip参数中设置的首选DNS服务器，在此我们叫它本地DNS服务器，此服务器收到查询时，如果要查询的域名，包含在本地配置区域资源中，则返回解析结果给客户机，完成域名解析，此解析具有权威性。</li>
+<li>如果要查询的域名，不由本地DNS服务器区域解析，但该服务器已缓存了此网址映射关系，则调用这个IP地址映射，完成域名解析，此解析不具有权威性。</li>
+<li>如果本地DNS服务器本地区域文件与缓存解析都失效，则根据本地DNS服务器的设置（是否设置转发器）进行查询，如果未用转发模式，本地DNS就把请求发至13台根DNS，根DNS服务器收到请求后会判断这个域名(.com)是谁来授权管理，并会返回一个负责该顶级域名服务器的一个IP。本地DNS服务器收到IP信息后，将会联系负责.com域的这台服务器。这台负责.com域的服务器收到请求后，如果自己无法解析，它就会找一个管理.com域的下一级DNS服务器地址(qq.com)给本地DNS服务器。当本地DNS服务器收到这个地址后，就会找qq.com域服务器，重复上面的动作，进行查询，直至找到<a target="_blank" rel="noopener" href="http://www.qq.com主机./">www.qq.com主机。</a></li>
+<li>如果用的是转发模式，此DNS服务器就会把请求转发至上一级DNS服务器，由上一级服务器进行解析，上一级服务器如果不能解析，或找根DNS或把转请求转至上上级，以此循环。不管是本地DNS服务器用是是转发，还是根提示，最后都是把结果返回给本地DNS服务器，由此DNS服务器再返回给客户机。<br> 从客户端到本地DNS服务器是属于递归查询，而DNS服务器之间就是的交互查询就是迭代查询。</li>
+</ol>
+<p>递归于迭代：</p>
+<p><strong>（1）递归查询</strong><br>递归查询是一种DNS 服务器的查询模式，在该模式下DNS 服务器接收到客户机请求，必须使用一个准确的查询结果回复客户机。如果DNS 服务器本地没有存储查询DNS 信息，那么该服务器会询问其他服务器，并将返回的查询结果提交给客户机。<br><strong>（2）迭代查询</strong><br>DNS 服务器另外一种查询方式为迭代查询，DNS 服务器会向客户机提供其他能够解析查询请求的DNS 服务器地址，当客户机发送查询请求时，DNS 服务器并不直接回复查询结果，而是告诉客户机另一台DNS 服务器地址，客户机再向这台DNS 服务器提交请求，依次循环直到返回查询的结果</p>
+<p>三、tcp连接</p>
+<p>三次握手</p>
+<p>客户端 -》请求包连接syn=1 seq=x 服务端<br>服务端 -》响应客户端syn=1 ack=x+1 seq=y 客户端<br>客户端 —》 建立连接 ack=y+1 seq=x+1 服务端</p>
+<p>三次握手是指建立一个 TCP 连接时需要客户端和服务器端总共发送三个包以确认连接的建立。在socket编程中，这一过程由客户端执行connect来触发。</p>
+<p>第一次握手：客户端将SYN请求包（位码为SYN=1、随机值seq=x）发送给服务器端。客户端进入SYN_SENT状态，等待服务器端确认。</p>
+<p>第二次握手：服务器端收到SYN请求包后由位码SYN=1知道客户端请求建立连接，并将SYN请求包(SYN=1)+ACK确认包（位码ACK=1，响应值ack=x+1，随机值seq=y）发送给客户端以确认连接请求。服务器端进入SYN_RCVD状态。</p>
+<p>第三次握手：客户端收到确认后检查确认包（ack是否为x+1，ACK是否为1），如果正确则将ACK确认包(位码ACK=1,响应值ack=y+1)发送给服务器端。服务器端检查确认，如果正确则连接建立成功。客户端和服务器端进入ESTABLISHED状态，完成三次握手，随后客户端与服务器端之间可以开始传输数据了。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231043697.jpeg" alt="image.png"></p>
+<p>四次挥手</p>
+<p>客户端 -》断开请求 fin=1 seq=x -》服务端<br>服务端 -&gt; 响应断开 fin=1 ack=x+1 seq=y -&gt;客户端<br>服务端 -》断开连接 fin=1 ack=x+1 seq=z -&gt;客户端<br>客户端 -》确认断开 fin=1 ack=z+1 seq=n -&gt; 服务端</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231043280.jpeg" alt="image.png"></p>
+<p><strong>第一次挥手</strong></p>
+<p>TCP发送一个FIN(结束)，用来关闭客户到服务端的连接。</p>
+<p>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），</p>
+<p>此时，客户端进入FIN-WAIT-1（终止等待1）状态。 TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。</p>
+<p><strong>第二次</strong>挥手</p>
+<p>服务端收到这个FIN，他发回一个ACK(确认)，确认收到序号为收到序号+1，和SYN一样，一个FIN将占用一个序号。</p>
+<p>服务器收到连接释放报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器</p>
+<p>通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个</p>
+<p>状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。</p>
+<p>客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。</p>
+<p><strong>第三次</strong>挥手</p>
+<p>服务端发送一个FIN(结束)到客户端，服务端关闭客户端的连接。</p>
+<p>服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，</p>
+<p>此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</p>
+<p><strong>第四次</strong>挥手</p>
+<p>客户端发送ACK(确认)报文确认，并将确认的序号+1，这样关闭完成。</p>
+<p>客户端收到服务器的连接释放报文后，必须发出确认，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时</p>
+<p>TCP连接还没有释放，必须经过2**MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。</p>
+<p>用户访问网站整体流程：<br>1.客户端发起http请求，请求会先抵达前端的防火墙<br>2.防火墙识别用户身份，通过内部交换机将正常的请求通过tcp连接负载均衡，传递用户的http请求<br>3.负载接收到请求，会根据请求的内容进行下发任务，通过tcp连接web服务器，发送用户的http请求<br>4.web接收到用户的http请求后，会根据用户请求的内容进行解析，解析分为如下：<br>静态请求:由web服务器向nfs建立tcp连接，获取对应的图片，最后返回给负衡（负载均衡-&gt;防火墙-&gt;用户)<br>动态请求:有web向后端的动态程序建立Tcp连接，将用户的动态http请求传递态程序-&gt;由动态程序进行解析<br>5.动态程序在解析的过程中，如果碰到查询数据库的请求，则优先和缓存建立tcp接，然后缓存服务发起http的查询<br>6.如果缓存没有对应的数据，动态程序再次向数据库建立tcp的连接，然后发起查作。<br>7.由数据库返回-&gt;动态程序-&gt;缓存-&gt;web服务-&gt;负载均衡-&gt;防火墙-&gt;用户。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/HTTP_hexo/" data-id="ckxjra7os0004r0v14rfm2jv9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Zabbix_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/Zabbix_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Zabbix简介："><a href="#Zabbix简介：" class="headerlink" title="Zabbix简介："></a>Zabbix简介：</h1><p>Zabbix是一款监控软件，用于监控linux服务器，是当下最热门的服务器监控解决方案。其监控方式可分为：客户端，SNMP,JMX(JAVA虚拟机监控)，IPMI(服务器硬件监控)，一般情况下客户端监控比较常见，也就是在需要监控的主机上安装zabbix_agent程序，服务器端定时去向客户端拉取数据。当然除了服务器拉取客户端的数据以外，客户端也可以定时主动把数据推向服务器，这样在监控主机过多时可以缓解服务器端的压力，这种模式被称为主动模式。</p>
+<p>Zabbix在使用C/S架构进行监控时，此时需要用到的组件有：zabbix-server,zabbix-agent,zabbix-gui(提供图形管理页面)。由于zabbix-server和gui需要用到数据库，而gui管理页面本身基于php。所以在部署时还需要安装mysql（or other sql）和php-fpm。而snmp主要用于无法安装agent端的设备，例如路由器，交换机等，但因其snmp是TCP/IP二层协议，一般都支持snmp，便可用这种方式监控。</p>
+<h1 id="zabbix安装："><a href="#zabbix安装：" class="headerlink" title="zabbix安装："></a>zabbix安装：</h1><h2 id="zabbix依赖："><a href="#zabbix依赖：" class="headerlink" title="zabbix依赖："></a>zabbix依赖：</h2><p>web服务器+php+数据库:</p>
+<p>nginx(apache)+php+mysql(other sql)</p>
+<p>zabbix分为服务器端，客户端，gui（web端），如果监控的主机较多，还会用到proxy端（分布式监控）</p>
+<p>一般安装分为两种方式源码和rpm，还有一种是docker</p>
+<h2 id="源码安装："><a href="#源码安装：" class="headerlink" title="源码安装："></a>源码安装：</h2><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/download_sources">https://www.zabbix.com/download_sources</a> 下载源码包</p>
+<p>tar -zxvf zabbix-5.2.0.tar.gz</p>
+<p>创建用户帐号：</p>
+<p>groupadd –system zabbix</p>
+<p>useradd –system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c “Zabbix Monitoring System” zabbix</p>
+<p>创建家目录</p>
+<p>mkdir -m u=rwx,g=rwx,o= -p /usr/lib/zabbix</p>
+<p>chown zabbix:zabbix /usr/lib/zabbix</p>
+<p>安装：</p>
+<p>依赖安装：</p>
+<p>yum -y install curl-devel libevent-devel net-snmp-devel mysql-devel</p>
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>要查看所有受支持的配置选项，请在提取的Zabbix源目录中运行：</p>
+<p>./configure –help</p>
+<p>要为Zabbix服务器和代理配置源，您可以运行以下命令：</p>
+<p>./configure –enable-server –enable-agent –with-mysql –enable-ipv6 –with-net-snmp –with-libcurl –with-libxml2</p>
+<p>要为Zabbix服务器（使用PostgreSQL等）配置源，可以运行：</p>
+<p>./configure –enable-server –with-postgresql –with-net-snmp</p>
+<p>要配置Zabbix代理的源（使用SQLite等），可以运行：</p>
+<p>./configure –prefix=/usr –enable-proxy –with-net-snmp –with-sqlite3 –with-ssh2</p>
+<p>要为Zabbix代理配置源，可以运行：</p>
+<p>./configure –enable-agent</p>
+<p>或者，对于Zabbix代理2：</p>
+<p>./configure –enable-agent2</p>
+<p>编译Zabbix代理2需要Go版本1.13或更高版本。有关安装说明，请参阅golang.org。</p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/manual/installation/install">https://www.zabbix.com/documentation/current/manual/installation/install</a></p>
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p>我这里agent和server都在一台服务器，就使用参数安装：</p>
+<p>./configure –enable-server –enable-agent –with-mysql –enable-ipv6 –with-net-snmp –with-libcurl –with-libxml2 –prefix=/usr/local/zabbix</p>
+<p>导入数据库</p>
+<p>#先安装好mysql</p>
+<p>shell&gt; mysql -uroot -p</p>
+<p>mysql&gt; create database zabbix character set utf8 collate utf8_bin;</p>
+<p>mysql&gt; create user ‘zabbix‘@’localhost’ identified by ‘’;</p>
+<p>mysql&gt; grant all privileges on zabbix.* to ‘zabbix‘@’localhost’;</p>
+<p>mysql&gt; quit;</p>
+<p>shell&gt; cd database/mysql</p>
+<p>shell&gt; mysql -uzabbix -p zabbix &lt; schema.sql</p>
+<p>stop here if you are creating database for Zabbix proxy</p>
+<p>shell&gt; mysql -uzabbix -p zabbix &lt; images.sql</p>
+<p>shell&gt; mysql -uzabbix -p zabbix &lt; data.sql</p>
+<p>这几个文件在源码包的database/mysql里面，路径应为</p>
+<p>zabbix-5.2.5/database/mysql</p>
+<p>非mysql请参考官方文档:<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/manual/appendix/install/db_scripts">https://www.zabbix.com/documentation/current/manual/appendix/install/db_scripts</a></p>
+<p>导入好数据库以后此时可以将zabbix配置文件指定到数据库就可以启动了</p>
+<p>zabbix_agent.conf:</p>
+<p>一般agent只用指定server和serveractive即可</p>
+<p>但是如果server和agent位于同一服务器也不用设置，应其默认为127.0.0.1</p>
+<p>（这里的serveractive是zabbix——agent主动模式的服务器地址）</p>
+<p>zabbix_server.conf:</p>
+<p>DBHost=192.168.34.136</p>
+<p>DBName=zabbixnew</p>
+<p>DBUser=root</p>
+<p>DBPassword=admin</p>
+<p>配置完就可以启动zabbix_agent和zabbix_server了</p>
+<p>./sbin/zabbix_agentd</p>
+<p>./sbin/zabbix_server</p>
+<p>如启动有问题可以看日志，默认编译安装应在/tmp/zabbix_agentd(server).conf</p>
+<p>也可以将zabbix写入systemd配置文件用systemctl启动</p>
+<p>/usr/lib/systemd/system/zabbix-server.service</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line"></span><br><span class="line">Description=Zabbix Server</span><br><span class="line"></span><br><span class="line">After=syslog.target</span><br><span class="line"></span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">After=mysql.service</span><br><span class="line"></span><br><span class="line">After=mysqld.service</span><br><span class="line"></span><br><span class="line">After=mariadb.service</span><br><span class="line"></span><br><span class="line">After=postgresql.service</span><br><span class="line"></span><br><span class="line">After=pgbouncer.service</span><br><span class="line"></span><br><span class="line">After=postgresql-9.4.service</span><br><span class="line"></span><br><span class="line">After=postgresql-9.5.service</span><br><span class="line"></span><br><span class="line">After=postgresql-9.6.service</span><br><span class="line"></span><br><span class="line">After=postgresql-10.service</span><br><span class="line"></span><br><span class="line">After=postgresql-11.service</span><br><span class="line"></span><br><span class="line">After=postgresql-12.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"></span><br><span class="line">Environment=&quot;CONFFILE=/etc/zabbix/zabbix_server.conf&quot;</span><br><span class="line"></span><br><span class="line">EnvironmentFile=-/etc/sysconfig/zabbix-server</span><br><span class="line"></span><br><span class="line">Type=forking</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line"></span><br><span class="line">PIDFile=/run/zabbix/zabbix_server.pid</span><br><span class="line"></span><br><span class="line">KillMode=control-group</span><br><span class="line"></span><br><span class="line">ExecStart=/usr/sbin/zabbix_server -c $CONFFILE</span><br><span class="line"></span><br><span class="line">ExecStop=/bin/kill -SIGTERM $MAINPID</span><br><span class="line"></span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">TimeoutSec=0</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line"></span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line">/usr/lib/systemd/system/zabbix-agent.service</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line"></span><br><span class="line">Description=Zabbix Agent</span><br><span class="line"></span><br><span class="line">After=syslog.target</span><br><span class="line"></span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"></span><br><span class="line">Environment=&quot;CONFFILE=/etc/zabbix/zabbix_agentd.conf&quot;</span><br><span class="line"></span><br><span class="line">EnvironmentFile=-/etc/sysconfig/zabbix-agent</span><br><span class="line"></span><br><span class="line">Type=forking</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line"></span><br><span class="line">PIDFile=/run/zabbix/zabbix_agentd.pid</span><br><span class="line"></span><br><span class="line">KillMode=control-group</span><br><span class="line"></span><br><span class="line">ExecStart=/usr/sbin/zabbix_agentd -c $CONFFILE</span><br><span class="line"></span><br><span class="line">ExecStop=/bin/kill -SIGTERM $MAINPID</span><br><span class="line"></span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">User=zabbix</span><br><span class="line"></span><br><span class="line">Group=zabbix</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line"></span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>zabbix-agent和server启动完后还差一个必要的组件，zabbix-gui，也就是zabbix的管理图形界面</p>
+<p>因是基于php编写的，所以这里还需要搭建一个nginx(apache)+php-fpm</p>
+<p>yum -y install nginx php-fpm</p>
+<p>其前端文件位于编译安装包根目录下的ui路径下面</p>
+<p>nginx:conf.d/zabbix.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">upstream php-fpm &#123;</span><br><span class="line">        server unix:/run/php-fpm/www.sock;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">        listen          81;</span><br><span class="line">        server_name     localhost;</span><br><span class="line"></span><br><span class="line">        root    /usr/local/zabbix/ui;</span><br><span class="line"></span><br><span class="line">        index   index.php;</span><br><span class="line"></span><br><span class="line">        location = /favicon.ico &#123;</span><br><span class="line">                log_not_found   off;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                try_files       $uri $uri/ =404;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location /assets &#123;</span><br><span class="line">                access_log      off;</span><br><span class="line">                expires         10d;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ /\.ht &#123;</span><br><span class="line">                deny            all;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ /(api\/|conf[^\.]|include|locale) &#123;</span><br><span class="line">                deny            all;</span><br><span class="line">                return          404;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ [^/]\.php(/|$) &#123;</span><br><span class="line">                fastcgi_pass    unix:/run/php-fpm/zabbix.sock;</span><br><span class="line">                fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">                fastcgi_index   index.php;</span><br><span class="line"></span><br><span class="line">                fastcgi_param   DOCUMENT_ROOT   /usr/local/zabbix/ui;</span><br><span class="line">                fastcgi_param   SCRIPT_FILENAME /usr/local/zabbix/ui$fastcgi_script_name;</span><br><span class="line">                fastcgi_param   PATH_TRANSLATED /usr/local/zabbix/ui$fastcgi_script_name;</span><br><span class="line"></span><br><span class="line">                include fastcgi_params;</span><br><span class="line">                fastcgi_param   QUERY_STRING    $query_string;</span><br><span class="line">                fastcgi_param   REQUEST_METHOD  $request_method;</span><br><span class="line">                fastcgi_param   CONTENT_TYPE    $content_type;</span><br><span class="line">                fastcgi_param   CONTENT_LENGTH  $content_length;</span><br><span class="line"></span><br><span class="line">                fastcgi_intercept_errors        on;</span><br><span class="line">                fastcgi_ignore_client_abort     off;</span><br><span class="line">                fastcgi_connect_timeout         60;</span><br><span class="line">                fastcgi_send_timeout            180;</span><br><span class="line">                fastcgi_read_timeout            180;</span><br><span class="line">                fastcgi_buffer_size             128k;</span><br><span class="line">                fastcgi_buffers                 4 256k;</span><br><span class="line">                fastcgi_busy_buffers_size       256k;</span><br><span class="line">                fastcgi_temp_file_write_size    256k;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处官方提供的配置文件在匹配到.php时是跳转到</p>
+<p>unix:/run/php-fpm/zabbix.sock;</p>
+<p>说明此处php-fpm应将其sock文件放置于此，</p>
+<p>/etc/php-fpm.d/zabbix.conf:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">[zabbix]</span><br><span class="line"></span><br><span class="line">user = apache</span><br><span class="line"></span><br><span class="line">group = apache</span><br><span class="line"></span><br><span class="line">listen = /run/php-fpm/zabbix.sock</span><br><span class="line"></span><br><span class="line">listen.acl_users = apache,nginx</span><br><span class="line"></span><br><span class="line">listen.allowed_clients = 127.0.0.1</span><br><span class="line"></span><br><span class="line">pm = dynamic</span><br><span class="line"></span><br><span class="line">pm.max_children = 50</span><br><span class="line"></span><br><span class="line">pm.start_servers = 5</span><br><span class="line"></span><br><span class="line">pm.min_spare_servers = 5</span><br><span class="line"></span><br><span class="line">pm.max_spare_servers = 35</span><br><span class="line"></span><br><span class="line">php_value[session.save_handler] = files</span><br><span class="line"></span><br><span class="line">php_value[session.save_path]    = /var/lib/php/session</span><br><span class="line"></span><br><span class="line">php_value[max_execution_time] = 300</span><br><span class="line"></span><br><span class="line">php_value[memory_limit] = 128M</span><br><span class="line"></span><br><span class="line">php_value[post_max_size] = 16M</span><br><span class="line"></span><br><span class="line">php_value[upload_max_filesize] = 2M</span><br><span class="line"></span><br><span class="line">php_value[max_input_time] = 300</span><br><span class="line"></span><br><span class="line">php_value[max_input_vars] = 10000</span><br><span class="line"></span><br><span class="line">php_value[date.timezone] = Asia/Shanghai</span><br></pre></td></tr></table></figure>
+
+<p>配置完启动即可</p>
+<p>systemctl start nginx</p>
+<p>systemctl start php-fpm</p>
+<h2 id="Yum安装："><a href="#Yum安装：" class="headerlink" title="Yum安装："></a>Yum安装：</h2><p>zabbix安装</p>
+<p>rpm -Uvh <a target="_blank" rel="noopener" href="https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm">https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm</a></p>
+<p>yum makecache</p>
+<p>yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-nginx-conf zabbix-agent</p>
+<p>创建初始数据库</p>
+<p>确保您已启动并运行数据库服务器。</p>
+<p>在数据库主机上运行以下命令mysql -uroot -p</p>
+<p>password</p>
+<p>mysql&gt; create database zabbix character set utf8 collate utf8_bin;</p>
+<p>mysql&gt; create user zabbix@localhost identified by ‘password’;</p>
+<p>mysql&gt; grant all privileges on zabbix.* to zabbix@localhost;</p>
+<p>mysql&gt; quit;</p>
+<p>zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix</p>
+<p>为Zabbix服务器配置数据库</p>
+<p>编辑文件/etc/zabbix/zabbix_server.conf</p>
+<p>DBPassword=password</p>
+<p>为Zabbix前端配置PHP</p>
+<p>编辑文件/etc/nginx/conf.d/zabbix.conf，取消注释并设置’listen’和’server_name’指令。</p>
+<p>listen 80;</p>
+<p>server_name example.com;</p>
+<p>编辑文件/etc/php-fpm.d/zabbix.conf，取消注释并为您设置正确的时区。</p>
+<p>; php_value[date.timezone] = Europe/Riga</p>
+<p>F。启动Zabbix服务器和代理进程</p>
+<p>启动Zabbix服务器和代理进程，并使其在系统启动时启动。</p>
+<p>systemctl restart zabbix-server zabbix-agent nginx php-fpm</p>
+<p>systemctl enable zabbix-server zabbix-agent nginx php-fpm</p>
+<h3 id="zabbix官网："><a href="#zabbix官网：" class="headerlink" title="zabbix官网："></a>zabbix官网：</h3><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/">https://www.zabbix.com/</a></p>
+<h2 id="装完可能遇到的问题："><a href="#装完可能遇到的问题：" class="headerlink" title="装完可能遇到的问题："></a>装完可能遇到的问题：</h2><p>1.zabbix连不上数据库（检查数据库是不是utf8-bin)</p>
+<p>2.设置里面不能改为中文：</p>
+<p>zabbix前端inculde/locales.inc.php中的中文是否为ture</p>
+<p>locale -a 中是有中文字码</p>
+<p>3.zabbix图形中中文显示乱码</p>
+<p>从windows中找到字体c:\windows\fonts</p>
+<p>找到linux例zabbix的字体路径（/usr/local/zabbix/ui/assets/fonts</p>
+<p>默认路径）</p>
+<p>find / -name “<em>fonts</em>“</p>
+<p>[root@localhost fonts]# ll</p>
+<p>总用量 0</p>
+<p>lrwxrwxrwx 1 root root 33 3月 1 03:50 graphfont.ttf -&gt; /etc/alternatives/zabbix-web-font</p>
+<p>cd /etc/alternatives/</p>
+<p>[root@localhost alternatives]# ll zabbix-web-font</p>
+<p>lrwxrwxrwx 1 root root 38 3月 1 03:50 zabbix-web-font -&gt; /usr/share/fonts/dejavu/DejaVuSans.ttf</p>
+<p>cd /usr/share/fonts/dejavu/</p>
+<p>将文件导入，备份源文件，然后将新文件改成这个名字</p>
+<p>[root@localhost dejavu]# mv DejaVuSans.ttf DejaVuSans.ttf.bak</p>
+<p>[root@localhost dejavu]# mv MSJH.TTC DejaVuSans.ttf</p>
+<h1 id="监控主机："><a href="#监控主机：" class="headerlink" title="监控主机："></a>监控主机：</h1><p>监控软件本身的主要作用的就是监控主机，在zabbix中，默认的第一个监控的主机为127.0.0.1:10050如agent在本地正常安装运行了以后，首次登陆gui就能看到本机的监控信息。</p>
+<p>zabbix监控主机有几种模式：</p>
+<p>agent，snmp，jmx，ipmi</p>
+<p>agent:</p>
+<p>一般情况是agent，即在需要被监控的主机端上装入客户端工具，然后与server端连接就可以进行监控了。</p>
+<p>agent监控有两种模式：</p>
+<p>主动模式，被动模式</p>
+<p>Zabbix 被动模式： Server 向 agent 请求获取监控项的数据， agent 返回数据。</p>
+<p>Server 打开一个 TCP 连接， Server 发送请求 agent.ping， Agent 接收到请求并</p>
+<p>且响应， Server 处理接收到的数据。</p>
+<p>Zabbix 主动模式： Agent 主动请求 server 获取主动的监控项列表，并主动将监</p>
+<p>控项内需要检测的数据提交给 server/proxy。 zabbix agent 首先向</p>
+<p>ServerActive 配置的 IP 请求获取 active items，获取并提交 active tiems 数</p>
+<p>据值 给server 或者 proxy；</p>
+<h2 id="Agent监控："><a href="#Agent监控：" class="headerlink" title="Agent监控："></a>Agent监控：</h2><h3 id="1-agent端配置"><a href="#1-agent端配置" class="headerlink" title="1.agent端配置"></a>1.agent端配置</h3><p>首先在需要监控的主机上安装agent端，安装见上zabbix安装。</p>
+<p>然后再zabbix_agentd.conf中配置：</p>
+<p>Server=127.0.0.1 #指定服务器ip地址</p>
+<p>默认是被动模式，客户端只需设置这个</p>
+<p>完成以后启动客户端即可</p>
+<h3 id="2-zabbix-gui配置"><a href="#2-zabbix-gui配置" class="headerlink" title="2.zabbix-gui配置"></a>2.zabbix-gui配置</h3><p>再管理页面中添加主机</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059796.jpeg" alt="image.png"></p>
+<p>指定其ip地址和端口，默认端口10050，链接上模板</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059887.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059763.jpeg" alt="image.png"></p>
+<p>然后就添加完成了，右方ZBX为绿色表示可用</p>
+<p><strong>agent监控方式也是被动模式，是默认的监控方式</strong></p>
+<h2 id="主动模式："><a href="#主动模式：" class="headerlink" title="主动模式："></a>主动模式：</h2><p>主动模式修改zabbix_agent的配置文件</p>
+<p>首先是StartAgents=0 这里默认为3，修改为0以后将不再监听端口。（server注不注释无所谓，主要是这里要配置为0）</p>
+<p>然后是ServerActive=127.0.0.1，这里的ip地址得指定成server端的ip地址</p>
+<p>这两个配置完毕以后主动模式就完成了，但还有一步是zabbix-gui中的监控项必须要设置成主动模式才会主动推送数据。</p>
+<p>这里首先选择一个模板：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104296.jpeg" alt="image.png"></p>
+<p>为避免改了以后无法改回来，因克隆一个模板（这里克隆的模板必须是独立的模板而非链接其他模板的模板，否则不能更改其监控项的设置）</p>
+<p>克隆完以后全选其监控项，点击批量更新</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059857.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059929.jpeg" alt="image.png"></p>
+<p>类型设置为zabbix客户端主动式，设置一个更新间隔。</p>
+<p>然后在主机中加入该模板</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059401.jpeg" alt="image.png"></p>
+<p>这个时候主动模式的监控就已经配置完毕，在主机-可用性中可以看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059819.jpeg" alt="image.png"></p>
+<p>其可用性非绿色，也就是zabbix-server无法找到客户端（因其客户端本身也不再监听端口）</p>
+<p>此时可以在最新数据中看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059797.jpeg" alt="image.png"></p>
+<h2 id="Snmp监控："><a href="#Snmp监控：" class="headerlink" title="Snmp监控："></a>Snmp监控：</h2><p>Snmp为简单网络管理协议，一般用在路由器，交换机之类的设备上，因这些设备本身无法安装监控客户端，则可以通过该协议监控其数据。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059467.jpeg" alt="image.png"></p>
+<h2 id="JMX"><a href="#JMX" class="headerlink" title="JMX:"></a>JMX:</h2><p>JMX(Java Management Extensions)是一个为应用程序植入管理功能的框架。JMX是一套标准的代理和服务，</p>
+<p>实际上，用户可以在任何Java应用程序中使用这些代理和服务实现管理。主要用于对JAVA应用程序和JVM进行监控和管理。</p>
+<p>JConsole和JVisualVM中能够监控到JAVA应用程序和JVM的相关信息都是通过JMX实现的。</p>
+<p>这里我监控的是tomcat，首先在启动脚本（catalina.sh）中加入变量</p>
+<p>CATALINA_OPTS=’-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8888 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false’</p>
+<p>改完需重启tomcat</p>
+<p>启用jmx并监听其端口</p>
+<p>首先我们需要了解一下他们的对应关系，zabbix_server开启java poller, zabbx_java开启JavaGateway，端口为10052，Tomcat JMX开启12345提供性能数据。</p>
+<p>数据获取：java poller&lt;–&gt;JavaGateway:10052&lt;–&gt;Tomcat:12345.</p>
+<p>此时tomcat配置完了，然后配置zabbix_java</p>
+<p>./configure –prefix=/usr/local/zabbix –enable-java &amp;&amp; make install #编译安装zabbix_java模块</p>
+<p>cd /usr/local/zabbix/sbin</p>
+<p>./startup</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059194.jpeg" alt="image.png"></p>
+<p>启动以后zabbix监听客户端就配置完毕了，然后再zabbix_server配置文件里面找到这三个选项并指定为刚才配置好的jmx服务器的地址和端口</p>
+<p>JavaGateway=10.10.10.223</p>
+<p>Option: JavaGatewayPort</p>
+<p>Port that Zabbix Java gateway listens on.</p>
+<p>Mandatory: no</p>
+<p>Range: 1024-32767</p>
+<p>Default:</p>
+<p>JavaGatewayPort=10052Option: StartJavaPollers</p>
+<p>Number of pre-forked instances of Java pollers.</p>
+<p>Mandatory: no</p>
+<p>Range: 0-1000# Default:</p>
+<p>StartJavaPollers=6</p>
+<p>最后一步在zabbix gui里面添加jmx监控主机：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059730.jpeg" alt="image.png"></p>
+<p>指定其类型为jmx，IP地址，以及jmx的端口 号</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059996.jpeg" alt="image.png"></p>
+<p>然后再指定其监控模板（监控项）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059225.jpeg" alt="image.png"></p>
+<p>完毕以后jmx为绿色即成功监控。</p>
+<h2 id="IPMI"><a href="#IPMI" class="headerlink" title="IPMI:"></a>IPMI:</h2><p>IPMI（Intelligent PlatformManagement Interface）即智能平台管理接口是使硬件管理具备“智能化”的新一代通用接口标准。用户可以利用 IPMI 监视服务器的物理特征，如温度、电压、电扇工作状态、电源供应以及机箱入侵等。Ipmi 最大的优势在于它是独立于 CPU BIOS 和 OS 的，所以用户无论在开机还是关机的状态下，只要接通电源就可以实现对服务器的监控。</p>
+<p>IPMI跳过</p>
+<h1 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h1><h2 id="主机群组："><a href="#主机群组：" class="headerlink" title="主机群组："></a>主机群组：</h2><p>主机群组是给主机以及模板进行分类的</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059909.jpeg" alt="image.png"></p>
+<p>在创建主机或模板时都需指定其主机群组。</p>
+<h2 id="监控模板："><a href="#监控模板：" class="headerlink" title="监控模板："></a>监控模板：</h2><p>系统模板：</p>
+<p>监控了主机以后首先应配置主机的监控项，监控模板就是一系列监控项的合集，也是zabbix自带监控项的合集。</p>
+<p>比如我这里选择了</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059238.jpeg" alt="image.png"></p>
+<p>Zabbix agent模板，然后其应用集，监控项，触发器就都有了，都是基于该模板。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059335.jpeg" alt="image.png"></p>
+<p>但本身监控模板也可以不提供任何监控项，其所有监控项均为链接其他的模板，由其他模板提供，以linux by zabbix agent 为例子，它做为模板本身没有任何应用集监控项，全是链接其它模板，相当于其他模板的整合模板。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059403.jpeg" alt="image.png"></p>
+<p>这种链接模板优点是可以做为多模板的合集，缺点是无法直接在该模板里面对其监控项触发器进行编辑，可以看到这里监控项的可编辑区域均为灰色（无法编辑）。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104240.jpeg" alt="image.png"></p>
+<h3 id="自定义模板："><a href="#自定义模板：" class="headerlink" title="自定义模板："></a>自定义模板：</h3><p>在配置-模板的右上角有个创建模板</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104141.jpeg" alt="image.png"></p>
+<p>创建时需输入模板名称与主机群组</p>
+<p>如不链接模板则输入完成后直接点添加</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059642.jpeg" alt="image.png"></p>
+<p>创建完成后可创建监控项应用集触发器。</p>
+<h4 id="应用集"><a href="#应用集" class="headerlink" title="应用集"></a>应用集</h4><p>应用集是监控项的的集合，用来归类监控项，一个应用集下面包含多个监控项。</p>
+<p>主要作用就是归类，方便按类别查找模板里面的监控项。</p>
+<h4 id="监控项"><a href="#监控项" class="headerlink" title="监控项"></a>监控项</h4><p>一个模板（主机）最重要的就是监控项，用于监控系统里面各个指标情况</p>
+<p>默认一个模板也会包含n个监控项。在监控项右上角可以添加监控项</p>
+<p>添加监控项界面：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059370.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059911.jpeg" alt="image.png"></p>
+<p>监控项最重要的指标就是键值，也就是监控项的数据来源，在选择中通过类型筛选可以找到很多系统自带的键值。除减值外其他设置都可以视情况而定，例如查看值指的是当监控项为某值时对应的监控系统状态，例如监控一个应用是否正常运行，一般就有两个状态0和1，代表运行和关闭。</p>
+<p>这是系统自带的查看值：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059695.jpeg" alt="image.png"></p>
+<h5 id="自定义监控"><a href="#自定义监控" class="headerlink" title="自定义监控"></a>自定义监控</h5><p>如使用系统自带的键值则是zabbix自带的监控项，但也可自定义监控项。</p>
+<p>例如我这里要手动监控nginx的状态：</p>
+<p>首先再zabbix_agent端的zabbixagent.conf修改配置</p>
+<p>Include=/usr/local/zabbix/etc/zabbix_agentd.conf.d/*.conf（也可以直接将自定义监控项键值写道主配置文件，但一般不会这么做）</p>
+<p>UnsafeUserParameters=1 UserParameter接受所有传递的参数（建议开启，有的监控脚本需要传递参数）</p>
+<p>[root@www etc]# cat zabbix_agentd.conf.d/nginx.conf</p>
+<p>UserParameter=nginx,ps -ef |grep -v grep |grep nginx |grep master &gt;/dev/null ;echo $?</p>
+<p>配置完重启zabbixagent端</p>
+<p>设置完以后可以先再zabbix_agent客户端使用zabbix_get测试一下</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103323.jpeg" alt="image.png"></p>
+<p>测试没有问题便可以添加配置项了，键值为nginx</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059650.jpeg" alt="image.png"></p>
+<p>然后在最新数据里面找到该监控项（nginx）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059468.jpeg" alt="image.png"></p>
+<p>已经有数据了。</p>
+<h4 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h4><p>触发器本身基于监控项，起作用为触发报警。当一个监控项的数据到达某个阈值后，触发器便会触发。</p>
+<p>下面创建一个触发器：</p>
+<p>模板-触发器-创建触发器</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103307.jpeg" alt="image.png"></p>
+<p>表达式：<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059736.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103462.jpeg" alt="image.png"></p>
+<p>触发器创建完毕后关闭nginx</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059274.jpeg" alt="image.png"></p>
+<p>首页便有触发器报警了，但这里写了恢复表达式，所以再nginx启动后，该报警就自动移除了。</p>
+<h4 id="图形"><a href="#图形" class="headerlink" title="图形"></a>图形</h4><p>正常情况下在添加了监控项以后都会有自带的图形监控显示功能，在最新数据里面就能可以，也可以在模板中把图形添加好</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103893.jpeg" alt="image.png"></p>
+<p>但这个的添加图形无非是定义一下图形颜色风格类别等，或者将多个监控项集成于一图形（个人觉得图形非监控必要模块，作用不大），添加界面如下<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103890.jpeg" alt="image.png"></p>
+<p>添加完成后在监测-主机-图形里可以看到</p>
+<h4 id="自动发现规则"><a href="#自动发现规则" class="headerlink" title="自动发现规则"></a>自动发现规则</h4><p>略</p>
+<h4 id="web监控"><a href="#web监控" class="headerlink" title="web监控"></a>web监控</h4><p>Web检测是用于监控web应用，主要检测项有web网页反应时间，响应码。</p>
+<p>在模板-web场景中添加web检测</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059981.jpeg" alt="image.png"></p>
+<p>设置其更新间隔，尝试次数以及检测时访问的客户端。</p>
+<p>然后在步骤里面添加要检测的weburl，选择跟随跳转，指定其状态码为200</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103105.jpeg" alt="image.png"></p>
+<p>添加以后可以最新数据中看到其最新数据以及图形监控</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059149.jpeg" alt="image.png"></p>
+<p>其监控项一共有五个：</p>
+<p>Response time for step “soloblog” of scenario “soloblog”.（响应时间）</p>
+<p>Response code for step “soloblog” of scenario “soloblog”.（响应码）</p>
+<p>Last error message of scenario “soloblog”.（上一条错误信息）</p>
+<p>Failed step of scenario “soloblog”. （响应失败）</p>
+<p>Download speed for step “soloblog” of scenario “soloblog”.（响应速度）</p>
+<p>Download speed for scenario “soloblog”.（响应速度）</p>
+<p>有了监控项后可以对其进行设置触发器，网上一般会对其响应码做设置，但不知是不是版本的原因，我在本地照着网上的触发器设置并关闭触发的web网站后并无法触发，后发现其原因为响应码监控项在web项目无法访问时不能生成任何数据，也就是无法生成200以外的数据，则无法对其监控</p>
+<p>响应时间，响应码，响应速度（Download speed for step “soloblog” of scenario “soloblog”.）均无法在web项目关闭时生成任何数据，所以也无法对这三项进行触发器触发操作。</p>
+<p>下面是web项目关闭时其web检测数据：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059340.jpeg" alt="image.png"></p>
+<p>这里可以对其响应失败码和响应速度进行触发，添加触发器：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059372.jpeg" alt="image.png"></p>
+<p>在关闭web项目就可以看到触发器触发警报了：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059806.jpeg" alt="image.png"></p>
+<h4 id="仪表盘"><a href="#仪表盘" class="headerlink" title="仪表盘"></a>仪表盘</h4><p>仪表盘和首页-仪表板类似，就是展示图形数据趋势图或者文本数据等相关信息的展示页面。</p>
+<p>在模板-仪表盘里面可以定义：</p>
+<p>模板-仪表盘-添加仪表盘</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103716.jpeg" alt="image.png"></p>
+<p>这是添加仪表盘界面，在空白处任意位置点击可以添加。</p>
+<h3 id="主机："><a href="#主机：" class="headerlink" title="主机："></a>主机：</h3><p>主机里面可以配置以及记录了zabbix监控的所有客户端</p>
+<p>右上角可以创建主机，应用集到web检测这几项可以点击进去创建，但一般都基于模板套用，无需手动创建，如果设置了代理程序，在agent代理程序会显示，点击状态可以切换开启或关闭，可用性为绿色表示可用以及显示了其agentd端的监控类型。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103133.jpeg" alt="image.png"></p>
+<p>IPMI为监控硬件选项，可以在ipmi选项卡中指定其用户名和密码</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059609.jpeg" alt="image.png"></p>
+<p>标记为主机的标记或备注信息</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059646.jpeg" alt="image.png"></p>
+<p>宏：</p>
+<p>略</p>
+<p>主机资产记录配置过以后可以在资产记录中看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103113.jpeg" alt="image.png"></p>
+<p>加密：</p>
+<p>Zabbix版本从3.0之后，开始支持Zabbix server, Zabbix proxy, Zabbix agent, zabbix_sender and zabbix_get之间的通信加密，加密方式有预共享密钥(PSK)和证书加密。加密配置是可选项，一些proxies和agents可以使用证书认证加密通信，另外一些可以使用PSK加密通信，而剩余的可以不使用加密进行通信。</p>
+<p>加密需编译时加入加密编译项，可通过密钥生成器生成密钥然后在zabbixagent配置文件中指定其密钥文件，最后在主机-加密中添加。</p>
+<p>维护：</p>
+<p>维护中可以定义其主机群组（主机）的维护时间，在维护时间内，主机监控项的触发器不会进行触发警，但如果维护时间过后仍未解决，zabbix会触发报警。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059118.jpeg" alt="image.png"></p>
+<p>处于维护期间的主机：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059563.jpeg" alt="image.png"></p>
+<h3 id="动作："><a href="#动作：" class="headerlink" title="动作："></a>动作：</h3><p>分为</p>
+<p>Trigger actions,discovery actions,autoregistration actions,internal actions.</p>
+<h4 id="Trigger-actions："><a href="#Trigger-actions：" class="headerlink" title="Trigger actions："></a>Trigger actions：</h4><p>Trigger actions最主要的作用是为触发器触发一个动作，触发器设置监控项的监控数据到达某个阈值时，会进行触发报警，但仅仅是在zabbix-gui面板上进行报警，而动作功能在触发器触发时进行邮件报警或恢复操作（执行命令）。</p>
+<p>邮件报警：</p>
+<p>首先设置好动作，动作的类型可以为多个，这里主要是设置其动作触发的条件，条件可以为多个，其计算方式一般是与/或和“和”：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231102098.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231102832.jpeg" alt="image.png"></p>
+<p>这个我设置了</p>
+<p>|<br>触发器示警度 大于等于 <em>警告</em> 主机 等于 <em>192.168.34.136</em> |<br>| - |</p>
+<p>两个条件，计算方式是和</p>
+<p>则在主机192.168.34.136的触发器警示度大于等于警告时，则会触发动作，接下来设置其动作。其动作有两种：发送消息和远程命令，发送消息也就是邮件报警或者钉钉（短信）等多种报警方式的实现，远程命令一般适用于其动作为某单个触发器时对其监控项进行命令恢复操作。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059111.jpeg" alt="image.png"></p>
+<p>其动作设置了在触发器触发和恢复时通过email发给admin用户，其实也就是发送email给对应用户，这里需要额外设置两个东西，发送邮件的发件人设置，收件人设置。</p>
+<p>发件人设置在其管理-报警媒介类型中：</p>
+<p>这里是email报警，就选择email进行设置</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059154.jpeg" alt="image.png"></p>
+<p>发件邮箱为163邮箱，需要网易邮箱中开启stmp服务，并获得其授权码，在这密码也非用户密码，而是授权码。Stmp输入其邮箱服务商对应的地址，电邮和用户名称皆为用户名</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059571.jpeg" alt="image.png"></p>
+<p>Message templates:</p>
+<p>这里可以设置报警时发送邮件的格式zabbix默认设置了五种邮件类型的模板，最常用的应该是问题。编辑可以更改</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231100963.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231100937.jpeg" alt="image.png"></p>
+<p>将其改为</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059136.jpeg" alt="image.png"></p>
+<p>然后更新确定</p>
+<p>发件邮箱设置好以后在设置收件邮箱 user settings-报警媒介里面添加一个报警媒介，设置其收件人（邮箱）。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059160.jpeg" alt="image.png"></p>
+<p>设置完以后就可以进行邮件报警了。这里192.168.34.136有一个触发器为监控nginx状态，为测试这里关闭nginx。关闭以后可以在主页仪表盘看到触发器以及其执行的动作<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059648.jpeg" alt="image.png"></p>
+<p>这时登录邮箱可以看到该邮件</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059855.jpeg" alt="image.png"></p>
+<h4 id="Discovery-actions"><a href="#Discovery-actions" class="headerlink" title="Discovery actions:"></a>Discovery actions:</h4><p>自动发现的动作首先需要设置自动发现，当自动发现根据其设置发现到主机时，才能触发discovery actions，也就是自动发现动作。</p>
+<h5 id="自动发现："><a href="#自动发现：" class="headerlink" title="自动发现："></a>自动发现：</h5><p>其配置项位于 配置-自动发现。下面是自动发现添加中需要定义的配置项</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059237.jpeg" alt="image.png"></p>
+<p>IP范围：自动发现需要定义一个ip范围，其扫描的时候也只扫描该范围中的ip段。</p>
+<p>更新间隔：更新间隔意味每隔多久会进行扫描一次，这个时间建议不要太短，太短的话其扫描操作会长期占用系统大部分资源，这里为了测试方便就设置了10秒</p>
+<p>检查：ip扫描作为第一个筛选规则，而检查就是其第二个筛选规则，下面是其检查类型，这里我设置了检查类型为zabbix客户端，其键值为system.uname(linux客户端名称的键值)</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059651.jpeg" alt="image.png"></p>
+<p>设备唯一准则性，主机名称，可见的名称根据需求设置即可，因其本身见名知意，这里也不在解释。</p>
+<p>自动发现设置完毕以后会在网端内定期扫描，扫描到以后的主机信息可以在检测-自动发现中看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059919.jpeg" alt="image.png"></p>
+<p>此时就可以设置自动发现的动作了。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059990.jpeg" alt="image.png"></p>
+<p>首先是其条件，一般来说自动发现状态为up即可，也可根据情况设置多个条件。</p>
+<p>然后是其动作<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059209.jpeg" alt="image.png"></p>
+<p>这里设置了四个动作：添加主机，添加到主机群组，链接其模板，启用主机。</p>
+<p>动作设置完成以后，此时当zabbix-server检测的自动发现检测到主机以后就会自动添加主机并链接其模板。</p>
+<h4 id="Autoregistration-actions"><a href="#Autoregistration-actions" class="headerlink" title="Autoregistration actions:"></a>Autoregistration actions:</h4><p>自动注册规则本质上实现的功能与自动发现一样，都是通过自动化功能添加监控zabbix-agent端，不一样的是自动发现是通过zabbix-server去扫描指定网段的客户端，而自动注册是zabbix-agent主动注册到server端。后者的优势在于自动注册无需指定网段，在局域网网络较为复杂或者互联网实现监控时可以用到。</p>
+<p>首先是在zabbix-agent的配置文件上进行配置：</p>
+<p>在需要被监控的主机上安装好agent端，然后编辑zabbix_agent.conf。</p>
+<p>Zabbix_agent.conf:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Server=10.10.10.187(这个非自动注册用到的配置项，而是监控时需指定的serverip)ServerActive=10.10.10.187（设置主动注册的serverip）</span><br><span class="line"></span><br><span class="line">Hostname=ysw1450 （注册时设置的主机名称，正常使用时这个也应当是zabbixagent的名称）</span><br><span class="line"></span><br><span class="line">HostMetadata=admin145 （注册时的主机元数据）</span><br><span class="line"></span><br><span class="line">HostMetadataItem=system.uame (也是元数据)</span><br></pre></td></tr></table></figure>
+
+<p>这样，您可以确保主机元数据包含“Linux”或“Windows”，具体取决于运行代理的主机。 在这种情况下主机元数据的示例：</p>
+<blockquote>
+<p>Linux: Linux server3 3.2.0-4-686-pae #1 SMP Debian 3.2.41-2 i686 GNU/Linux</p>
+<p>Windows: Windows WIN-0PXGGSTYNHO 6.0.6001 Windows Server 2008 Service Pack 1 Intel IA-32</p>
+</blockquote>
+<p>我感觉HostMetadataItem和HostMetadata设置一个即可，如设置HostMetadataItem的话就在配置页面主机元数据那里写上linux（windows），如果是HostMetadata的话就对其字符串进行匹配。也可以一起设置。</p>
+<p>配置好以后转到zabbix_gui上的自动注册添加，主机名对应hostname，主机元数据对应HostMetadata</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059180.jpeg" alt="image.png"></p>
+<p>然后设置其动作（和自动发现一样）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059447.jpeg" alt="image.png"></p>
+<p>添加以后启动zabbixagent然后看gui就已经注册了。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059701.jpeg" alt="image.png"></p>
+<h4 id="Internal-actions："><a href="#Internal-actions：" class="headerlink" title="Internal actions："></a>Internal actions：</h4><p>内部动作主要是根据事件类型来做动作。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059732.jpeg" alt="image.png"></p>
+<p>在事件类型触发以下条件时就可以做出动作（发送信息）。</p>
+<p>但我觉得这个用的少，且本身监控项触发器在事件类型报告为未知的情况并不常见。</p>
+<h3 id="关联项事件："><a href="#关联项事件：" class="headerlink" title="关联项事件："></a>关联项事件：</h3><p>略</p>
+<h3 id="钉钉报警："><a href="#钉钉报警：" class="headerlink" title="钉钉报警："></a>钉钉报警：</h3><h4 id="钉钉创建群机器人"><a href="#钉钉创建群机器人" class="headerlink" title="钉钉创建群机器人"></a>钉钉创建群机器人</h4><p>首先在钉钉里面创建一个群，然后再创建一个机器人并拿到其webhook</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059972.jpeg" alt="image.png"></p>
+<h4 id="在linux中创建脚本"><a href="#在linux中创建脚本" class="headerlink" title="在linux中创建脚本"></a>在linux中创建脚本</h4><p>vim /usr/lib/zabbix/alertscripts/dingding.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">to=<span class="variable">$1</span></span><br><span class="line">subject=<span class="variable">$2</span></span><br><span class="line">text=<span class="variable">$3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#此处的 xxxxx 就是刚刚复制存留的 api 接口地址。</span></span><br><span class="line">curl -i -X POST \</span><br><span class="line"><span class="string">&#x27;https://oapi.dingtalk.com/robot/send?access_token=XXX&#x27;</span> \</span><br><span class="line">-H <span class="string">&#x27;Content-type&#x27;</span>:<span class="string">&#x27;application/json&#x27;</span> \</span><br><span class="line">-d <span class="string">&#x27;</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;msgtype&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="string">     &quot;text&quot;: &#123;</span></span><br><span class="line"><span class="string">        &quot;content&quot;: &quot;&#x27;</span>监控报警：<span class="string">&#x27;&#x27;</span><span class="string">&quot;<span class="variable">$text</span>&quot;</span><span class="string">&#x27;&quot;</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">  &quot;at&quot;:&#123;</span></span><br><span class="line"><span class="string">    &quot;atMobiles&quot;:[</span></span><br><span class="line"><span class="string">      &quot;&#x27;</span><span class="string">&quot;<span class="variable">$1</span>&quot;</span><span class="string">&#x27;&quot;</span></span><br><span class="line"><span class="string">      ],</span></span><br><span class="line"><span class="string">  &quot;isAtAll&quot;:false</span></span><br><span class="line"><span class="string">   &#125; </span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>chmod +x dingding.sh</p>
+<p>测试脚本是否执行成功。<br>sh dinhding.sh 11 22 33</p>
+<p><strong>此时应该能在钉钉群里看到机器人发送消息</strong></p>
+<h4 id="在zabbix中添加报警媒介"><a href="#在zabbix中添加报警媒介" class="headerlink" title="在zabbix中添加报警媒介"></a>在zabbix中添加报警媒介</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059800.jpeg" alt="image.png"></p>
+<p>参数：</p>
+<p>{ALERT.SENDTO}</p>
+<p>{ALERT.SUBJECT}</p>
+<p>{ALERT.MESSAGE}</p>
+<h5 id="message-templates："><a href="#message-templates：" class="headerlink" title="message templates："></a>message templates：</h5><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059850.jpeg" alt="image.png"></p>
+<p>主题：</p>
+<p>故障{TRIGGER.STATUS},服务器:{HOSTNAME1}发生: {TRIGGER.NAME}故障!</p>
+<p>消息：</p>
+<p>告警主机:{HOSTNAME1}</p>
+<p>告警时间:{EVENT.DATE} {EVENT.TIME}</p>
+<p>告警等级:{TRIGGER.SEVERITY}</p>
+<p>告警信息: {TRIGGER.NAME}</p>
+<p>告警项目:{TRIGGER.KEY1}</p>
+<p>问题详情:{ITEM.NAME}:{ITEM.VALUE}</p>
+<p>当前状态:{TRIGGER.STATUS}:{ITEM.VALUE1}</p>
+<p>事件 ID:{EVENT.ID}</p>
+<h4 id="触发器动作中加入钉钉报警"><a href="#触发器动作中加入钉钉报警" class="headerlink" title="触发器动作中加入钉钉报警"></a>触发器动作中加入钉钉报警</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059029.jpeg" alt="image.png"></p>
+<h4 id="给admin添加钉钉报警媒介"><a href="#给admin添加钉钉报警媒介" class="headerlink" title="给admin添加钉钉报警媒介"></a>给admin添加钉钉报警媒介</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059359.jpeg" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/Zabbix_hexo/" data-id="ckxjra7ot0005r0v10uvagm2i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-NFS_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/NFS_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/NFS_hexo/">NFS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h1><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p>network file system<br>通过局域网络让不同的主机系统之间可以共享文件和目录，主要通过linux系统进行共享，NFS服务可以提供远程存储服务，一般应用于用于内网小型集群架构中，其远程传输基于RPC（远程过程调用）。其作用为实现多台服务器存储共享以及实现多台服务器之间数据一致性。</p>
+<h1 id="2-实现原理："><a href="#2-实现原理：" class="headerlink" title="2.实现原理："></a>2.实现原理：</h1><p>NFS守护进程<br>RPC.nfsd<br>守护进程,管理NFS服务<br>RPC.mount<br>管理nfs的文件系统<br>本地文件操作方式<br>1.当用户执行mkdir命令，该命令会通过shell解释器翻译给内核，由内核解析完成后驱动硬件，完成相应的操作。<br>NFS实现原理<br>1.用户进程访问NFS客户端，使用不同的函数对数据进行处理<br>2.NFS客户端通过TCP/IP的方式传递给NFS服务端<br>3.NFS服务器端收到请求后，会先调用portmap进程进行端口映射<br>4.nfsd进程用于判断NFS客户端是否拥有权限连接NFS服务器端<br>5.RPC.mount进程判断客户端是否有对应的权限进行验证<br>6.idmap进程实现用户映射和压缩<br>7.最后NFS服务端会将对应请求的函数转换为本地能识别的命令，传递到内核，由内核驱动硬件。<br>rpc是一个远程过程调用，那么使用nfs必须有rpc服务</p>
+<h1 id="3-nfs组件"><a href="#3-nfs组件" class="headerlink" title="3.nfs组件"></a>3.nfs组件</h1><p>安装NFS服务，需要安装两个软件，分别是：</p>
+<ul>
+<li><strong>RPC主程序：rpcbind</strong><br>  NFS 其实可以被视为一个 RPC 服务，因为启动任何一个 RPC 服务之前，我们都需要做好 port 的对应 (mapping) 的工作才行，这个工作其实就是『 rpcbind 』这个服务所负责的！也就是说， 在启动任何一个 RPC 服务之前，我们都需要启动 rpcbind 才行！ (在 CentOS 5.x 以前这个软件称为 portmap，在 CentOS 6.x 之后才称为 rpcbind 的！)。</li>
+<li><strong>NFS主程序：nfs-utils</strong><br>  就是提供 rpc.nfsd 及 rpc.mountd 这两个 NFS daemons 与其他相关 documents 与说明文件、执行文件等的软件！这个就是 NFS 服务所需要的主要软件。</li>
+<li></li>
+</ul>
+<p><strong>NFS的相关文件：</strong></p>
+<ul>
+<li>主要配置文件：/etc/exports<br>  这是 NFS 的主要配置文件了。该文件是空白的，有的系统可能不存在这个文件，主要手动建立。NFS的配置一般只在这个文件中配置即可。</li>
+<li>NFS 文件系统维护指令：/usr/sbin/exportfs<br>  这个是维护 NFS 分享资源的指令，可以利用这个指令重新分享 /etc/exports 变更的目录资源、将 NFS Server 分享的目录卸除或重新分享。</li>
+<li>分享资源的登录档：/var/lib/nfs/*tab<br>  在 NFS 服务器的登录文件都放置到 /var/lib/nfs/ 目录里面，在该目录下有两个比较重要的登录档， 一个是 etab ，主要记录了 NFS 所分享出来的目录的完整权限设定值；另一个 xtab 则记录曾经链接到此 NFS 服务器的相关客户端数据。</li>
+<li>客户端查询服务器分享资源的指令：/usr/sbin/showmount<br>  这是另一个重要的 NFS 指令。exportfs 是用在 NFS Server 端，而 showmount 则主要用在 Client 端。showmount 可以用来察看 NFS 分享出来的目录资源。</li>
+</ul>
+<h1 id="4-服务实践"><a href="#4-服务实践" class="headerlink" title="4.服务实践"></a>4.服务实践</h1><p>首先服务器端需要启动nfs-server和rpcbind，客户端也需要启动rpcbind。</p>
+<h2 id="服务器端："><a href="#服务器端：" class="headerlink" title="服务器端："></a>服务器端：</h2><p>安装nfs<br>yum -y install nfs-utils rpcbind</p>
+<p>配置<br>主配置文件/etc/exports,默认空<br>格式：<br>共享目录路径 允许访问的nfs客户端（共享权限参数）<br>共享目录路径： 服务器本地目录路径<br>允许访问的客户端：<br>ip or 域名<br>网段： 172.16.1.0/24 主机： 172.16.1.1/32 域名：*.edu.mage.com<br>权限：<br>rw 读写权限 ***<br>ro 只读权限<br>root_squash 当nfs客户端以root管理员访问时，映射为nfs服务器的匿名用户<br>no_root_squash 当nfs客户端以root管理员访问时，映射为nfs服务器的ROOT管理员用户<br>all_squash 无论nfs客户端使用什么账户访问，均映射为nfs服务器的匿名用户 ***<br>sync 同时将数据写入内存与硬盘中，保证不丢死数据<br>async 优先将数据保存到内存中，然后再写入硬盘，这样效率更高，但可能会丢失数据。<br>async 优先将数据保存到内存中，然后再写入硬盘，这样效率更高，但可能会丢失数据。<br>anonuid 配置all_aquash使用，指定nfs的用户uid，必须存在系统 ***<br>anongid 配置all_aquash使用，指定nfs的用户gid，必须存在系统 ***</p>
+<p>例子（/etc/exports）：<br>/data 172.16.1.0/24(rw),0.0.0.0/0(ro)<br>/backup 192.1.1.1/32(rw)<br>/backuo *.edu.com(rw)</p>
+<p>4.创建环境<br>mkdir /data<br>chown -R nfsnobody.nfsnobody /data</p>
+<p>5.启动服务<br>systemctl start nfs-server rpcbind<br>systemctl status nfs-server rpcbind</p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>客户端挂载<br>1.安装工具 安装nfs-utils 并启动rpcbind<br>yum -y install rpcbind nfs-utils</p>
+<p>2.客户端使用 showmount -e 查看远程服务器rpc提供的可挂载nfs信息</p>
+<p>showmount -e 192.168.1.1<br>3.在nfs创建一个挂载目录，然后使用mount命令挂载。<br>mount -t nfs 192.168.65.131:/backup /mnt</p>
+<p>挂载时需注意挂载权限。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/NFS_hexo/" data-id="ckxjra7ot0006r0v11e6kgpnb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-firewalld_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/firewalld_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/firewalld_hexo/">firewalld</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p>firewalld是linux的防火墙命令工具，与iptables类似，本身和iptables一样只是命令行工具，真正实现防火墙是内置于linux内核里面的netfilter模块。但其命令无需理解netfilter的四表五链，相对于iptables会简单一些。也是centos7以后的默认防火墙命令行工具。</p>
+<h1 id="2-firewalld-和iptables的区别"><a href="#2-firewalld-和iptables的区别" class="headerlink" title="2 firewalld 和iptables的区别"></a>2 firewalld 和iptables的区别</h1><ol>
+<li>firewalld可以动态修改单条规则，而不需要像iptables那样，在修改了规则后必须得全部刷新才可以生效;</li>
+<li>firewalld在使用上要比iptables人性化很多，即使不明白“五张表五条链”而且对TCPIP协议也不理解也可以实现大部分功能;</li>
+<li>firewalld跟iptables比起来，不好的地方是每个服务都需要去设置才能放行，因为默认是拒绝。而iptables里默认是每个服务是允许，需要拒绝的才去限制;</li>
+<li>firewalld加入了区域zone的概念。</li>
+</ol>
+<h1 id="3-区域"><a href="#3-区域" class="headerlink" title="3.区域"></a>3.区域</h1><p>firewalld有区域的概念，而其防火墙隔离操作也是通过区域来进行隔离的</p>
+<p>firewalld默认自带的区域：<br>trusted (信任)<br>允许所有的数据包流入与流出<br>home (家庭)<br>拒绝流入的流量，除非与流出的流量相关;而如果流量与ssh、mdns、 ipp-client、 amba-client与dhcpv6-client服务相关, 则允许流量<br>internal (内部)<br>等同于home区域<br>work (工作)<br>拒绝流入的流量,除非与流出的流量数相关;而如果流量与ssh、ipp-client与dhcpv6-client服务相关, 则允许流量<br>public (公共)<br>拒绝流入的流量，除非与流出的流量相关;而如果流量与ssh、dhcpv6-client服务相关， 则允许流量<br>external (外部)<br>拒绝流入的流量,除非与流出的流量相关;而如果流量与ssh服务相关,则允许流量<br>dmz (非军事区)<br>拒绝流入的流量,除非与流出的流量相关;而如果流量与5ssh服务相关,则允许流量<br>block (限制)<br>拒绝流入的流量，除非与流出的流量相关<br>drop (丢弃)<br>拒绝流入的流量，除非与流出的流量相关</p>
+<p>默认网卡都加入到了公共的区域，也就是public。区域内可以加入网卡或者网段，默认为public区域，如加入网卡表示该网卡的所有流量都遵循该区域的规则，例如默认drop丢弃所有包，将网卡设置为drop即该网卡丢弃所有包。但如果将网段设置为一个区域，例如trust，此时该网段的所有包将允许。<br>则如果想实现黑名单拒绝所有，只允许白名单可以将网卡先设置为drop并允许部分网段<br>如果想实现某网段的部分端口放行，例如10.0.0.0/24仅放行其ssh，可以将该网段加入external区域（因其区域本身只允许ssh），但因默认所有网卡为public，此时建议把网卡设置为drop区域，这样仅10网段可以访问ssh且其他所有网段无法访问（如设置为trusted区域为所有网段皆允许但仅10网段限定智能访问其ssh端口）</p>
+<h1 id="4-firewall-cmd"><a href="#4-firewall-cmd" class="headerlink" title="4.firewall-cmd"></a>4.firewall-cmd</h1><p>firewall-cmd是firewalld服务的命令行工具，在firewall-cmd执行命令时，有两种生效方式：</p>
+<p>runtime （运行时）：修改规则马上生效，但是临时生效</p>
+<p>permanent（持久配置）：需要reload才能生效 ，但是永久生效</p>
+<h2 id="firewall-cmd相关命令参数："><a href="#firewall-cmd相关命令参数：" class="headerlink" title="firewall-cmd相关命令参数："></a>firewall-cmd相关命令参数：</h2><p>zone区域相关指令：<br>–get-default-zone 查询默认的区域名称<br>–set-default-zone=xxx 设置默认的区域，使其永久生效<br>–get-active-zones 显示当前正在使用的区域与网卡名称<br>–get-zones 显示总共可用的区域<br>–new-zone= 新增区域</p>
+<p>services服务相关指令<br>–get-services 显示预先定义好的服务<br>–add-service= 设置默认区域允许该服务的流量<br>–remove-service= 设置默认区域不再允许该服务的流量</p>
+<p>port端口相关指令<br>-add-port=端口号/协议 设置默认区域允许该端口的流量<br>-remove-port=端口号/协议 设置默认区域不再允许该端口的流量</p>
+<p>interface网卡相关指令：<br>–add-interface=网卡名 将源自该网卡的所有流量都导向某个指定区域<br>–change-interface=网卡名 将某个网卡与区域进行关联</p>
+<p>其他相关指令：<br>–list-all 显示当前区域的网卡配置参数，资源，端口以及服务等信息<br>–reload 让永久生效的配置规则立即生效，并覆盖当前的配置规则<br>–zone 在对区域进行添加修改删除等配置时，指定对其某个区域进行操作。</p>
+<p>在对区域添加或更改配置时，如没有指明–zone,则默认设置为当前默认的区域。<br>例如 firewall-cmd –add-port=8080/tcp<br>这里给防火墙加了一个8080允许的规则，一般firewalld默认是public，所以这时，这个规则会加到public里面，如果是想把这条规则加到drop里面<br>则：firewall-cmd –add-port=8080/tcp –zone=drop</p>
+<h2 id="firewall-cmd-–list-all"><a href="#firewall-cmd-–list-all" class="headerlink" title="firewall-cmd –list-all"></a>firewall-cmd –list-all</h2><p>显示当前区域的网卡配置参数，资源，端口以及服务等信息<br>public (active)<br>target: default<br>icmp-block-inversion: no<br>interfaces: ens33 ens37 ens38<br>sources:<br>services: cockpit dhcpv6-client http ssh<br>ports:<br>protocols:<br>masquerade: no<br>forward-ports:<br>source-ports:<br>icmp-blocks:<br>rich rules:<br>默认所有网卡都会在public区域，可以通过zone相关参数修改。默认支持的服务（端口）在services里面，如要添加允许的服务，可以通过–add-port（–add-services）。<br>例如允许81端口 :<br>firewall-cmd –permanent –add-port=81/tcp<br>firewall-cmd –reload<br>删除直接把add换成remove</p>
+<p>禁用传统防火墙服务<br>systemctl mask iptables<br>systemctl mask ip6tables<br>systemctl mask ebtables</p>
+<p>启动firewalld防火墙，并加入开机自启动服务<br>systemctl start/enable firewalld</p>
+<p>备份firewalld配置文件<br>cp -rf /etc/firewalld/ /etc/firewalld_backup</p>
+<h2 id="案例："><a href="#案例：" class="headerlink" title="案例："></a>案例：</h2><p>案例一:<br>1.设定默认区域为drop (拒绝所有)<br>2.设置白名单IP访问，将源10.0.0.0/24网段加入trusted区域<br>//将当前默认区域修改为drop<br>[root@Firewalld ~]firewall-cmd –set-default-zone=drop<br>//将网络接口关联至drop区域<br>[root@Firewalld ~]firewall-cmd –permanent –change-interface=eth0 –zone=drop<br>将10.o.o.0/24网段加入trusted白名单<br>[root@Firewalld ~]# firewall-cmd –permanent –add-source=10.0.0.0/24 –zone=trusted<br>[rooteFirewalld ~]# firewall-cmd –reload<br>success<br>//查看当前处于活动的区域<br>firewall-cmd –get-active-zones<br>drop.默认区域,eth0接口流量都由drop区域过滤<br>interfaces: eth0<br>trusted.数据包的源IP是10.0.0.0网段走trusted区域<br>sources: 10.0.0.0/24<br>将网卡设置为drop区域以后，再将允许的网段加入trust区域，此时trust允许的网段能访问drop的网卡。</p>
+<p>防火墙端口转发：<br>firewall-cmd –permanent –zone=&lt;区域&gt; –add-forward-port=port=&lt;源端口号&gt;:proto=&lt;协议&gt;:toport=&lt;目标端口号&gt;:toaddr=&lt;目标ip地址&gt;<br>此功能对应iptables nat表功能<br>1.转发本机555/tcp端口的流量至22/tcp端口，要求当前和长期有效<br>[root@Firewalld ~]# firewall-cmd –permanent –zone=public –add-forward-port=port=555:proto=tcp:toport=22:toaddr=10.0.0.61<br>success<br>[ root@Firewalld ~]# firewall-cmd –reload<br>success<br>2.移除本机转发的555/tcp端口策略，要求当前和长期有效<br>[root@Firewalld -]firewall-cmd –remove-forward-port=port=555:proto=tcp:toport=22:toaddr=10.0.0.61<br>success<br>[ rooteFirewalld ~].firewall-cmd –reload<br>success<br>3.如果需要将本地的10.0.0.81:6666端口转发至后端172.16.1.8:22端口<br>1.开启IP伪装<br>[root@Firewalld ~]# firewall-cmd –add-masquerade –permanent<br>2.配置转发<br>[root@Firewalld ~]# firewall-cmd –permanent –zone=public<br>–add-forward-port=port=6666:proto=tcp:toport=22:toaddr=172.16.1.8<br>[ root@Firewalld ~].firewall-cmd –reload<br>此时ssh访问10 6666端口即连接到172.16.1.8:22</p>
+<h1 id="防火墙富规则策略："><a href="#防火墙富规则策略：" class="headerlink" title="防火墙富规则策略："></a>防火墙富规则策略：</h1><p>firewalld中的富规则表示更细致，更详细的防火墙策略配置，可以针对系统服务，端口号，源地址和目标地址等诸多信息进行更有针对性的策略配置，优先级在所有防火墙策略中也是最高的。</p>
+<p>帮助：man firewalld.richlanguage</p>
+<p>firewall-cmd –add-rich-rule=’rule’</p>
+<p>rule<br>[source]<br>[destination]<br>service|port|protocol|icmp-block|icmp-type|masquerade|forward-port|source-port<br>[log]<br>[audit]<br>[accept|reject|drop|mark]</p>
+<p>rule [ family=”ipv4 lipv6””]<br>source address=”address [ /rmask]”[invert=”True”]<br>destination address=”address [/mask] “ invert=”True”<br>service name=”service name”<br>port port=”port value” protocol=”tcp|udp”<br>protocol value=”protocoi value”<br>forward-port port=”port value” protocol=”tcp|udp” to-port=”port value” to-addr=”address”<br>log [prefix=”prefix text”] [level=”log level”] [limit value=”rate/duration”]<br>accept|reject [type=”reject type”] | drop<br>//区里的富规则按先后顺序匹配，按先匹配到的规则生效。<br>–add-rich-rule=KFUJLE&gt;’//在指定的区添加一条富规则<br>–remove-rich-rule=’’//在指定的区删除一条富规则<br>–query-rich-rule=’’ 1/找到规则返回0，找不到返回1<br>–iist-rich-rules/列出指定区里的所有富规则<br>–list-all 和 –list-all-zones也能列出存在的富规则</p>
+<p>1.允许10.0.0.0/24网段中10.0.0.1主机访问http服务,其他同网段主机无法访问，当前和永久生效<br>#1.加入10.0.0.0/24所有主机至public区域<br>[root@mo1 ~]# firewall-cmd –permanent –add-source=10.0.0.0/24 –zone=public<br>#2.仅允许public中的10.0.0.1主机访问http<br>[rootCmo1 ~]# firewall-cmd –permanent –zone=public –add-rich-rule= ‘rule family=ipv4 source address=10.0.0.1/32 port port=80 protocol=tcp accept”<br>#3.重载firewalld防火墙<br>[root@m01 ~]# firewall-cmd –reload</p>
+<p>2.拒绝10.0.0.0/24网段中的10.0.0.9主机发起的ssh请求,当前和永久生效<br>[rootCmo1 ~]# fireuall-cmd –permanent –zone=public –add-rich-rulem ‘rule family-ipv4 source address=10.0.0.9/32 service name=ssh drop’</p>
+<p>[ root@me1 ~]# firewall-cmd –reload<br>success</p>
+<p>3.将远程10.0.0.1主机请求firewalld的5551端口，转发至firewalld防火墙的22端口<br>[rootCmo ~]# firewall-cmd –permanent –zone=public –add-rich-rule= ‘rule family=ipv4 source address=10.0.0.1/32 forward-port port=5551 protocol=tcp to-port=22’<br>[ root@mo1 ~]# firewall-cmd –reload<br>success</p>
+<p>4.将远程10.0.0.1主机请求firewalld的6661端口，转发至后端主机10.0.0.9的22端口<br>[ root@mo1 ~]# firewall-cmd –add-masquerade –permanent<br>[ root@mo1 ]# firewall-cmd –permanent –zone=public –add-rich-rule=’rule family=ipv4 source address=10.0.0.1/32 forward-port port=6661 protocol=tcp to-port=22 to-addr=10.0.0.9’<br>success<br>[root@me1]# firewall-cmd –reload</p>
+<h1 id="防火墙开启内部上网："><a href="#防火墙开启内部上网：" class="headerlink" title="防火墙开启内部上网："></a>防火墙开启内部上网：</h1><p>环境<br>主机1（防火墙主机） 外网ip 内网ip<br>主机2 内网ip<br>主机2的内网ip需要与主机1的内网ip位于同一环境，此时主机2 的内网ip无法直接与互联网进行通信<br>主机2配置：<br>gateway指定其主机1的内网ip，dns需设置（114.114.114.114）。<br>然后重启网卡<br>nmcli c down ens33 &amp;&amp;nmcli c up ens33<br>主机1配置：<br>firewall-cmd –permanet –add-masquerade (开启主机转发)</p>
+<p>然后即可通信</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/firewalld_hexo/" data-id="ckxjra7ov000ar0v1cmcmhmco" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ftp_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/ftp_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/ftp_hexo/">ftp</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-ftp简介"><a href="#1-ftp简介" class="headerlink" title="1.ftp简介"></a>1.ftp简介</h1><p>ftp是一种较为古老的文件传输服务，可实现文件的共享以及传输。其服务器端有两个端口，一个是控制端口（默认21），控制端口负责ftp的连接控制，还有一个端口是传输端口，其主动模式时，传输端口默认为20端口，在其为被动模式时，默认为1000以后的大端口号。ftp服务的版本服务很多，vsftp是其中一个分支,译为非常安全的文件服务。</p>
+<h1 id="2-主动模式与被动模式"><a href="#2-主动模式与被动模式" class="headerlink" title="2.主动模式与被动模式"></a>2.主动模式与被动模式</h1><p>ftp其运行时有两种工作模式，主动模式与被动模式。</p>
+<h3 id="1-PORT（主动模式）"><a href="#1-PORT（主动模式）" class="headerlink" title="(1) PORT（主动模式）"></a>(1) PORT（主动模式）</h3><p>PORT中文称为主动模式，工作的原理： FTP客户端连接到FTP服务器的21端口，发送用户名和密码登录，登录成功后要list列表或者读取数据时，客户端随机开放一个端口（1024以上），发送 PORT命令到FTP服务器，告诉服务器客户端采用主动模式并开放端口；FTP服务器收到PORT主动模式命令和端口号后，通过服务器的20端口和客户端开放的端口连接，发送数据，原理如下图：<br><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035913.jpeg" alt="img"></p>
+<h3 id="2-PASV（被动模式）"><a href="#2-PASV（被动模式）" class="headerlink" title="(2) PASV（被动模式）"></a>(2) PASV（被动模式）</h3><p>PASV是Passive的缩写，中文成为被动模式，工作原理：FTP客户端连接到FTP服务器的21端口，发送用户名和密码登录，登录成功后要list列表或者读取数据时，发送PASV命令到FTP服务器， 服务器在本地随机开放一个端口（1024以上），然后把开放的端口告诉客户端， 客户端再连接到服务器开放的端口进行数据传输，原理如下图：<br><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036826.jpeg" alt="img"></p>
+<h1 id="3-两种模式对于防火墙的影响"><a href="#3-两种模式对于防火墙的影响" class="headerlink" title="3.两种模式对于防火墙的影响"></a>3.两种模式对于防火墙的影响</h1><p>主动模式之所以称为主动模式，是因为在两端传输端口通道建立时，是服务器端（21端口）主动与客户端（1024+随机端口）请求建立连接。这其中可能出现的问题是，我们都知道，防火墙是有入口和出口的，通常客户端的入端口在防火墙策略里面是关闭的，故也无法成功连接客户端的传输接口。而在被动模式中，是服务器端开放一个大于1024的随机接口，然后通过控制接口告知客户端，让客户端来主动请求建立连接。在这里，客户端的防火墙不会是问题所在，因为客户端出端口一般默认不会做限制，而两个连接请求也都是客户端发起的，但此时，服务器端除了开放自己21的控制端口以外，还需要特别开放一个随机端口范围（这个范围由ftp启动被动模式时定义的范围）。</p>
+<p>综上所述，在服务器端需要面对大量客户端时，最好选择被动模式，这样不会让客户端因为自己的防火墙入口关闭而受到影响。</p>
+<h1 id="4-vsftpd"><a href="#4-vsftpd" class="headerlink" title="4.vsftpd"></a>4.vsftpd</h1><p>vsftpd安装很简单 redhad 或centos直接使用</p>
+<figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vsftpd</span><br></pre></td></tr></table></figure>
+
+<p>rpm -ql vsftpd #查看vsftpd安装的所有文件</p>
+<h3 id="4-1配置文件"><a href="#4-1配置文件" class="headerlink" title="4.1配置文件"></a>4.1配置文件</h3><p>vsftpd配置文件目录：/etc/vsftpd/vsftpd.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"># 是否允许匿名登录FTP服务器，默认设置为YES允许</span><br><span class="line"># 用户可使用用户名ftp或anonymous进行ftp登录，口令为用户的E-mail地址。</span><br><span class="line"># 如不允许匿名访问则设置为NO</span><br><span class="line">anonymous_enable=YES</span><br><span class="line"># 是否允许本地用户(即linux系统中的用户帐号)登录FTP服务器，默认设置为YES允许</span><br><span class="line"># 本地用户登录后会进入用户主目录，而匿名用户登录后进入匿名用户的下载目录/var/ftp/pub</span><br><span class="line"># 若只允许匿名用户访问，前面加上#注释掉即可阻止本地用户访问FTP服务器</span><br><span class="line">local_enable=YES</span><br><span class="line"># 是否允许本地用户对FTP服务器文件具有写权限，默认设置为YES允许</span><br><span class="line">write_enable=YES </span><br><span class="line"># 掩码，本地用户默认掩码为077</span><br><span class="line"># 你可以设置本地用户的文件掩码为缺省022，也可根据个人喜好将其设置为其他值</span><br><span class="line">#local_umask=022</span><br><span class="line"># 是否允许匿名用户上传文件，须将全局的write_enable=YES。默认为YES</span><br><span class="line">#anon_upload_enable=YES</span><br><span class="line"># 是否允许匿名用户创建新文件夹</span><br><span class="line">#anon_mkdir_write_enable=YES </span><br><span class="line"># 是否激活目录欢迎信息功能</span><br><span class="line"># 当用户用CMD模式首次访问服务器上某个目录时，FTP服务器将显示欢迎信息</span><br><span class="line"># 默认情况下，欢迎信息是通过该目录下的.message文件获得的</span><br><span class="line"># 此文件保存自定义的欢迎信息，由用户自己建立</span><br><span class="line">#dirmessage_enable=YES</span><br><span class="line"># 是否让系统自动维护上传和下载的日志文件</span><br><span class="line"># 默认情况该日志文件为/var/log/vsftpd.log,也可以通过下面的xferlog_file选项对其进行设定</span><br><span class="line"># 默认值为NO</span><br><span class="line">xferlog_enable=YES</span><br><span class="line"># Make sure PORT transfer connections originate from port 20 (ftp-data).</span><br><span class="line"># 是否设定FTP服务器将启用FTP数据端口的连接请求</span><br><span class="line"># ftp-data数据传输，21为连接控制端口</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line"># 设定是否允许改变上传文件的属主，与下面一个设定项配合使用</span><br><span class="line"># 注意，不推荐使用root用户上传文件</span><br><span class="line">#chown_uploads=YES</span><br><span class="line"># 设置想要改变的上传文件的属主，如果需要，则输入一个系统用户名</span><br><span class="line"># 可以把上传的文件都改成root属主。whoever：任何人</span><br><span class="line">#chown_username=whoever</span><br><span class="line"># 设定系统维护记录FTP服务器上传和下载情况的日志文件</span><br><span class="line"># /var/log/vsftpd.log是默认的，也可以另设其它</span><br><span class="line">#xferlog_file=/var/log/vsftpd.log</span><br><span class="line"># 是否以标准xferlog的格式书写传输日志文件</span><br><span class="line"># 默认为/var/log/xferlog，也可以通过xferlog_file选项对其进行设定</span><br><span class="line"># 默认值为NO</span><br><span class="line">#xferlog_std_format=YES</span><br><span class="line"># 以下是附加配置，添加相应的选项将启用相应的设置</span><br><span class="line"># 是否生成两个相似的日志文件</span><br><span class="line"># 默认在/var/log/xferlog和/var/log/vsftpd.log目录下</span><br><span class="line"># 前者是wu_ftpd类型的传输日志，可以利用标准日志工具对其进行分析；后者是vsftpd类型的日志</span><br><span class="line">#dual_log_enable</span><br><span class="line"># 是否将原本输出到/var/log/vsftpd.log中的日志，输出到系统日志</span><br><span class="line">#syslog_enable</span><br><span class="line"># 设置数据传输中断间隔时间，此语句表示空闲的用户会话中断时间为600秒</span><br><span class="line"># 即当数据传输结束后，用户连接FTP服务器的时间不应超过600秒。可以根据实际情况对该值进行修改</span><br><span class="line">#idle_session_timeout=600</span><br><span class="line"># 设置数据连接超时时间，该语句表示数据连接超时时间为120秒，可根据实际情况对其个修改</span><br><span class="line">#data_connection_timeout=120</span><br><span class="line"># 运行vsftpd需要的非特权系统用户，缺省是nobody</span><br><span class="line">#nopriv_user=ftpsecure</span><br><span class="line"># 是否识别异步ABOR请求。</span><br><span class="line"># 如果FTP client会下达“async ABOR”这个指令时，这个设定才需要启用</span><br><span class="line"># 而一般此设定并不安全，所以通常将其取消</span><br><span class="line">#async_abor_enable=YES</span><br><span class="line"># 是否以ASCII方式传输数据。默认情况下，服务器会忽略ASCII方式的请求。</span><br><span class="line"># 启用此选项将允许服务器以ASCII方式传输数据</span><br><span class="line"># 不过，这样可能会导致由&quot;SIZE /big/file&quot;方式引起的DoS攻击</span><br><span class="line">#ascii_upload_enable=YES</span><br><span class="line">#ascii_download_enable=YES</span><br><span class="line"># 登录FTP服务器时显示的欢迎信息</span><br><span class="line"># 如有需要，可在更改目录欢迎信息的目录下创建名为.message的文件，并写入欢迎信息保存后</span><br><span class="line">#ftpd_banner=Welcome to blah FTP service.</span><br><span class="line"># 黑名单设置。如果很讨厌某些email address，就可以使用此设定来取消他的登录权限</span><br><span class="line"># 可以将某些特殊的email address抵挡住。</span><br><span class="line">#deny_email_enable=YES</span><br><span class="line"># 当上面的deny_email_enable=YES时，可以利用这个设定项来规定哪些邮件地址不可登录vsftpd服务器</span><br><span class="line"># 此文件需用户自己创建，一行一个email address即可</span><br><span class="line">#banned_email_file=/etc/vsftpd/banned_emails</span><br><span class="line"># 用户登录FTP服务器后是否具有访问自己目录以外的其他文件的权限</span><br><span class="line"># 设置为YES时，用户被锁定在自己的home目录中，vsftpd将在下面chroot_list_file选项值的位置寻找chroot_list文件</span><br><span class="line"># 必须与下面的设置项配合</span><br><span class="line">#chroot_list_enable=YES</span><br><span class="line"># 被列入此文件的用户，在登录后将不能切换到自己目录以外的其他目录</span><br><span class="line"># 从而有利于FTP服务器的安全管理和隐私保护。此文件需自己建立</span><br><span class="line">#chroot_list_file=/etc/vsftpd/chroot_list</span><br><span class="line"># 是否允许递归查询。默认为关闭，以防止远程用户造成过量的I/O</span><br><span class="line">#ls_recurse_enable=YES</span><br><span class="line"># 是否允许监听。</span><br><span class="line"># 如果设置为YES，则vsftpd将以独立模式运行，由vsftpd自己监听和处理IPv4端口的连接请求</span><br><span class="line">listen=YES</span><br><span class="line"># 设定是否支持IPV6。如要同时监听IPv4和IPv6端口，</span><br><span class="line"># 则必须运行两套vsftpd，采用两套配置文件</span><br><span class="line"># 同时确保其中有一个监听选项是被注释掉的</span><br><span class="line">#listen_ipv6=YES</span><br><span class="line"># 设置PAM外挂模块提供的认证服务所使用的配置文件名，即/etc/pam.d/vsftpd文件</span><br><span class="line"># 此文件中file=/etc/vsftpd/ftpusers字段，说明了PAM模块能抵挡的帐号内容来自文件/etc/vsftpd/ftpusers中</span><br><span class="line">#pam_service_name=vsftpd</span><br><span class="line"># 是否允许ftpusers文件中的用户登录FTP服务器，默认为NO</span><br><span class="line"># 若此项设为YES，则user_list文件中的用户允许登录FTP服务器</span><br><span class="line"># 而如果同时设置了userlist_deny=YES，则user_list文件中的用户将不允许登录FTP服务器，甚至连输入密码提示信息都没有</span><br><span class="line">#userlist_enable=YES/NO</span><br><span class="line"># 设置是否阻扯user_list文件中的用户登录FTP服务器，默认为YES</span><br><span class="line">#userlist_deny=YES/NO</span><br><span class="line"># 是否使用tcp_wrappers作为主机访问控制方式。</span><br><span class="line"># tcp_wrappers可以实现linux系统中网络服务的基于主机地址的访问控制</span><br><span class="line"># 在/etc目录中的hosts.allow和hosts.deny两个文件用于设置tcp_wrappers的访问控制</span><br><span class="line"># 前者设置允许访问记录，后者设置拒绝访问记录。</span><br><span class="line"># 如想限制某些主机对FTP服务器192.168.57.2的匿名访问，编缉/etc/hosts.allow文件，如在下面增加两行命令：</span><br><span class="line"># vsftpd:192.168.57.1:DENY 和vsftpd:192.168.57.9:DENY</span><br><span class="line"># 表明限制IP为192.168.57.1/192.168.57.9主机访问IP为192.168.57.2的FTP服务器</span><br><span class="line"># 此时FTP服务器虽可以PING通，但无法连接</span><br><span class="line">tcp_wrappers=YES</span><br></pre></td></tr></table></figure>
+
+<p>VSFTPD登录方式：</p>
+<p>vsftpd的配置项较多，但都是”配置项”=”xx”这种格式，其本身有三种登录方式</p>
+<p>：匿名用户登录，本地用户登录，虚拟用户登录</p>
+<h3 id="1-匿名用户登录"><a href="#1-匿名用户登录" class="headerlink" title="1.匿名用户登录"></a>1.匿名用户登录</h3><p>anonymous_enable=YES</p>
+<p>只要设置这行就表示允许匿名用户登录了</p>
+<p>匿名用户使用的登陆名为ftp或anonymous，口令为空</p>
+<p>匿名用户（anonymous）设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#控制是否允许匿名用户登入，YES 为允许匿名登入，NO 为不允许。默认值为 YES。</span><br><span class="line">anonymous_enable=YES/NO（YES）</span><br><span class="line"></span><br><span class="line">#是否允许登陆用户有写权限。属于全局设置，默认值为 YES。</span><br><span class="line">write_enable=YES/NO（YES）</span><br><span class="line"></span><br><span class="line">#若是启动这项功能，则使用匿名登入时，不会询问密码。默认值为 NO。</span><br><span class="line">no_anon_password=YES/NO（NO）</span><br><span class="line"></span><br><span class="line">#定义匿名登入的使用者名称。默认值为 ftp。</span><br><span class="line">ftp_username=ftp</span><br><span class="line"></span><br><span class="line">#使用匿名登入时，所登入的目录。默认值为/var/ftp。注意 ftp目录不能是 777的权限属性，即匿名用户的家目录不能有 777的权限。</span><br><span class="line">anon_root=/var/ftp</span><br><span class="line"></span><br><span class="line">#如果设为 YES，则允许匿名登入者有上传文件（非目录）的权限，只有在 write_enable=YES时，此项才有效。当然，匿名用户必须要有对上层目录的写入权。默认值为 NO</span><br><span class="line">anon_upload_enable=YES/NO（NO）</span><br><span class="line"></span><br><span class="line">#如果设为 YES，则允许匿名登入者下载可阅读的档案（可以下载到本机阅读，不能直接在 FTP服务器中打开阅读）。默认值为 YES。</span><br><span class="line">anon_world_readable_only=YES/NO（YES）</span><br><span class="line"></span><br><span class="line">#如果设为 YES，则允许匿名登入者有新增目录的权限，只有在 write_enable=YES时，此项才有效。当然，匿名用户必须要有对上层目录的写入权。默认值为 NO。</span><br><span class="line">anon_mkdir_write_enable=YES/NO（NO）</span><br><span class="line"></span><br><span class="line">#如果设为 YES，则允许匿名登入者更多于上传或者建立目录之外的权限，譬如删除或者重命名。（如</span><br><span class="line">果 anon_upload_enable=NO，则匿名用户不能上传文件，但可以删除或者重命名已经存在的文件；如</span><br><span class="line">果 anon_mkdir_write_enable=NO，则匿名用户不能上传或者新建文件夹，但可以删除或者重命名已经</span><br><span class="line">存在的文件夹。）默认值为 NO。</span><br><span class="line">anon_other_write_enable=YES/NO（NO）</span><br><span class="line"></span><br><span class="line">#设置是否改变匿名用户上传文件（非目录）的属主。默认值为 NO。</span><br><span class="line">chown_uploads=YES/NO（NO）</span><br><span class="line"></span><br><span class="line">#设置匿名用户上传文件（非目录）的属主名。建议不要设置为 root。</span><br><span class="line">chown_username=username</span><br><span class="line"></span><br><span class="line">#设置匿名登入者新增或上传档案时的 umask 值。默认值为 077，则新建档案的对应权限为 700。</span><br><span class="line">anon_umask=077</span><br><span class="line"></span><br><span class="line">#若是启动这项功能，则必须提供一个档案/etc/vsftpd/banner_emails，内容为 email address。若是</span><br><span class="line">使用匿名登入，则会要求输入 email address，若输入的 email address 在此档案内，则不允许进入。</span><br><span class="line">默认值为 NO。</span><br><span class="line">deny_email_enable=YES/NO（NO）</span><br><span class="line"></span><br><span class="line">#此文件用来输入 email address，只有在 deny_email_enable=YES时，才会使用到此档案。若是使用匿名登入，则会要求输入 email address，若输入的 email address 在此档案内，则不允许进入。</span><br><span class="line">banned_email_file=/etc/vsftpd/banner_emails</span><br></pre></td></tr></table></figure>
+
+<p>匿名登录最重要的还是anonymous_enable=YES这个配置，表示启用了匿名</p>
+<p>下面是我配置好的匿名登录配置文件：vsftpd.conf</p>
+<blockquote>
+<p>allow_writeable_chroot=YES<br>anonymous_enable=YES<br>no_anon_password=YES<br>ftp_username=ftp<br>anon_root=/var/ftp<br>anon_upload_enable=YES<br>anon_world_readable_only=YES<br>anon_mkdir_write_enable=YES<br>anon_other_write_enable=YES<br>chown_uploads=YES<br>chown_username=nobody<br>anon_umask=077<br>#local_enable=YES<br>#write_enable=YES<br>local_umask=022<br>dirmessage_enable=YES<br>xferlog_enable=YES<br>connect_from_port_20=YES<br>xferlog_std_format=YES<br>listen=YES<br>listen_ipv6=NO<br>pam_service_name=vsftpd<br>userlist_enable=YES<br>tcp_wrappers=YES</p>
+</blockquote>
+<p>其中local_enable表示的是本地用户登录，no表示本地用户不能登录，需要注意的是ftp服务的读写权限首先是配置文件里面定义的权限，然后是本地文件夹本身的权限。我这里发现一个问题是这个报错：500 OOPS: vsftpd: refusing to run with writable root inside chroot()，我去网上搜索了一下，网上基本都说是这个问题：</p>
+<blockquote>
+<p>从2.3.5之后，vsftpd增强了安全检查，如果用户被限定在了其主目录下，则该用户的主目录不能再具有写权限了！如果检查发现还有写权限，就会报该错误。要修复这个错误，可以用命令chmod a-w /home/user去除用户主目录的写权限，注意把目录替换成你自己的。或者你可以在vsftpd的配置文件中增加下列两项中的一项：allow_writeable_chroot=YES</p>
+</blockquote>
+<p>但根据我测试，只能将根目录取消写权限。加这一行配置并没用，但根目录里面的文件或文件夹加上写权限并不会影响使用。</p>
+<p>如测试连接出现这个报错，去掉tcp_wrappers配置重启即可：</p>
+<p>500 OOPS: tcp_wrappers is set to YES but no tcp wrapper support compiled in</p>
+<h3 id="2-本地用户登录"><a href="#2-本地用户登录" class="headerlink" title="2.本地用户登录"></a>2.本地用户登录</h3><p><strong>本地用户设置</strong></p>
+<p><strong>local_enable=YES/NO****（YES）</strong></p>
+<p>控制是否允许本地用户登入，YES 为允许本地用户登入，NO为不允许。默认值为YES。</p>
+<p><strong>local_root=/home/username</strong></p>
+<p>当本地用户登入时，将被更换到定义的目录下。默认值为各用户的家目录。</p>
+<p><strong>write_enable=YES/NO****（YES）</strong></p>
+<p>是否允许登陆用户有写权限。属于全局设置，默认值为YES。</p>
+<p><strong>local_umask=022</strong></p>
+<p>本地用户新增档案时的umask 值。默认值为077。</p>
+<p><strong>file_open_mode=0755</strong></p>
+<p>本地用户上传档案后的档案权限，与chmod 所使用的数值相同。默认值为0666</p>
+<p>目录锁定配置：</p>
+<p>在默认配置下，本地用户登入FTP后可以使用cd命令切换到其他目录，这样会对系统带来安全隐患。可以通过以下三条配置文件来控制用户切换目录。</p>
+<p><strong>chroot_list_enable=YES/NO****（NO）</strong></p>
+<p>设置是否启用chroot_list_file配置项指定的用户列表文件。默认值为NO。</p>
+<p><strong>chroot_list_file=/etc/vsftpd.chroot_list</strong></p>
+<p>用于指定用户列表文件，该文件用于控制哪些用户可以切换到用户家目录的上级目录。</p>
+<p><strong>chroot_local_user=YES/NO****（NO）</strong></p>
+<p>用于指定用户列表文件中的用户是否允许切换到上级目录。默认值为NO。</p>
+<p><strong>通过搭配能实现以下几种效果：</strong></p>
+<p><strong>①</strong>当chroot_list_enable=YES，chroot_local_user=YES时，在/etc/vsftpd.chroot_list文件中列出的用户，可以切换到其他目录；未在文件中列出的用户，不能切换到其他目录。</p>
+<p><strong>②</strong>当chroot_list_enable=YES，chroot_local_user=NO时，在/etc/vsftpd.chroot_list文件中列出的用户，不能切换到其他目录；未在文件中列出的用户，可以切换到其他目录。</p>
+<p><strong>③</strong>当chroot_list_enable=NO，chroot_local_user=YES时，所有的用户均不能切换到其他目录。</p>
+<p><strong>④</strong>当chroot_list_enable=NO，chroot_local_user=NO时，所有的用户均可以切换到其他目录。</p>
+<p><strong>控制用户访问：</strong></p>
+<p>对于用户的访问控制可以通过/etc目录下的vsftpd.user_list和ftpusers文件来实现。</p>
+<p><strong>userlist_file=/etc/vsftpd.user_list</strong></p>
+<p>控制用户访问FTP的文件，里面写着用户名称。一个用户名称一行。</p>
+<p><strong>userlist_enable=YES/NO****（NO）</strong></p>
+<p>是否启用vsftpd.user_list文件。</p>
+<p><strong>userlist_deny=YES/NO****（YES）</strong></p>
+<p>决定vsftpd.user_list文件中的用户是否能够访问FTP服务器。若设置为YES，则vsftpd.user_list文件中的用户不允许访问FTP，若设置为NO，则只有vsftpd.user_list文件中的用户才能访问FTP。</p>
+<p><strong>/etc/vsftpd/ftpusers</strong>文件专门用于定义不允许访问FTP服务器的用户列表（<strong>注意</strong>:如果userlist_enable=YES,userlist_deny=NO,此时如果在vsftpd.user_list和ftpusers中都有某个用户时，那么这个用户是不能够访问FTP的，即ftpusers的优先级要高）。默认情况下vsftpd.user_list和ftpusers，这两个文件已经预设置了一些不允许访问FTP服务器的系统内部账户。如果系统没有这两个文件，那么新建这两个文件，将用户添加进去即可。</p>
+<p>下面是我配置好的本地用户登录配置文件 vsftpd.conf:</p>
+<blockquote>
+<p>anonymous_enable=NO<br>local_enable=YES<br>write_enable=YES<br>local_umask=022<br>dirmessage_enable=YES<br>xferlog_enable=YES<br>connect_from_port_20=YES<br>xferlog_std_format=YES<br>listen=YES<br>listen_ipv6=NO<br>pam_service_name=vsftpd<br>userlist_enable=YES<br>chroot_local_user=YES<br>local_root=/home/ftp/static<br>userlist_enable=YES<br>userlist_deny=YES</p>
+</blockquote>
+<p>这个配置文件匿名用户无法登录，切user_list和ftpusers里面的用户不能登录 user_list是userlist_enable启用的，ftpusers这个配置文件我没找到其定义的配置项，我怀疑应该是/etc/pam.d/vsftpd里面定义的，但这个不用深究。local_root锁定了用户家目录。</p>
+<p>记得做完mkdir /home/ftp/static</p>
+<h3 id="3-虚拟用户登录"><a href="#3-虚拟用户登录" class="headerlink" title="3.虚拟用户登录"></a>3.虚拟用户登录</h3><p>虚拟用户登录其登录的验证文件是/etc/pam.d/vsftpd，与本地登录不同的是，虚拟用户其本身也需要映射到一个本地用户，以本地用户来做为其权限载体，但可将多个虚拟用户映射为一个本地用户，然后在pam.d/vsftpd里面指定其用户账号密码文件，还需单独指定其虚拟用户配置文件，定义其ftp权限，ftp文件路径等。</p>
+<p><strong>虚拟用户设置</strong></p>
+<p>虚拟用户使用PAM认证方式。</p>
+<p><strong>pam_service_name=vsftpd</strong></p>
+<p>设置PAM使用的名称，默认值为/etc/pam.d/vsftpd。</p>
+<p><strong>guest_enable= YES/NO****（NO）</strong></p>
+<p>启用虚拟用户。默认值为NO。</p>
+<p><strong>guest_username=ftp</strong></p>
+<p>这里用来映射虚拟用户。默认值为ftp。</p>
+<p><strong>virtual_use_local_privs=YES/NO****（NO）</strong></p>
+<p>当该参数激活（YES）时，虚拟用户使用与本地用户相同的权限。当此参数关闭（NO）时，虚拟用户使用与匿名用户相同的权限。默认情况下此参数是关闭的（NO）。</p>
+<p>首先把虚拟用户的配置文件配置好/etc/vsftpd/vsftpd.conf:</p>
+<blockquote>
+<p>anonymous_enable=NO<br>local_enable=YES<br>write_enable=YES<br>local_umask=022<br>dirmessage_enable=YES<br>xferlog_enable=YES<br>connect_from_port_20=YES<br>xferlog_std_format=YES<br>listen=YES<br>listen_ipv6=NO<br><strong>pam_service_name=vsftpd</strong><br>userlist_enable=YES<br>chroot_local_user=YES<br>local_root=/home/ftp/static<br>userlist_enable=YES<br>userlist_deny=YES<br><strong>guest_enable=YES<br>guest_username=vsftpd<br>anon_upload_enable=NO<br>anon_mkdir_write_enable=NO<br>anon_other_write_enable=NO<br>user_config_dir=/etc/vsftpd/vusers</strong></p>
+</blockquote>
+<p>guest_enable启用虚拟用户，guest_username是虚拟用户映射到本地用户的用户名，anon的三个配置项代表匿名用户与虚拟用户的权限，因每个虚拟用户权限不一致，所以先关闭权限。user_config_dir表示虚拟用户的配置文件夹，这里需要注意的是:</p>
+<p><strong>/etc/vsftpd/vusers里面一个配置文件代表一个虚拟用户，且文件名需以虚拟用户名称来表示。</strong></p>
+<p><strong>/etc/vsftpd/vusers/ftpuser:</strong></p>
+<blockquote>
+<p>local_root=/home/ftp/static<br>write_enable=YES<br>anon_world_readable_only=NO<br>anon_upload_enable=YES<br>anon_mkdir_write_enable=YES<br>anon_other_write_enable=YES</p>
+</blockquote>
+<p>虚拟用户配置文件有了以后，就可以生成虚拟用户认证文件了，首先上面vsftpd.conf里面guest_username=vsftpd代表虚拟用户映射为vsftpd,pam_service_name=vsftpd表示其登录认证文件为/etc/pam.d/vsftpd这个认证文件，首先先创建虚拟用户账号密码文件，然后再用pam.d/vsftpd配置文件中指定这个虚拟用户文件。</p>
+<p>配置完的/etc/pam.d/vsftpd:</p>
+<blockquote>
+<p><strong>auth sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/virtualusers<br>account sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/virtualusers</strong><br>session optional pam_keyinit.so force revoke<br>auth required pam_listfile.so item=user sense=deny file=/etc/vsftpd/ftpusers onerr=succeed<br>auth required pam_shells.so<br>auth include password-auth<br>account include password-auth<br>session required pam_loginuid.so<br>session include password-auth</p>
+</blockquote>
+<p>上面两行为指定的虚拟用户认证文件，所以接下来需要创建virtualusers</p>
+<p>echo -e “ftpuser\n123456” &gt; /etc/vsftpd/virtualusers</p>
+<p>db_load -T -t hash -f /etc/vsftpd/virtualusers /etc/vsftpd/virtualusers.db</p>
+<p>chmod 600 /etc/vsftpd/virtualusers*</p>
+<p>mkdir /home/ftp/static;chown -R vsftpd.vsftpd /home/ftp/static</p>
+<p>这个时候用ftp测试工具测试一下可以登录就OK了。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036139.jpeg" alt="image.png"></p>
+<p>容易出现的报错：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035051.jpeg" alt="image.png"></p>
+<p>在ftp根目录如果用户拥有写权限的话便会报错</p>
+<p>421 Service not available, remote server has closed connection</p>
+<h3 id="目前最容易遇到的坑："><a href="#目前最容易遇到的坑：" class="headerlink" title="目前最容易遇到的坑："></a>目前最容易遇到的坑：</h3><p>1.文件夹加了写权限导致ftp账号无法登录</p>
+<p>2.虚拟用户的配置文件得在user_config_dir=/etc/vsftpd/vusers指定文件夹下面且每个虚拟用户一个配置文件，其文件名为自己的虚拟用户用户名</p>
+<p>3.无法启动vsftpd，基本上都是配置文件文件，建议用vsftpd默认自带的来进行修改，或者复制文中已经写好的配置文件。</p>
+<p>4.测试ftp连接性时尽量使用linux下的ftp工具:yum -y install ftp即可安装，因其出错时报错信息都比较准确，如果在windows直接测试的话可能直接就是无法登录，但没有对应的报错信息。</p>
+<h1 id="5-vsftpd主动模式与被动模式"><a href="#5-vsftpd主动模式与被动模式" class="headerlink" title="5.vsftpd主动模式与被动模式"></a>5.vsftpd主动模式与被动模式</h1><p>这里主要是讲主动模式与被动模式的实现，首先是最常用的被动模式</p>
+<h3 id="1-被动模式"><a href="#1-被动模式" class="headerlink" title="1.被动模式"></a>1.被动模式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pasv_enable=yes （Default: YES） 设置是否允许pasv模式</span><br><span class="line">pasv_max_port=10240 （Default: 0 (use any port)） pasv使用的最大端口</span><br><span class="line">pasv_min_port=20480 （Default: 0 (use any port)） pasv使用的最小端口</span><br></pre></td></tr></table></figure>
+
+<p>被动模式为这三个选项，因pasv默认为yes，所以在vsftpd中，默认也是使用被动模式来运行的。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035069.jpeg" alt="image.png"></p>
+<p>定义好最大最小端口后重启并测试</p>
+<p>systemctl restart vsftpd</p>
+<p>然后找一个windows或linux的ftp客户端进行测试（浏览器也行）：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035032.jpeg" alt="image.png"></p>
+<p>服务器中ftp没连接时的信息<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036198.jpeg" alt="image.png"></p>
+<p>然后用浏览器去访问ftp时的端口情况</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036194.jpeg" alt="image.png"></p>
+<p>可以知道，此时vsftpd开启了1408来作为传输端口，与我们配置的无异，被动模式成功运行。</p>
+<h3 id="2-主动模式"><a href="#2-主动模式" class="headerlink" title="2.主动模式"></a>2.主动模式</h3><p>pasv_enable=NO #关闭被动模式<br>port_enable=YES #启用主动模式<br>connect_from_port_20=YES #主动式连接使用的数据通道</p>
+<p>#Ftp_date_port=%portnumber% 上一选项使用NO参数是 指定数据传输端口</p>
+<blockquote>
+<p>anonymous_enable=NO<br>local_enable=YES<br>write_enable=YES<br>local_umask=022<br>dirmessage_enable=YES<br>xferlog_enable=YES<br>#connect_from_port_20=YES<br>xferlog_std_format=YES<br>listen=YES<br>listen_ipv6=NO<br>pam_service_name=vsftpd<br>userlist_enable=YES<br>chroot_local_user=YES<br>local_root=/home/ftp/static<br>userlist_enable=YES<br>userlist_deny=YES<br>guest_enable=YES<br>guest_username=vsftpd<br>anon_upload_enable=NO<br>anon_mkdir_write_enable=NO<br>anon_other_write_enable=NO<br>user_config_dir=/etc/vsftpd/vusers<br>#pasv_min_port=1380<br>#pasv_max_port=1500<br><strong>pasv_enable=NO<br>port_enable=YES<br>connect_from_port_20=YES</strong></p>
+</blockquote>
+<p>下面是测试：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036816.jpeg" alt="image.png"></p>
+<p>可以看到20端口启用了，所以主动模式成功运行了。但像浏览器，ftp命令行工具默认会使用被动模式进行连接，启用主动模式后便无法连接</p>
+<p>所以最好用ftp工具连接，连接时还需指定用主动模式连接</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036277.jpeg" alt="image.png"></p>
+<p>当然，如不关闭被动模式，则主动模式将于被动模式共存。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/ftp_hexo/" data-id="ckxjra7ow000br0v19hcafocz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/git_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/git_hexo/">git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Git是一种是分布式代码版本控制系统。可以有效、高速地处理从很小到非常大的项目版本管理。也是Linus Torvalds为了帮助管理Linux内核开发而开发的一个开放源码的版本控制软件。</p>
+<h1 id="git和svn的区别："><a href="#git和svn的区别：" class="headerlink" title="git和svn的区别："></a>git和svn的区别：</h1><p>1.GIT是分布式的，SVN不是:这是GIT和其它非分布式的版本控制系统，例如SVN，CVS<br>等，最核心的区别。<br>2.GIT把内容按元数据方式存储，而SVN是按文件︰所有的资源控制系统都是把文件的元信<br>息隐藏在一个类似.svn,.cvs等的文件夹里。<br>3.GIT分支和SVN的分支不同:分支在SVN中一点不特别，就是版本库中的另外的一个目<br>录。<br>4.GIT没有一个全局的版本号，而SVN有∶目前为止这是跟SVN相比GIT缺少的最大的一个特<br>征。<br>5.GIT的内容完整性要优于SVN:GIT的内容存储使用的是SHA-1哈希算法。这能确保代码内<br>容的完整性，确保在遇到磁盘故障和网络问题时降低对版本库的破坏。</p>
+<h1 id="git安装及使用"><a href="#git安装及使用" class="headerlink" title="git安装及使用"></a>git安装及使用</h1><h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><p>centos系统使用yum安装即可（ubantu则是apt-get），git本身对版本无过多需求，所以也无需在意版本号。</p>
+<p>yum -y install git //安装git</p>
+<h2 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h2><h3 id="配置git仓库"><a href="#配置git仓库" class="headerlink" title="配置git仓库"></a>配置git仓库</h3><p>Git提供了一个叫做git config 的工具，专门用来配置或读取相应的工作环境变量。<br>这些环境变量，决定了Git在各个环节的具体工作方式和行为。这些变量可以存放在以下三个不同的地方:<br>/etc/gitconfig文件:</p>
+<p>系统中对所有用户都普遍适用的配置。若使用git config时用–system选项，读写的就是这个文件。<br>~/.gitconfig文件:</p>
+<p>用户目录下的配置文件只适用于该用户。若使用git config时用-global选项，读写的就是这个文件。</p>
+<p>当前项目的Git目录中的配置文件（也就是工作目录中的.git/config文件)︰这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以<br>.git/config里的配置会覆盖/etc/gitconfig中的同名变量。</p>
+<p><strong>git config</strong></p>
+<p><strong>–global 使用全局配置文件</strong></p>
+<p><strong>–system 使用系统级配置文件</strong></p>
+<p><strong>–local</strong> <strong>使用版本库级配置文件</strong></p>
+<p>git config –global user.name “ysw” 配置使用用户</p>
+<p>git config –global user.email “<a href="mailto:1@qq.com">1@qq.com</a>“ 配置使用邮箱</p>
+<p>git config –global color.ui true 语法高亮</p>
+<p>[root@localhost ~]# git config –list</p>
+<p>user.name=ysw</p>
+<p><a href="mailto:user.email=1@11.com">user.email=1@11.com</a></p>
+<p>[root@localhost ~]# cat .gitconfig</p>
+<p>[user]</p>
+<p>name = ysw<br>email = <a href="mailto:1@11.com">1@11.com</a></p>
+<p>查看设置的用户和邮箱</p>
+<h3 id="git初始化"><a href="#git初始化" class="headerlink" title="git初始化"></a>git初始化</h3><p>mkdir git_data &amp;&amp; cd git_data</p>
+<p>git init //初始化 在git-server上应该使用用git –bare init</p>
+<p>git status //查看工作区状态</p>
+<p>//查看git创建的仓库文件</p>
+<p>[root@localhost git_data]# ll .git/</p>
+<p>总用量 12</p>
+<p>drwxr-xr-x 2 root root 6 5月 25 21:27 branches</p>
+<p>-rw-r–r– 1 root root 92 5月 25 21:27 config</p>
+<p>-rw-r–r– 1 root root 73 5月 25 21:27 description</p>
+<p>-rw-r–r– 1 root root 23 5月 25 21:27 HEAD</p>
+<p>drwxr-xr-x 2 root root 332 5月 25 21:27 hooks</p>
+<p>drwxr-xr-x 2 root root 21 5月 25 21:27 info</p>
+<p>drwxr-xr-x 4 root root 30 5月 25 21:27 objects</p>
+<p>drwxr-xr-x 4 root root 31 5月 25 21:27 refs</p>
+<p>branches //分支目录</p>
+<p>config //定义项目持有的配置选项</p>
+<p>description //仅供git web程序使用</p>
+<p>HEAD //指示当前的分支</p>
+<p>hooks //包含git钩子文件</p>
+<p>info // 包含一个全局排除文件（exclude文件）</p>
+<p>objects // 存放所有数据内容，有info和pack两个子文件</p>
+<p>refs // 存放指向（分支）的提交对象的指针</p>
+<p>index // 保存暂存区信息，在执行git init的时候，这个文件还没有</p>
+<h3 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h3><p>Git的几个区域:</p>
+<p><strong>工作区:就是你在电脑里能看到的目录。<br>暂存区:英文叫stage,或index。一般存放在”git目录”下的index文件(.git/index)中，所以我们把暂存区有时也叫作索引index).<br>版本库:工作区有一个隐藏目录git。这个不算工作区，而是Git的版本库。</strong></p>
+<p>git分为工作区域，暂存区域，本地仓库，远程仓库。在写代码时，代码首先是放到工作区域，然后上传到暂存区域，然后再是本地仓库，具体流程如下：</p>
+<p>工作目录 暂存区域 本地仓库 远程仓库</p>
+<p>git add –&gt; git commit–&gt; git push –&gt;</p>
+<p>git rm &lt;– git clone/git pull &lt;–</p>
+<p>git restore &lt;–</p>
+<p>git reset –hard 3de15d4 &lt;————-</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107486.jpeg" alt="image.png"></p>
+<h3 id="git命令介绍："><a href="#git命令介绍：" class="headerlink" title="git命令介绍："></a>git命令介绍：</h3><p>git add：将工作目录的代码提交至暂存区域</p>
+<p>git rm：从工作区和索引中删除文件</p>
+<p>git restore ：当工作区的文件删除时可通过该命令恢复,–staged为删除暂存区的文件 git –staged == git rm –cached</p>
+<p>git reset –hard xxx:将代码代码恢复到某个版本</p>
+<p>git commit :提交暂存仓库的代码到本地仓库</p>
+<p>git push / git clone/git pull :推拉远程仓库到本地仓库</p>
+<p>git mv : 移动或重命名一个文件、目录或符号链接</p>
+<p>git clone:克隆仓库到一个新目录</p>
+<p>git diff:显示提交之间、提交和工作区之间等的差异</p>
+<p>git show:显示各种类型的对象(仓库中的)和git log -p一样</p>
+<p>git log:查看仓库中的版本（只能看到已当前主版本为最新的历史版本）</p>
+<p>git log 查看提交的仓库信息</p>
+<p>git log –oneline 简略查看</p>
+<p>git log -p 查看详细提交的内容</p>
+<p>git reflog 查看所有仓库日志（git log只能看到当前主版本）</p>
+<p>git reflog：查看仓库中所有代码版本</p>
+<h3 id="Git使用示例："><a href="#Git使用示例：" class="headerlink" title="Git使用示例："></a>Git使用示例：</h3><p>[root@localhost git_data]# touch a b</p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>尚无提交</p>
+<p>未跟踪的文件:</p>
+<p>（使用 “git add &lt;文件&gt;…” 以包含要提交的内容）</p>
+<p>a<br>b</p>
+<p>提交为空，但是存在尚未跟踪的文件（使用 “git add” 建立跟踪）</p>
+<p>[root@localhost git_data]# git add a b</p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>尚无提交</p>
+<p>要提交的变更：</p>
+<p>（使用 “git rm –cached &lt;文件&gt;…” 以取消暂存）</p>
+<p>新文件： a<br>新文件： b</p>
+<p><strong>//此时a，b文件已经上传到暂存区域</strong></p>
+<p>[root@localhost git_data]# git commit -m “new” a b</p>
+<p>[master（根提交） 0958221] new</p>
+<p>2 files changed, 0 insertions(+), 0 deletions(-)</p>
+<p>create mode 100644 a</p>
+<p>create mode 100644 b</p>
+<p>[root@localhost git_data]# git log</p>
+<p>commit 0958221eeae14b91800e79af6e9056d202a7a22c (HEAD -&gt; master)</p>
+<p>Author: ysw <a href="mailto:1@11.com">1@11.com</a></p>
+<p>Date: Tue May 25 22:34:59 2021 -0400</p>
+<p>New</p>
+<p><strong>//Git仓库里面可以看到已提交的。</strong></p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>无文件要提交，干净的工作区</p>
+<p><strong>//提交完以后工作区就没有可以提交的了。</strong></p>
+<h4 id="删除工作区域并恢复："><a href="#删除工作区域并恢复：" class="headerlink" title="删除工作区域并恢复："></a>删除工作区域并恢复：</h4><p>[root@localhost git_data]# rm -rf a b</p>
+<p>[root@localhost git_data]# git restore a b</p>
+<p>//此时文件就恢复了</p>
+<p>用git rm删除：</p>
+<p>[root@localhost git_data]# git rm a145 b145</p>
+<p>rm ‘a145’</p>
+<p>rm ‘b145’</p>
+<p>[root@localhost git_data]# git reset –hard HEAD</p>
+<p>//这里无法通过restore进行恢复，因为git rm是直接将本地和暂存区的都删除了，只能去本地仓库拉取。</p>
+<h4 id="改名："><a href="#改名：" class="headerlink" title="改名："></a>改名：</h4><p>[root@localhost git_data]# git mv a a145</p>
+<p>[root@localhost git_data]# git mv b b145</p>
+<p>[root@localhost git_data]# ll</p>
+<p>总用量 0</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:41 a145</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:41 b145</p>
+<p>提交重命名的文件:</p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>要提交的变更：</p>
+<p>（使用 “git restore –staged &lt;文件&gt;…” 以取消暂存）</p>
+<p>重命名： a -&gt; a145<br>重命名： b -&gt; b145</p>
+<p>[root@localhost git_data]# git commit -m “145” a145 b145</p>
+<p>[master 9b2380a] 145</p>
+<p>2 files changed, 0 insertions(+), 0 deletions(-)</p>
+<p>create mode 100644 a145</p>
+<p>create mode 100644 b145</p>
+<h4 id="将工作区域更新到仓库某一版本："><a href="#将工作区域更新到仓库某一版本：" class="headerlink" title="将工作区域更新到仓库某一版本："></a>将工作区域更新到仓库某一版本：</h4><p>[root@localhost git_data]# git log –oneline</p>
+<p>9b2380a (HEAD -&gt; master) 145</p>
+<p>0958221 new</p>
+<p>[root@localhost git_data]# git reset –hard HEAD</p>
+<p>HEAD 现在位于 9b2380a 145</p>
+<h4 id="删除暂存区的代码文件："><a href="#删除暂存区的代码文件：" class="headerlink" title="删除暂存区的代码文件："></a>删除暂存区的代码文件：</h4><p>[root@localhost git_data]# echo 111 &gt; c</p>
+<p>[root@localhost git_data]# echo 222 &gt; d</p>
+<p>[root@localhost git_data]# git add c d</p>
+<p>[root@localhost git_data]# git status c d</p>
+<p>位于分支 master</p>
+<p>要提交的变更：</p>
+<p>（使用 “git restore –staged &lt;文件&gt;…” 以取消暂存）</p>
+<p>新文件： c<br>新文件： d</p>
+<p>[root@localhost git_data]# git restore –staged c d</p>
+<p>[root@localhost git_data]# git status c d</p>
+<p>位于分支 master</p>
+<p>未跟踪的文件:</p>
+<p>（使用 “git add &lt;文件&gt;…” 以包含要提交的内容）</p>
+<p>c<br>d</p>
+<p>提交为空，但是存在尚未跟踪的文件（使用 “git add” 建立跟踪）</p>
+<p>[root@localhost git_data]# git add c d</p>
+<p>[root@localhost git_data]# git rm –cached c d</p>
+<p>rm ‘c’</p>
+<p>rm ‘d’</p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>未跟踪的文件:</p>
+<p>（使用 “git add &lt;文件&gt;…” 以包含要提交的内容）</p>
+<p>c<br>d</p>
+<p>提交为空，但是存在尚未跟踪的文件（使用 “git add” 建立跟踪）</p>
+<h4 id="git文件比对："><a href="#git文件比对：" class="headerlink" title="git文件比对："></a>git文件比对：</h4><p>git比对工作区和暂存区的区别 diff：</p>
+<p>[root@localhost git_data]# git diff a.txt1</p>
+<p>diff –git a/a.txt1 b/a.txt1</p>
+<p>index e69de29..2aaba2d 100644</p>
+<p>— a/a.txt1</p>
+<p>+++ b/a.txt1</p>
+<p>@@ -0,0 +1 @@</p>
+<p>+asdfasfasf</p>
+<p>[root@localhost git_data]# git commit -m “new2 “ a.txt1</p>
+<p>[master 4e17e88] new2</p>
+<p>1 file changed, 1 insertion(+)</p>
+<p>create mode 100644 a.txt1</p>
+<p>[root@localhost git_data]# git diff a.txt1</p>
+<p>对比暂存区和仓库的区别</p>
+<p>[root@localhost git_data]# git add a.txt1</p>
+<p>[root@localhost git_data]# git diff –cached a.txt1</p>
+<p>diff –git a/a.txt1 b/a.txt1</p>
+<p>index 2aaba2d..cc6fda8 100644</p>
+<p>— a/a.txt1</p>
+<p>+++ b/a.txt1</p>
+<p>@@ -1 +1 @@</p>
+<p>-asdfasfasf</p>
+<p>+1ds</p>
+<h3 id="git标签"><a href="#git标签" class="headerlink" title="git标签"></a>git标签</h3><p>git tag -a v1.0 -m “banben” //为当前版本库打上标签，如要为指定版本库打标签可先用git reflog找到对应版本的hash值，然后git tag -a v1.0 4e17e88 -m “banben”</p>
+<p>git tag //查看历史标签</p>
+<p>git reset –hard v1.0 //可以通过标签名回滚<br><strong>//git的使用本身并没有太多难度，大多数主要就是围绕着工作区域，暂存区域和本地仓库的工作，其流程无非就是在工作区域编写代码然后上传到暂存区域再上传到本地仓库，暂存区域和工作区域的代码文件即使删除也可以通过本地仓库找回来。需要注意的是如果将版本更新到仓库最新以前的版本之后使用git log是看不到最新的版本，只能看到当前主版本及以前的代码，使用log reflog可以看到所有的。</strong></p>
+<h3 id="git分支"><a href="#git分支" class="headerlink" title="git分支"></a>git分支</h3><p>分支即使平行空间，假设你在为某个手机系统研发拍照功能，代码已经完成了80%，但如果将这不完整的代码直接提供到git仓库中，又可能影响其他人的工作，此时我们便可以在该软件的项目上创建一个名叫“拍照功能”的分支，这个分支只属于你自己，而其他人看不到，等代码编写完成后再与原来的项目主分支合并下即可，这样既能保证代码不丢失，又不影响其他人的工作。</p>
+<p>git log –oneline –decorate 默认分支指向最后一次的master分支</p>
+<p>git branch testing 新增分支</p>
+<p>git branch 查看分支</p>
+<p>git checkout testing 切换分支</p>
+<p>git branch -d testing 删除分支</p>
+<p>git merge xxx 合并分支</p>
+<h4 id="合并例："><a href="#合并例：" class="headerlink" title="合并例："></a>合并例：</h4><p>[root@localhost git_data]# git branch testing // 添加分支</p>
+<p>[root@localhost git_data]# git checkout testing //切换分支</p>
+<p>A c</p>
+<p>A d</p>
+<p>切换到分支 ‘testing’</p>
+<p>[root@localhost git_data]# ll</p>
+<p>总用量 8</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 a</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 a145</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 b</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 b145</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:43 c</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:38 d</p>
+<p>[root@localhost git_data]# echo dfaf &gt; testing</p>
+<p>[root@localhost git_data]# git add testing</p>
+<p>[root@localhost git_data]# git commit -m “testing” testing</p>
+<p>[testing aed242b] testing</p>
+<p>1 file changed, 1 insertion(+)</p>
+<p>create mode 100644 testing</p>
+<p>[root@localhost git_data]# git log –oneline</p>
+<p>aed242b (HEAD -&gt; testing) testing</p>
+<p>9b2380a (master) 145</p>
+<p>0958221 new</p>
+<p>//在这个分支上新增代码并上传</p>
+<p>[root@localhost git_data]# git checkout master</p>
+<p>A c</p>
+<p>A d</p>
+<p>切换到分支 ‘master’</p>
+<p>[root@localhost git_data]# ll</p>
+<p>总用量 8</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 a</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 a145</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 b</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 b145</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:43 c</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:38 d</p>
+<p>[root@localhost git_data]# git merge testing</p>
+<p>更新 9b2380a..aed242b</p>
+<p>Fast-forward</p>
+<p>testing | 1 +</p>
+<p>1 file changed, 1 insertion(+)</p>
+<p>create mode 100644 testing</p>
+<p>//切换到主版本并合并分支</p>
+<p>[root@localhost git_data]# ll</p>
+<p>总用量 12</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 a</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 a145</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 b</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 b145</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:43 c</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:38 d</p>
+<p>-rw-r–r– 1 root root 5 5月 26 01:54 testing</p>
+<p>[root@localhost git_data]# git log –oneline</p>
+<p>aed242b (HEAD -&gt; master, testing) testing</p>
+<p>9b2380a 145</p>
+<p>0958221 new</p>
+<p>//<strong>新增分支时分支会复制主版本master的所有代码文件，此时分支与master一样，在分支上新增了代码后，这时分支上的代码比主版本新，可以通过merge合并分支。合并时如果代码冲突会合并失败，合并失败需手动修正冲突。</strong></p>
+<h1 id="git远程仓库："><a href="#git远程仓库：" class="headerlink" title="git远程仓库："></a>git远程仓库：</h1><p>这里有两台主机，分别是git-server和git-client，虽然git是分布式，但是为了区分一下就这样命名了。</p>
+<p>这里是git-server上已经建立好的仓库（master分支）：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107572.jpeg" alt="image.png"></p>
+<p>git-client：</p>
+<p>git clone <a href="ssh://10.10.10.85/root/git/.git">ssh://10.10.10.85/root/git/.git</a> //需要输入密码，如果不想输入密码可以通过ssh-keygen生成密钥将公钥传到server上这样client可以免密登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@ysw-virtual-machine:/git-core<span class="comment"># ll git/total 36</span></span><br><span class="line">drwxr-xr-x 3 root root 4096 Jun  4 01:43 ./</span><br><span class="line">drwxr-xr-x 4 root root 4096 Jun  4 01:43 ../</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  4 01:43 1</span><br><span class="line">-rw-r--r-- 1 root root    5 Jun  4 01:43 2</span><br><span class="line">-rw-r--r-- 1 root root    5 Jun  4 01:43 3</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  4 01:43 4</span><br><span class="line">-rw-r--r-- 1 root root    2 Jun  4 01:43 5</span><br><span class="line">drwxr-xr-x 8 root root 4096 Jun  4 01:43 .git/</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  4 01:43 ysw</span><br></pre></td></tr></table></figure>
+
+<p>此时便克隆成功了</p>
+<p>还有一种方式是通过git remote add：</p>
+<p>clone无需创建文件夹，可以直接把库复制过来，remote要麻烦一点,需要手动创建文件夹以及空库</p>
+<p>首先创建一个文件夹：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">root@ysw-virtual-machine:~ mkdir /yswroot@ysw-virtual-machine:~# cd /ysw</span><br><span class="line">root@ysw-virtual-machine:/ysw# git init</span><br><span class="line">Initialized empty Git repository in /ysw/.git/</span><br><span class="line">root@ysw-virtual-machine:/ysw# git remote add origin ssh://10.10.10.85/root/git/.git</span><br><span class="line">root@ysw-virtual-machine:/ysw# git pull origin master</span><br><span class="line">root@10.10.10.85&#x27;s password:</span><br><span class="line">remote: Enumerating objects: 11, done.</span><br><span class="line">remote: Counting objects: 100% (11/11), done.</span><br><span class="line">remote: Compressing objects: 100% (6/6), done.</span><br><span class="line">remote: Total 11 (delta 2), reused 0 (delta 0)</span><br><span class="line">Unpacking objects: 100% (11/11), 640 bytes | 128.00 KiB/s, done.</span><br><span class="line">From ssh://10.10.10.85/root/git/branch            master     -&gt; FETCH_HEAD[new branch]      master     -&gt; origin/master</span><br><span class="line">root@ysw-virtual-machine:/ysw# ll</span><br><span class="line">total 36</span><br><span class="line">drwxr-xr-x  3 root root 4096 Jun  4 01:49 ./</span><br><span class="line">drwxr-xr-x 23 root root 4096 Jun  4 01:48 ../</span><br><span class="line">-rw-r--r--  1 root root    8 Jun  4 01:49 1</span><br><span class="line">-rw-r--r--  1 root root    5 Jun  4 01:49 2</span><br><span class="line">-rw-r--r--  1 root root    5 Jun  4 01:49 3</span><br><span class="line">-rw-r--r--  1 root root    8 Jun  4 01:49 4</span><br><span class="line">-rw-r--r--  1 root root    2 Jun  4 01:49 5</span><br><span class="line">drwxr-xr-x  8 root root 4096 Jun  4 01:49 .git/</span><br><span class="line">-rw-r--r--  1 root root    8 Jun  4 01:49 ysw</span><br></pre></td></tr></table></figure>
+
+<p>此时就成功了</p>
+<h2 id="在本地创建新代码并推送至远程仓库："><a href="#在本地创建新代码并推送至远程仓库：" class="headerlink" title="在本地创建新代码并推送至远程仓库："></a>在本地创建新代码并推送至远程仓库：</h2><p><strong>首先将在本地创建测试代码并上传到本地仓库：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@ysw-virtual-machine:/ysw# echo ceshi &gt;ceshi</span><br><span class="line">root@ysw-virtual-machine:/ysw# git add ceshi</span><br><span class="line">root@ysw-virtual-machine:/ysw# git commit -m &quot;ceshi&quot; ceshi</span><br><span class="line">[master 9a3d5d5] ceshi</span><br><span class="line">1 file changed, 1 insertion(+)</span><br><span class="line">create mode 100644 ceshi</span><br></pre></td></tr></table></figure>
+
+<p><strong>然后上传到远程仓库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```root@ysw-virtual-machine:/ysw# git push -u origin master</span><br><span class="line">root@10.10.10.85&#x27;s password:</span><br><span class="line">Enumerating objects: 4, done.</span><br><span class="line">Counting objects: 100% (4/4), done.</span><br><span class="line">Delta compression using up to 2 threads</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 247 bytes | 247.00 KiB/s, done.</span><br><span class="line">Total 3 (delta 1), reused 0 (delta 0)</span><br><span class="line">To ssh://10.10.10.85/root/git/.git</span><br><span class="line">111c7d3..9a3d5d5  master -&gt; master</span><br><span class="line">Branch &#x27;master&#x27; set up to track remote branch &#x27;master&#x27; from &#x27;origin&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>git-server：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root@ysw-virtual-machine:~/git# git reflog</span><br><span class="line">9a3d5d5 (HEAD -&gt; master) HEAD@&#123;0&#125;: push</span><br><span class="line">111c7d3 HEAD@&#123;1&#125;: commit: new 3</span><br><span class="line">1412870 HEAD@&#123;2&#125;: reset: moving to HEAD</span><br><span class="line">1412870 HEAD@&#123;3&#125;: push</span><br><span class="line">76eca6c HEAD@&#123;4&#125;: commit (initial): new</span><br><span class="line">root@ysw-virtual-machine:~/git# git reset --hard</span><br><span class="line">HEAD is now at 9a3d5d5 ceshi</span><br><span class="line">root@ysw-virtual-machine:~/git# ll</span><br><span class="line">total 40</span><br><span class="line">drwxr-xr-x 3 root root 4096 Jun  4 01:53 ./</span><br><span class="line">drwx------ 5 root root 4096 Jun  3 20:59 ../</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  3 19:39 1</span><br><span class="line">-rw-r--r-- 1 root root    5 Jun  3 19:39 2</span><br><span class="line">-rw-r--r-- 1 root root    5 Jun  3 19:39 3</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  3 20:24 4</span><br><span class="line">-rw-r--r-- 1 root root    2 Jun  3 20:42 5</span><br><span class="line">-rw-r--r-- 1 root root    6 Jun  4 01:53 ceshi</span><br><span class="line">drwxr-xr-x 8 root root 4096 Jun  4 01:53 .git/</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  3 20:24 ysw</span><br></pre></td></tr></table></figure>
+
+<h1 id="gitlab"><a href="#gitlab" class="headerlink" title="gitlab"></a>gitlab</h1><p>GitLab是一个用于仓库管理系统的开源项目。使用Cit作为代码管理工具，并在此基础上搭建起来的web服务。可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用。</p>
+<h2 id="gitlab服务构成："><a href="#gitlab服务构成：" class="headerlink" title="gitlab服务构成："></a>gitlab服务构成：</h2><p>nginx静态web服务器<br>gitlab-workhorse:轻量级的反向代理服务器<br>logrotate：日志文件管理工具<br>postgresql：数据库<br>redis：缓存数据库<br>sidekiq：用在后台执行队列任务（异步执行）。（Ruby）<br>unicorn:an http server for rack applications .gitlab rails应用是托管在这个服务器上面的</p>
+<h2 id="gitlab安装"><a href="#gitlab安装" class="headerlink" title="gitlab安装:"></a>gitlab安装:</h2><h3 id="redhad"><a href="#redhad" class="headerlink" title="redhad:"></a>redhad:</h3><p>sudo dnf install -y curl policycoreutils openssh-server perl<br><a target="_blank" rel="noopener" href="https://packages.gitlab.com/gitlab/">https://packages.gitlab.com/gitlab/</a> //去官网下载包<br>curl -s <a target="_blank" rel="noopener" href="https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh">https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh</a> | sudo bash<br>sudo yum install gitlab-ce-13.11.4-ce.0.el8.x86_64</p>
+<h3 id="ubuntu安装-（换成国内源）"><a href="#ubuntu安装-（换成国内源）" class="headerlink" title="ubuntu安装:（换成国内源）"></a>ubuntu安装:（换成国内源）</h3><ol>
+<li>安装配置依赖项 sudo apt-get update<br> sudo apt-get install -y curl openssh-server ca-certificates</li>
+</ol>
+<p>2.安装发送邮件的（可以用自己熟悉的代替） sudo apt-get install -y postfix</p>
+<p>安装过程中会弹出对话框，按TAB键让按钮点亮后按Enter或者空格。填文字的地方随便写，是邮件中显示的发送者。</p>
+<p>3.下载安装脚本 curl <a target="_blank" rel="noopener" href="https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh">https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh</a> | sudo bash</p>
+<p>4.修改安装脚本 vim /etc/apt/sources.list.d/gitlab_gitlab-ce.list</p>
+<p>把原来的两行删除或者注释（#是行注释），然后增加<br>deb <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu</a> bionic main<br>deb-src <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu</a> bionic main</p>
+<p>再次执行<br>sudo apt-get update<br><a target="_blank" rel="noopener" href="http://t.zoukankan.com/whm-blog-p-11557498.html">http://t.zoukankan.com/whm-blog-p-11557498.html</a><br>5.安装<br>sudo apt-get install gitlab-ce=13.10.5-ce.0<br>完成后需要改一下external_url，将其改为本机的ip地址（访问地址）<br>vim /etc/gitlab/gitlab.rb：<br>external_url ‘<a target="_blank" rel="noopener" href="http://10.10.10.10/">http://10.10.10.10</a>‘</p>
+<p>sudo gitlab-ctl reconfigure<br>初始化完成以后<br>gitlab-ctl status //查看gitlab进程状态<br>gitlab-ctl start //启动，但初始化完成会自动启动，不用再启动。<br>访问地址：<a target="_blank" rel="noopener" href="http://ip/">http://ip</a><br>启动了以后访问出现报错：<br>Whoops, GitLab is taking too much time to respond. 502<br>可以free -h看一下内存，一般是内存不够</p>
+<h2 id="使用：-1"><a href="#使用：-1" class="headerlink" title="使用："></a>使用：</h2><p>第一次登录需要修改密码，账号为root。首页：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107468.jpeg" alt="image.png"></p>
+<h3 id="注册限制："><a href="#注册限制：" class="headerlink" title="注册限制："></a>注册限制：</h3><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107491.jpeg" alt="image.png"></p>
+<p>设置了注册限制以后无法在登录页面注册，只能通过管理员账号添加注册账号</p>
+<h3 id="中文设置："><a href="#中文设置：" class="headerlink" title="中文设置："></a>中文设置：</h3><p>首次登陆需要重置密码，用户为root，然后设置流程为<br>右上角的头像-preferences-Localization-language-简体中文</p>
+<h3 id="备份："><a href="#备份：" class="headerlink" title="备份："></a>备份：</h3><p>对gitlab进行备份将会创建一个包含所有库和附件的归档文件。对备份的恢复只能恢复到与备份时的gitlab相同的版本。将gitlab迁移到另一台服务器上的最佳方法就是通过备份和还原。<br>gitlab提供了一个简单的命令行来备份整个gitlab，并且能灵活的满足需求。<br>备份文件将保存在配置文件中定义的backup_path中，文件名为TIMESTAMP_gitlab_backup.tar,TIMESTAMP为备份时的时间。TIMESTAMP的格式为:EPOCH_YYYY_MM_DD_Gitlab-version.<br>如果自定义备份目录需要赋予git权限<br>配置文件中加入<br>gitlab_rails[‘backup_path’] = “/data/ backup/gitlab”<br>gitlab_rails[‘backup_keep_time’ = 604800</p>
+<p>备份保留的时间(以秒为单位，这个是七天默认值)，</p>
+<p>mkdir / data/ backup/gitlab<br>chown -R git.git /data/ backup/gitlab</p>
+<p>完成后执行gitlab-ctl reconfigure</p>
+<p>备份<br>gitlab-rake gitlab:backup:create<br>恢复<br>gitlab-rake gitlab:backup:restore BACKUP=1537261122_2018_09_18_9.2.5</p>
+<h3 id="gitlab配置smtp邮件功能："><a href="#gitlab配置smtp邮件功能：" class="headerlink" title="gitlab配置smtp邮件功能："></a>gitlab配置smtp邮件功能：</h3><p>vim /etc/gitlab/gitlab.rb:<br>gitlab_rails[‘smtp_enable’] = true<br>gitlab_rails[‘smtp_address’] = “smtp.qq.com”<br>gitlab_rails[‘smtp_port’] = 465<br>gitlab_rails[‘smtp_user_name’] = “<a href="mailto:1072023998@qq.com">1072023998@qq.com</a>“<br>gitlab_rails[‘smtp_password’] = “jlgwsbmvbedebfdf”<br>gitlab_rails[‘smtp_domain’] = “smtp.qq.com”<br>gitlab_rails[‘smtp_authentication’] = “login”<br>gitlab_rails[‘smtp_enable_starttls_auto’] = true<br>gitlab_rails[‘smtp_tls’] = true<br>gitlab_rails[‘smtp_pool’] = false<br>gitlab_rails[‘gitlab_email_enabled’]=true<br>gitlab_rails[‘gitlab_email_display_name’]=’gitlab’<br>gitlab_rails[‘gitlab_email_from’]<a href="mailto:='1072023998@qq.com">=‘1072023998@qq.com</a>‘<br>gitlab_rails[‘gitlab_email_reply_to’]<a href="mailto:='1072023998@qq.com">=‘1072023998@qq.com</a>‘<br>gitlab_rails[‘gitlab_email_subject_suffix’]=’[gitlab]’</p>
+<p>修改完成后初始化配置<br>gitlab-ctl reconfigure<br>gitlab-ctl stop &amp;&amp;gitlab-ctl start</p>
+<p>完成以后测试：<br>gitlab-rails console<br>irb(main):002:0&gt;<br>Notify.test_email(<a href="mailto:'1072023998@qq.com">‘1072023998@qq.com</a>‘,’Message Subject’,’Message Body’).deliver_now<br>测试邮件发送后前往邮箱查看</p>
+<h3 id="创建用户，组，项目："><a href="#创建用户，组，项目：" class="headerlink" title="创建用户，组，项目："></a>创建用户，组，项目：</h3><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107595.jpeg" alt="image.png"></p>
+<h4 id="新建用户："><a href="#新建用户：" class="headerlink" title="新建用户："></a>新建用户：</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107479.jpeg" alt="image.png"></p>
+<p>这里如果输入了正确的邮箱并设置了发送邮箱的服务器，便会在用户创建完成以后向该邮箱发送邮件</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107803.jpeg" alt="image.png"></p>
+<p>点击修改密码</p>
+<h4 id="创建群组："><a href="#创建群组：" class="headerlink" title="创建群组："></a>创建群组：</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107034.jpeg" alt="image.png"></p>
+<p>将用户加入群组并授予开发者权限</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108174.jpeg" alt="image.png"></p>
+<h4 id="新建项目："><a href="#新建项目：" class="headerlink" title="新建项目："></a>新建项目：</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107216.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107267.jpeg" alt="image.png"></p>
+<p>邀请成员或群组便可以使其加入该项目</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108205.jpeg" alt="image.png"></p>
+<p>此时就应该将gitlab作为git的远程仓库来进行使用了。</p>
+<h3 id="将gitlab作为git的远程仓库："><a href="#将gitlab作为git的远程仓库：" class="headerlink" title="将gitlab作为git的远程仓库："></a>将gitlab作为git的远程仓库：</h3><p>下面是创建完后gitlab自带的命令行指示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Git 全局设置</span><br><span class="line">git config --global user.name &quot;Administrator&quot;</span><br><span class="line">git config --global user.email &quot;admin@example.com&quot;</span><br><span class="line"></span><br><span class="line">创建一个新仓库</span><br><span class="line">git clone http://10.10.10.90/root/dev.git</span><br><span class="line">cd dev</span><br><span class="line">touch README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;add README&quot;</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">推送现有文件夹</span><br><span class="line">cd existing_folder</span><br><span class="line">git init</span><br><span class="line">git remote add origin http://10.10.10.90/root/dev.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;Initial commit&quot;</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">推送现有的 Git 仓库</span><br><span class="line">cd existing_repo</span><br><span class="line">git remote rename origin old-origin</span><br><span class="line">git remote add origin http://10.10.10.90/root/dev.git</span><br><span class="line">git push -u origin --all</span><br><span class="line">git push -u origin --tags</span><br></pre></td></tr></table></figure>
+
+<p>如果是gitlab有数据git上没有就在git上使用clone。如果是将git上的代码仓库推送到gitlab上就用推送现有文件夹或推送现有仓库。</p>
+<p>因git与gitlab传输时可以通过两种方式，http与ssh</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107774.jpeg" alt="image.png"></p>
+<p>这里我们使用ssh，首先在linux（git-server）上创建秘钥并把公钥传到gitlab上以实现免密传输。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br><span class="line">cat /root/.ssh/id_rsa.pub //将里面的内容复制到gitlab</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107828.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107040.jpeg" alt="image.png"></p>
+<p>粘贴复制的公钥</p>
+<p>由于这里git本地已有仓库，就通过remote设置远程仓库然后将代码推送过去</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108089.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108427.jpeg" alt="image.png"></p>
+<p>此时刷新一下gitlab可以看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107419.jpeg" alt="image.png"></p>
+<p>所有代码文件都上传上来了！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/git_hexo/" data-id="ckxjra7oy000gr0v1h8tw5y1z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-jdk环境变量_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/jdk%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/jdk%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_hexo/">jdk环境变量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_131 export JRE_HOME=$&#123;JAVA_HOME&#125;/jre export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib:$CLASSPATH export JAVA_PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;JRE_HOME&#125;/bin export PATH=$PATH:$&#123;JAVA_PATH&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/jdk%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_hexo/" data-id="ckxjra7p2000qr0v1awqsgehe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-keepalived_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/keepalived_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/keepalived_hexo/">keepalived</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h1><p>keepalived服务是一个高可用服务，用于解决服务器单点故障，保证服务器能执行高可用。一般keepalived于lvs一起使用，本身其就有检查lvs的状态功能。</p>
+<p>keepalived基于VRRP协议，VRRP是虚拟路由器冗余协议，VRRP出现的目的就是为了解决静态路由单点故障问题的，它能够保证当个别节点宕机时，整个网络可以不间断地运行。</p>
+<p>keepalived配置完毕以后，根据配置文件内容，会将多个服务器定义为一组实例，生成一个或多个虚拟IP和虚拟MAC地址，一般为一个主节点和一个（或多个）备用节点，正常情况下其VIP（虚拟IP）和对应MAC地址会在主节点中监听并向外提供服务，当主节点出现故障时，其备用节点就会监听其IP代替主节点提供服务（如有多个备用节点会根据其优先级大小对比）。所以对用户来说，即使挂掉一个或多个服务器仍能正常访问到，也就实现了高可用。</p>
+<h1 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h1><p>安装一般有两种方式，yum或者源码安装，yum安装的话阿里云或者国内常见源都有keepalived的包，如果是源码安装就需要去官方下载</p>
+<p>官方地址：<a target="_blank" rel="noopener" href="https://keepalived.org/">https://keepalived.org/</a></p>
+<h2 id="yum安装："><a href="#yum安装：" class="headerlink" title="yum安装："></a>yum安装：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum list keepalived</span><br><span class="line"></span><br><span class="line">yum -y install keepalived</span><br></pre></td></tr></table></figure>
+
+<h2 id="源码安装："><a href="#源码安装：" class="headerlink" title="源码安装："></a>源码安装：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf keepalived-2.2.1.tar.gz</span><br><span class="line"></span><br><span class="line">cd keepalived-2.2.1</span><br><span class="line"></span><br><span class="line">./configure --prefix=/usr/local/keepalived</span><br><span class="line"></span><br><span class="line">make&amp;&amp;make install</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-keepalived配置文件"><a href="#2-keepalived配置文件" class="headerlink" title="2.keepalived配置文件"></a>2.keepalived配置文件</h1><p>/etc/keepalived/keepalived.conf (源码安装一般在自身目录下)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File <span class="keyword">for</span> keepalived</span><br><span class="line">global_defs &#123;                                     <span class="comment">#全局定义部分</span></span><br><span class="line">    notification_email &#123;                          <span class="comment">#设置报警邮件地址，可设置多个</span></span><br><span class="line">        acassen@firewall.loc                      <span class="comment">#接收通知的邮件地址</span></span><br><span class="line">    &#125;  </span><br><span class="line">    notification_email_from test0@163.com         <span class="comment">#设置 发送邮件通知的地址</span></span><br><span class="line">    smtp_server smtp.163.com                      <span class="comment">#设置 smtp server 地址，可是ip或域名.可选端口号 （默认25）</span></span><br><span class="line">    smtp_connect_timeout 30                       <span class="comment">#设置 连接 smtp server的超时时间</span></span><br><span class="line">    router_id LVS_DEVEL                           <span class="comment">#主机标识，用于邮件通知</span></span><br><span class="line">    vrrp_skip_check_adv_addr   </span><br><span class="line">    vrrp_strict                                   <span class="comment">#严格执行VRRP协议规范，此模式不支持节点单播</span></span><br><span class="line">    vrrp_garp_interval 0   </span><br><span class="line">    vrrp_gna_interval 0   </span><br><span class="line">    script_user keepalived_script                 <span class="comment">#指定运行脚本的用户名和组。默认使用用户的默认组。如未指定，默认为keepalived_script 用户，如无此用户，则使用root</span></span><br><span class="line">    enable_script_security                        <span class="comment">#如过路径为非root可写，不要配置脚本为root用户执行。</span></span><br><span class="line">&#125;   </span><br><span class="line">vrrp_sync_group &#123;</span><br><span class="line">group&#123;</span><br><span class="line">VI_1</span><br><span class="line">VI_2</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script chk_nginx_service &#123;                   <span class="comment">#VRRP 脚本声明</span></span><br><span class="line">    script <span class="string">&quot;/etc/keepalived/chk_nginx.sh&quot;</span>         <span class="comment">#周期性执行的脚本</span></span><br><span class="line">    interval 3                                    <span class="comment">#运行脚本的间隔时间，秒</span></span><br><span class="line">    weight -20                                    <span class="comment">#权重，priority值减去此值要小于备服务的priority值</span></span><br><span class="line">    fall 3                                        <span class="comment">#检测几次失败才为失败，整数</span></span><br><span class="line">    rise 2                                        <span class="comment">#检测几次状态为正常的，才确认正常，整数</span></span><br><span class="line">    user keepalived_script                        <span class="comment">#执行脚本的用户或组</span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;                              <span class="comment">#vrrp 实例部分定义，VI_1自定义名称</span></span><br><span class="line">    state MASTER                                  <span class="comment">#指定 keepalived 的角色，必须大写 可选值：MASTER|BACKUP</span></span><br><span class="line">    interface ens33                               <span class="comment">#网卡设置，lvs需要绑定在网卡上，realserver绑定在回环口。区别：lvs对访问为外，realserver为内不易暴露本机信息</span></span><br><span class="line">    virtual_router_id 51                          <span class="comment">#虚拟路由标识，是一个数字，同一个vrrp 实例使用唯一的标识，MASTER和BACKUP 的 同一个 vrrp_instance 下 这个标识必须保持一致</span></span><br><span class="line">    priority 100                                  <span class="comment">#定义优先级，数字越大，优先级越高。</span></span><br><span class="line">    advert_int 1                                  <span class="comment">#设定 MASTER 与 BACKUP 负载均衡之间同步检查的时间间隔，单位为秒，两个节点设置必须一样</span></span><br><span class="line">    authentication &#123;                              <span class="comment">#设置验证类型和密码，两个节点必须一致</span></span><br><span class="line">        auth_type PASS  </span><br><span class="line">        auth_pass 1111  </span><br><span class="line">    &#125;   </span><br><span class="line">    virtual_ipaddress &#123;                           <span class="comment">#设置虚拟IP地址，可以设置多个虚拟IP地址，每行一个</span></span><br><span class="line">        192.168.119.130   </span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;                                <span class="comment">#脚本监控状态</span></span><br><span class="line">        chk_nginx_service                         <span class="comment">#可加权重，但会覆盖声明的脚本权重值。chk_nginx_service weight -20</span></span><br><span class="line">    &#125;</span><br><span class="line">        notify_master <span class="string">&quot;/etc/keepalived/start_haproxy.sh start&quot;</span>  <span class="comment">#当前节点成为master时，通知脚本执行任务</span></span><br><span class="line">        notify_backup <span class="string">&quot;/etc/keepalived/start_haproxy.sh stop&quot;</span>   <span class="comment">#当前节点成为backup时，通知脚本执行任务</span></span><br><span class="line">        notify_fault  <span class="string">&quot;/etc/keepalived/start_haproxy.sh stop&quot;</span>   <span class="comment">#当当前节点出现故障，执行的任务; </span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">virtual_server 192.168.119.130 80  &#123;          <span class="comment">#定义RealServer对应的VIP及服务端口，IP和端口之间用空格隔开</span></span><br><span class="line">    delay_loop 6                              <span class="comment">#每隔6秒查询realserver状态</span></span><br><span class="line">    lb_algo rr                                <span class="comment">#后端调试算法（load balancing algorithm）</span></span><br><span class="line">    lb_kind DR                                <span class="comment">#LVS调度类型NAT/DR/TUN</span></span><br><span class="line">    <span class="comment">#persistence_timeout 60                   同一IP的连接60秒内被分配到同一台realserver</span></span><br><span class="line">    protocol TCP                              <span class="comment">#用TCP协议检查realserver状态</span></span><br><span class="line">    real_server 192.168.119.120 80 &#123;  </span><br><span class="line">        weight 1                              <span class="comment">#权重，最大越高，lvs就越优先访问</span></span><br><span class="line">        TCP_CHECK &#123;                           <span class="comment">#keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span></span><br><span class="line">            connect_timeout 10                <span class="comment">#10秒无响应超时</span></span><br><span class="line">            retry 3                           <span class="comment">#重连次数3次</span></span><br><span class="line">            delay_before_retry 3              <span class="comment">#重连间隔时间</span></span><br><span class="line">            connect_port 80                   <span class="comment">#健康检查realserver的端口</span></span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;   </span><br><span class="line">    real_server 192.168.119.121 80 &#123;  </span><br><span class="line">        weight 1                              <span class="comment">#权重，最大越高，lvs就越优先访问</span></span><br><span class="line">        TCP_CHECK &#123;                           <span class="comment">#keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span></span><br><span class="line">            connect_timeout 10                <span class="comment">#10秒无响应超时</span></span><br><span class="line">            retry 3                           <span class="comment">#重连次数3次</span></span><br><span class="line">            delay_before_retry 3              <span class="comment">#重连间隔时间</span></span><br><span class="line">            connect_port 80                   <span class="comment">#健康检查realserver的端口</span></span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">vrrp_instance VI_2 &#123;                          <span class="comment">#vrrp 实例部分定义，VI_1自定义名称</span></span><br><span class="line">    state   BACKUP                            <span class="comment">#指定 keepalived 的角色，必须大写 可选值：MASTER|BACKUP 分别表示（主|备）</span></span><br><span class="line">    interface ens33                           <span class="comment">#网卡设置，绑定vip的子接口，lvs需要绑定在网卡上，realserver绑定在回环口。区别：lvs对访问为外，realserver为内不易暴露本机信息</span></span><br><span class="line">    virtual_router_id 52                      <span class="comment">#虚拟路由标识，是一个数字，同一个vrrp 实例使用唯一的标识，MASTER和BACKUP 的 同一个 vrrp_instance 下 这个标识必须保持一致</span></span><br><span class="line">    priority 90                               <span class="comment">#定义优先级，数字越大，优先级越高。</span></span><br><span class="line">    advert_int 1                              <span class="comment">#设定 MASTER 与 BACKUP 负载均衡之间同步检查的时间间隔，单位为秒，两个节点设置必须一样</span></span><br><span class="line">    authentication &#123;                          <span class="comment">#设置验证类型和密码，两个节点必须一致</span></span><br><span class="line">        auth_type PASS  </span><br><span class="line">        auth_pass 1111  </span><br><span class="line">    &#125;   </span><br><span class="line">    virtual_ipaddress &#123;                       <span class="comment">#设置虚拟IP地址，可以设置多个虚拟IP地址，每行一个</span></span><br><span class="line">        192.168.119.131   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">virtual_server 192.168.119.131 80 &#123;           <span class="comment">#定义RealServer对应的VIP及服务端口，IP和端口之间用空格隔开</span></span><br><span class="line">    delay_loop 6                              <span class="comment">#每隔6秒查询realserver状态</span></span><br><span class="line">    lb_algo rr                                <span class="comment">#后端调试算法（load balancing algorithm）</span></span><br><span class="line">    lb_kind DR                                <span class="comment">#LVS调度类型NAT/DR/TUN</span></span><br><span class="line">    <span class="comment">#persistence_timeout 60                   #同一IP的连接60秒内被分配到同一台realserver</span></span><br><span class="line">    protocol TCP                              <span class="comment">#用TCP协议检查realserver状态</span></span><br><span class="line">    real_server 192.168.119.120 80 &#123;  </span><br><span class="line">        weight 1                              <span class="comment">#权重，最大越高，lvs就越优先访问</span></span><br><span class="line">        TCP_CHECK &#123;                           <span class="comment">#keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span></span><br><span class="line">            connect_timeout 10                <span class="comment">#10秒无响应超时</span></span><br><span class="line">            retry 3                           <span class="comment">#重连次数3次</span></span><br><span class="line">            delay_before_retry 3              <span class="comment">#重连间隔时间</span></span><br><span class="line">            connect_port 80                   <span class="comment">#健康检查realserver的端口</span></span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;   </span><br><span class="line">    real_server 192.168.119.121 80 &#123;  </span><br><span class="line">        weight 1                              <span class="comment">#权重，最大越高，lvs就越优先访问</span></span><br><span class="line">        TCP_CHECK &#123;                           <span class="comment">#keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span></span><br><span class="line">            connect_timeout 10                <span class="comment">#10秒无响应超时</span></span><br><span class="line">            retry 3                           <span class="comment">#重连次数3次</span></span><br><span class="line">            delay_before_retry 3              <span class="comment">#重连间隔时间</span></span><br><span class="line">            connect_port 80                   <span class="comment">#健康检查realserver的端口</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置段分为几大块：</p>
+<p>global_def:</p>
+<p>该配置段为全局配置段，一般用于配置邮件发送或keepalived协议相关配置。</p>
+<p>这个配置段可不配置，一般不会影响正常使用</p>
+<p>vrrp_script：</p>
+<p>用于定义检测脚本，定义了以后需在vrrp_instance中指定该脚本。</p>
+<p>vrrp_instance:</p>
+<p>定义一个虚拟路由器实例，在其中需定义该服务器的实例状态（master or backup），路由器id，绑定的网卡等信息，多个服务器就是通过该配置段来判断是否为同一个虚拟路由器，是主还备。</p>
+<p>virtual_server:</p>
+<p>定义了lvs的相关配置，</p>
+<p>real_server则是定义了lvs对应的后端服务器的配置信息</p>
+<p>tcp_check是keepalived对后端的健康检查方式</p>
+<p>vrrp_sync_group :<br>group模块将多实例绑定起来，当其中一个实例挂掉时，另一个实例也会随之挂掉。</p>
+<h1 id="3-实例"><a href="#3-实例" class="headerlink" title="3.实例"></a>3.实例</h1><p>一共有四台服务器</p>
+<p>其中两台服务器是lvs+keepalived</p>
+<p>还有两台服务器是web服务器（nginx）</p>
+<p>这里要实现的效果为前端两台lvs调度器实现高可用，通过lvs调度器分发到后端web服务器上。</p>
+<p>实验拓扑图及服务器ip如下：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045829.jpeg" alt="image.png"></p>
+<p>因为有四台服务器，这里就称为server1-server4</p>
+<p>server1和server2是lvs+keepalived的服务器，所以有两张网卡，一张是外网网卡，一张是内网网卡，用于与用户通信和转发到后端web服务器</p>
+<p>server3和server4是web服务器，只有一张网卡，为内网网卡</p>
+<p>这里因为机器较多，就采用ansible批量部署了，ansible可以使用yum直接安装（epel源）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y install ansible</span><br><span class="line">vim /etc/ansible/hosts</span><br><span class="line">####添加下面的信息</span><br><span class="line">[lvs]</span><br><span class="line">10.10.10.105</span><br><span class="line">10.10.10.187</span><br><span class="line">[lvs:vars]</span><br><span class="line">ansible_ssh_pass=admin</span><br><span class="line">[ngx]</span><br><span class="line">192.168.34.137</span><br><span class="line">192.168.34.136</span><br><span class="line">[ngx:vars]</span><br><span class="line">ansible_ssh_pass=admin</span><br><span class="line">####</span><br><span class="line">#其中10.10.10.105和10.10.10.187是lvs+keepalived服务武器</span><br><span class="line">#192.168.34.136和192.168.34.137为web服务器</span><br><span class="line">sed -i &#x27;s/^#host_key_checking = False/host_key_checking = False/g&#x27; /etc/ansible/ansible.cfg</span><br><span class="line"></span><br><span class="line">ansible准备工作就做好，下面开始用ansible安装服务器需要用到的软件#需准备好yum源</span><br><span class="line">ansible lvs -m yum -a &quot;state=installed name=ipvsadm&quot;</span><br><span class="line">ansible lvs -m yum -a &quot;state=installed name=keepalived&quot;</span><br><span class="line">ansible ngx -m yum -a &quot;state=installed name=nginx&quot;</span><br><span class="line">ansible 192.168.34.136 -m shell -a &quot;echo 192.168.34.136 &gt; /usr/share/nginx/html/index.html&quot;</span><br><span class="line">ansible 192.168.34.137 -m shell -a &quot;echo 192.168.34.137 &gt; /usr/share/nginx/html/index.html&quot;</span><br><span class="line">ansible ngx -m systemd -a &quot;name=nginx enabled=yes state=started&quot;</span><br><span class="line"></span><br><span class="line">此时开始配置keepalived</span><br><span class="line">编辑配置文件vim /etc/keepalived/ansible.cfg</span><br><span class="line">####这个配置为10.10.10.105的配置文件，改服务器做为keepalived主服务器，state为master且为抢占模式</span><br><span class="line">global_defs &#123;</span><br><span class="line">   router_id 99</span><br><span class="line">&#125;</span><br><span class="line">vrrp_sync_group 145 &#123;</span><br><span class="line">group &#123;</span><br><span class="line">VI_1</span><br><span class="line">VI_2</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    priority 150</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line"> 10.10.10.106</span><br><span class="line">vrrp_instance VI_2 &#123; </span><br><span class="line">    state MASTER</span><br><span class="line">    interface ens37 </span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   router_id 99</span><br><span class="line">&#125;</span><br><span class="line">vrrp_sync_group 145 &#123;</span><br><span class="line">group &#123;</span><br><span class="line">VI_1</span><br><span class="line">VI_2</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    priority 150</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line"> 10.10.10.106</span><br><span class="line">vrrp_instance VI_2 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    priority 150</span><br><span class="line">    interface ens37</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line"> 192.168.34.145</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"> virtual_server 10.10.10.106 80  &#123;          #定义RealServer对应的VIP及服务端口，IP和端口之间用空格隔开</span><br><span class="line">    delay_loop 6                              #每隔6秒查询realserver状态</span><br><span class="line">    lb_algo rr                                #后端调试算法（load balancing algorithm）</span><br><span class="line">    lb_kind NAT                                #LVS调度类型NAT/DR/TUN</span><br><span class="line">    #persistence_timeout 60                   同一IP的连接60秒内被分配到同一台realserver</span><br><span class="line">    protocol TCP                              #用TCP协议检查realserver状态</span><br><span class="line">    real_server 192.168.34.137 80 &#123;</span><br><span class="line">        weight 1                              #权重，最大越高，lvs就越优先访问</span><br><span class="line">        TCP_CHECK &#123;                           #keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span><br><span class="line">            connect_timeout 10                #10秒无响应超时</span><br><span class="line">            retry 3                           #重连次数3次</span><br><span class="line">            delay_before_retry 3              #重连间隔时间</span><br><span class="line">            connect_port 80                   #健康检查realserver的端口</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server 192.168.34.136 80 &#123;</span><br><span class="line">        weight 1                              #权重，最大越高，lvs就越优先访问</span><br><span class="line">        TCP_CHECK &#123;                           #keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span><br><span class="line">            connect_timeout 10                #10秒无响应超时</span><br><span class="line">            retry 3                           #重连次数3次</span><br><span class="line">            delay_before_retry 3              #重连间隔时间</span><br><span class="line">            connect_port 80                   #健康检查realserver的端口</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">####</span><br><span class="line">10.10.10.187的配置于105大致相似，只需要改一下几个点</span><br><span class="line">vrrp_instance VI_1和VI_2</span><br><span class="line">state=MASTER改为state=BACKUP</span><br><span class="line">priority=150改为priority=100</span><br><span class="line">改完后keepalived就配置完毕了，lvs安装即可，无需手动配置lvs的配置都会通过virtual_server和real_server自动配置上。</span><br><span class="line">此时重启keepalived即可(如没启动便直接启动)</span><br><span class="line">systemctl restart keepalived</span><br><span class="line">最后因为nat的lvs需要后端服务器将其默认路由指定到前端lvs的DIP上，所以还需要写一条路由</span><br><span class="line">ansible ngx -m shell -a &quot;route add default gw 192.168.34.145&quot;</span><br><span class="line">此时便配置完成了。</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h2><p>然后是测试环节，首先是访问测试</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231046645.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045772.jpeg" alt="image.png"></p>
+<p>访问没有问题说明lvs负载均衡和后端nginx是正常运行且能正常访问的</p>
+<p>这时再测试keepalived</p>
+<p>在10.10.10.105（MASTER）服务器上关闭一块网卡或关闭keepalived</p>
+<p>nmcli c down ens33</p>
+<p>此时，其虚拟ip就飘逸到BACKUP服务器上去了</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045923.jpeg" alt="image.png"></p>
+<p>此时再访问测试</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231046664.jpeg" alt="image.png"></p>
+<p>还是可以访问说明keepalived的ip飘逸成功了。关闭一个lvs+keepalived服务器时，另一个会直接替代其对外提供服务器，也就实现了高可用服务器。</p>
+<p>需要注意的点：</p>
+<p>1.在keepalived中配置lvs时（virtual_server 和 real_server），指定的lvs模式（NAT,TUNL,DR）的准备工作需要提前做好，例如nat需要调度器有内外两个网卡且后端服务器默认路由地址要指定到DIP。因其keepalived仅仅只会将ipvsadm配置上，其lvs相关环境以及必要配置还是需要手动去配置。</p>
+<p>2.在抢占模式中可以通过检测脚本（需手动写）来控制其实例的优先级数值，在非抢占模式中需要加上nopreempt的配置，且非抢占模式中不需要priority优先级配置。</p>
+<p>抢占模式与非抢占模式的区别为：</p>
+<p>在抢占模式中当主节点挂掉以后备用节点会立刻顶替主节点的位置，而当主节点又重新正常上线后主节点会将备用节点的虚拟ip抢占过来，而非抢占模式时当备用节点顶替主节点后，主节点再上线时其主节点这时并不会去抢占其虚拟ip。</p>
+<p>非抢占模式要求：</p>
+<ol>
+<li>两个节点的state都必须配置为BACKUP</li>
+<li>两个节点都必须加上配置 nopreempt</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/keepalived_hexo/" data-id="ckxjra7p3000vr0v1dqbea49c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux启动流程_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/linux%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/23/linux%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B_hexo/">linux启动流程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>linux启动流程</p>
+<p>linux的启动流程为：</p>
+<p>POST-》-boot sequence》BOOTLOADER（BIOS）-》KERNEL-》INIT(SYSTEMD)</p>
+<p>1.加电质检POST</p>
+<p>上电自检过程中其实 Linux 没有什么也没做，上电自检主要由硬件的部分来完成，这对于所有操作系统都一样。当电脑接通电源，电脑开始执行 BIOS（基本输入输出系统Basic I/O System）的 POST（上电自检Power On Self Test）过程。</p>
+<p>在 1981 年，IBM 设计的第一台个人电脑中，BIOS 被设计为用来初始化硬件组件。POST 作为 BIOS 的组成部分，用于检验电脑硬件基本功能是否正常。如果 POST 失败，那么这个电脑就不能使用，引导过程也将就此中断。</p>
+<p>上电自检POST(Power-on self test)：首先加载BIOS，然后BIOS对其系统硬件进行检查，主要负责检测系统外围关键设备（如：CPU、内存、显卡、I/O、键盘鼠标等）是否正常。例如，最常见的是内存松动的情况，BIOS自检阶段会报错，系统就无法启动起来。</p>
+<p>2..boot sequence</p>
+<p>当硬件检查完毕BIOS加载完硬件信息后，会根据BIOS设置中的硬盘（光盘，网络）启动顺序，根据定义好的顺序依次查找硬盘中第一个扇区（MBR引导扇区），实际上这里BIOS并不关心启动设备第一个扇区中是什么内容，它只是负责读取该扇区内容、并执行。</p>
+<p>3.boot loader</p>
+<p>boot loader为引导加载器，引导加载器会根据自身配置文件加载内核，但这里有个问题是MBR（主引导扇区），这里需要先说明一下MBR。</p>
+<p>MBR：MBR为主引导扇区（主引导记录），位于硬盘里面0磁道0柱面1扇区，大小为512kb，启动真正存放bootloader的空间为前446B（字节），后64B为存放分区信息（三个主分区一个扩展分区，每个各占16B），剩下2B为“55，AA”，是分区结束的标签。</p>
+<p>所以引导加载器实际的存储空间为446字节，对于现在的引导加载器存储空间肯定是不够的，所以现在的引导加载器一般存放于文件系统上，然后通过mbr去找到并加载它。这里以grub为例，下面是步骤：</p>
+<ul>
+<li>第一步：这个其实就是MBR，它的主要工作就是查找并加载第二段Bootloader程序(stage2)，但系统在没启动时，MBR根本找不到文件系统，也就找不到stage2所存放的位置，因此，就有了stage2</li>
+<li>第二步：第一步的mbr里面放置了bootloader的最小程序，用于找到并加载第二步，而第二部则是为了加载驱动，识别文件系统。</li>
+<li>第三步：GRUB程序会根据/boot/grub/grub.conf文件查找Kernel的信息，然后开始加载Kernel程序，当Kernel程序被检测并在加载到内存中，GRUB就将控制权交接给了Kernel程序</li>
+</ul>
+<p>下面是grub的配置文件：</p>
+<blockquote>
+<p>default=0 #设定默认启动的title的编号，从0开始<br>　　　　timeout=5 #等待用户选择的超时时间<br>　　　　splashimage=(hd0,0)/boot/grub/splash.xpm.gz #GRUB的背景图片<br>　　　　hiddenmenu #隐藏菜单<br>　　　　title CentOS (2.6.18-194.el5PAE) #内核标题<br>　　　　root (hd0,0) #内核文件所在的设备<br>　　　　kernel /vmlinuz-2.6.18-194.el5PAE ro root=LABEL=/ #内核文件路径以及传递给内核的参数　　　initrd /initrd-2.6.18-194.el5PAE.img #ramdisk文件路径</p>
+</blockquote>
+<p>4.kernel</p>
+<p>我们知道kernel是完成探索硬件及加载硬件驱动程序，并以读写的方式挂载根文件系统。那么这里就出现一个比较诡异的问题，是什么问题呢？<br><strong>我们又知道，要想访问真正的根文件系统（rootfs）的话，就必须加载根文件系统中的设备，这时根文件系统又没有挂载，要挂载根文件系统又得加载根文件系统中的驱动程序，哪怎么办呢？这是就用到了initrd文件了。<br>在来说下kernel初始化所要工作的内容做下简单总结：<br>探测硬件-&gt;加载驱动（initrd)-&gt;挂载根文件系统-&gt;rootfs(/sbin/init)</strong></p>
+<p><strong>initrd功能介绍<br>其实说白了initrd就是一个虚拟的文件系统，里面有/、lib、bin、sbin、usr、proc、sys、var、dev、boot等一些目录，其实你会发现里面的目录有点像真的/对吧，所以我们称之为虚拟的根文件系统，作用就是将kernel和真的根文件系统建立关联关系，让kernel去initrd中加载根文件系统所需要的驱动程序，并以读写的方式挂载根文件系统，并让执行用户当中第一个进程init。</strong></p>
+<p><strong>/sbin/init(/etc/inittab)</strong><br>/sbin/init启动会用到/etc/inittab所定义的条目，如：默认登陆级别id:3:initdefault:(这里就是默认启动3级别）<br><strong>下面就来说下/etc/inittab所工作那些内容：</strong><br>/etc/inittab<br>默认运行级别<br>0：halt<br>1: single user mode(单用户维护模式)<br>2：multi user mode, without NFS(不支持NFS功能）<br>3: multi user mode, text mode（字符界面）<br>4：reserved （系统保留）<br>5: multi user mode, graphic mode （图形化界面）<br>6: reboot （重启）<br>系统初始化(/etc/rc.d/rc.sysinit)<br>检测，并以读写方式挂载根文件系统<br>设定主机名<br>检测并挂载/etc/fstab中其它文件系统<br>启动swap分区<br>初始化外围硬件设备驱动<br>根据/etc/sysctl.conf设定内核参数<br>激活udev和selinux<br>激活LVM和RAID设备<br>清理过期锁文件和PID文件<br>装载键映射–&gt;键盘上每个键的功能<br>运行指定级别的服务脚本<br>/etc/rc.d/init.d/<br>/etc/rc.d/rc#.d<br>rc0-rc6<br>K* ##只要是以K开头的文件均执行stop工作<br>S* ##只要是以S开头的文件均执行start工作<br>0-99 (执行次序，数字越小越先被执行)<br>init执行/etc/rc.d/rc.local<br>init执行中断机模拟程序mingetty来启动login进程，最后等待用户登录**</p>
+<p><strong>下面在来说下/etc/inittab的语法及格式：</strong><br>/etc/inittab格式及语法(:)</p>
+<p>设置选项：<br>代表init主要工作选项<br>运行级别<br>0-6<br>init操作行为：<br>initdefault：代表默认运行级别<br>sysinit：代表系统初始化操作选项<br>ctrlaltdel：代表重启的相关设置<br>wait：代表上一个命令执行结束后方可执行下面的操作<br>respawn：代表后面字段可以无限制再生(reboot)<br>命令选项<br>一些命令，不过通常都是脚本<br>**</p>
+<p><strong>init处理流程：<br>根据/etc/inittab设置进行处理：以默认级别3说明：id:3:initdefault:<br>default runlevel-&gt;/etc/rc.d/rc.sysinit-&gt;/etc/rc.d/rc5.d-&gt;ctrlatdel-&gt;set “pf” and “pr”-&gt;mingetty-&gt;login</strong></p>
+<p>init处理系统初始化流程/etc/rc.d/rc.sysinit(设置系统环境)<br>取得网络环境与主机类型-&gt;/etc/sysconfig/network<br>测试与挂载内存设备/proc及/sys<br>SElinux<br>启动系统的随机数生成器<br>设置终端机字体<br>设置系统启动过程中的欢迎界面<br>设置系统时间与时区设置/etc/sysconfig/clock<br>接口设备检测<br>用户自定义模块加载-&gt;/etc/sysconfig/modules/.modules<br>根据/etc/sysctl.conf设置内核参数<br>初始化软件磁盘阵列-&gt;/etc/mdadm.conf<br>初始化LVM文件系统功能<br>fsck检测磁盘文件系统<br>磁盘配额<br>检测，并以读写方式重新挂载根文件系统<br>清除清除过程当中的临时文件<br>将启动的相关信息-&gt;/var/log/dmesg</p>
+<p>启动服务与相关启动配置文件(/etc/rc.d/rc # &amp;/etc/sysconfig )<br>以默认级别3说明：id:3:initdefault:<br>l3:3:wait:/etc/rc.d/rc 3<br>找到/etc/rc.d/rc3.d<br>以K<em>开头的文件，并运行/etc/rc.d/rc3.d/K</em> stop<br>以S<em>开头的文件，并运行/etc/rc.d/rc3.d/S</em> start<br>/etc/rc.d/rc#.d/里面的文件链接的都是/etc/rc.d/init.d的文件**</p>
+<p>**用户自定义开机启动程序(/etc/rc.d/rc.local)<br>**可以根据自己的需求将一些执行命令或是脚本写到/etc/rc.d/rc.local里，当开机时，就可以加载啦</p>
+<p>根据mingetty程序调用login让用户登录-&gt;用户登录（完成系统启动）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/linux%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B_hexo/" data-id="ckxjra7p4000yr0v1cg07ent5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

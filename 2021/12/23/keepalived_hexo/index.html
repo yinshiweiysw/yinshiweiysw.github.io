@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>keepalived | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介：keepalived服务是一个高可用服务，用于解决服务器单点故障，保证服务器能执行高可用。一般keepalived于lvs一起使用，本身其就有检查lvs的状态功能。 keepalived基于VRRP协议，VRRP是虚拟路由器冗余协议，VRRP出现的目的就是为了解决静态路由单点故障问题的，它能够保证当个别节点宕机时，整个网络可以不间断地运行。 keepalived配置完毕以后，根据配置文件内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="keepalived">
+<meta property="og:url" content="http://example.com/2021/12/23/keepalived_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介：keepalived服务是一个高可用服务，用于解决服务器单点故障，保证服务器能执行高可用。一般keepalived于lvs一起使用，本身其就有检查lvs的状态功能。 keepalived基于VRRP协议，VRRP是虚拟路由器冗余协议，VRRP出现的目的就是为了解决静态路由单点故障问题的，它能够保证当个别节点宕机时，整个网络可以不间断地运行。 keepalived配置完毕以后，根据配置文件内容">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045829.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231046645.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045772.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045923.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231046664.jpeg">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.224Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045829.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-keepalived_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/keepalived_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      keepalived
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h1><p>keepalived服务是一个高可用服务，用于解决服务器单点故障，保证服务器能执行高可用。一般keepalived于lvs一起使用，本身其就有检查lvs的状态功能。</p>
+<p>keepalived基于VRRP协议，VRRP是虚拟路由器冗余协议，VRRP出现的目的就是为了解决静态路由单点故障问题的，它能够保证当个别节点宕机时，整个网络可以不间断地运行。</p>
+<p>keepalived配置完毕以后，根据配置文件内容，会将多个服务器定义为一组实例，生成一个或多个虚拟IP和虚拟MAC地址，一般为一个主节点和一个（或多个）备用节点，正常情况下其VIP（虚拟IP）和对应MAC地址会在主节点中监听并向外提供服务，当主节点出现故障时，其备用节点就会监听其IP代替主节点提供服务（如有多个备用节点会根据其优先级大小对比）。所以对用户来说，即使挂掉一个或多个服务器仍能正常访问到，也就实现了高可用。</p>
+<h1 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h1><p>安装一般有两种方式，yum或者源码安装，yum安装的话阿里云或者国内常见源都有keepalived的包，如果是源码安装就需要去官方下载</p>
+<p>官方地址：<a target="_blank" rel="noopener" href="https://keepalived.org/">https://keepalived.org/</a></p>
+<h2 id="yum安装："><a href="#yum安装：" class="headerlink" title="yum安装："></a>yum安装：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum list keepalived</span><br><span class="line"></span><br><span class="line">yum -y install keepalived</span><br></pre></td></tr></table></figure>
+
+<h2 id="源码安装："><a href="#源码安装：" class="headerlink" title="源码安装："></a>源码安装：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf keepalived-2.2.1.tar.gz</span><br><span class="line"></span><br><span class="line">cd keepalived-2.2.1</span><br><span class="line"></span><br><span class="line">./configure --prefix=/usr/local/keepalived</span><br><span class="line"></span><br><span class="line">make&amp;&amp;make install</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-keepalived配置文件"><a href="#2-keepalived配置文件" class="headerlink" title="2.keepalived配置文件"></a>2.keepalived配置文件</h1><p>/etc/keepalived/keepalived.conf (源码安装一般在自身目录下)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File <span class="keyword">for</span> keepalived</span><br><span class="line">global_defs &#123;                                     <span class="comment">#全局定义部分</span></span><br><span class="line">    notification_email &#123;                          <span class="comment">#设置报警邮件地址，可设置多个</span></span><br><span class="line">        acassen@firewall.loc                      <span class="comment">#接收通知的邮件地址</span></span><br><span class="line">    &#125;  </span><br><span class="line">    notification_email_from test0@163.com         <span class="comment">#设置 发送邮件通知的地址</span></span><br><span class="line">    smtp_server smtp.163.com                      <span class="comment">#设置 smtp server 地址，可是ip或域名.可选端口号 （默认25）</span></span><br><span class="line">    smtp_connect_timeout 30                       <span class="comment">#设置 连接 smtp server的超时时间</span></span><br><span class="line">    router_id LVS_DEVEL                           <span class="comment">#主机标识，用于邮件通知</span></span><br><span class="line">    vrrp_skip_check_adv_addr   </span><br><span class="line">    vrrp_strict                                   <span class="comment">#严格执行VRRP协议规范，此模式不支持节点单播</span></span><br><span class="line">    vrrp_garp_interval 0   </span><br><span class="line">    vrrp_gna_interval 0   </span><br><span class="line">    script_user keepalived_script                 <span class="comment">#指定运行脚本的用户名和组。默认使用用户的默认组。如未指定，默认为keepalived_script 用户，如无此用户，则使用root</span></span><br><span class="line">    enable_script_security                        <span class="comment">#如过路径为非root可写，不要配置脚本为root用户执行。</span></span><br><span class="line">&#125;   </span><br><span class="line">vrrp_sync_group &#123;</span><br><span class="line">group&#123;</span><br><span class="line">VI_1</span><br><span class="line">VI_2</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script chk_nginx_service &#123;                   <span class="comment">#VRRP 脚本声明</span></span><br><span class="line">    script <span class="string">&quot;/etc/keepalived/chk_nginx.sh&quot;</span>         <span class="comment">#周期性执行的脚本</span></span><br><span class="line">    interval 3                                    <span class="comment">#运行脚本的间隔时间，秒</span></span><br><span class="line">    weight -20                                    <span class="comment">#权重，priority值减去此值要小于备服务的priority值</span></span><br><span class="line">    fall 3                                        <span class="comment">#检测几次失败才为失败，整数</span></span><br><span class="line">    rise 2                                        <span class="comment">#检测几次状态为正常的，才确认正常，整数</span></span><br><span class="line">    user keepalived_script                        <span class="comment">#执行脚本的用户或组</span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;                              <span class="comment">#vrrp 实例部分定义，VI_1自定义名称</span></span><br><span class="line">    state MASTER                                  <span class="comment">#指定 keepalived 的角色，必须大写 可选值：MASTER|BACKUP</span></span><br><span class="line">    interface ens33                               <span class="comment">#网卡设置，lvs需要绑定在网卡上，realserver绑定在回环口。区别：lvs对访问为外，realserver为内不易暴露本机信息</span></span><br><span class="line">    virtual_router_id 51                          <span class="comment">#虚拟路由标识，是一个数字，同一个vrrp 实例使用唯一的标识，MASTER和BACKUP 的 同一个 vrrp_instance 下 这个标识必须保持一致</span></span><br><span class="line">    priority 100                                  <span class="comment">#定义优先级，数字越大，优先级越高。</span></span><br><span class="line">    advert_int 1                                  <span class="comment">#设定 MASTER 与 BACKUP 负载均衡之间同步检查的时间间隔，单位为秒，两个节点设置必须一样</span></span><br><span class="line">    authentication &#123;                              <span class="comment">#设置验证类型和密码，两个节点必须一致</span></span><br><span class="line">        auth_type PASS  </span><br><span class="line">        auth_pass 1111  </span><br><span class="line">    &#125;   </span><br><span class="line">    virtual_ipaddress &#123;                           <span class="comment">#设置虚拟IP地址，可以设置多个虚拟IP地址，每行一个</span></span><br><span class="line">        192.168.119.130   </span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;                                <span class="comment">#脚本监控状态</span></span><br><span class="line">        chk_nginx_service                         <span class="comment">#可加权重，但会覆盖声明的脚本权重值。chk_nginx_service weight -20</span></span><br><span class="line">    &#125;</span><br><span class="line">        notify_master <span class="string">&quot;/etc/keepalived/start_haproxy.sh start&quot;</span>  <span class="comment">#当前节点成为master时，通知脚本执行任务</span></span><br><span class="line">        notify_backup <span class="string">&quot;/etc/keepalived/start_haproxy.sh stop&quot;</span>   <span class="comment">#当前节点成为backup时，通知脚本执行任务</span></span><br><span class="line">        notify_fault  <span class="string">&quot;/etc/keepalived/start_haproxy.sh stop&quot;</span>   <span class="comment">#当当前节点出现故障，执行的任务; </span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">virtual_server 192.168.119.130 80  &#123;          <span class="comment">#定义RealServer对应的VIP及服务端口，IP和端口之间用空格隔开</span></span><br><span class="line">    delay_loop 6                              <span class="comment">#每隔6秒查询realserver状态</span></span><br><span class="line">    lb_algo rr                                <span class="comment">#后端调试算法（load balancing algorithm）</span></span><br><span class="line">    lb_kind DR                                <span class="comment">#LVS调度类型NAT/DR/TUN</span></span><br><span class="line">    <span class="comment">#persistence_timeout 60                   同一IP的连接60秒内被分配到同一台realserver</span></span><br><span class="line">    protocol TCP                              <span class="comment">#用TCP协议检查realserver状态</span></span><br><span class="line">    real_server 192.168.119.120 80 &#123;  </span><br><span class="line">        weight 1                              <span class="comment">#权重，最大越高，lvs就越优先访问</span></span><br><span class="line">        TCP_CHECK &#123;                           <span class="comment">#keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span></span><br><span class="line">            connect_timeout 10                <span class="comment">#10秒无响应超时</span></span><br><span class="line">            retry 3                           <span class="comment">#重连次数3次</span></span><br><span class="line">            delay_before_retry 3              <span class="comment">#重连间隔时间</span></span><br><span class="line">            connect_port 80                   <span class="comment">#健康检查realserver的端口</span></span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;   </span><br><span class="line">    real_server 192.168.119.121 80 &#123;  </span><br><span class="line">        weight 1                              <span class="comment">#权重，最大越高，lvs就越优先访问</span></span><br><span class="line">        TCP_CHECK &#123;                           <span class="comment">#keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span></span><br><span class="line">            connect_timeout 10                <span class="comment">#10秒无响应超时</span></span><br><span class="line">            retry 3                           <span class="comment">#重连次数3次</span></span><br><span class="line">            delay_before_retry 3              <span class="comment">#重连间隔时间</span></span><br><span class="line">            connect_port 80                   <span class="comment">#健康检查realserver的端口</span></span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">vrrp_instance VI_2 &#123;                          <span class="comment">#vrrp 实例部分定义，VI_1自定义名称</span></span><br><span class="line">    state   BACKUP                            <span class="comment">#指定 keepalived 的角色，必须大写 可选值：MASTER|BACKUP 分别表示（主|备）</span></span><br><span class="line">    interface ens33                           <span class="comment">#网卡设置，绑定vip的子接口，lvs需要绑定在网卡上，realserver绑定在回环口。区别：lvs对访问为外，realserver为内不易暴露本机信息</span></span><br><span class="line">    virtual_router_id 52                      <span class="comment">#虚拟路由标识，是一个数字，同一个vrrp 实例使用唯一的标识，MASTER和BACKUP 的 同一个 vrrp_instance 下 这个标识必须保持一致</span></span><br><span class="line">    priority 90                               <span class="comment">#定义优先级，数字越大，优先级越高。</span></span><br><span class="line">    advert_int 1                              <span class="comment">#设定 MASTER 与 BACKUP 负载均衡之间同步检查的时间间隔，单位为秒，两个节点设置必须一样</span></span><br><span class="line">    authentication &#123;                          <span class="comment">#设置验证类型和密码，两个节点必须一致</span></span><br><span class="line">        auth_type PASS  </span><br><span class="line">        auth_pass 1111  </span><br><span class="line">    &#125;   </span><br><span class="line">    virtual_ipaddress &#123;                       <span class="comment">#设置虚拟IP地址，可以设置多个虚拟IP地址，每行一个</span></span><br><span class="line">        192.168.119.131   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">virtual_server 192.168.119.131 80 &#123;           <span class="comment">#定义RealServer对应的VIP及服务端口，IP和端口之间用空格隔开</span></span><br><span class="line">    delay_loop 6                              <span class="comment">#每隔6秒查询realserver状态</span></span><br><span class="line">    lb_algo rr                                <span class="comment">#后端调试算法（load balancing algorithm）</span></span><br><span class="line">    lb_kind DR                                <span class="comment">#LVS调度类型NAT/DR/TUN</span></span><br><span class="line">    <span class="comment">#persistence_timeout 60                   #同一IP的连接60秒内被分配到同一台realserver</span></span><br><span class="line">    protocol TCP                              <span class="comment">#用TCP协议检查realserver状态</span></span><br><span class="line">    real_server 192.168.119.120 80 &#123;  </span><br><span class="line">        weight 1                              <span class="comment">#权重，最大越高，lvs就越优先访问</span></span><br><span class="line">        TCP_CHECK &#123;                           <span class="comment">#keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span></span><br><span class="line">            connect_timeout 10                <span class="comment">#10秒无响应超时</span></span><br><span class="line">            retry 3                           <span class="comment">#重连次数3次</span></span><br><span class="line">            delay_before_retry 3              <span class="comment">#重连间隔时间</span></span><br><span class="line">            connect_port 80                   <span class="comment">#健康检查realserver的端口</span></span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;   </span><br><span class="line">    real_server 192.168.119.121 80 &#123;  </span><br><span class="line">        weight 1                              <span class="comment">#权重，最大越高，lvs就越优先访问</span></span><br><span class="line">        TCP_CHECK &#123;                           <span class="comment">#keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span></span><br><span class="line">            connect_timeout 10                <span class="comment">#10秒无响应超时</span></span><br><span class="line">            retry 3                           <span class="comment">#重连次数3次</span></span><br><span class="line">            delay_before_retry 3              <span class="comment">#重连间隔时间</span></span><br><span class="line">            connect_port 80                   <span class="comment">#健康检查realserver的端口</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置段分为几大块：</p>
+<p>global_def:</p>
+<p>该配置段为全局配置段，一般用于配置邮件发送或keepalived协议相关配置。</p>
+<p>这个配置段可不配置，一般不会影响正常使用</p>
+<p>vrrp_script：</p>
+<p>用于定义检测脚本，定义了以后需在vrrp_instance中指定该脚本。</p>
+<p>vrrp_instance:</p>
+<p>定义一个虚拟路由器实例，在其中需定义该服务器的实例状态（master or backup），路由器id，绑定的网卡等信息，多个服务器就是通过该配置段来判断是否为同一个虚拟路由器，是主还备。</p>
+<p>virtual_server:</p>
+<p>定义了lvs的相关配置，</p>
+<p>real_server则是定义了lvs对应的后端服务器的配置信息</p>
+<p>tcp_check是keepalived对后端的健康检查方式</p>
+<p>vrrp_sync_group :<br>group模块将多实例绑定起来，当其中一个实例挂掉时，另一个实例也会随之挂掉。</p>
+<h1 id="3-实例"><a href="#3-实例" class="headerlink" title="3.实例"></a>3.实例</h1><p>一共有四台服务器</p>
+<p>其中两台服务器是lvs+keepalived</p>
+<p>还有两台服务器是web服务器（nginx）</p>
+<p>这里要实现的效果为前端两台lvs调度器实现高可用，通过lvs调度器分发到后端web服务器上。</p>
+<p>实验拓扑图及服务器ip如下：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045829.jpeg" alt="image.png"></p>
+<p>因为有四台服务器，这里就称为server1-server4</p>
+<p>server1和server2是lvs+keepalived的服务器，所以有两张网卡，一张是外网网卡，一张是内网网卡，用于与用户通信和转发到后端web服务器</p>
+<p>server3和server4是web服务器，只有一张网卡，为内网网卡</p>
+<p>这里因为机器较多，就采用ansible批量部署了，ansible可以使用yum直接安装（epel源）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y install ansible</span><br><span class="line">vim /etc/ansible/hosts</span><br><span class="line">####添加下面的信息</span><br><span class="line">[lvs]</span><br><span class="line">10.10.10.105</span><br><span class="line">10.10.10.187</span><br><span class="line">[lvs:vars]</span><br><span class="line">ansible_ssh_pass=admin</span><br><span class="line">[ngx]</span><br><span class="line">192.168.34.137</span><br><span class="line">192.168.34.136</span><br><span class="line">[ngx:vars]</span><br><span class="line">ansible_ssh_pass=admin</span><br><span class="line">####</span><br><span class="line">#其中10.10.10.105和10.10.10.187是lvs+keepalived服务武器</span><br><span class="line">#192.168.34.136和192.168.34.137为web服务器</span><br><span class="line">sed -i &#x27;s/^#host_key_checking = False/host_key_checking = False/g&#x27; /etc/ansible/ansible.cfg</span><br><span class="line"></span><br><span class="line">ansible准备工作就做好，下面开始用ansible安装服务器需要用到的软件#需准备好yum源</span><br><span class="line">ansible lvs -m yum -a &quot;state=installed name=ipvsadm&quot;</span><br><span class="line">ansible lvs -m yum -a &quot;state=installed name=keepalived&quot;</span><br><span class="line">ansible ngx -m yum -a &quot;state=installed name=nginx&quot;</span><br><span class="line">ansible 192.168.34.136 -m shell -a &quot;echo 192.168.34.136 &gt; /usr/share/nginx/html/index.html&quot;</span><br><span class="line">ansible 192.168.34.137 -m shell -a &quot;echo 192.168.34.137 &gt; /usr/share/nginx/html/index.html&quot;</span><br><span class="line">ansible ngx -m systemd -a &quot;name=nginx enabled=yes state=started&quot;</span><br><span class="line"></span><br><span class="line">此时开始配置keepalived</span><br><span class="line">编辑配置文件vim /etc/keepalived/ansible.cfg</span><br><span class="line">####这个配置为10.10.10.105的配置文件，改服务器做为keepalived主服务器，state为master且为抢占模式</span><br><span class="line">global_defs &#123;</span><br><span class="line">   router_id 99</span><br><span class="line">&#125;</span><br><span class="line">vrrp_sync_group 145 &#123;</span><br><span class="line">group &#123;</span><br><span class="line">VI_1</span><br><span class="line">VI_2</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    priority 150</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line"> 10.10.10.106</span><br><span class="line">vrrp_instance VI_2 &#123; </span><br><span class="line">    state MASTER</span><br><span class="line">    interface ens37 </span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   router_id 99</span><br><span class="line">&#125;</span><br><span class="line">vrrp_sync_group 145 &#123;</span><br><span class="line">group &#123;</span><br><span class="line">VI_1</span><br><span class="line">VI_2</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    priority 150</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line"> 10.10.10.106</span><br><span class="line">vrrp_instance VI_2 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    priority 150</span><br><span class="line">    interface ens37</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line"> 192.168.34.145</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"> virtual_server 10.10.10.106 80  &#123;          #定义RealServer对应的VIP及服务端口，IP和端口之间用空格隔开</span><br><span class="line">    delay_loop 6                              #每隔6秒查询realserver状态</span><br><span class="line">    lb_algo rr                                #后端调试算法（load balancing algorithm）</span><br><span class="line">    lb_kind NAT                                #LVS调度类型NAT/DR/TUN</span><br><span class="line">    #persistence_timeout 60                   同一IP的连接60秒内被分配到同一台realserver</span><br><span class="line">    protocol TCP                              #用TCP协议检查realserver状态</span><br><span class="line">    real_server 192.168.34.137 80 &#123;</span><br><span class="line">        weight 1                              #权重，最大越高，lvs就越优先访问</span><br><span class="line">        TCP_CHECK &#123;                           #keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span><br><span class="line">            connect_timeout 10                #10秒无响应超时</span><br><span class="line">            retry 3                           #重连次数3次</span><br><span class="line">            delay_before_retry 3              #重连间隔时间</span><br><span class="line">            connect_port 80                   #健康检查realserver的端口</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server 192.168.34.136 80 &#123;</span><br><span class="line">        weight 1                              #权重，最大越高，lvs就越优先访问</span><br><span class="line">        TCP_CHECK &#123;                           #keepalived的健康检查方式HTTP_GET | SSL_GET | TCP_CHECK | SMTP_CHECK | MISC</span><br><span class="line">            connect_timeout 10                #10秒无响应超时</span><br><span class="line">            retry 3                           #重连次数3次</span><br><span class="line">            delay_before_retry 3              #重连间隔时间</span><br><span class="line">            connect_port 80                   #健康检查realserver的端口</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">####</span><br><span class="line">10.10.10.187的配置于105大致相似，只需要改一下几个点</span><br><span class="line">vrrp_instance VI_1和VI_2</span><br><span class="line">state=MASTER改为state=BACKUP</span><br><span class="line">priority=150改为priority=100</span><br><span class="line">改完后keepalived就配置完毕了，lvs安装即可，无需手动配置lvs的配置都会通过virtual_server和real_server自动配置上。</span><br><span class="line">此时重启keepalived即可(如没启动便直接启动)</span><br><span class="line">systemctl restart keepalived</span><br><span class="line">最后因为nat的lvs需要后端服务器将其默认路由指定到前端lvs的DIP上，所以还需要写一条路由</span><br><span class="line">ansible ngx -m shell -a &quot;route add default gw 192.168.34.145&quot;</span><br><span class="line">此时便配置完成了。</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h2><p>然后是测试环节，首先是访问测试</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231046645.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045772.jpeg" alt="image.png"></p>
+<p>访问没有问题说明lvs负载均衡和后端nginx是正常运行且能正常访问的</p>
+<p>这时再测试keepalived</p>
+<p>在10.10.10.105（MASTER）服务器上关闭一块网卡或关闭keepalived</p>
+<p>nmcli c down ens33</p>
+<p>此时，其虚拟ip就飘逸到BACKUP服务器上去了</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231045923.jpeg" alt="image.png"></p>
+<p>此时再访问测试</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231046664.jpeg" alt="image.png"></p>
+<p>还是可以访问说明keepalived的ip飘逸成功了。关闭一个lvs+keepalived服务器时，另一个会直接替代其对外提供服务器，也就实现了高可用服务器。</p>
+<p>需要注意的点：</p>
+<p>1.在keepalived中配置lvs时（virtual_server 和 real_server），指定的lvs模式（NAT,TUNL,DR）的准备工作需要提前做好，例如nat需要调度器有内外两个网卡且后端服务器默认路由地址要指定到DIP。因其keepalived仅仅只会将ipvsadm配置上，其lvs相关环境以及必要配置还是需要手动去配置。</p>
+<p>2.在抢占模式中可以通过检测脚本（需手动写）来控制其实例的优先级数值，在非抢占模式中需要加上nopreempt的配置，且非抢占模式中不需要priority优先级配置。</p>
+<p>抢占模式与非抢占模式的区别为：</p>
+<p>在抢占模式中当主节点挂掉以后备用节点会立刻顶替主节点的位置，而当主节点又重新正常上线后主节点会将备用节点的虚拟ip抢占过来，而非抢占模式时当备用节点顶替主节点后，主节点再上线时其主节点这时并不会去抢占其虚拟ip。</p>
+<p>非抢占模式要求：</p>
+<ol>
+<li>两个节点的state都必须配置为BACKUP</li>
+<li>两个节点都必须加上配置 nopreempt</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/keepalived_hexo/" data-id="ckxjra7p3000vr0v1dqbea49c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/23/jdk%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          jdk环境变量
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/23/linux%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux启动流程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

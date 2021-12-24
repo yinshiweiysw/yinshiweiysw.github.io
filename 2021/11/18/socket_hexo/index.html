@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>socket | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SOCKET ：socket本质上来说就是位于应用层与传输层之间的逻辑层，下图为tcp&#x2F;ip四层，五层协议以及osi参考模型  一般现在用的就是五层模型，从两台计算机传输数据的角度来讲，物理层定义其计算机基本数据结构（0和1，也就是数据本身）。数据链路层定义了数据的传输（以mac地址为唯一标识），而这一层在局域网内通信方式也极其简单，就是通过广播发送到每一个局域网内的计算机上面，如非指定的接受者（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="socket">
+<meta property="og:url" content="http://example.com/2021/11/18/socket_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SOCKET ：socket本质上来说就是位于应用层与传输层之间的逻辑层，下图为tcp&#x2F;ip四层，五层协议以及osi参考模型  一般现在用的就是五层模型，从两台计算机传输数据的角度来讲，物理层定义其计算机基本数据结构（0和1，也就是数据本身）。数据链路层定义了数据的传输（以mac地址为唯一标识），而这一层在局域网内通信方式也极其简单，就是通过广播发送到每一个局域网内的计算机上面，如非指定的接受者（">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.socket/1036857-20161008145544426-736439132.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190718154523875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.socket/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.socket/image-20211104162346374.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.socket/image-20211104172547839.png">
+<meta property="article:published_time" content="2021-11-18T09:24:46.000Z">
+<meta property="article:modified_time" content="2021-11-19T03:54:22.948Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yinshiweiysw.github.io/images/assets.socket/1036857-20161008145544426-736439132.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-socket_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/11/18/socket_hexo/" class="article-date">
+  <time datetime="2021-11-18T09:24:46.000Z" itemprop="datePublished">2021-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      socket
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SOCKET-："><a href="#SOCKET-：" class="headerlink" title="SOCKET ："></a>SOCKET ：</h1><p>socket本质上来说就是位于应用层与传输层之间的逻辑层，下图为tcp/ip四层，五层协议以及osi参考模型</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.socket/1036857-20161008145544426-736439132.png" alt="img"></p>
+<p>一般现在用的就是五层模型，从两台计算机传输数据的角度来讲，物理层定义其计算机基本数据结构（0和1，也就是数据本身）。数据链路层定义了数据的传输（以mac地址为唯一标识），而这一层在局域网内通信方式也极其简单，就是通过广播发送到每一个局域网内的计算机上面，如非指定的接受者（mac地址），则丢弃。到网络层时就可以跨越其局域网的限制，通过网关设备的路由功能（通过ip地址进行路由），就可以找到互联网上的每一个设备进行传输通信，但其本质上还是数据链路层通信，网络层最主要是定位到互联网每一台主机（ARP协议最终将ip解析到mac地址）。到传输层时有两个协议（tcp和udp），tcp是稳定的传输协议，主要保证数据完整性，而udp是非稳定的传输协议，用于非重要数据传输，例如视频聊天，qq信息等。这里传输层定义了端口，可使用范围为1-65535。如果说网络层是用来定位到互联网中的某一台计算机的话，那么传输层则是定位到计算机中的某个应用且与其建立连接（三次握手，其建立连接本质上也是逻辑上的建立）。到应用层这里则是访问到应用中具体某个资源，例如/index.html。</p>
+<p>应用程序位于其应用层，在应用程序发送数据时，需要将其封装打包成一段段的数据段送到传输层，然后传输层再封装成网络包，到链路层时又封装成数据帧，到物理层又封装成数据位（二进制，0和1）。到目标主机以后从物理层开始又一层一层的拆包往上传递，所以正常情况下程序员在编写程序时，应该把客户端和目标服务器五层的封装以及拆包写好，但是这个步骤太过于麻烦且重复性工作，所以有了socket。</p>
+<p><u>socket起源于Unix，而Unix/Linux基本哲学之一就是“一切皆文件”，都可以用“打开open –&gt; 读写write/read –&gt; 关闭close”模式来操作。我的理解就是Socket就是该模式的一个实现，socket即是一种特殊的文件，一些socket函数就是对其进行的操作（读/写IO、打开、关闭）。</u></p>
+<p><u>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。</u></p>
+<p>有了socket接口以后程序员就只用关心程序本身，只要将C/S两边程序写好，直接调用已有的socket模块来帮程序员完成应用层以下真正实现传输的所有步骤。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190718154523875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h2 id="socket流程："><a href="#socket流程：" class="headerlink" title="socket流程："></a>socket流程：</h2><p><img src="https://yinshiweiysw.github.io/images/assets.socket/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+<p>图中每一个步骤就是socket的每一个提供函数（方法）。</p>
+<p>客户端：</p>
+<p>首先创建socket对象，连接服务器端，发送（请求）数据和接受数据，然后关闭套接字</p>
+<p>服务器端：<br>        首先也需要创建socket对象，然后绑定端口（服务器需要固定的端口绑定，客户端使用随机ip和端口进行通信即可），监听，监听完毕后accept等待客户端连接（这里可以设置半连接池），然后连接完毕以后发送数据，接受数据（发送接受先后顺序不定，看程序需要），最后关闭连接（关闭这个客户端的连接），但一般不会关闭服务器套接字连接。</p>
+<h2 id="socket-for-python"><a href="#socket-for-python" class="headerlink" title="socket for python:"></a>socket for python:</h2><h3 id="tcp流程"><a href="#tcp流程" class="headerlink" title="tcp流程"></a>tcp流程</h3><p>tcp客户端:<br>            创建客户端套接字对象<br>            和服务端套接字建立连接<br>            发送数据<br>            接收数据<br>            关闭客户端套接字<br>            socket() -&gt; connect() -&gt; send() -&gt; recv () -&gt;close()<br>      tcp服务器：<br>            创建服务端端套接字对象<br>            绑定端口号<br>            设置监听<br>            等待接受客户端的连接请求<br>            接收数据<br>            发送数据<br>            关闭套接字<br>            socket()-&gt;bind()-&gt;listen()-&gt;accept()-&gt;recv()-send()-&gt;close() </p>
+<p>tcp客户端开发：</p>
+<p>需要导入socket模块，然后根据步骤调用每一个方法即可，实例代码如下</p>
+<h3 id="tcp："><a href="#tcp：" class="headerlink" title="tcp："></a>tcp：</h3><p>客户端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line">SOCKET=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line"></span><br><span class="line">SOCKET.connect((&#x27;localhost&#x27;,8080))</span><br><span class="line"></span><br><span class="line">SOCKET.send(&#x27;你就是传说中的服务器吗？我是客户端&#x27;.encode(&#x27;utf-8&#x27;))</span><br><span class="line"></span><br><span class="line">information=SOCKET.recv(1024)</span><br><span class="line">print(information.decode(&#x27;utf-8&#x27;))</span><br><span class="line">SOCKET.close()</span><br></pre></td></tr></table></figure>
+
+<p>服务器端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line"></span><br><span class="line">SOCKET=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line"></span><br><span class="line">SOCKET.bind((&#x27;localhost&#x27;,8080))</span><br><span class="line"></span><br><span class="line">SOCKET.listen()</span><br><span class="line"></span><br><span class="line">user,user_addr=SOCKET.accept()</span><br><span class="line">print(&#x27;正在处理客户端消息，客户端ip为：&#x27;,user_addr)</span><br><span class="line">information=user.recv(1024)</span><br><span class="line">print(information.decode(&#x27;utf-8&#x27;))</span><br><span class="line"></span><br><span class="line">user.send(&#x27;给客户端发送消息&#x27;.encode(&#x27;utf-8&#x27;))</span><br><span class="line"></span><br><span class="line">user.close()</span><br><span class="line"></span><br><span class="line">SOCKET.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="udp："><a href="#udp：" class="headerlink" title="udp："></a>udp：</h3><p>服务端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line">server=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)</span><br><span class="line">server.bind((&#x27;127.0.0.1&#x27;,8080))</span><br><span class="line">while True:</span><br><span class="line">    data,ip_addr=server.recvfrom(1024)</span><br><span class="line">    print(data.decode(&#x27;utf-8&#x27;))</span><br><span class="line">    server.sendto(data,ip_addr)</span><br><span class="line">server.close()</span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line">server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</span><br><span class="line">while True:</span><br><span class="line">    msg=input(&#x27;&gt;&gt;&gt;:&#x27;).strip()</span><br><span class="line">    server.sendto(msg.encode(&#x27;utf-8&#x27;),(&#x27;127.0.0.1&#x27;,8080))</span><br><span class="line">    data, ip_addr = server.recvfrom(1024)</span><br><span class="line">    print(data.decode(&#x27;utf-8&#x27;))</span><br><span class="line">server.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="远程执行命令和粘包问题"><a href="#远程执行命令和粘包问题" class="headerlink" title="远程执行命令和粘包问题"></a>远程执行命令和粘包问题</h3><h4 id="粘包："><a href="#粘包：" class="headerlink" title="粘包："></a>粘包：</h4><p><img src="https://yinshiweiysw.github.io/images/assets.socket/image-20211104162346374.png" alt="image-20211104162346374"></p>
+<p>发送端可以是一K一K地发送数据，而接收端的应用程序可以两K两K地提走数据，当然也有可能一次提走3K或6K数据，或者一次只提走几个字节的数据，也就是说，应用程序所看到的数据是一个整体，或说是一个流(stream)，一条消息有多少字节对应用程序是不可见的，因此TCP协议是面向流的协议，这也是容易出现粘包问题的原因。而UDP是面向消息的协议，每个UDP段都是一条消息，应用程序必须以消息为单位提取数据，不能一次提取任意字节的数据，这一点和TCP是很不同的。怎样定义消息呢?可以认为对方一次性write/send的数据为一个消息，需要明白的是当对方send一条信息的时候，无论底层怎样分段分片，TCP协议层会把构成整条消息的数据段排序完成后才呈现在内核缓冲区。<br>        例如基于tcp的套接字客户端往服务端上传文件，发送时文件内容是按照一段一段的字节流发送的，在接收方看了，根本不知道该文件的字节流从何处开始,在何处结束<br>所谓粘包问题主要还是因为接收方不知道消息之间的界限，不知道一次性提取多少字节的数据所造成的。<br>        此外，发送方引起的粘包是由TCP协议本身造成的，TCP为提高传输效率，发送方往往要收集到足够多的数据后才发送一个TCP段。若连续几次需要send的数据都很少，通常TCP会根据优化算法把这些数据合成一个TCP段后一次发送出去，这样接收方就收到了粘包数据。</p>
+<p>1.TCP (transport control protocol，传输控制协议）是面向连接的，面向流的，提供高可靠性服务。收发两端〈客户端和服务器端）都要有—一成对的socket，因此，发送端为了将多个发往接收端的包，更有效的发到对方，使用了优化方法(Nagle算法)，将多次间隔较小且数据量小的数据，合并成一个大的数据块，然后进行封包。这样，接收端，就难于分辨出来了，必须提供科学的拆包机制。即面向流的通信是无消息保护边界的。<br>        2.UDP(user datagram protocol，用户数据报协议）是无连接的，面向消息的，提供高效率服务。不会使用块的合并优化算法，,由于UDP支持的是一对多的模式，所以接收端的skbuff(套接字缓冲区）采用了链式结构来记录每一个到达的UDP包，在每个UDP包中就有了消息头〈消息来源地址，端口等信息)，这样,对于接收端来说，就容易进行区分处理了。即面向消息的通信是有消息保护边界的。<br>        3.tcp是基于数据流的，于是收发的消息不能为空，这就需要在客户端和服务端都添加空消息的处理机制，防止程序卡住，而udp是基于数据报的，即便是你输入的是空内容（直接回车)，那也不是空消息，udp协议会帮你封装上消息头.</p>
+<p>例如客户端在使用recv(1024)方法接受数据时，其最大接受数据为1024个字节，但服务器端发送的数据远远大于这个值，于是客户端的缓存就会有很多数据没拿到，只有1024是真正被网卡取出缓存的，其他数据会在下一次再向客户端请求数据时拿到，第二次很明显无法拿到想要的数据，而是第一次没有读取完的数据。</p>
+<p>客户端收数据没收干净，有残留，就会在下一次结果混淆在一起。</p>
+<p>解决办法：</p>
+<p>每次都将数据收完，不要让其残留在缓存里面。    </p>
+<p>1.拿到数据的总大小total_size</p>
+<p>2.recv_size=0,循环接收，每接收一次，recv_size+=接收的长度    </p>
+<p>3.直到recv_size=total_size，结束循环</p>
+<h4 id="python解决粘包（远程执行命令的代码）："><a href="#python解决粘包（远程执行命令的代码）：" class="headerlink" title="python解决粘包（远程执行命令的代码）："></a>python解决粘包（远程执行命令的代码）：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.服务器端要传入其发送数据的具体字节大小到客户端（也就是头信息）</span><br><span class="line">2.客户端接收数据时要先接收头部信息（字节大小），再根据其字节大小接收具体的数据</span><br><span class="line">#subprocess为远程执行命令</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#服务器端</span><br><span class="line">#本代码为客户端调用命令远程执行服务器端的命令</span><br><span class="line">import subprocess</span><br><span class="line">from socket import *</span><br><span class="line">import struct</span><br><span class="line">server=socket(AF_INET,SOCK_STREAM)</span><br><span class="line">server.bind((&#x27;127.0.0.1&#x27;,8080))</span><br><span class="line">server.listen(5)</span><br><span class="line">while True:</span><br><span class="line">    conn,client_addr=server.accept()</span><br><span class="line"></span><br><span class="line">    while True:</span><br><span class="line">        try:</span><br><span class="line">            res=conn.recv(1024)</span><br><span class="line">            if len(res) == 0:break #如果客户端输入的命令为空则推出</span><br><span class="line">            obj=subprocess.Popen(res.decode(&#x27;utf-8&#x27;),</span><br><span class="line">                             shell=True,</span><br><span class="line">                             stdout=subprocess.PIPE,</span><br><span class="line">                             stderr=subprocess.PIPE)</span><br><span class="line">           #subprocess.Popen执行命令，stdout和stderr为其正确输出以及错误输出</span><br><span class="line">            stdout=obj.stdout.read()</span><br><span class="line">            stderr=obj.stderr.read()</span><br><span class="line">            total_size=len(stdout)+len(stderr) #统计其输出代码的字节长度</span><br><span class="line">            #stdout为命令执行成功输出，stderr为执行错误的输出</span><br><span class="line">            header=struct.pack(&#x27;i&#x27;,total_size) #将其长度转换为字节bytes，struct.pack 中i的固定大小为4字节，表示其客户端在拿到头部信息时，先收取4字节并解码就可以得到其服务器端传输数据的大小</span><br><span class="line">            conn.send(header)</span><br><span class="line">            conn.send(stdout+stderr)</span><br><span class="line">        except Exception:</span><br><span class="line">            break</span><br><span class="line">    conn.close()	</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#客户端</span><br><span class="line">import struct</span><br><span class="line">from socket import *</span><br><span class="line">client=socket(AF_INET,SOCK_STREAM)</span><br><span class="line">client.connect((&#x27;127.0.0.1&#x27;,8080))</span><br><span class="line">while True:</span><br><span class="line">    msg=input(&#x27;请输入命令&#x27;).strip()</span><br><span class="line">    if len(msg) == 0:continue</span><br><span class="line">    client.send(msg.encode(&#x27;utf-8&#x27;))</span><br><span class="line">    header=client.recv(4) #拿四个字节的数据大小</span><br><span class="line">    total_size=struct.unpack(&#x27;i&#x27;,header)[0] #拿到后解码</span><br><span class="line">    recv_size=0</span><br><span class="line">    cmd_res=b&#x27;&#x27;</span><br><span class="line">    while  recv_size &lt; total_size: #如果已拿到的数据大小recv_size小于服务器发送过来的总数据大小就继续拿数据。</span><br><span class="line">        data=client.recv(1024)</span><br><span class="line">        recv_size+=len(data)</span><br><span class="line">        cmd_res+=data</span><br><span class="line">        print(data.decode(&#x27;gbk&#x27;),end=&#x27;&#x27;) #windows编码gbk</span><br><span class="line">    else:</span><br><span class="line">        print(&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>strut转换参数：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.socket/image-20211104172547839.png" alt="image-20211104172547839"></p>
+<h4 id="解决粘包代码终极版："><a href="#解决粘包代码终极版：" class="headerlink" title="解决粘包代码终极版："></a>解决粘包代码终极版：</h4><p>（将其封装成一个字典，将字典作为头信息传递过去）</p>
+<p>服务器端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">@作者: egon老湿</span><br><span class="line">@微信:18611453110</span><br><span class="line">@专栏: https://zhuanlan.zhihu.com/c_1189883314197168128</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"># 服务端应该满足两个特点：</span><br><span class="line"># 1、一直对外提供服务</span><br><span class="line"># 2、并发地服务多个客户端</span><br><span class="line">import subprocess</span><br><span class="line">import struct</span><br><span class="line">import json</span><br><span class="line">from socket import *</span><br><span class="line"></span><br><span class="line">server=socket(AF_INET,SOCK_STREAM)</span><br><span class="line">server.setsockopt(SOL_SOCKET,SO_REUSEADDR,1) #就是它，在bind前加</span><br><span class="line">server.bind((&#x27;127.0.0.1&#x27;,8083))</span><br><span class="line">server.listen(5)</span><br><span class="line"></span><br><span class="line">#  服务端应该做两件事</span><br><span class="line"># 第一件事：循环地从板连接池中取出链接请求与其建立双向链接，拿到链接对象</span><br><span class="line">while True:</span><br><span class="line">    conn,client_addr=server.accept()</span><br><span class="line"></span><br><span class="line">    # 第二件事：拿到链接对象，与其进行通信循环</span><br><span class="line">    while True:</span><br><span class="line">        try:</span><br><span class="line">            cmd=conn.recv(1024)</span><br><span class="line">            if len(cmd) == 0:break</span><br><span class="line">            obj=subprocess.Popen(cmd.decode(&#x27;utf-8&#x27;),</span><br><span class="line">                             shell=True,</span><br><span class="line">                             stdout=subprocess.PIPE,</span><br><span class="line">                             stderr=subprocess.PIPE</span><br><span class="line">                             )</span><br><span class="line"></span><br><span class="line">            stdout_res=obj.stdout.read()</span><br><span class="line">            stderr_res=obj.stderr.read()</span><br><span class="line">            total_size=len(stdout_res)+len(stderr_res)</span><br><span class="line"></span><br><span class="line">            # 1、制作头</span><br><span class="line">            header_dic=&#123;</span><br><span class="line">                &quot;filename&quot;:&quot;a.txt&quot;,</span><br><span class="line">                &quot;total_size&quot;:total_size,</span><br><span class="line">                &quot;md5&quot;:&quot;123123xi12ix12&quot;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            json_str = json.dumps(header_dic)</span><br><span class="line">            json_str_bytes = json_str.encode(&#x27;utf-8&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            # 2、先把头的长度发过去</span><br><span class="line">            x=struct.pack(&#x27;i&#x27;,len(json_str_bytes))</span><br><span class="line">            conn.send(x)</span><br><span class="line"></span><br><span class="line">            # 3、发头信息</span><br><span class="line">            conn.send(json_str_bytes)</span><br><span class="line">            # 4、再发真实的数据</span><br><span class="line">            conn.send(stdout_res)</span><br><span class="line">            conn.send(stderr_res)</span><br><span class="line"></span><br><span class="line">        except Exception:</span><br><span class="line">            break</span><br><span class="line">    conn.close()</span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">@作者: egon老湿</span><br><span class="line">@微信:18611453110</span><br><span class="line">@专栏: https://zhuanlan.zhihu.com/c_1189883314197168128</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import struct</span><br><span class="line">import json</span><br><span class="line">from socket import *</span><br><span class="line"></span><br><span class="line">client=socket(AF_INET,SOCK_STREAM)</span><br><span class="line">client.connect((&#x27;127.0.0.1&#x27;,8083))</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    cmd=input(&#x27;请输入命令&gt;&gt;：&#x27;).strip()</span><br><span class="line">    if len(cmd) == 0:continue</span><br><span class="line">    client.send(cmd.encode(&#x27;utf-8&#x27;))</span><br><span class="line"></span><br><span class="line">    # 接收端</span><br><span class="line">    # 1、先手4个字节，从中提取接下来要收的头的长度</span><br><span class="line">    x=client.recv(4)</span><br><span class="line">    header_len=struct.unpack(&#x27;i&#x27;,x)[0]</span><br><span class="line"></span><br><span class="line">    # 2、接收头，并解析</span><br><span class="line">    json_str_bytes=client.recv(header_len)</span><br><span class="line">    json_str=json_str_bytes.decode(&#x27;utf-8&#x27;)</span><br><span class="line">    header_dic=json.loads(json_str)</span><br><span class="line">    print(header_dic)</span><br><span class="line">    total_size=header_dic[&quot;total_size&quot;]</span><br><span class="line"></span><br><span class="line">    # 3、接收真实的数据</span><br><span class="line">    recv_size = 0</span><br><span class="line">    while recv_size &lt; total_size:</span><br><span class="line">        recv_data=client.recv(1024)</span><br><span class="line">        recv_size+=len(recv_data)</span><br><span class="line">        print(recv_data.decode(&#x27;utf-8&#x27;),end=&#x27;&#x27;)</span><br><span class="line">    else:</span><br><span class="line">        print()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 粘包问题出现的原因</span><br><span class="line"># 1、tcp是流式协议，数据像水流一样粘在一起，没有任何边界区分</span><br><span class="line"># 2、收数据没收干净，有残留，就会下一次结果混淆在一起</span><br><span class="line"></span><br><span class="line"># 解决的核心法门就是：每次都收干净，不要任何残留</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端为多个客户端提供服务"><a href="#服务端为多个客户端提供服务" class="headerlink" title="服务端为多个客户端提供服务"></a>服务端为多个客户端提供服务</h3><p>从上面的代码来说，当一个服务器端处于accept()等待连接的时候，一个客户端来了这个时候代码就会继续往下面走，此时如果再来一个客户端，在请求时就会堵塞住，因为服务器端的主线程已经用于服务第一个客户端去了，无法分身服务多个客户端</p>
+<p>解决办法：</p>
+<p>1.socketserver </p>
+<p>2.多线程（多进程）</p>
+<p>这两个模块都能解决单进程服务器端的问题，其实就是服务器端把处理客户端的服务交给其他进程或线程取处理，而自己只负责与客户端连接。类似于nginx，nginx一共两个进程，master和slave，master进程仅负责接收客户端的请求，而真正与客户端通信和返回数据的是slave端。 </p>
+<h4 id="socketserver"><a href="#socketserver" class="headerlink" title="socketserver:"></a>socketserver:</h4><p>这里用了socketserver模块，直接省略accpet以及以上监听绑定步骤（服务器端），直接用class类继承socketserver.BaseRequestHandler，然后定义handle函数，在恢复和发送数据时调用self.request.(recv or send)即可。最后生成对象，传入要监听的端口ip以及创建好的类名再运行对象即可。</p>
+<p><strong>这里只需要创建对象时传入bind的ip+port，已经通信时调用request方法。极其简单便捷。客户端无需改变，该如何通信还是一样，服务器端除了于客户端通信的那段代码其他均为固定格式</strong></p>
+<p>服务器端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import subprocess</span><br><span class="line">import socketserver</span><br><span class="line">import struct</span><br><span class="line">class MyRequestHandle(socketserver.BaseRequestHandler):</span><br><span class="line">    def handle(self):</span><br><span class="line">        while True:</span><br><span class="line">            try:</span><br><span class="line">                res=self.request.recv(1024)</span><br><span class="line">                if len(res) == 0:break</span><br><span class="line">                obj=subprocess.Popen(res.decode(&#x27;utf-8&#x27;),</span><br><span class="line">                                 shell=True,</span><br><span class="line">                                 stdout=subprocess.PIPE,</span><br><span class="line">                                 stderr=subprocess.PIPE)</span><br><span class="line">                stdout=obj.stdout.read()</span><br><span class="line">                stderr=obj.stderr.read()</span><br><span class="line">                total_size=len(stdout)+len(stderr)</span><br><span class="line">                #stdout为命令执行成功输出，stderr为执行错误的输出</span><br><span class="line">                header=struct.pack(&#x27;i&#x27;,total_size)</span><br><span class="line">                self.request.send(header)</span><br><span class="line">                self.request.send(stdout+stderr)</span><br><span class="line">            except Exception:</span><br><span class="line">                break</span><br><span class="line">        self.request.close()</span><br><span class="line">s=socketserver.ThreadingTCPServer((&#x27;127.0.0.1&#x27;,8080),MyRequestHandle)</span><br><span class="line">s.serve_forever()</span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import struct</span><br><span class="line">from socket import *</span><br><span class="line">client=socket(AF_INET,SOCK_STREAM)</span><br><span class="line">client.connect((&#x27;127.0.0.1&#x27;,8080))</span><br><span class="line">while True:</span><br><span class="line">    msg=input(&#x27;请输入命令&#x27;).strip()</span><br><span class="line">    if len(msg) == 0:continue</span><br><span class="line">    client.send(msg.encode(&#x27;utf-8&#x27;))</span><br><span class="line">    header=client.recv(4)</span><br><span class="line">    total_size=struct.unpack(&#x27;i&#x27;,header)[0]</span><br><span class="line">    recv_size=0</span><br><span class="line">    cmd_res=b&#x27;&#x27;</span><br><span class="line">    while  recv_size &lt; total_size:</span><br><span class="line">        data=client.recv(1024)</span><br><span class="line">        recv_size+=len(data)</span><br><span class="line">        cmd_res+=data</span><br><span class="line">        print(data.decode(&#x27;gbk&#x27;),end=&#x27;&#x27;)</span><br><span class="line">    else:</span><br><span class="line">        print(&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="服务器端代码模板："><a href="#服务器端代码模板：" class="headerlink" title="服务器端代码模板："></a>服务器端代码模板：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import subprocess</span><br><span class="line">import socketserver</span><br><span class="line">import struct</span><br><span class="line">class MyRequestHandle(socketserver.BaseRequestHandler):</span><br><span class="line">    def handle(self):</span><br><span class="line">        while True:</span><br><span class="line">				主代码（于客户端通信的代码）</span><br><span class="line">        self.request.close() #（关闭套接字代码）</span><br><span class="line">s=socketserver.ThreadingTCPServer((&#x27;127.0.0.1&#x27;,8080),MyRequestHandle)</span><br><span class="line">s.serve_forever()</span><br></pre></td></tr></table></figure>
+
+<h4 id="多线程实现："><a href="#多线程实现：" class="headerlink" title="多线程实现："></a>多线程实现：</h4><p>多线程与多进程都可以实现，这里导入多线程模块，把accpet接收到的客户端对象以下代码全部交与线程来做就可以了。（多进程也可以实现，但一般用多线程即可。）这里用threading模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line">import threading</span><br><span class="line">import struct</span><br><span class="line">import subprocess</span><br><span class="line"># 处理客户端请求的任务</span><br><span class="line">def handle_client_request(ip_port, new_client):</span><br><span class="line">	print(&quot;客户端的ip和端口号为:&quot;, ip_port)</span><br><span class="line">	# 5. 接收客户端的数据</span><br><span class="line">	# 收发消息都使用返回的这个新的套接字</span><br><span class="line">	# 循环接收客户端的消息</span><br><span class="line">	while True:</span><br><span class="line">		recv_data = new_client.recv(1024)</span><br><span class="line">		if recv_data == &#x27;quit&#x27;:</span><br><span class="line">			new_client.close()</span><br><span class="line">			break</span><br><span class="line">		elif recv_data:</span><br><span class="line">			obj = subprocess.Popen(recv_data.decode(&#x27;utf-8&#x27;),</span><br><span class="line">								   shell=True,</span><br><span class="line">								   stdout=subprocess.PIPE,</span><br><span class="line">								   stderr=subprocess.PIPE)</span><br><span class="line">			stdout = obj.stdout.read()</span><br><span class="line">			stderr = obj.stderr.read()</span><br><span class="line">			total_size = len(stdout) + len(stderr)</span><br><span class="line">			total_size = struct.pack(&quot;i&quot;,total_size)</span><br><span class="line">			new_client.send(total_size)</span><br><span class="line">			new_client.send(stdout)</span><br><span class="line">			new_client.send(stderr)</span><br><span class="line">		else:</span><br><span class="line">			break</span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">			# 1. 创建tcp服务端套接字</span><br><span class="line">			# AF_INET: ipv4 , AF_INET6: ipv6</span><br><span class="line">			tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">			# 设置端口号复用，表示意思： 服务端程序退出端口号立即释放</span><br><span class="line">			# 1. SOL_SOCKET: 表示当前套接字</span><br><span class="line">			# 2. SO_REUSEADDR： 表示复用端口号的选项</span><br><span class="line">			# 3. True： 确定复用</span><br><span class="line">			tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)</span><br><span class="line">			# 2. 绑定端口号</span><br><span class="line">			# 第一个参数表示ip地址，一般不用指定，表示本机的任何一个ip即可</span><br><span class="line">			# 第二个参数表示端口号</span><br><span class="line">			tcp_server_socket.bind((&quot;&quot;, 8080))</span><br><span class="line">			# 3. 设置监听</span><br><span class="line">			# 128: 表示最大等待建立连接的个数</span><br><span class="line">			tcp_server_socket.listen(128)</span><br><span class="line">			# 4. 等待接受客户端的连接请求</span><br><span class="line">			# 注意点： 每次当客户端和服务端建立连接成功都会返回一个新的套接字</span><br><span class="line">			# tcp_server_socket只负责等待接收客户端的连接请求，收发消息不使用该套接字</span><br><span class="line">			# 循环等待接受客户端的连接请求</span><br><span class="line">			while True:</span><br><span class="line">				new_client, ip_port = tcp_server_socket.accept()</span><br><span class="line">				# 代码执行到此，说明客户端和服务端建立连接成功</span><br><span class="line">				# 当客户端和服务端建立连接成功，创建子线程，让子线程专门负责接收客户端的消息</span><br><span class="line">				sub_thread = threading.Thread(target=handle_client_request, args=(ip_port, new_client))</span><br><span class="line">				# 设置守护主线程，主线程退出子线程直接销毁</span><br><span class="line">				sub_thread.setDaemon(True)</span><br><span class="line">				# 启动子线程执行对应的任务</span><br><span class="line">				sub_thread.start()</span><br><span class="line">				# 7. 关闭服务端套接字， 表示服务端以后不再等待接受客户端的连接请求</span><br><span class="line">				# tcp_server_socket.close()  # 因为服务端的程序需要一直运行，所以关闭服务端套接字的代码可以省略不写</span><br></pre></td></tr></table></figure>
+
+<p>上面为服务端代码，客户端不变，仅为实现服务端多线程</p>
+<h5 id="模板："><a href="#模板：" class="headerlink" title="模板："></a>模板：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line">import threading</span><br><span class="line">import struct</span><br><span class="line">import subprocess</span><br><span class="line">def handle_client_request(ip_port, new_client):</span><br><span class="line">	while True:</span><br><span class="line">		#主代码部分</span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">			tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">			tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)</span><br><span class="line">			tcp_server_socket.bind((&quot;&quot;, 8080))</span><br><span class="line">			tcp_server_socket.listen(128)</span><br><span class="line">			while True:</span><br><span class="line">				new_client, ip_port = tcp_server_socket.accept()</span><br><span class="line">				sub_thread = threading.Thread(target=handle_client_request, args=(ip_port, new_client))</span><br><span class="line">				sub_thread.setDaemon(True)</span><br><span class="line">				sub_thread.start()</span><br><span class="line">				# tcp_server_socket.close() </span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/11/18/socket_hexo/" data-id="ckxjra7pe001ur0v15i3y83fu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/11/18/mysql%20for%20python_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          mysql for python
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/01/python%E5%BC%82%E5%B8%B8_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python异常</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

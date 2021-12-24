@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>二分法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title: 二分法date: 2021-10-20 20:19:11tags:    - Typora    - Python   title: 二分法date: 2021-10-20 20:18:43tags:    - Typora    - Python  ​     算法：是高效解决问题的方法 算法之二分法 ​    需求：有一个按照从小到大顺序排序的数字列表，需要从该数字列表中找到我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分法">
+<meta property="og:url" content="http://example.com/2021/10/28/%E4%BA%8C%E5%88%86%E6%B3%95_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title: 二分法date: 2021-10-20 20:19:11tags:    - Typora    - Python   title: 二分法date: 2021-10-20 20:18:43tags:    - Typora    - Python  ​     算法：是高效解决问题的方法 算法之二分法 ​    需求：有一个按照从小到大顺序排序的数字列表，需要从该数字列表中找到我">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-28T01:47:05.000Z">
+<meta property="article:modified_time" content="2021-11-19T03:54:23.025Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-二分法_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E4%BA%8C%E5%88%86%E6%B3%95_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二分法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 二分法<br>date: 2021-10-20 20:19:11<br>tags:<br>    - Typora<br>    - Python</p>
+<hr>
+<hr>
+<p>title: 二分法<br>date: 2021-10-20 20:18:43<br>tags:<br>    - Typora<br>    - Python</p>
+<hr>
+<p>​    </p>
+<p>算法：是高效解决问题的方法</p>
+<p>算法之二分法</p>
+<p>​    需求：有一个按照从小到大顺序排序的数字列表，需要从该数字列表中找到我们想要的那个一个数字。</p>
+<p>​    例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a = [1,2,3,7,89,877,999,6888,56757,575657]</span><br><span class="line">b = 6888</span><br><span class="line"></span><br><span class="line">def bibary(a,b):</span><br><span class="line">    print(a)</span><br><span class="line">    e = len(a) // 2</span><br><span class="line">    if b &gt; a[e]:</span><br><span class="line">        a=a[e:]</span><br><span class="line">        bibary(a, b)</span><br><span class="line">    elif b &lt; a[e]:</span><br><span class="line">        a = a[:e]</span><br><span class="line">        bibary(a, b)</span><br><span class="line">    else:</span><br><span class="line">        print(&#x27;have find it &#x27;)</span><br><span class="line"></span><br><span class="line">bibary(a,b)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="函数式编程："><a href="#函数式编程：" class="headerlink" title="函数式编程："></a>函数式编程：</h2><p>函数式编程并非用函数编程这么简单，而是将计算机的运算视为数学意义上的运算，比起面向过程，函数式更加注重的是执行结果而非执行的过程，代表语言有:Haskell、Erlang。而python并不是一门函数式编程语言，但是仍为我们提饪了很多函数式编程好的特性，如lambda，map,reduce，filter</p>
+<h3 id="匿名函数lambda："><a href="#匿名函数lambda：" class="headerlink" title="匿名函数lambda："></a>匿名函数lambda：</h3><p>​    1.有名函数</p>
+<p>​    func=函数的内存地址</p>
+<p>​    def fun(a,b)</p>
+<p>​        return x+y</p>
+<p>​    2.匿名函数</p>
+<p>​        lambda a,b:x+y #a,b为参数，无需加括号</p>
+<p>​         这个x+y等于上面有名代码的return x+y</p>
+<h4 id="调用匿名函数："><a href="#调用匿名函数：" class="headerlink" title="调用匿名函数："></a>调用匿名函数：</h4><p>​            方式一：</p>
+<p>​                res=（lambda x,y:x+y）(1,2)</p>
+<p>​                print(res)                </p>
+<p>​            相当于 匿名地址内存地址加上传递的参数    </p>
+<p>​            方式二：</p>
+<p>​                func=lambda x,y:x+y</p>
+<p>​                res=func(1,2)</p>
+<p>​                print(res)</p>
+<p>​            匿名函数本质不应加函数名字，可以加函数名字实现但没必要。</p>
+<h4 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h4><p>​        用于临时使用（调用）一次。</p>
+<p>​        </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">salaries=&#123;</span><br><span class="line">    &#x27;siry&#x27;:3000,</span><br><span class="line">    &#x27;tom&#x27;:7000,</span><br><span class="line">    &#x27;lili&#x27;:10000,</span><br><span class="line">    &#x27;jack&#x27;:2000</span><br><span class="line">&#125;</span><br><span class="line"># 迭代出的内容    比较的值</span><br><span class="line"># &#x27;siry&#x27;         3000</span><br><span class="line"># &#x27;tom&#x27;          7000</span><br><span class="line"># &#x27;lili&#x27;         10000</span><br><span class="line"># &#x27;jack&#x27;         2000</span><br><span class="line"></span><br><span class="line"># def func(k):</span><br><span class="line">#     return salaries[k]</span><br><span class="line"></span><br><span class="line"># ========================max的应用</span><br><span class="line"># res=max(salaries,key=func) # 返回值=func(&#x27;siry&#x27;)</span><br><span class="line"># print(res)</span><br><span class="line">#这里再max迭代其字典salaries时，迭代的是其key而非value，所以比较的也是key非value，想要比较key就把max中传入key=func参数，func为定义的函数(这里无需跟括号和参数因为max会自动传入参数)，其功能为返回字典key对应的value，使其用value进行比较，但因这里只临时调用一次，顾应该定义为lambda函数，而无需专门定义一个有名函数。写法如下：</span><br><span class="line">res = max(salaries,key=lambda k:salaries[k])</span><br><span class="line">print(res)</span><br><span class="line"># ========================min的应用</span><br><span class="line"># res=min(salaries,key=lambda k:salaries[k])</span><br><span class="line"># print(res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ========================sorted排序</span><br><span class="line"></span><br><span class="line">#res=sorted(salaries,key=lambda k:salaries[k],reverse=True)</span><br><span class="line"># print(res)</span><br><span class="line">#这里sorted为排序，默认为key排序，传入key参数（lamdda）找到其key对应value，使其用value排序。</span><br></pre></td></tr></table></figure>
+
+<p>​            </p>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E4%BA%8C%E5%88%86%E6%B3%95_hexo/" data-id="ckxjra7pc001rr0v1c6zs1fys" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/10/28/nginx_locationANDrewrite_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nginx_locationANDrewrite
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/10/28/%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">名称空间</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

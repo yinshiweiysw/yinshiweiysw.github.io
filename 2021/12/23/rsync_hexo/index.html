@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>rsync | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.rsync简介rysnc是一种备份工具。支持增量备份和差异备份。rsync有三种备份方式，第一种是本地备份类似与cp命令，第二种是远程备份，类似与scp，使用的是ssh传输通道（需要进行ssh身份验证）。第三种是守护进程模式，需要有一台linux主机作为服务器监听端口，其他主要通过服务器的ip和端口进行访问（备份）操作 2.rsync用法2.1选项rsync有许多选项： -n: 在不确定命令是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rsync">
+<meta property="og:url" content="http://example.com/2021/12/23/rsync_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.rsync简介rysnc是一种备份工具。支持增量备份和差异备份。rsync有三种备份方式，第一种是本地备份类似与cp命令，第二种是远程备份，类似与scp，使用的是ssh传输通道（需要进行ssh身份验证）。第三种是守护进程模式，需要有一台linux主机作为服务器监听端口，其他主要通过服务器的ip和端口进行访问（备份）操作 2.rsync用法2.1选项rsync有许多选项： -n: 在不确定命令是">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032537.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032672.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032782.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032617.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231034667.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231034944.jpeg">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.422Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032537.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-rsync_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/rsync_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      rsync
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-rsync简介"><a href="#1-rsync简介" class="headerlink" title="1.rsync简介"></a>1.rsync简介</h1><p>rysnc是一种备份工具。支持增量备份和差异备份。rsync有三种备份方式，第一种是本地备份类似与cp命令，第二种是远程备份，类似与scp，使用的是ssh传输通道（需要进行ssh身份验证）。第三种是守护进程模式，需要有一台linux主机作为服务器监听端口，其他主要通过服务器的ip和端口进行访问（备份）操作</p>
+<h1 id="2-rsync用法"><a href="#2-rsync用法" class="headerlink" title="2.rsync用法"></a>2.rsync用法</h1><h2 id="2-1选项"><a href="#2-1选项" class="headerlink" title="2.1选项"></a>2.1选项</h2><p>rsync有许多选项：</p>
+<p>-n: 在不确定命令是否能按意愿执行时，务必要事先测试；-n可以完成此功能；<br>-v: –verbose，详细输出模式<br>-q: –quiet，静默模式<br>-c: –checksum，开启校验功能，强制对文件传输进行校验<br>-r: –recursive，递归复制；<br>-a: –archives，归档，保留文件的原有属性<br>-p: –perms 保留文件的权限<br>-t: –times 保留文件的时间戳<br>-l: –links 保留文件的符号链接<br>-g: –group 保留文件的属组<br>-o: –owner 保留文件的属主<br>-D： –devices 保留设备文件<br>-H, –hard-links 保留硬链结;<br>-S, –sparse 对稀疏文件进行特殊处理以节省DST的 空间;<br>-e ssh: 表示使用ssh协议作承载<br>-z: 对文件压缩后传输<br>–progress：显示进度条<br>–stats: 显示如何执行压缩和传输<br>–delete：删除那些DST中有而SRC没有的文件，即删除DST中多余的文件</p>
+<h2 id="2-2命令格式"><a href="#2-2命令格式" class="headerlink" title="2.2命令格式"></a>2.2命令格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Local:  rsync [OPTION...] SRC... [DEST]</span><br><span class="line"> </span><br><span class="line">Access via remote shell:</span><br><span class="line">  Pull: rsync [OPTION...] [USER@]HOST:SRC... [DEST]</span><br><span class="line">  Push: rsync [OPTION...] SRC... [USER@]HOST:DEST</span><br><span class="line"> </span><br><span class="line">Access via rsync daemon:</span><br><span class="line">  Pull: rsync [OPTION...] [USER@]HOST::SRC... [DEST]</span><br><span class="line">        rsync [OPTION...] rsync://[USER@]HOST[:PORT]/SRC... [DEST]</span><br><span class="line">  Push: rsync [OPTION...] SRC... [USER@]HOST::DEST</span><br><span class="line">        rsync [OPTION...] SRC... rsync://[USER@]HOST[:PORT]/DEST</span><br></pre></td></tr></table></figure>
+
+<p>由此语法可知，rsync有三种工作方式：</p>
+<p>(1).本地文件系统上实现同步。命令行语法格式为上述”Local”段的格式。</p>
+<p>(2).本地主机使用远程shell和远程主机通信。命令行语法格式为上述”Access via remote shell”段的格式。</p>
+<p>(3).本地主机通过网络套接字连接远程主机上的rsync daemon。命令行语法格式为上述”Access via rsync daemon”段的格式。</p>
+<p>前两者的本质是通过管道通信，即使是远程shell。而方式(3)则是让远程主机上运行rsync服务，使其监听在一个端口上，等待客户端的连接。</p>
+<h2 id="2-3-配置文件"><a href="#2-3-配置文件" class="headerlink" title="2.3 配置文件"></a>2.3 配置文件</h2><p>rsync配置文件一般为/etc/rsyncd.conf:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fake super = yes</span><br><span class="line">uid = rsync</span><br><span class="line">gid = rsync</span><br><span class="line">use chroot = no</span><br><span class="line">max connections = 10</span><br><span class="line">timeout = 600</span><br><span class="line">motd file = /var/rsyncd/rsyncd.moth</span><br><span class="line">pid file = /var/rsyncd/rsync.pid</span><br><span class="line">lock file = /var/run/rsync.lock</span><br><span class="line">log file = /var/rsyncd/rsyncd.log</span><br><span class="line">dont compress = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2</span><br><span class="line">[backup]</span><br><span class="line">path = /backup</span><br><span class="line">igonre errors</span><br><span class="line">read only = false</span><br><span class="line">write only = false</span><br><span class="line">list = false</span><br><span class="line">auth users = rsyncd_backup</span><br><span class="line">secrets file = /etc/rsyncd.passwd</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="rsyncd-conf配置文件常用参数说明"><a href="#rsyncd-conf配置文件常用参数说明" class="headerlink" title="rsyncd.conf配置文件常用参数说明"></a>rsyncd.conf配置文件常用参数说明</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">| rsyncd.conf参数 | 参数说明 |</span><br><span class="line">| - | - |</span><br><span class="line">| uid=rsync | rsync使用的用户。 |</span><br><span class="line">| gid=rsync | rsync使用的用户组（用户所在的组） |</span><br><span class="line">| use chroot=no | 如果为true，daemon会在客户端传输文件前“chroot to the path”。这是一种安全配置，因为我们大多数都在内网，所以不配也没关系 |</span><br><span class="line">| max connections=200 | 设置最大连接数，默认0，意思无限制，负值为关闭这个模块 |</span><br><span class="line">| timeout=400 | 默认为0，表示no timeout，建议300-600（5-10分钟） |</span><br><span class="line">| pid file | rsync daemon启动后将其进程pid写入此文件。如果这个文件存在，rsync不会覆盖该文件，而是会终止 |</span><br><span class="line">| lock file | 指定lock文件用来支持“max connections”参数，使得总连接数不会超过限制 |</span><br><span class="line">| log file | 不设或者设置错误，rsync会使用rsyslog输出相关日志信息 |</span><br><span class="line">| ignore errors | 忽略I/O错误 |</span><br><span class="line">| read only=false | 指定客户端是否可以上传文件，默认对所有模块为true |</span><br><span class="line">| list=false | 是否允许客户端可以查看可用模块列表，默认为可以 |</span><br><span class="line">| hosts allow | 指定可以联系的客户端主机名或和ip地址或地址段，默认情况没有此参数，即都可以连接 |</span><br><span class="line">| hosts deny | 指定不可以联系的客户端主机名或ip地址或地址段，默认情况没有此参数，即都可以连接 |</span><br><span class="line">| auth users | 指定以空格或逗号分隔的用户可以使用哪些模块，用户不需要在本地系统中存在。默认为所有用户无密码访问 |</span><br><span class="line">| secrets file | 指定用户名和密码存放的文件，格式；用户名；密码，密码不超过8位 |</span><br><span class="line">| [backup] | 这里就是模块名称，需用中括号扩起来，起名称没有特殊要求，但最好是有意义的名称，便于以后维护 |</span><br><span class="line">| path | 这个模块中，daemon使用的文件系统或目录，目录的权限要注意和配置文件中的权限一致，否则会遇到读写的问题 |</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-实验"><a href="#3-实验" class="headerlink" title="3.实验"></a>3.实验</h1><h2 id="3-1-本地传输"><a href="#3-1-本地传输" class="headerlink" title="3.1 本地传输"></a>3.1 本地传输</h2><p>文件同步<br>rsync -avz /etc/fstab /data/<br>目录同步<br>rsync -avz /data /opt<br>data 后面加/表示将data下的内容同步过去 不加/表示将data目录同步过去</p>
+<p>–delete 让目标目录与原目录数据同步</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032537.jpeg" alt="image.png"></p>
+<h2 id="3-2远程传输"><a href="#3-2远程传输" class="headerlink" title="3.2远程传输"></a>3.2远程传输</h2><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032672.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032782.jpeg" alt="image.png"></p>
+<p>备注：需要注意的是，远程传输方式使用的是ssh传输通道，ssh传输通道本身传输数据加密的，是安全的，但也有几个缺点：</p>
+<p>1.用户权限问题<br>2.用户身份暴露（安全隐患）<br>3.文件路径暴露（安全隐患）</p>
+<p>tcp传输过程，每传输一个数据都会有连接的建立，维护，断开过程。所以传输多个文件会比较慢</p>
+<p>且两边都需要安装rsync程序。</p>
+<p>第一次传输需要进行秘钥确定，且每次登陆需要输入密码，如不想输入密码，可生成秘钥并发送到远程主机。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231032617.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231034667.png" alt="image-20211123103427345"></p>
+<p>使用ssh-keygen生成秘钥，并使用ssh-copy-id 发送至远程主机</p>
+<p>此时传输数据便不会提示输入密码（ssh登陆亦是如此）</p>
+<h2 id="3-3-守护进程方式"><a href="#3-3-守护进程方式" class="headerlink" title="3.3 守护进程方式"></a>3.3 守护进程方式</h2><p>守护进程方式需要一台机器作为server端，启动rsync deamon程序，监听端口，通过ip+socket来进行交互。</p>
+<p>1.rpm -ql rsync查看rsync是否有安装（有的rsync把rsync与rsync-deamon分开，需要注意下）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231034944.jpeg" alt="image.png"></p>
+<p>如果没有的话则需要安装</p>
+<p>yum -y install rsync-deamon rsync</p>
+<p>2.编辑配置文件</p>
+<p>vim /etc/rsyncd.conf<br>3.创建程序用户<br>useradd -M -s /sbin/nologin rsync<br>chown -R rsync.rsync /backup<br>4.创建目录<br>mkdir /backup &amp;&amp; chown -R rsync.rsync /backup<br>5.创建虚拟用户认证文件<br>echo “rsync_backup:1” &gt; /etc/rsync.password<br>chmod 600 rsync.password<br>6.启动守护进程<br>systemctl start rsyncd</p>
+<p>使用rsync带上参数–password-file=xxx指定密码文件可以免输入密码</p>
+<p>首先 echo 123456 &gt;　/etc/rsync_password; chmod 600 /etc/rsync_password</p>
+<p>然后 rsync -avz xxx <a href="mailto:rsyncd_backup@192.168.1.1">rsyncd_backup@192.168.1.1</a>::bakcup –password-file=/etc/rsync_password</p>
+<p>或者设置环境变量：</p>
+<p>export RSYNC_PASSWORD =123456</p>
+<p>这样不用跟上参数也可以免密码传输</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/rsync_hexo/" data-id="ckxjra7pa001kr0v1eeqhbko1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/23/nginx_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nginx
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/23/vmware%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vmware问题及解决方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

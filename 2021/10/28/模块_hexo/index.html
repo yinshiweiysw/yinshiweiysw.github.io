@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>模块 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="时间相关命令时间分为三种格式 1.时间戳：从1970年到现在的秒数 ​            time.time 2.格式化的字符串形式 ​            time.strftime(‘%Y-%m-%d %H:%M%S %p’) 3.结构化的时间 ​            res&#x3D;time.localtime ​            print(res) ​            pri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模块">
+<meta property="og:url" content="http://example.com/2021/10/28/%E6%A8%A1%E5%9D%97_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="时间相关命令时间分为三种格式 1.时间戳：从1970年到现在的秒数 ​            time.time 2.格式化的字符串形式 ​            time.strftime(‘%Y-%m-%d %H:%M%S %p’) 3.结构化的时间 ​            res&#x3D;time.localtime ​            print(res) ​            pri">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20210924160248941.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20210927145134605.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20210927151042187.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/1036857-20180410101832069-1144106861.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211008145648843.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211008151019274.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211008151301307.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211009154143282.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211009154312364.png">
+<meta property="article:published_time" content="2021-10-28T01:47:05.000Z">
+<meta property="article:modified_time" content="2021-11-19T03:54:23.383Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yinshiweiysw.github.io/images/assets/image-20210924160248941.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-模块_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/28/%E6%A8%A1%E5%9D%97_hexo/" class="article-date">
+  <time datetime="2021-10-28T01:47:05.000Z" itemprop="datePublished">2021-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      模块
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="时间相关命令"><a href="#时间相关命令" class="headerlink" title="时间相关命令"></a>时间相关命令</h3><p>时间分为三种格式</p>
+<p>1.时间戳：从1970年到现在的秒数</p>
+<p>​            time.time</p>
+<p>2.格式化的字符串形式</p>
+<p>​            time.strftime(‘%Y-%m-%d %H:%M%S %p’)</p>
+<p>3.结构化的时间</p>
+<p>​            res=time.localtime</p>
+<p>​            print(res)</p>
+<p>​            print(res.tm_year)</p>
+<p>4.datetime</p>
+<p>​    import datetime</p>
+<p>​    print(datetime.datetime.now())</p>
+<p>​    直接获取到格式化的时间格式</p>
+<h3 id="时间格式的转换"><a href="#时间格式的转换" class="headerlink" title="时间格式的转换"></a>时间格式的转换</h3><p>时间格式转换是其三种时间格式的相互转换，结构化时间（struct_time）,时间戳（timestamp）,格式化的字符串（format_string）</p>
+<h4 id="struct-time转换成时间戳"><a href="#struct-time转换成时间戳" class="headerlink" title="struct_time转换成时间戳"></a>struct_time转换成时间戳</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">s_time=time.localtime()</span><br><span class="line">print(time.mktime(s_time))</span><br></pre></td></tr></table></figure>
+
+<h4 id="时间戳转换成struct-time"><a href="#时间戳转换成struct-time" class="headerlink" title="时间戳转换成struct_time"></a>时间戳转换成struct_time</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tp_time=time.time()</span><br><span class="line">print(time.localtime(tp_time))</span><br></pre></td></tr></table></figure>
+
+<h4 id="strcut-time转换成格式化的字符串"><a href="#strcut-time转换成格式化的字符串" class="headerlink" title="strcut_time转换成格式化的字符串"></a>strcut_time转换成格式化的字符串</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s_time=time.localtime()</span><br><span class="line">time.strftime(&#x27;%Y-%m-%d %H:%M%S %p&#x27;,s_time)</span><br></pre></td></tr></table></figure>
+
+<p>真正需要掌握的是format string &lt;—&gt; timestamp</p>
+<h2 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a>random模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"></span><br><span class="line">print(random.random()) #的到0到1之间的小数</span><br><span class="line">	  random.randint(1,3) #大于等于1小于等于3的数</span><br><span class="line">	  random.randrange(1,3) #大于等于1 小于3 </span><br><span class="line">	  	   ~.choice(1,&#x27;aaa&#x27;,[2,3]) #定义几个数随机取一个</span><br><span class="line">	  	   ~.sample(1,&#x27;23131d&#x27;,[4,5]) #列表元素任意2个组合</span><br><span class="line">	  	   ~.uniform(1,3) #大于1小于3 的小树</span><br><span class="line">	  	   item =[1,2,3,4,5]</span><br><span class="line">	  	   random.shuffle(item)#打乱顺序</span><br></pre></td></tr></table></figure>
+
+<h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a>os模块</h2><p>os模块是与操作系统交互的一个接口</p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">os.getcwd() 获取当前工作目录，即当前python脚本工作的目录路径</span><br><span class="line">os.chdir(&quot;dirname&quot;)  改变当前脚本工作目录；相当于shell下cd</span><br><span class="line">os.curdir  返回当前目录: (&#x27;.&#x27;)</span><br><span class="line">os.pardir  获取当前目录的父目录字符串名：(&#x27;..&#x27;)</span><br><span class="line">os.makedirs(&#x27;dirname1/dirname2&#x27;)    可生成多层递归目录</span><br><span class="line">os.removedirs(&#x27;dirname1&#x27;)    若目录为空，则删除，并递归到上一级目录，如若也为空，则删除，依此类推</span><br><span class="line">os.mkdir(&#x27;dirname&#x27;)    生成单级目录；相当于shell中mkdir dirname</span><br><span class="line">os.rmdir(&#x27;dirname&#x27;)    删除单级空目录，若目录不为空则无法删除，报错；相当于shell中rmdir dirname</span><br><span class="line">os.listdir(&#x27;dirname&#x27;)    列出指定目录下的所有文件和子目录，包括隐藏文件，并以列表方式打印</span><br><span class="line">os.remove()  删除一个文件</span><br><span class="line">os.rename(&quot;oldname&quot;,&quot;newname&quot;)  重命名文件/目录</span><br><span class="line">os.stat(&#x27;path/filename&#x27;)  获取文件/目录信息</span><br><span class="line">os.sep    输出操作系统特定的路径分隔符，win下为&quot;\\&quot;,Linux下为&quot;/&quot;</span><br><span class="line">os.linesep    输出当前平台使用的行终止符，win下为&quot;\t\n&quot;,Linux下为&quot;\n&quot;</span><br><span class="line">os.pathsep    输出用于分割文件路径的字符串 win下为;,Linux下为:</span><br><span class="line">os.name    输出字符串指示当前使用平台。win-&gt;&#x27;nt&#x27;; Linux-&gt;&#x27;posix&#x27;</span><br><span class="line">os.system(&quot;bash command&quot;)  运行shell命令，直接显示</span><br><span class="line">os.environ  获取系统环境变量</span><br><span class="line">os.path.abspath(path)  返回path规范化的绝对路径</span><br><span class="line">os.path.split(path)  将path分割成目录和文件名二元组返回</span><br><span class="line">os.path.dirname(path)  返回path的目录。其实就是os.path.split(path)的第一个元素</span><br><span class="line">os.path.basename(path)  返回path最后的文件名。如何path以／或\结尾，那么就会返回空值。即os.path.split(path)的第二个元素</span><br><span class="line">os.path.exists(path)  如果path存在，返回True；如果path不存在，返回False</span><br><span class="line">os.path.isabs(path)  如果path是绝对路径，返回True</span><br><span class="line">os.path.isfile(path)  如果path是一个存在的文件，返回True。否则返回False</span><br><span class="line">os.path.isdir(path)  如果path是一个存在的目录，则返回True。否则返回False</span><br><span class="line">os.path.join(path1[, path2[, ...]])  将多个路径组合后返回，第一个绝对路径之前的参数将被忽略</span><br><span class="line">os.path.getatime(path)  返回path所指向的文件或者目录的最后存取时间</span><br><span class="line">os.path.getmtime(path)  返回path所指向的文件或者目录的最后修改时间</span><br><span class="line">os.path.getsize(path) 返回path的大小</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">在Linux和Mac平台上，该函数会原样返回path，在windows平台上会将路径中所有字符转换为小写，并将所有斜杠转换为饭斜杠。</span><br><span class="line">&gt;&gt;&gt; os.path.normcase(&#x27;c:/windows\\system32\\&#x27;)   </span><br><span class="line">&#x27;c:\\windows\\system32\\&#x27;   </span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">规范化路径，如..和/</span><br><span class="line">&gt;&gt;&gt; os.path.normpath(&#x27;c://windows\\System32\\../Temp/&#x27;)   </span><br><span class="line">&#x27;c:\\windows\\Temp&#x27;   </span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; a=&#x27;/Users/jieli/test1/\\\a1/\\\\aa.py/../..&#x27;</span><br><span class="line">&gt;&gt;&gt; print(os.path.normpath(a))</span><br><span class="line">/Users/jieli/test1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">os路径处理</span><br><span class="line">#方式一：推荐使用</span><br><span class="line">import os</span><br><span class="line">#具体应用</span><br><span class="line">import os,sys</span><br><span class="line">possible_topdir = os.path.normpath(os.path.join(</span><br><span class="line">    os.path.abspath(__file__),</span><br><span class="line">    os.pardir, #上一级</span><br><span class="line">    os.pardir,</span><br><span class="line">    os.pardir</span><br><span class="line">))</span><br><span class="line">sys.path.insert(0,possible_topdir)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#方式二：不推荐使用</span><br><span class="line">os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a>sys模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">print(sys.argv)</span><br></pre></td></tr></table></figure>
+
+<p>sys.argv用于获取向文件传递的参数</p>
+<p>例如：</p>
+<p>python3 run.py 1 2 3</p>
+<p>其中的1, 2,3就分别是三个参数</p>
+<p>sys.argv[0]为文件名， 123，分别就是后面对应的位置参数。</p>
+<p>例如:</p>
+<p>以argv来实现cp命令（cp 源文件 目标文件），实现复制粘贴文件的效果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">cs_1=sys.argv[1]</span><br><span class="line">cs_2=sys.argv[2]</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    with open(r&#x27;%s&#x27; %cs_1,mode=&quot;rb&quot;) as file1:</span><br><span class="line">        a=file1.read()</span><br><span class="line">        with open(r&#x27;%s&#x27; %cs_2,mode=&quot;wb+&quot;) as file2:</span><br><span class="line">            b=file2.write(a)</span><br><span class="line">except IOError:</span><br><span class="line">    print(&quot;没有该文件&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;内容写入文件成功&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>执行效果：（得在Windows命令行console执行）</p>
+<p>(pyproject) E:\pyproject\py_study1&gt;python study1.py upload_file.py 2.py<br>内容写入文件成功</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210924160248941.png" alt="image-20210924160248941"></p>
+<h2 id="打印进度条："><a href="#打印进度条：" class="headerlink" title="打印进度条："></a>打印进度条：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">res = &#x27;&#x27;</span><br><span class="line">for i in range(50):</span><br><span class="line">	res+=&#x27;#&#x27;</span><br><span class="line">	time.sleep(0.5)</span><br><span class="line">	print(&#x27;\r[%-50s]&#x27; % res,end=&#x27;&#x27;)</span><br><span class="line">	#%s 为百分号替代符号，中间的-50，-为左对齐，50为其长度固定为50，由于只输出一行，让其为每次叠加一个#的进度条，所以其换行符为空，并且\r跳到其行首，使其覆盖</span><br></pre></td></tr></table></figure>
+
+<h3 id="模拟打印下载进度条："><a href="#模拟打印下载进度条：" class="headerlink" title="模拟打印下载进度条："></a>模拟打印下载进度条：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">recv_size=0</span><br><span class="line"></span><br><span class="line">total_size=30000</span><br><span class="line"></span><br><span class="line">while recv_size &lt; total_size:</span><br><span class="line">	time.sleep(0.1)</span><br><span class="line">	recv_size+=1024</span><br><span class="line">	</span><br><span class="line">	percent= recv_size / total_size</span><br><span class="line">	if percent &gt; 1:</span><br><span class="line">        percent = 1</span><br><span class="line">	res= int(50 * percent) * &#x27;#&#x27;</span><br><span class="line">	print(&#x27;\r[%-50s] %d%%&#x27;) % (res,int(100*percent)),end=&#x27;&#x27;)</span><br><span class="line">	#recv_size和total_size模拟其文件大小以及已下载的数据大小</span><br><span class="line">	#sleep模拟下载速度，使其不会太快加载完。</span><br><span class="line">	#recv_size/total_size得到的分数为其下载进度，\r[%-50s]为其打印进度条，%d%%显示百分比，百分比为其下载进度分数x100.但recv_size一直累加可能会超出总大小本身，其比例也会超过100%，这是可以用if 判断其大于1时使其等于1.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a>shutil模块</h2><p>引入： import shutil</p>
+<p>copy()<br>功能：复制文件<br>格式：shutil.copy(‘来源文件’,’目标地址’)<br>返回值：复制之后的路径</p>
+<p>copy2()<br>功能：复制文件，保留元数据<br>格式：shutil.copy2(‘来源文件’,’目标地址’)<br>返回值：复制之后的路径</p>
+<p>copyfileobj()<br>将一个文件的内容拷贝的另外一个文件当中<br>格式：shutil.copyfileobj(open(来源文件,’r’),open（’目标文件’,’w’）)<br>返回值：无</p>
+<p>copyfile()<br>功能：将一个文件的内容拷贝的另外一个文件当中<br>格式:shutil.copyfile(来源文件,目标文件)<br>返回值：目标文件的路径</p>
+<p>copytree()<br>功能：复制整个文件目录<br>格式:shutil.copytree(来源目录,目标目录)<br>返回值：目标目录的路径<br>注意：无论文件夹是否为空，均可以复制，而且会复制文件夹中的所有内容</p>
+<p>copymode()<br>功能：拷贝权限</p>
+<p>copystat()<br>功能：拷贝元数据（状态）</p>
+<p>rmtree()<br>功能：移除整个目录，无论是否空<br>格式：shutil.rmtree(目录路径)<br>返回值：无</p>
+<p>move()<br>功能：移动文件或者文件夹<br>格式：shutil.move(来源地址,目标地址)<br>返回值：目标地址</p>
+<p>which()<br>功能：检测命令对应的文件路径<br>格式：shutil.which(‘命令字符串’)<br>返回值：命令文件所在位置<br>注意：window和linux不太一样。 window的命令都是.exe结尾，linux则不是</p>
+<p>disk_usage()<br>功能：检测磁盘使用信息<br>格式：disk_usage(‘盘符’)<br>返回值：元组</p>
+<p>归档和解包操作<br>归档：将多个文件合并到一个文件当中，这种操作方式就是归档。</p>
+<p>解包：将归档的文件进行释放。</p>
+<p>压缩：压缩时将多个文件进行有损或者无损的合并到一个文件当中。</p>
+<p>解压缩：就是压缩的反向操作，将压缩文件中的多个文件，释放出来。</p>
+<p>注意：压缩属于归档！<br>        make_archive()<br>功能：归档函数，归档操作<br>格式：shutil.make_archive(‘目标文件路径’,’归档文件后缀’,’需要归档的目录’)<br>返回值：归档文件的最终路径</p>
+<p>unpack_archive()<br>功能：解包操作<br>格式：shutil.unpack_archive(‘归档文件路径’,’解包目标文件夹’)<br>返回值:None<br>注意：文件夹不存在会新建文件夹</p>
+<p>get_archive_formats()<br>功能：获取当前系统已注册的归档文件格式（后缀）<br>格式：shutil.get_archive_formats()</p>
+<p>get_unpack_formats()<br>功能：获取当前系统已经注册的解包文件格式(后缀)<br>格式:shutil.get_unpack_formats()<br>返回值：列表   [(后缀,解释),(后缀,解释),(后缀,解释)…]</p>
+<h2 id="json-amp-pickle模块"><a href="#json-amp-pickle模块" class="headerlink" title="json&amp;pickle模块"></a>json&amp;pickle模块</h2><p>之前我们学习过用eval内置方法可以将一个字符串转成python对象，不过，eval方法是有局限性的，对于普通的数据类型，json.loads和eval都能用，但遇到特殊类型的时候，eval就不管用了,所以eval的重点还是通常用来执行一个字符串表达式，并返回表达式的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 import json</span><br><span class="line">2 x=&quot;[null,true,false,1]&quot;</span><br><span class="line">3 print(eval(x)) #报错，无法解析null类型，而json就可以</span><br><span class="line">4 print(json.loads(x)) </span><br></pre></td></tr></table></figure>
+
+<p><strong>什么是序列化？</strong></p>
+<p>我们把对象(变量)从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等，都是一个意思。</p>
+<p><strong>为什么要序列化？</strong></p>
+<p>1：持久保存状态</p>
+<p>需知一个软件/程序的执行就在处理一系列状态的变化，在编程语言中，’状态’会以各种各样有结构的数据类型(也可简单的理解为变量)的形式被保存在内存中。</p>
+<p>内存是无法永久保存数据的，当程序运行了一段时间，我们断电或者重启程序，内存中关于这个程序的之前一段时间的数据（有结构）都被清空了。</p>
+<p>在断电或重启程序之前将程序当前内存中所有的数据都保存下来（保存到文件中），以便于下次程序执行能够从文件中载入之前的数据，然后继续执行，这就是序列化。</p>
+<p>具体的来说，你玩使命召唤闯到了第13关，你保存游戏状态，关机走人，下次再玩，还能从上次的位置开始继续闯关。或如，虚拟机状态的挂起等。</p>
+<p>2：跨平台数据交互</p>
+<p>序列化之后，不仅可以把序列化后的内容写入磁盘，还可以通过网络传输到别的机器上，如果收发的双方约定好实用一种序列化的格式，那么便打破了平台/语言差异化带来的限制，实现了跨平台数据交互。</p>
+<p>反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。</p>
+<h3 id="json"><a href="#json" class="headerlink" title="json"></a><strong>json</strong></h3><p>如果我们要在不同的编程语言之间传递对象，就必须把对象序列化为标准格式，比如XML，但更好的方法是序列化为JSON，因为JSON表示出来就是一个字符串，可以被所有语言读取，也可以方便地存储到磁盘或者通过网络传输。JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。</p>
+<p>JSON表示的对象就是标准的JavaScript语言的对象，JSON和Python内置的数据类型对应如下：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210927145134605.png" alt="image-20210927145134605"></p>
+<h3 id="如何序列化与反序列化"><a href="#如何序列化与反序列化" class="headerlink" title="如何序列化与反序列化"></a>如何序列化与反序列化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">res=json.dumps([1,&#x27;aaa&#x27;,True,False])</span><br><span class="line">print(res.type(res))</span><br><span class="line">l=json.loads(res)</span><br><span class="line">print(l,type(l))</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>[1, “aaa”, true, false] &lt;class ‘str’&gt;<br>        [1, ‘aaa’, True, False] &lt;class ‘list’&gt;</p>
+<p>json.dumps是序列化转换，将列表转换为json格式，其格式变为了str。</p>
+<p>json.loads是反序列化转换，将其又转回了原来的列表格式。</p>
+<p>示例2：存储为json格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">res=json.dumps([1,&#x27;aaa&#x27;,True,False])</span><br><span class="line">with open(&quot;1.json&quot;,mode=&quot;wt&quot;,encoding=&#x27;utf-8&#x27;) as file:</span><br><span class="line">    file.write(res)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210927151042187.png" alt="image-20210927151042187"></p>
+<p>再读取json格式将其反序列化转换成原格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">with open(&quot;1.json&quot;,mode=&#x27;rt&#x27;) as file:</span><br><span class="line">    a=file.read()</span><br><span class="line">    b=json.loads(a)</span><br><span class="line">    print(b)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>[1, ‘aaa’, True, False]</p>
+<p>简单方法实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">with open(&quot;1.json&quot;,mode=&quot;wt&quot;,encoding=&#x27;utf-8&#x27;) as file:</span><br><span class="line">    json.dump([1, &#x27;aaa&#x27;, True, False],file)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">with open(&quot;1.json&quot;,mode=&#x27;rt&#x27;) as file:</span><br><span class="line">    l=json.load(file)</span><br><span class="line">    print(l)</span><br></pre></td></tr></table></figure>
+
+<p>dump和load可以省略其文件的write和read方法</p>
+<h3 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import pickle</span><br><span class="line">res=pickle.dumps(&#123;1,2,3,4,5&#125;)</span><br><span class="line">print(res,type(res))</span><br></pre></td></tr></table></figure>
+
+<p>将python序列化转换成pickle形式，反序列化为loads，与json一致。</p>
+<h2 id="configparser模块"><a href="#configparser模块" class="headerlink" title="configparser模块"></a>configparser模块</h2><p><strong>配置文件如下：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 注释1</span><br><span class="line">; 注释2</span><br><span class="line"></span><br><span class="line">[section1]</span><br><span class="line">k1 = v1</span><br><span class="line">k2:v2</span><br><span class="line">user=egon</span><br><span class="line">age=18</span><br><span class="line">is_admin=true</span><br><span class="line">salary=31</span><br><span class="line">[section2]</span><br><span class="line">k1 = v1</span><br></pre></td></tr></table></figure>
+
+<p><strong>读取</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import configparser</span><br><span class="line"></span><br><span class="line">config=configparser.ConfigParser()</span><br><span class="line">config.read(&#x27;a.cfg&#x27;)</span><br><span class="line"></span><br><span class="line">#查看所有的标题</span><br><span class="line">res=config.sections() #[&#x27;section1&#x27;, &#x27;section2&#x27;]</span><br><span class="line">print(res)</span><br><span class="line"></span><br><span class="line">#查看标题section1下所有key=value的key</span><br><span class="line">options=config.options(&#x27;section1&#x27;)</span><br><span class="line">print(options) #[&#x27;k1&#x27;, &#x27;k2&#x27;, &#x27;user&#x27;, &#x27;age&#x27;, &#x27;is_admin&#x27;, &#x27;salary&#x27;]</span><br><span class="line"></span><br><span class="line">#查看标题section1下所有key=value的(key,value)格式</span><br><span class="line">item_list=config.items(&#x27;section1&#x27;)</span><br><span class="line">print(item_list) #[(&#x27;k1&#x27;, &#x27;v1&#x27;), (&#x27;k2&#x27;, &#x27;v2&#x27;), (&#x27;user&#x27;, &#x27;egon&#x27;), (&#x27;age&#x27;, &#x27;18&#x27;), (&#x27;is_admin&#x27;, &#x27;true&#x27;), (&#x27;salary&#x27;, &#x27;31&#x27;)]</span><br><span class="line"></span><br><span class="line">#查看标题section1下user的值=&gt;字符串格式</span><br><span class="line">val=config.get(&#x27;section1&#x27;,&#x27;user&#x27;)</span><br><span class="line">print(val) #egon</span><br><span class="line"></span><br><span class="line">#查看标题section1下age的值=&gt;整数格式</span><br><span class="line">val1=config.getint(&#x27;section1&#x27;,&#x27;age&#x27;)</span><br><span class="line">print(val1) #18</span><br><span class="line"></span><br><span class="line">#查看标题section1下is_admin的值=&gt;布尔值格式</span><br><span class="line">val2=config.getboolean(&#x27;section1&#x27;,&#x27;is_admin&#x27;)</span><br><span class="line">print(val2) #True</span><br><span class="line"></span><br><span class="line">#查看标题section1下salary的值=&gt;浮点型格式</span><br><span class="line">val3=config.getfloat(&#x27;section1&#x27;,&#x27;salary&#x27;)</span><br><span class="line">print(val3) #31.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>改写</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import configparser</span><br><span class="line"></span><br><span class="line">config=configparser.ConfigParser()</span><br><span class="line">config.read(&#x27;a.cfg&#x27;,encoding=&#x27;utf-8&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#删除整个标题section2</span><br><span class="line">config.remove_section(&#x27;section2&#x27;)</span><br><span class="line"></span><br><span class="line">#删除标题section1下的某个k1和k2</span><br><span class="line">config.remove_option(&#x27;section1&#x27;,&#x27;k1&#x27;)</span><br><span class="line">config.remove_option(&#x27;section1&#x27;,&#x27;k2&#x27;)</span><br><span class="line"></span><br><span class="line">#判断是否存在某个标题</span><br><span class="line">print(config.has_section(&#x27;section1&#x27;))</span><br><span class="line"></span><br><span class="line">#判断标题section1下是否有user</span><br><span class="line">print(config.has_option(&#x27;section1&#x27;,&#x27;&#x27;))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#添加一个标题</span><br><span class="line">config.add_section(&#x27;egon&#x27;)</span><br><span class="line"></span><br><span class="line">#在标题egon下添加name=egon,age=18的配置</span><br><span class="line">config.set(&#x27;egon&#x27;,&#x27;name&#x27;,&#x27;egon&#x27;)</span><br><span class="line">config.set(&#x27;egon&#x27;,&#x27;age&#x27;,18) #报错,必须是字符串</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#最后将修改的内容写入文件,完成最终的修改</span><br><span class="line">config.write(open(&#x27;a.cfg&#x27;,&#x27;w&#x27;))</span><br></pre></td></tr></table></figure>
+
+<p>基于上述方法添加一个ini文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import configparser</span><br><span class="line">  </span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line">config[&quot;DEFAULT&quot;] = &#123;&#x27;ServerAliveInterval&#x27;: &#x27;45&#x27;,</span><br><span class="line">                      &#x27;Compression&#x27;: &#x27;yes&#x27;,</span><br><span class="line">                     &#x27;CompressionLevel&#x27;: &#x27;9&#x27;&#125;</span><br><span class="line">  </span><br><span class="line">config[&#x27;bitbucket.org&#x27;] = &#123;&#125;</span><br><span class="line">config[&#x27;bitbucket.org&#x27;][&#x27;User&#x27;] = &#x27;hg&#x27;</span><br><span class="line">config[&#x27;topsecret.server.com&#x27;] = &#123;&#125;</span><br><span class="line">topsecret = config[&#x27;topsecret.server.com&#x27;]</span><br><span class="line">topsecret[&#x27;Host Port&#x27;] = &#x27;50022&#x27;     # mutates the parser</span><br><span class="line">topsecret[&#x27;ForwardX11&#x27;] = &#x27;no&#x27;  # same here</span><br><span class="line">config[&#x27;DEFAULT&#x27;][&#x27;ForwardX11&#x27;] = &#x27;yes&#x27;</span><br><span class="line">with open(&#x27;example.ini&#x27;, &#x27;w&#x27;) as configfile:</span><br><span class="line">   config.write(configfile)</span><br></pre></td></tr></table></figure>
+
+<h2 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a>hashlib模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 1、什么叫hash:hash是一种算法（3.x里代替了md5模块和sha模块，主要提供 SHA1, SHA224, SHA256, SHA384, SHA512 ，MD5 算法），该算法接受传入的内容，经过运算得到一串hash值</span><br><span class="line"># 2、hash值的特点是：</span><br><span class="line">#2.1 只要传入的内容一样，得到的hash值必然一样=====&gt;要用明文传输密码文件完整性校验</span><br><span class="line">#2.2 不能由hash值返解成内容=======》把密码做成hash值，不应该在网络传输明文密码</span><br><span class="line">#2.3 只要使用的hash算法不变，无论校验的内容有多大，得到的hash值长度是固定的</span><br></pre></td></tr></table></figure>
+
+<p> hash算法就像一座工厂，工厂接收你送来的原材料（可以用m.update()为工厂运送原材料），经过加工返回的产品就是hash值</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/1036857-20180410101832069-1144106861.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> 1 import hashlib</span><br><span class="line"> 2  </span><br><span class="line"> 3 m=hashlib.md5()# m=hashlib.sha256()</span><br><span class="line"> 4  </span><br><span class="line"> 5 m.update(&#x27;hello&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line"> 6 print(m.hexdigest())  #5d41402abc4b2a76b9719d911017c592</span><br><span class="line"> 7  </span><br><span class="line"> 8 m.update(&#x27;alvin&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line"> 9  </span><br><span class="line">10 print(m.hexdigest())  #92a7e713c30abbb0319fa07da2a5c4af</span><br><span class="line">11  </span><br><span class="line">12 m2=hashlib.md5()</span><br><span class="line">13 m2.update(&#x27;helloalvin&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line">14 print(m2.hexdigest()) #92a7e713c30abbb0319fa07da2a5c4af</span><br><span class="line">15 </span><br><span class="line">16 &#x27;&#x27;&#x27;</span><br><span class="line">17 注意：把一段很长的数据update多次，与一次update这段长数据，得到的结果一样</span><br><span class="line">18 但是update多次为校验大文件提供了可能。</span><br><span class="line">19 &#x27;&#x27;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>以上加密算法虽然依然非常厉害，但时候存在缺陷，即：通过撞库可以反解。所以，有必要对加密算法中添加自定义key再来做加密。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 import hashlib</span><br><span class="line">2  </span><br><span class="line">3 # ######## 256 ########</span><br><span class="line">4  </span><br><span class="line">5 hash = hashlib.sha256(&#x27;898oaFs09f&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line">6 hash.update(&#x27;alvin&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="line">7 print (hash.hexdigest())#e79e68f070cdedcfe63eaf1a2e92c83b4cfb1b5c6bc452d214c1b7e77cdfd1c7</span><br></pre></td></tr></table></figure>
+
+<p>python 还有一个 hmac 模块，它内部对我们创建 key 和 内容 进行进一步的处理然后再加密:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import hmac</span><br><span class="line">h1=hmac.new(&#x27;hello&#x27;.encode(&#x27;utf-8&#x27;),digestmod=&#x27;md5&#x27;)</span><br><span class="line">h1.update(&#x27;world&#x27;.encode(&#x27;utf-8&#x27;))</span><br><span class="line"></span><br><span class="line">print(h1.hexdigest())</span><br></pre></td></tr></table></figure>
+
+<h2 id="suprocess模块"><a href="#suprocess模块" class="headerlink" title="suprocess模块"></a>suprocess模块</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> 1 import  subprocess</span><br><span class="line"> 2 </span><br><span class="line"> 3 &#x27;&#x27;&#x27;</span><br><span class="line"> 4 sh-3.2# ls /Users/egon/Desktop |grep txt$</span><br><span class="line"> 5 mysql.txt</span><br><span class="line"> 6 tt.txt</span><br><span class="line"> 7 事物.txt</span><br><span class="line"> 8 &#x27;&#x27;&#x27;</span><br><span class="line"> 9 </span><br><span class="line">10 res1=subprocess.Popen(&#x27;ls /Users/jieli/Desktop&#x27;,shell=True,stdout=subprocess.PIPE)</span><br><span class="line">11 res=subprocess.Popen(&#x27;grep txt$&#x27;,shell=True,stdin=res1.stdout,</span><br><span class="line">12                  stdout=subprocess.PIPE)</span><br><span class="line">13 </span><br><span class="line">14 print(res.stdout.read().decode(&#x27;utf-8&#x27;))</span><br><span class="line">15 </span><br><span class="line">16 </span><br><span class="line">17 #等同于上面,但是上面的优势在于,一个数据流可以和另外一个数据流交互,可以通过爬虫得到结果然后交给grep</span><br><span class="line">18 res1=subprocess.Popen(&#x27;ls /Users/jieli/Desktop |grep txt$&#x27;,shell=True,stdout=subprocess.PIPE)</span><br><span class="line">19 print(res1.stdout.read().decode(&#x27;utf-8&#x27;))</span><br><span class="line">20 </span><br><span class="line">21 </span><br><span class="line">22 #windows下:</span><br><span class="line">23 # dir | findstr &#x27;test*&#x27;</span><br><span class="line">24 # dir | findstr &#x27;txt$&#x27;</span><br><span class="line">25 import subprocess</span><br><span class="line">26 res1=subprocess.Popen(r&#x27;dir C:\Users\Administrator\PycharmProjects\test\函数备课&#x27;,shell=True,stdout=subprocess.PIPE)</span><br><span class="line">27 res=subprocess.Popen(&#x27;findstr test*&#x27;,shell=True,stdin=res1.stdout,</span><br><span class="line">28                  stdout=subprocess.PIPE)</span><br><span class="line">29 </span><br><span class="line">30 print(res.stdout.read().decode(&#x27;gbk&#x27;)) #subprocess使用当前系统默认编码，得到结果为bytes类型，在windows下需要用gbk解码</span><br></pre></td></tr></table></figure>
+
+<h2 id="logging模块"><a href="#logging模块" class="headerlink" title="logging模块"></a>logging模块</h2><h3 id="1-日志级别以及模块"><a href="#1-日志级别以及模块" class="headerlink" title="1.日志级别以及模块"></a>1.日志级别以及模块</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import logging</span><br><span class="line">logging.debug(&quot;调试&quot;)</span><br><span class="line">logging.info(&quot;消息信息&quot;)</span><br><span class="line">logging.warning(&quot;警告信息&quot;)</span><br><span class="line">logging.error(&quot;错误error信息&quot;)</span><br><span class="line">logging.critical(&quot;严重信息&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>logging为模块名，有5种输出级别，对应调试，信息，警告，错误，严重错误。</p>
+<p>该段代码运行效果：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008145648843.png" alt="image-20211008145648843"></p>
+<p>logging.告警级别 本质上就是直接在对应位置输出对应信息，信息内容包含在括号里面，这里打印时默认只输出了warning及其以上的信息，说明默认输出日志级别为warning。</p>
+<h3 id="logging-basicConfig"><a href="#logging-basicConfig" class="headerlink" title="logging.basicConfig"></a>logging.basicConfig</h3><p>#======介绍<br>    可在logging.basicConfig()函数中可通过具体参数来更改logging模块默认行为，可用参数有<br>    filename：用指定的文件名创建FiledHandler（后边会具体讲解handler的概念），这样日志会被存储在指定的文件中。<br>    filemode：文件打开方式，在指定了filename时使用这个参数，默认值为“a”还可指定为“w”。<br>    format：指定handler使用的日志显示格式。<br>    datefmt：指定日期时间格式。<br>    level：设置rootlogger（后边会讲解具体概念）的日志级别<br>    stream：用指定的stream创建StreamHandler。可以指定输出到    sys.stderr,sys.stdout或者文件，默认为sys.stderr。若同时列出了filename和stream两个参数，则stream参数会被忽略。</p>
+<p>format参数中可能用到的格式化串：<br>%(name)s Logger的名字<br>%(levelno)s 数字形式的日志级别<br>%(levelname)s 文本形式的日志级别<br>%(pathname)s 调用日志输出函数的模块的完整路径名，可能没有<br>%(filename)s 调用日志输出函数的模块的文件名<br>%(module)s 调用日志输出函数的模块名<br>%(funcName)s 调用日志输出函数的函数名<br>%(lineno)d 调用日志输出函数的语句所在的代码行<br>%(created)f 当前时间，用UNIX标准的表示时间的浮 点数表示<br>%(relativeCreated)d 输出日志信息时的，自Logger创建以 来的毫秒数<br>%(asctime)s 字符串形式的当前时间。默认格式是 “2003-07-08 16:49:45,896”。逗号后面的是毫秒<br>%(thread)d 线程ID。可能没有<br>%(threadName)s 线程名。可能没有<br>%(process)d 进程ID。可能没有<br>%(message)s用户输出的消息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#========使用</span><br><span class="line">import logging</span><br><span class="line">logging.basicConfig(filename=&#x27;access.log&#x27;,</span><br><span class="line">                    format=&#x27;%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s&#x27;,</span><br><span class="line">                    datefmt=&#x27;%Y-%m-%d %H:%M:%S %p&#x27;,</span><br><span class="line">                    level=10)</span><br><span class="line"></span><br><span class="line">logging.debug(&#x27;调试debug&#x27;)</span><br><span class="line">logging.info(&#x27;消息info&#x27;)</span><br><span class="line">logging.warning(&#x27;警告warn&#x27;)</span><br><span class="line">logging.error(&#x27;错误error&#x27;)</span><br><span class="line">logging.critical(&#x27;严重critical&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">part2: 可以为logging模块指定模块级的配置,即所有logger的配置</span><br></pre></td></tr></table></figure>
+
+<p>filename指定了日志文件，format指定其日志输出格式，datefmt指定日志输出时间的格式，level指定其日志输出级别，默认为30</p>
+<p><strong>level为10,20,30,40,50，对应调试，信息，警告，错误和严重错误。</strong></p>
+<h4 id="日志输出结果："><a href="#日志输出结果：" class="headerlink" title="日志输出结果："></a>日志输出结果：</h4><p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008151019274.png" alt="image-20211008151019274"></p>
+<p>如果这里不指定filename则默认输出到pycharm屏幕（python屏幕）</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008151301307.png" alt="image-20211008151301307"></p>
+<h3 id="日志字典"><a href="#日志字典" class="headerlink" title="日志字典"></a>日志字典</h3><p>其作用为让日志在读取格式时直接通过自身模块从字典里读取形成多种格式的方法，字典本身多个key固定的名称。</p>
+<h4 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py:"></a>settings.py:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">standard_format = &#x27;%(asctime)s - %(threadName)s:%(thread)d - 日志名字:%(name)s - %(filename)s:%(lineno)d -&#x27; \</span><br><span class="line">                  &#x27;%(levelname)s - %(message)s&#x27;</span><br><span class="line"></span><br><span class="line">simple_format = &#x27;[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)s&#x27;</span><br><span class="line"></span><br><span class="line">test_format = &#x27;%(asctime)s] %(message)s&#x27;</span><br><span class="line"></span><br><span class="line"># 3、日志配置字典</span><br><span class="line">LOGGING_DIC = &#123;</span><br><span class="line">    &#x27;version&#x27;: 1,  #版本，可以随意定义</span><br><span class="line">    &#x27;disable_existing_loggers&#x27;: False,  # 禁用已经存在的logger实例，固定格式</span><br><span class="line">    &#x27;formatters&#x27;: &#123;</span><br><span class="line">        &#x27;standard&#x27;: &#123;</span><br><span class="line">            &#x27;format&#x27;: standard_format</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;simple&#x27;: &#123;</span><br><span class="line">            &#x27;format&#x27;: simple_format</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;test&#x27;: &#123;</span><br><span class="line">            &#x27;format&#x27;: test_format</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;, # 定义日志 格式化的 工具，上面定义的standard_format，simple_format，test_format对应三种输出格式</span><br><span class="line">    &#x27;filters&#x27;: &#123;&#125;,# 过滤</span><br><span class="line">    # handlers是日志的接收者，不同的handler会将日志输出到不同的位置</span><br><span class="line">    &#x27;handlers&#x27;: &#123;</span><br><span class="line">        #打印到终端的日志</span><br><span class="line">        &#x27;console&#x27;: &#123;</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,</span><br><span class="line">            &#x27;class&#x27;: &#x27;logging.StreamHandler&#x27;,  # 打印到屏幕</span><br><span class="line">            &#x27;formatter&#x27;: &#x27;simple&#x27;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;default&#x27;: &#123;</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,</span><br><span class="line">            &#x27;class&#x27;: &#x27;logging.handlers.RotatingFileHandler&#x27;,  # 保存到文件</span><br><span class="line">            # &#x27;maxBytes&#x27;: 1024*1024*5,  # 日志大小 5M</span><br><span class="line">            &#x27;maxBytes&#x27;: 1000,</span><br><span class="line">            &#x27;backupCount&#x27;: 5,</span><br><span class="line">            &#x27;filename&#x27;: &#x27;a1.log&#x27;,  # os.path.join(os.path.dirname(os.path.dirname(__file__)),&#x27;log&#x27;,&#x27;a2.log&#x27;)</span><br><span class="line">            &#x27;encoding&#x27;: &#x27;utf-8&#x27;,</span><br><span class="line">            &#x27;formatter&#x27;: &#x27;standard&#x27;,</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        #打印到文件的日志,收集info及以上的日志</span><br><span class="line">        &#x27;other&#x27;: &#123;</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,</span><br><span class="line">            &#x27;class&#x27;: &#x27;logging.FileHandler&#x27;,  # 保存到文件</span><br><span class="line">            &#x27;filename&#x27;: &#x27;a2.log&#x27;, # os.path.join(os.path.dirname(os.path.dirname(__file__)),&#x27;log&#x27;,&#x27;a2.log&#x27;)</span><br><span class="line">            &#x27;encoding&#x27;: &#x27;utf-8&#x27;,</span><br><span class="line">            &#x27;formatter&#x27;: &#x27;test&#x27;,</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    # loggers是日志的产生者，产生的日志会传递给handler然后控制输出</span><br><span class="line">    &#x27;loggers&#x27;: &#123;</span><br><span class="line">        #logging.getLogger(__name__)拿到的logger配置</span><br><span class="line">        &#x27;kkk&#x27;: &#123;</span><br><span class="line">            &#x27;handlers&#x27;: [&#x27;console&#x27;,&#x27;other&#x27;],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;, # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)</span><br><span class="line">            &#x27;propagate&#x27;: False,  # 默认为True，向上（更高level的logger）传递，通常设置为False即可，否则会一份日志向上层层传递</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;终端提示&#x27;: &#123;</span><br><span class="line">            &#x27;handlers&#x27;: [&#x27;console&#x27;,],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,  # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)</span><br><span class="line">            &#x27;propagate&#x27;: False,  # 默认为True，向上（更高level的logger）传递，通常设置为False即可，否则会一份日志向上层层传递</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;&#x27;: &#123;</span><br><span class="line">            &#x27;handlers&#x27;: [&#x27;default&#x27;, ],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕</span><br><span class="line">            &#x27;level&#x27;: &#x27;DEBUG&#x27;,  # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)</span><br><span class="line">            &#x27;propagate&#x27;: False,  # 默认为True，向上（更高level的logger）传递，通常设置为False即可，否则会一份日志向上层层传递</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="src-py-主文件-："><a href="#src-py-主文件-：" class="headerlink" title="src.py(主文件)："></a>src.py(主文件)：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import logging #导入logging模块</span><br><span class="line"></span><br><span class="line">import settings #导入settings文件，上面定义的settings.py</span><br><span class="line">from logging import config,getLogger  #导入config和getlogger 这里需要单独导入</span><br><span class="line"></span><br><span class="line">config.dictConfig(settings.LOGGING_DIC) #LOGGING_DIC为字典名，这里settings导入字典名，然后dictconfig解析。固定格式，只需将LOGGING_DIC替换为需要的字典名即可</span><br><span class="line">logger4=getLogger(&#x27;终端提示&#x27;) #loggers为发送者，这里也是将日志输出者定义为对应的loggers，并将其定义成一个变量。</span><br><span class="line">logger4.info(&#x27;logger4产生的info日志&#x27;)#调用info发送日志。</span><br></pre></td></tr></table></figure>
+
+<h4 id="代码步骤"><a href="#代码步骤" class="headerlink" title="代码步骤:"></a>代码步骤:</h4><h5 id="settings-py-1"><a href="#settings-py-1" class="headerlink" title="settings.py:"></a>settings.py:</h5><p>standard_format,simple_format,test_format定义三种输出格式</p>
+<p><strong>LOGGING_DIC</strong>:</p>
+<p>​    字典定义了日志输出相关配置</p>
+<p>1.version，disable_existing_loggers 其格式固定就行</p>
+<p>2.formatters 其中key也是固定的，里面定义了三种日志输出格式，这里里面的key和value都是自己定义的，其三种value也对应一开始定义的三种变量。</p>
+<p>3.filters 略（过滤）</p>
+<p>4.handlers：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handlers是日志的接收者，不同的handler会将日志输出到不同的位置</span><br></pre></td></tr></table></figure>
+
+<p>这里定义了两种输出位置。level为输出级别，class为输出方式，formatter为其对应输出格式,filename输出文件,encoding输出字符。这里相当于定义其日志输出位置以及将上面定义的日志输出格式赋给日志这个日志输出位置。</p>
+<p>5.loggers：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># loggers是日志的产生者，产生的日志会传递给handler然后控制输出</span><br></pre></td></tr></table></figure>
+
+<p>这里loggers与handlers相当于是下级对上级，loggers产生日志，handlers接受日志，两边都可以设置其level，如果loggers的level低于handlers，那么实际日志输出只会根据handlers的level来进行输出（因为loggers发送了低于handlers的日志，但handlers只会接受并输出自己的level以上的。），正常情况两边level应一致。</p>
+<p>handlers定义其输出位置（方式），level为其输出级别，propagate固定false。</p>
+<p>如果定义的loggers为空 ‘’ 的话，后面在使用getlogger找不到loggers的所有日志名都会匹配到空。</p>
+<h5 id="src-py"><a href="#src-py" class="headerlink" title="src.py"></a>src.py</h5><p>如上备注所示。</p>
+<p><strong>其本身格式基本上为固定，直接拿着两个文件稍作修改就可以用于各种工作场景，无需过分理解，能看懂代码格式即可</strong></p>
+<p><strong>日志字典本身就算是python日志的功能之一，所以其字典里面需要定义固定的key让其logging模块去解析它。而非自己定义一个字典再自己去解析，其格式固定。</strong></p>
+<p>字典顺序：</p>
+<p>loggers（日志输出者）-》handlers（接受者）-》formatters（日志输出格式（standard_format,simple_format,test_format）</p>
+<h3 id="日志轮转："><a href="#日志轮转：" class="headerlink" title="日志轮转："></a>日志轮转：</h3><p>相当于日志备份，logging自带日志备份，可以设置日志最大大小和备份日志最大个数</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211009154143282.png" alt="image-20211009154143282"></p>
+<p>在字典handlers中有两个设置：maxbytes和backupcount</p>
+<p>maxbytes为最大大小，其格式为字节</p>
+<p>backupcount是最大备份文件为多少</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import settings #导入settings文件，上面定义的settings.py</span><br><span class="line">from logging import config,getLogger  #导入config和getlogger 这里需要单独导入</span><br><span class="line"></span><br><span class="line">config.dictConfig(settings.LOGGING_DIC) #LOGGING_DIC为字典名，这里settings导入字典名，然后dictconfig解析。固定格式，只需将LOGGING_DIC替换为需要的字典名即可</span><br><span class="line">logger4=getLogger(&#x27;随便输入&#x27;) #loggers为发送者，这里也是将日志输出者定义为对应的loggers，并将其定义成一个变量。</span><br><span class="line">logger4.info(&#x27;logger4产生的info日志&#x27;)#调用info发送日志。</span><br></pre></td></tr></table></figure>
+
+<p>运行主代码程序输出日志以后，当日志大小大于5字节，就会备份成”文件名.1”,然后如果再执行程序，则会将1备份成2，将源文件备份成1，依次类推到5。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211009154312364.png" alt="image-20211009154312364"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/28/%E6%A8%A1%E5%9D%97_hexo/" data-id="ckxjra7pl002kr0v1alwico8v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/10/28/%E6%96%87%E4%BB%B6_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          文件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/10/28/%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">闭包与装饰器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

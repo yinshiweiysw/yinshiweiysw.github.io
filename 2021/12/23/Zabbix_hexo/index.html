@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Zabbix | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Zabbix简介：Zabbix是一款监控软件，用于监控linux服务器，是当下最热门的服务器监控解决方案。其监控方式可分为：客户端，SNMP,JMX(JAVA虚拟机监控)，IPMI(服务器硬件监控)，一般情况下客户端监控比较常见，也就是在需要监控的主机上安装zabbix_agent程序，服务器端定时去向客户端拉取数据。当然除了服务器拉取客户端的数据以外，客户端也可以定时主动把数据推向服务器，这样在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zabbix">
+<meta property="og:url" content="http://example.com/2021/12/23/Zabbix_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Zabbix简介：Zabbix是一款监控软件，用于监控linux服务器，是当下最热门的服务器监控解决方案。其监控方式可分为：客户端，SNMP,JMX(JAVA虚拟机监控)，IPMI(服务器硬件监控)，一般情况下客户端监控比较常见，也就是在需要监控的主机上安装zabbix_agent程序，服务器端定时去向客户端拉取数据。当然除了服务器拉取客户端的数据以外，客户端也可以定时主动把数据推向服务器，这样在">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059796.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059887.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059763.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104296.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059857.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059929.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059401.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059819.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059797.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059467.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059194.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059730.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059996.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059225.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059909.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059238.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059335.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059403.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104240.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104141.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059642.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059370.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059911.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059695.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103323.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059650.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059468.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103307.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059736.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103462.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059274.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103893.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103890.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059981.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103105.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059149.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059340.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059372.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059806.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103716.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103133.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059609.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059646.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103113.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059118.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059563.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231102098.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231102832.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059111.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059154.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059571.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231100963.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231100937.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059136.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059160.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059648.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059855.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059237.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059651.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059919.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059990.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059209.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059180.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059447.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059701.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059732.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059972.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059800.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059850.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059029.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059359.jpeg">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.484Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059796.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Zabbix_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/Zabbix_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Zabbix
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Zabbix简介："><a href="#Zabbix简介：" class="headerlink" title="Zabbix简介："></a>Zabbix简介：</h1><p>Zabbix是一款监控软件，用于监控linux服务器，是当下最热门的服务器监控解决方案。其监控方式可分为：客户端，SNMP,JMX(JAVA虚拟机监控)，IPMI(服务器硬件监控)，一般情况下客户端监控比较常见，也就是在需要监控的主机上安装zabbix_agent程序，服务器端定时去向客户端拉取数据。当然除了服务器拉取客户端的数据以外，客户端也可以定时主动把数据推向服务器，这样在监控主机过多时可以缓解服务器端的压力，这种模式被称为主动模式。</p>
+<p>Zabbix在使用C/S架构进行监控时，此时需要用到的组件有：zabbix-server,zabbix-agent,zabbix-gui(提供图形管理页面)。由于zabbix-server和gui需要用到数据库，而gui管理页面本身基于php。所以在部署时还需要安装mysql（or other sql）和php-fpm。而snmp主要用于无法安装agent端的设备，例如路由器，交换机等，但因其snmp是TCP/IP二层协议，一般都支持snmp，便可用这种方式监控。</p>
+<h1 id="zabbix安装："><a href="#zabbix安装：" class="headerlink" title="zabbix安装："></a>zabbix安装：</h1><h2 id="zabbix依赖："><a href="#zabbix依赖：" class="headerlink" title="zabbix依赖："></a>zabbix依赖：</h2><p>web服务器+php+数据库:</p>
+<p>nginx(apache)+php+mysql(other sql)</p>
+<p>zabbix分为服务器端，客户端，gui（web端），如果监控的主机较多，还会用到proxy端（分布式监控）</p>
+<p>一般安装分为两种方式源码和rpm，还有一种是docker</p>
+<h2 id="源码安装："><a href="#源码安装：" class="headerlink" title="源码安装："></a>源码安装：</h2><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/download_sources">https://www.zabbix.com/download_sources</a> 下载源码包</p>
+<p>tar -zxvf zabbix-5.2.0.tar.gz</p>
+<p>创建用户帐号：</p>
+<p>groupadd –system zabbix</p>
+<p>useradd –system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c “Zabbix Monitoring System” zabbix</p>
+<p>创建家目录</p>
+<p>mkdir -m u=rwx,g=rwx,o= -p /usr/lib/zabbix</p>
+<p>chown zabbix:zabbix /usr/lib/zabbix</p>
+<p>安装：</p>
+<p>依赖安装：</p>
+<p>yum -y install curl-devel libevent-devel net-snmp-devel mysql-devel</p>
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>要查看所有受支持的配置选项，请在提取的Zabbix源目录中运行：</p>
+<p>./configure –help</p>
+<p>要为Zabbix服务器和代理配置源，您可以运行以下命令：</p>
+<p>./configure –enable-server –enable-agent –with-mysql –enable-ipv6 –with-net-snmp –with-libcurl –with-libxml2</p>
+<p>要为Zabbix服务器（使用PostgreSQL等）配置源，可以运行：</p>
+<p>./configure –enable-server –with-postgresql –with-net-snmp</p>
+<p>要配置Zabbix代理的源（使用SQLite等），可以运行：</p>
+<p>./configure –prefix=/usr –enable-proxy –with-net-snmp –with-sqlite3 –with-ssh2</p>
+<p>要为Zabbix代理配置源，可以运行：</p>
+<p>./configure –enable-agent</p>
+<p>或者，对于Zabbix代理2：</p>
+<p>./configure –enable-agent2</p>
+<p>编译Zabbix代理2需要Go版本1.13或更高版本。有关安装说明，请参阅golang.org。</p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/manual/installation/install">https://www.zabbix.com/documentation/current/manual/installation/install</a></p>
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p>我这里agent和server都在一台服务器，就使用参数安装：</p>
+<p>./configure –enable-server –enable-agent –with-mysql –enable-ipv6 –with-net-snmp –with-libcurl –with-libxml2 –prefix=/usr/local/zabbix</p>
+<p>导入数据库</p>
+<p>#先安装好mysql</p>
+<p>shell&gt; mysql -uroot -p</p>
+<p>mysql&gt; create database zabbix character set utf8 collate utf8_bin;</p>
+<p>mysql&gt; create user ‘zabbix‘@’localhost’ identified by ‘’;</p>
+<p>mysql&gt; grant all privileges on zabbix.* to ‘zabbix‘@’localhost’;</p>
+<p>mysql&gt; quit;</p>
+<p>shell&gt; cd database/mysql</p>
+<p>shell&gt; mysql -uzabbix -p zabbix &lt; schema.sql</p>
+<p>stop here if you are creating database for Zabbix proxy</p>
+<p>shell&gt; mysql -uzabbix -p zabbix &lt; images.sql</p>
+<p>shell&gt; mysql -uzabbix -p zabbix &lt; data.sql</p>
+<p>这几个文件在源码包的database/mysql里面，路径应为</p>
+<p>zabbix-5.2.5/database/mysql</p>
+<p>非mysql请参考官方文档:<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/manual/appendix/install/db_scripts">https://www.zabbix.com/documentation/current/manual/appendix/install/db_scripts</a></p>
+<p>导入好数据库以后此时可以将zabbix配置文件指定到数据库就可以启动了</p>
+<p>zabbix_agent.conf:</p>
+<p>一般agent只用指定server和serveractive即可</p>
+<p>但是如果server和agent位于同一服务器也不用设置，应其默认为127.0.0.1</p>
+<p>（这里的serveractive是zabbix——agent主动模式的服务器地址）</p>
+<p>zabbix_server.conf:</p>
+<p>DBHost=192.168.34.136</p>
+<p>DBName=zabbixnew</p>
+<p>DBUser=root</p>
+<p>DBPassword=admin</p>
+<p>配置完就可以启动zabbix_agent和zabbix_server了</p>
+<p>./sbin/zabbix_agentd</p>
+<p>./sbin/zabbix_server</p>
+<p>如启动有问题可以看日志，默认编译安装应在/tmp/zabbix_agentd(server).conf</p>
+<p>也可以将zabbix写入systemd配置文件用systemctl启动</p>
+<p>/usr/lib/systemd/system/zabbix-server.service</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line"></span><br><span class="line">Description=Zabbix Server</span><br><span class="line"></span><br><span class="line">After=syslog.target</span><br><span class="line"></span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">After=mysql.service</span><br><span class="line"></span><br><span class="line">After=mysqld.service</span><br><span class="line"></span><br><span class="line">After=mariadb.service</span><br><span class="line"></span><br><span class="line">After=postgresql.service</span><br><span class="line"></span><br><span class="line">After=pgbouncer.service</span><br><span class="line"></span><br><span class="line">After=postgresql-9.4.service</span><br><span class="line"></span><br><span class="line">After=postgresql-9.5.service</span><br><span class="line"></span><br><span class="line">After=postgresql-9.6.service</span><br><span class="line"></span><br><span class="line">After=postgresql-10.service</span><br><span class="line"></span><br><span class="line">After=postgresql-11.service</span><br><span class="line"></span><br><span class="line">After=postgresql-12.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"></span><br><span class="line">Environment=&quot;CONFFILE=/etc/zabbix/zabbix_server.conf&quot;</span><br><span class="line"></span><br><span class="line">EnvironmentFile=-/etc/sysconfig/zabbix-server</span><br><span class="line"></span><br><span class="line">Type=forking</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line"></span><br><span class="line">PIDFile=/run/zabbix/zabbix_server.pid</span><br><span class="line"></span><br><span class="line">KillMode=control-group</span><br><span class="line"></span><br><span class="line">ExecStart=/usr/sbin/zabbix_server -c $CONFFILE</span><br><span class="line"></span><br><span class="line">ExecStop=/bin/kill -SIGTERM $MAINPID</span><br><span class="line"></span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">TimeoutSec=0</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line"></span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line">/usr/lib/systemd/system/zabbix-agent.service</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line"></span><br><span class="line">Description=Zabbix Agent</span><br><span class="line"></span><br><span class="line">After=syslog.target</span><br><span class="line"></span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"></span><br><span class="line">Environment=&quot;CONFFILE=/etc/zabbix/zabbix_agentd.conf&quot;</span><br><span class="line"></span><br><span class="line">EnvironmentFile=-/etc/sysconfig/zabbix-agent</span><br><span class="line"></span><br><span class="line">Type=forking</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line"></span><br><span class="line">PIDFile=/run/zabbix/zabbix_agentd.pid</span><br><span class="line"></span><br><span class="line">KillMode=control-group</span><br><span class="line"></span><br><span class="line">ExecStart=/usr/sbin/zabbix_agentd -c $CONFFILE</span><br><span class="line"></span><br><span class="line">ExecStop=/bin/kill -SIGTERM $MAINPID</span><br><span class="line"></span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">User=zabbix</span><br><span class="line"></span><br><span class="line">Group=zabbix</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line"></span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>zabbix-agent和server启动完后还差一个必要的组件，zabbix-gui，也就是zabbix的管理图形界面</p>
+<p>因是基于php编写的，所以这里还需要搭建一个nginx(apache)+php-fpm</p>
+<p>yum -y install nginx php-fpm</p>
+<p>其前端文件位于编译安装包根目录下的ui路径下面</p>
+<p>nginx:conf.d/zabbix.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">upstream php-fpm &#123;</span><br><span class="line">        server unix:/run/php-fpm/www.sock;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">        listen          81;</span><br><span class="line">        server_name     localhost;</span><br><span class="line"></span><br><span class="line">        root    /usr/local/zabbix/ui;</span><br><span class="line"></span><br><span class="line">        index   index.php;</span><br><span class="line"></span><br><span class="line">        location = /favicon.ico &#123;</span><br><span class="line">                log_not_found   off;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                try_files       $uri $uri/ =404;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location /assets &#123;</span><br><span class="line">                access_log      off;</span><br><span class="line">                expires         10d;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ /\.ht &#123;</span><br><span class="line">                deny            all;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ /(api\/|conf[^\.]|include|locale) &#123;</span><br><span class="line">                deny            all;</span><br><span class="line">                return          404;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ [^/]\.php(/|$) &#123;</span><br><span class="line">                fastcgi_pass    unix:/run/php-fpm/zabbix.sock;</span><br><span class="line">                fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">                fastcgi_index   index.php;</span><br><span class="line"></span><br><span class="line">                fastcgi_param   DOCUMENT_ROOT   /usr/local/zabbix/ui;</span><br><span class="line">                fastcgi_param   SCRIPT_FILENAME /usr/local/zabbix/ui$fastcgi_script_name;</span><br><span class="line">                fastcgi_param   PATH_TRANSLATED /usr/local/zabbix/ui$fastcgi_script_name;</span><br><span class="line"></span><br><span class="line">                include fastcgi_params;</span><br><span class="line">                fastcgi_param   QUERY_STRING    $query_string;</span><br><span class="line">                fastcgi_param   REQUEST_METHOD  $request_method;</span><br><span class="line">                fastcgi_param   CONTENT_TYPE    $content_type;</span><br><span class="line">                fastcgi_param   CONTENT_LENGTH  $content_length;</span><br><span class="line"></span><br><span class="line">                fastcgi_intercept_errors        on;</span><br><span class="line">                fastcgi_ignore_client_abort     off;</span><br><span class="line">                fastcgi_connect_timeout         60;</span><br><span class="line">                fastcgi_send_timeout            180;</span><br><span class="line">                fastcgi_read_timeout            180;</span><br><span class="line">                fastcgi_buffer_size             128k;</span><br><span class="line">                fastcgi_buffers                 4 256k;</span><br><span class="line">                fastcgi_busy_buffers_size       256k;</span><br><span class="line">                fastcgi_temp_file_write_size    256k;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处官方提供的配置文件在匹配到.php时是跳转到</p>
+<p>unix:/run/php-fpm/zabbix.sock;</p>
+<p>说明此处php-fpm应将其sock文件放置于此，</p>
+<p>/etc/php-fpm.d/zabbix.conf:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">[zabbix]</span><br><span class="line"></span><br><span class="line">user = apache</span><br><span class="line"></span><br><span class="line">group = apache</span><br><span class="line"></span><br><span class="line">listen = /run/php-fpm/zabbix.sock</span><br><span class="line"></span><br><span class="line">listen.acl_users = apache,nginx</span><br><span class="line"></span><br><span class="line">listen.allowed_clients = 127.0.0.1</span><br><span class="line"></span><br><span class="line">pm = dynamic</span><br><span class="line"></span><br><span class="line">pm.max_children = 50</span><br><span class="line"></span><br><span class="line">pm.start_servers = 5</span><br><span class="line"></span><br><span class="line">pm.min_spare_servers = 5</span><br><span class="line"></span><br><span class="line">pm.max_spare_servers = 35</span><br><span class="line"></span><br><span class="line">php_value[session.save_handler] = files</span><br><span class="line"></span><br><span class="line">php_value[session.save_path]    = /var/lib/php/session</span><br><span class="line"></span><br><span class="line">php_value[max_execution_time] = 300</span><br><span class="line"></span><br><span class="line">php_value[memory_limit] = 128M</span><br><span class="line"></span><br><span class="line">php_value[post_max_size] = 16M</span><br><span class="line"></span><br><span class="line">php_value[upload_max_filesize] = 2M</span><br><span class="line"></span><br><span class="line">php_value[max_input_time] = 300</span><br><span class="line"></span><br><span class="line">php_value[max_input_vars] = 10000</span><br><span class="line"></span><br><span class="line">php_value[date.timezone] = Asia/Shanghai</span><br></pre></td></tr></table></figure>
+
+<p>配置完启动即可</p>
+<p>systemctl start nginx</p>
+<p>systemctl start php-fpm</p>
+<h2 id="Yum安装："><a href="#Yum安装：" class="headerlink" title="Yum安装："></a>Yum安装：</h2><p>zabbix安装</p>
+<p>rpm -Uvh <a target="_blank" rel="noopener" href="https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm">https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm</a></p>
+<p>yum makecache</p>
+<p>yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-nginx-conf zabbix-agent</p>
+<p>创建初始数据库</p>
+<p>确保您已启动并运行数据库服务器。</p>
+<p>在数据库主机上运行以下命令mysql -uroot -p</p>
+<p>password</p>
+<p>mysql&gt; create database zabbix character set utf8 collate utf8_bin;</p>
+<p>mysql&gt; create user zabbix@localhost identified by ‘password’;</p>
+<p>mysql&gt; grant all privileges on zabbix.* to zabbix@localhost;</p>
+<p>mysql&gt; quit;</p>
+<p>zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix</p>
+<p>为Zabbix服务器配置数据库</p>
+<p>编辑文件/etc/zabbix/zabbix_server.conf</p>
+<p>DBPassword=password</p>
+<p>为Zabbix前端配置PHP</p>
+<p>编辑文件/etc/nginx/conf.d/zabbix.conf，取消注释并设置’listen’和’server_name’指令。</p>
+<p>listen 80;</p>
+<p>server_name example.com;</p>
+<p>编辑文件/etc/php-fpm.d/zabbix.conf，取消注释并为您设置正确的时区。</p>
+<p>; php_value[date.timezone] = Europe/Riga</p>
+<p>F。启动Zabbix服务器和代理进程</p>
+<p>启动Zabbix服务器和代理进程，并使其在系统启动时启动。</p>
+<p>systemctl restart zabbix-server zabbix-agent nginx php-fpm</p>
+<p>systemctl enable zabbix-server zabbix-agent nginx php-fpm</p>
+<h3 id="zabbix官网："><a href="#zabbix官网：" class="headerlink" title="zabbix官网："></a>zabbix官网：</h3><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/">https://www.zabbix.com/</a></p>
+<h2 id="装完可能遇到的问题："><a href="#装完可能遇到的问题：" class="headerlink" title="装完可能遇到的问题："></a>装完可能遇到的问题：</h2><p>1.zabbix连不上数据库（检查数据库是不是utf8-bin)</p>
+<p>2.设置里面不能改为中文：</p>
+<p>zabbix前端inculde/locales.inc.php中的中文是否为ture</p>
+<p>locale -a 中是有中文字码</p>
+<p>3.zabbix图形中中文显示乱码</p>
+<p>从windows中找到字体c:\windows\fonts</p>
+<p>找到linux例zabbix的字体路径（/usr/local/zabbix/ui/assets/fonts</p>
+<p>默认路径）</p>
+<p>find / -name “<em>fonts</em>“</p>
+<p>[root@localhost fonts]# ll</p>
+<p>总用量 0</p>
+<p>lrwxrwxrwx 1 root root 33 3月 1 03:50 graphfont.ttf -&gt; /etc/alternatives/zabbix-web-font</p>
+<p>cd /etc/alternatives/</p>
+<p>[root@localhost alternatives]# ll zabbix-web-font</p>
+<p>lrwxrwxrwx 1 root root 38 3月 1 03:50 zabbix-web-font -&gt; /usr/share/fonts/dejavu/DejaVuSans.ttf</p>
+<p>cd /usr/share/fonts/dejavu/</p>
+<p>将文件导入，备份源文件，然后将新文件改成这个名字</p>
+<p>[root@localhost dejavu]# mv DejaVuSans.ttf DejaVuSans.ttf.bak</p>
+<p>[root@localhost dejavu]# mv MSJH.TTC DejaVuSans.ttf</p>
+<h1 id="监控主机："><a href="#监控主机：" class="headerlink" title="监控主机："></a>监控主机：</h1><p>监控软件本身的主要作用的就是监控主机，在zabbix中，默认的第一个监控的主机为127.0.0.1:10050如agent在本地正常安装运行了以后，首次登陆gui就能看到本机的监控信息。</p>
+<p>zabbix监控主机有几种模式：</p>
+<p>agent，snmp，jmx，ipmi</p>
+<p>agent:</p>
+<p>一般情况是agent，即在需要被监控的主机端上装入客户端工具，然后与server端连接就可以进行监控了。</p>
+<p>agent监控有两种模式：</p>
+<p>主动模式，被动模式</p>
+<p>Zabbix 被动模式： Server 向 agent 请求获取监控项的数据， agent 返回数据。</p>
+<p>Server 打开一个 TCP 连接， Server 发送请求 agent.ping， Agent 接收到请求并</p>
+<p>且响应， Server 处理接收到的数据。</p>
+<p>Zabbix 主动模式： Agent 主动请求 server 获取主动的监控项列表，并主动将监</p>
+<p>控项内需要检测的数据提交给 server/proxy。 zabbix agent 首先向</p>
+<p>ServerActive 配置的 IP 请求获取 active items，获取并提交 active tiems 数</p>
+<p>据值 给server 或者 proxy；</p>
+<h2 id="Agent监控："><a href="#Agent监控：" class="headerlink" title="Agent监控："></a>Agent监控：</h2><h3 id="1-agent端配置"><a href="#1-agent端配置" class="headerlink" title="1.agent端配置"></a>1.agent端配置</h3><p>首先在需要监控的主机上安装agent端，安装见上zabbix安装。</p>
+<p>然后再zabbix_agentd.conf中配置：</p>
+<p>Server=127.0.0.1 #指定服务器ip地址</p>
+<p>默认是被动模式，客户端只需设置这个</p>
+<p>完成以后启动客户端即可</p>
+<h3 id="2-zabbix-gui配置"><a href="#2-zabbix-gui配置" class="headerlink" title="2.zabbix-gui配置"></a>2.zabbix-gui配置</h3><p>再管理页面中添加主机</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059796.jpeg" alt="image.png"></p>
+<p>指定其ip地址和端口，默认端口10050，链接上模板</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059887.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059763.jpeg" alt="image.png"></p>
+<p>然后就添加完成了，右方ZBX为绿色表示可用</p>
+<p><strong>agent监控方式也是被动模式，是默认的监控方式</strong></p>
+<h2 id="主动模式："><a href="#主动模式：" class="headerlink" title="主动模式："></a>主动模式：</h2><p>主动模式修改zabbix_agent的配置文件</p>
+<p>首先是StartAgents=0 这里默认为3，修改为0以后将不再监听端口。（server注不注释无所谓，主要是这里要配置为0）</p>
+<p>然后是ServerActive=127.0.0.1，这里的ip地址得指定成server端的ip地址</p>
+<p>这两个配置完毕以后主动模式就完成了，但还有一步是zabbix-gui中的监控项必须要设置成主动模式才会主动推送数据。</p>
+<p>这里首先选择一个模板：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104296.jpeg" alt="image.png"></p>
+<p>为避免改了以后无法改回来，因克隆一个模板（这里克隆的模板必须是独立的模板而非链接其他模板的模板，否则不能更改其监控项的设置）</p>
+<p>克隆完以后全选其监控项，点击批量更新</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059857.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059929.jpeg" alt="image.png"></p>
+<p>类型设置为zabbix客户端主动式，设置一个更新间隔。</p>
+<p>然后在主机中加入该模板</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059401.jpeg" alt="image.png"></p>
+<p>这个时候主动模式的监控就已经配置完毕，在主机-可用性中可以看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059819.jpeg" alt="image.png"></p>
+<p>其可用性非绿色，也就是zabbix-server无法找到客户端（因其客户端本身也不再监听端口）</p>
+<p>此时可以在最新数据中看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059797.jpeg" alt="image.png"></p>
+<h2 id="Snmp监控："><a href="#Snmp监控：" class="headerlink" title="Snmp监控："></a>Snmp监控：</h2><p>Snmp为简单网络管理协议，一般用在路由器，交换机之类的设备上，因这些设备本身无法安装监控客户端，则可以通过该协议监控其数据。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059467.jpeg" alt="image.png"></p>
+<h2 id="JMX"><a href="#JMX" class="headerlink" title="JMX:"></a>JMX:</h2><p>JMX(Java Management Extensions)是一个为应用程序植入管理功能的框架。JMX是一套标准的代理和服务，</p>
+<p>实际上，用户可以在任何Java应用程序中使用这些代理和服务实现管理。主要用于对JAVA应用程序和JVM进行监控和管理。</p>
+<p>JConsole和JVisualVM中能够监控到JAVA应用程序和JVM的相关信息都是通过JMX实现的。</p>
+<p>这里我监控的是tomcat，首先在启动脚本（catalina.sh）中加入变量</p>
+<p>CATALINA_OPTS=’-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8888 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false’</p>
+<p>改完需重启tomcat</p>
+<p>启用jmx并监听其端口</p>
+<p>首先我们需要了解一下他们的对应关系，zabbix_server开启java poller, zabbx_java开启JavaGateway，端口为10052，Tomcat JMX开启12345提供性能数据。</p>
+<p>数据获取：java poller&lt;–&gt;JavaGateway:10052&lt;–&gt;Tomcat:12345.</p>
+<p>此时tomcat配置完了，然后配置zabbix_java</p>
+<p>./configure –prefix=/usr/local/zabbix –enable-java &amp;&amp; make install #编译安装zabbix_java模块</p>
+<p>cd /usr/local/zabbix/sbin</p>
+<p>./startup</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059194.jpeg" alt="image.png"></p>
+<p>启动以后zabbix监听客户端就配置完毕了，然后再zabbix_server配置文件里面找到这三个选项并指定为刚才配置好的jmx服务器的地址和端口</p>
+<p>JavaGateway=10.10.10.223</p>
+<p>Option: JavaGatewayPort</p>
+<p>Port that Zabbix Java gateway listens on.</p>
+<p>Mandatory: no</p>
+<p>Range: 1024-32767</p>
+<p>Default:</p>
+<p>JavaGatewayPort=10052Option: StartJavaPollers</p>
+<p>Number of pre-forked instances of Java pollers.</p>
+<p>Mandatory: no</p>
+<p>Range: 0-1000# Default:</p>
+<p>StartJavaPollers=6</p>
+<p>最后一步在zabbix gui里面添加jmx监控主机：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059730.jpeg" alt="image.png"></p>
+<p>指定其类型为jmx，IP地址，以及jmx的端口 号</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059996.jpeg" alt="image.png"></p>
+<p>然后再指定其监控模板（监控项）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059225.jpeg" alt="image.png"></p>
+<p>完毕以后jmx为绿色即成功监控。</p>
+<h2 id="IPMI"><a href="#IPMI" class="headerlink" title="IPMI:"></a>IPMI:</h2><p>IPMI（Intelligent PlatformManagement Interface）即智能平台管理接口是使硬件管理具备“智能化”的新一代通用接口标准。用户可以利用 IPMI 监视服务器的物理特征，如温度、电压、电扇工作状态、电源供应以及机箱入侵等。Ipmi 最大的优势在于它是独立于 CPU BIOS 和 OS 的，所以用户无论在开机还是关机的状态下，只要接通电源就可以实现对服务器的监控。</p>
+<p>IPMI跳过</p>
+<h1 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h1><h2 id="主机群组："><a href="#主机群组：" class="headerlink" title="主机群组："></a>主机群组：</h2><p>主机群组是给主机以及模板进行分类的</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059909.jpeg" alt="image.png"></p>
+<p>在创建主机或模板时都需指定其主机群组。</p>
+<h2 id="监控模板："><a href="#监控模板：" class="headerlink" title="监控模板："></a>监控模板：</h2><p>系统模板：</p>
+<p>监控了主机以后首先应配置主机的监控项，监控模板就是一系列监控项的合集，也是zabbix自带监控项的合集。</p>
+<p>比如我这里选择了</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059238.jpeg" alt="image.png"></p>
+<p>Zabbix agent模板，然后其应用集，监控项，触发器就都有了，都是基于该模板。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059335.jpeg" alt="image.png"></p>
+<p>但本身监控模板也可以不提供任何监控项，其所有监控项均为链接其他的模板，由其他模板提供，以linux by zabbix agent 为例子，它做为模板本身没有任何应用集监控项，全是链接其它模板，相当于其他模板的整合模板。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059403.jpeg" alt="image.png"></p>
+<p>这种链接模板优点是可以做为多模板的合集，缺点是无法直接在该模板里面对其监控项触发器进行编辑，可以看到这里监控项的可编辑区域均为灰色（无法编辑）。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104240.jpeg" alt="image.png"></p>
+<h3 id="自定义模板："><a href="#自定义模板：" class="headerlink" title="自定义模板："></a>自定义模板：</h3><p>在配置-模板的右上角有个创建模板</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231104141.jpeg" alt="image.png"></p>
+<p>创建时需输入模板名称与主机群组</p>
+<p>如不链接模板则输入完成后直接点添加</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059642.jpeg" alt="image.png"></p>
+<p>创建完成后可创建监控项应用集触发器。</p>
+<h4 id="应用集"><a href="#应用集" class="headerlink" title="应用集"></a>应用集</h4><p>应用集是监控项的的集合，用来归类监控项，一个应用集下面包含多个监控项。</p>
+<p>主要作用就是归类，方便按类别查找模板里面的监控项。</p>
+<h4 id="监控项"><a href="#监控项" class="headerlink" title="监控项"></a>监控项</h4><p>一个模板（主机）最重要的就是监控项，用于监控系统里面各个指标情况</p>
+<p>默认一个模板也会包含n个监控项。在监控项右上角可以添加监控项</p>
+<p>添加监控项界面：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059370.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059911.jpeg" alt="image.png"></p>
+<p>监控项最重要的指标就是键值，也就是监控项的数据来源，在选择中通过类型筛选可以找到很多系统自带的键值。除减值外其他设置都可以视情况而定，例如查看值指的是当监控项为某值时对应的监控系统状态，例如监控一个应用是否正常运行，一般就有两个状态0和1，代表运行和关闭。</p>
+<p>这是系统自带的查看值：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059695.jpeg" alt="image.png"></p>
+<h5 id="自定义监控"><a href="#自定义监控" class="headerlink" title="自定义监控"></a>自定义监控</h5><p>如使用系统自带的键值则是zabbix自带的监控项，但也可自定义监控项。</p>
+<p>例如我这里要手动监控nginx的状态：</p>
+<p>首先再zabbix_agent端的zabbixagent.conf修改配置</p>
+<p>Include=/usr/local/zabbix/etc/zabbix_agentd.conf.d/*.conf（也可以直接将自定义监控项键值写道主配置文件，但一般不会这么做）</p>
+<p>UnsafeUserParameters=1 UserParameter接受所有传递的参数（建议开启，有的监控脚本需要传递参数）</p>
+<p>[root@www etc]# cat zabbix_agentd.conf.d/nginx.conf</p>
+<p>UserParameter=nginx,ps -ef |grep -v grep |grep nginx |grep master &gt;/dev/null ;echo $?</p>
+<p>配置完重启zabbixagent端</p>
+<p>设置完以后可以先再zabbix_agent客户端使用zabbix_get测试一下</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103323.jpeg" alt="image.png"></p>
+<p>测试没有问题便可以添加配置项了，键值为nginx</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059650.jpeg" alt="image.png"></p>
+<p>然后在最新数据里面找到该监控项（nginx）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059468.jpeg" alt="image.png"></p>
+<p>已经有数据了。</p>
+<h4 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h4><p>触发器本身基于监控项，起作用为触发报警。当一个监控项的数据到达某个阈值后，触发器便会触发。</p>
+<p>下面创建一个触发器：</p>
+<p>模板-触发器-创建触发器</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103307.jpeg" alt="image.png"></p>
+<p>表达式：<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059736.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103462.jpeg" alt="image.png"></p>
+<p>触发器创建完毕后关闭nginx</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059274.jpeg" alt="image.png"></p>
+<p>首页便有触发器报警了，但这里写了恢复表达式，所以再nginx启动后，该报警就自动移除了。</p>
+<h4 id="图形"><a href="#图形" class="headerlink" title="图形"></a>图形</h4><p>正常情况下在添加了监控项以后都会有自带的图形监控显示功能，在最新数据里面就能可以，也可以在模板中把图形添加好</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103893.jpeg" alt="image.png"></p>
+<p>但这个的添加图形无非是定义一下图形颜色风格类别等，或者将多个监控项集成于一图形（个人觉得图形非监控必要模块，作用不大），添加界面如下<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103890.jpeg" alt="image.png"></p>
+<p>添加完成后在监测-主机-图形里可以看到</p>
+<h4 id="自动发现规则"><a href="#自动发现规则" class="headerlink" title="自动发现规则"></a>自动发现规则</h4><p>略</p>
+<h4 id="web监控"><a href="#web监控" class="headerlink" title="web监控"></a>web监控</h4><p>Web检测是用于监控web应用，主要检测项有web网页反应时间，响应码。</p>
+<p>在模板-web场景中添加web检测</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059981.jpeg" alt="image.png"></p>
+<p>设置其更新间隔，尝试次数以及检测时访问的客户端。</p>
+<p>然后在步骤里面添加要检测的weburl，选择跟随跳转，指定其状态码为200</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103105.jpeg" alt="image.png"></p>
+<p>添加以后可以最新数据中看到其最新数据以及图形监控</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059149.jpeg" alt="image.png"></p>
+<p>其监控项一共有五个：</p>
+<p>Response time for step “soloblog” of scenario “soloblog”.（响应时间）</p>
+<p>Response code for step “soloblog” of scenario “soloblog”.（响应码）</p>
+<p>Last error message of scenario “soloblog”.（上一条错误信息）</p>
+<p>Failed step of scenario “soloblog”. （响应失败）</p>
+<p>Download speed for step “soloblog” of scenario “soloblog”.（响应速度）</p>
+<p>Download speed for scenario “soloblog”.（响应速度）</p>
+<p>有了监控项后可以对其进行设置触发器，网上一般会对其响应码做设置，但不知是不是版本的原因，我在本地照着网上的触发器设置并关闭触发的web网站后并无法触发，后发现其原因为响应码监控项在web项目无法访问时不能生成任何数据，也就是无法生成200以外的数据，则无法对其监控</p>
+<p>响应时间，响应码，响应速度（Download speed for step “soloblog” of scenario “soloblog”.）均无法在web项目关闭时生成任何数据，所以也无法对这三项进行触发器触发操作。</p>
+<p>下面是web项目关闭时其web检测数据：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059340.jpeg" alt="image.png"></p>
+<p>这里可以对其响应失败码和响应速度进行触发，添加触发器：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059372.jpeg" alt="image.png"></p>
+<p>在关闭web项目就可以看到触发器触发警报了：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059806.jpeg" alt="image.png"></p>
+<h4 id="仪表盘"><a href="#仪表盘" class="headerlink" title="仪表盘"></a>仪表盘</h4><p>仪表盘和首页-仪表板类似，就是展示图形数据趋势图或者文本数据等相关信息的展示页面。</p>
+<p>在模板-仪表盘里面可以定义：</p>
+<p>模板-仪表盘-添加仪表盘</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103716.jpeg" alt="image.png"></p>
+<p>这是添加仪表盘界面，在空白处任意位置点击可以添加。</p>
+<h3 id="主机："><a href="#主机：" class="headerlink" title="主机："></a>主机：</h3><p>主机里面可以配置以及记录了zabbix监控的所有客户端</p>
+<p>右上角可以创建主机，应用集到web检测这几项可以点击进去创建，但一般都基于模板套用，无需手动创建，如果设置了代理程序，在agent代理程序会显示，点击状态可以切换开启或关闭，可用性为绿色表示可用以及显示了其agentd端的监控类型。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103133.jpeg" alt="image.png"></p>
+<p>IPMI为监控硬件选项，可以在ipmi选项卡中指定其用户名和密码</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059609.jpeg" alt="image.png"></p>
+<p>标记为主机的标记或备注信息</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059646.jpeg" alt="image.png"></p>
+<p>宏：</p>
+<p>略</p>
+<p>主机资产记录配置过以后可以在资产记录中看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231103113.jpeg" alt="image.png"></p>
+<p>加密：</p>
+<p>Zabbix版本从3.0之后，开始支持Zabbix server, Zabbix proxy, Zabbix agent, zabbix_sender and zabbix_get之间的通信加密，加密方式有预共享密钥(PSK)和证书加密。加密配置是可选项，一些proxies和agents可以使用证书认证加密通信，另外一些可以使用PSK加密通信，而剩余的可以不使用加密进行通信。</p>
+<p>加密需编译时加入加密编译项，可通过密钥生成器生成密钥然后在zabbixagent配置文件中指定其密钥文件，最后在主机-加密中添加。</p>
+<p>维护：</p>
+<p>维护中可以定义其主机群组（主机）的维护时间，在维护时间内，主机监控项的触发器不会进行触发警，但如果维护时间过后仍未解决，zabbix会触发报警。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059118.jpeg" alt="image.png"></p>
+<p>处于维护期间的主机：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059563.jpeg" alt="image.png"></p>
+<h3 id="动作："><a href="#动作：" class="headerlink" title="动作："></a>动作：</h3><p>分为</p>
+<p>Trigger actions,discovery actions,autoregistration actions,internal actions.</p>
+<h4 id="Trigger-actions："><a href="#Trigger-actions：" class="headerlink" title="Trigger actions："></a>Trigger actions：</h4><p>Trigger actions最主要的作用是为触发器触发一个动作，触发器设置监控项的监控数据到达某个阈值时，会进行触发报警，但仅仅是在zabbix-gui面板上进行报警，而动作功能在触发器触发时进行邮件报警或恢复操作（执行命令）。</p>
+<p>邮件报警：</p>
+<p>首先设置好动作，动作的类型可以为多个，这里主要是设置其动作触发的条件，条件可以为多个，其计算方式一般是与/或和“和”：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231102098.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231102832.jpeg" alt="image.png"></p>
+<p>这个我设置了</p>
+<p>|<br>触发器示警度 大于等于 <em>警告</em> 主机 等于 <em>192.168.34.136</em> |<br>| - |</p>
+<p>两个条件，计算方式是和</p>
+<p>则在主机192.168.34.136的触发器警示度大于等于警告时，则会触发动作，接下来设置其动作。其动作有两种：发送消息和远程命令，发送消息也就是邮件报警或者钉钉（短信）等多种报警方式的实现，远程命令一般适用于其动作为某单个触发器时对其监控项进行命令恢复操作。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059111.jpeg" alt="image.png"></p>
+<p>其动作设置了在触发器触发和恢复时通过email发给admin用户，其实也就是发送email给对应用户，这里需要额外设置两个东西，发送邮件的发件人设置，收件人设置。</p>
+<p>发件人设置在其管理-报警媒介类型中：</p>
+<p>这里是email报警，就选择email进行设置</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059154.jpeg" alt="image.png"></p>
+<p>发件邮箱为163邮箱，需要网易邮箱中开启stmp服务，并获得其授权码，在这密码也非用户密码，而是授权码。Stmp输入其邮箱服务商对应的地址，电邮和用户名称皆为用户名</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059571.jpeg" alt="image.png"></p>
+<p>Message templates:</p>
+<p>这里可以设置报警时发送邮件的格式zabbix默认设置了五种邮件类型的模板，最常用的应该是问题。编辑可以更改</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231100963.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231100937.jpeg" alt="image.png"></p>
+<p>将其改为</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059136.jpeg" alt="image.png"></p>
+<p>然后更新确定</p>
+<p>发件邮箱设置好以后在设置收件邮箱 user settings-报警媒介里面添加一个报警媒介，设置其收件人（邮箱）。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059160.jpeg" alt="image.png"></p>
+<p>设置完以后就可以进行邮件报警了。这里192.168.34.136有一个触发器为监控nginx状态，为测试这里关闭nginx。关闭以后可以在主页仪表盘看到触发器以及其执行的动作<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059648.jpeg" alt="image.png"></p>
+<p>这时登录邮箱可以看到该邮件</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059855.jpeg" alt="image.png"></p>
+<h4 id="Discovery-actions"><a href="#Discovery-actions" class="headerlink" title="Discovery actions:"></a>Discovery actions:</h4><p>自动发现的动作首先需要设置自动发现，当自动发现根据其设置发现到主机时，才能触发discovery actions，也就是自动发现动作。</p>
+<h5 id="自动发现："><a href="#自动发现：" class="headerlink" title="自动发现："></a>自动发现：</h5><p>其配置项位于 配置-自动发现。下面是自动发现添加中需要定义的配置项</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059237.jpeg" alt="image.png"></p>
+<p>IP范围：自动发现需要定义一个ip范围，其扫描的时候也只扫描该范围中的ip段。</p>
+<p>更新间隔：更新间隔意味每隔多久会进行扫描一次，这个时间建议不要太短，太短的话其扫描操作会长期占用系统大部分资源，这里为了测试方便就设置了10秒</p>
+<p>检查：ip扫描作为第一个筛选规则，而检查就是其第二个筛选规则，下面是其检查类型，这里我设置了检查类型为zabbix客户端，其键值为system.uname(linux客户端名称的键值)</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059651.jpeg" alt="image.png"></p>
+<p>设备唯一准则性，主机名称，可见的名称根据需求设置即可，因其本身见名知意，这里也不在解释。</p>
+<p>自动发现设置完毕以后会在网端内定期扫描，扫描到以后的主机信息可以在检测-自动发现中看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059919.jpeg" alt="image.png"></p>
+<p>此时就可以设置自动发现的动作了。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059990.jpeg" alt="image.png"></p>
+<p>首先是其条件，一般来说自动发现状态为up即可，也可根据情况设置多个条件。</p>
+<p>然后是其动作<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059209.jpeg" alt="image.png"></p>
+<p>这里设置了四个动作：添加主机，添加到主机群组，链接其模板，启用主机。</p>
+<p>动作设置完成以后，此时当zabbix-server检测的自动发现检测到主机以后就会自动添加主机并链接其模板。</p>
+<h4 id="Autoregistration-actions"><a href="#Autoregistration-actions" class="headerlink" title="Autoregistration actions:"></a>Autoregistration actions:</h4><p>自动注册规则本质上实现的功能与自动发现一样，都是通过自动化功能添加监控zabbix-agent端，不一样的是自动发现是通过zabbix-server去扫描指定网段的客户端，而自动注册是zabbix-agent主动注册到server端。后者的优势在于自动注册无需指定网段，在局域网网络较为复杂或者互联网实现监控时可以用到。</p>
+<p>首先是在zabbix-agent的配置文件上进行配置：</p>
+<p>在需要被监控的主机上安装好agent端，然后编辑zabbix_agent.conf。</p>
+<p>Zabbix_agent.conf:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Server=10.10.10.187(这个非自动注册用到的配置项，而是监控时需指定的serverip)ServerActive=10.10.10.187（设置主动注册的serverip）</span><br><span class="line"></span><br><span class="line">Hostname=ysw1450 （注册时设置的主机名称，正常使用时这个也应当是zabbixagent的名称）</span><br><span class="line"></span><br><span class="line">HostMetadata=admin145 （注册时的主机元数据）</span><br><span class="line"></span><br><span class="line">HostMetadataItem=system.uame (也是元数据)</span><br></pre></td></tr></table></figure>
+
+<p>这样，您可以确保主机元数据包含“Linux”或“Windows”，具体取决于运行代理的主机。 在这种情况下主机元数据的示例：</p>
+<blockquote>
+<p>Linux: Linux server3 3.2.0-4-686-pae #1 SMP Debian 3.2.41-2 i686 GNU/Linux</p>
+<p>Windows: Windows WIN-0PXGGSTYNHO 6.0.6001 Windows Server 2008 Service Pack 1 Intel IA-32</p>
+</blockquote>
+<p>我感觉HostMetadataItem和HostMetadata设置一个即可，如设置HostMetadataItem的话就在配置页面主机元数据那里写上linux（windows），如果是HostMetadata的话就对其字符串进行匹配。也可以一起设置。</p>
+<p>配置好以后转到zabbix_gui上的自动注册添加，主机名对应hostname，主机元数据对应HostMetadata</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059180.jpeg" alt="image.png"></p>
+<p>然后设置其动作（和自动发现一样）</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059447.jpeg" alt="image.png"></p>
+<p>添加以后启动zabbixagent然后看gui就已经注册了。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059701.jpeg" alt="image.png"></p>
+<h4 id="Internal-actions："><a href="#Internal-actions：" class="headerlink" title="Internal actions："></a>Internal actions：</h4><p>内部动作主要是根据事件类型来做动作。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059732.jpeg" alt="image.png"></p>
+<p>在事件类型触发以下条件时就可以做出动作（发送信息）。</p>
+<p>但我觉得这个用的少，且本身监控项触发器在事件类型报告为未知的情况并不常见。</p>
+<h3 id="关联项事件："><a href="#关联项事件：" class="headerlink" title="关联项事件："></a>关联项事件：</h3><p>略</p>
+<h3 id="钉钉报警："><a href="#钉钉报警：" class="headerlink" title="钉钉报警："></a>钉钉报警：</h3><h4 id="钉钉创建群机器人"><a href="#钉钉创建群机器人" class="headerlink" title="钉钉创建群机器人"></a>钉钉创建群机器人</h4><p>首先在钉钉里面创建一个群，然后再创建一个机器人并拿到其webhook</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059972.jpeg" alt="image.png"></p>
+<h4 id="在linux中创建脚本"><a href="#在linux中创建脚本" class="headerlink" title="在linux中创建脚本"></a>在linux中创建脚本</h4><p>vim /usr/lib/zabbix/alertscripts/dingding.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">to=<span class="variable">$1</span></span><br><span class="line">subject=<span class="variable">$2</span></span><br><span class="line">text=<span class="variable">$3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#此处的 xxxxx 就是刚刚复制存留的 api 接口地址。</span></span><br><span class="line">curl -i -X POST \</span><br><span class="line"><span class="string">&#x27;https://oapi.dingtalk.com/robot/send?access_token=XXX&#x27;</span> \</span><br><span class="line">-H <span class="string">&#x27;Content-type&#x27;</span>:<span class="string">&#x27;application/json&#x27;</span> \</span><br><span class="line">-d <span class="string">&#x27;</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;msgtype&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="string">     &quot;text&quot;: &#123;</span></span><br><span class="line"><span class="string">        &quot;content&quot;: &quot;&#x27;</span>监控报警：<span class="string">&#x27;&#x27;</span><span class="string">&quot;<span class="variable">$text</span>&quot;</span><span class="string">&#x27;&quot;</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">  &quot;at&quot;:&#123;</span></span><br><span class="line"><span class="string">    &quot;atMobiles&quot;:[</span></span><br><span class="line"><span class="string">      &quot;&#x27;</span><span class="string">&quot;<span class="variable">$1</span>&quot;</span><span class="string">&#x27;&quot;</span></span><br><span class="line"><span class="string">      ],</span></span><br><span class="line"><span class="string">  &quot;isAtAll&quot;:false</span></span><br><span class="line"><span class="string">   &#125; </span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>chmod +x dingding.sh</p>
+<p>测试脚本是否执行成功。<br>sh dinhding.sh 11 22 33</p>
+<p><strong>此时应该能在钉钉群里看到机器人发送消息</strong></p>
+<h4 id="在zabbix中添加报警媒介"><a href="#在zabbix中添加报警媒介" class="headerlink" title="在zabbix中添加报警媒介"></a>在zabbix中添加报警媒介</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059800.jpeg" alt="image.png"></p>
+<p>参数：</p>
+<p>{ALERT.SENDTO}</p>
+<p>{ALERT.SUBJECT}</p>
+<p>{ALERT.MESSAGE}</p>
+<h5 id="message-templates："><a href="#message-templates：" class="headerlink" title="message templates："></a>message templates：</h5><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059850.jpeg" alt="image.png"></p>
+<p>主题：</p>
+<p>故障{TRIGGER.STATUS},服务器:{HOSTNAME1}发生: {TRIGGER.NAME}故障!</p>
+<p>消息：</p>
+<p>告警主机:{HOSTNAME1}</p>
+<p>告警时间:{EVENT.DATE} {EVENT.TIME}</p>
+<p>告警等级:{TRIGGER.SEVERITY}</p>
+<p>告警信息: {TRIGGER.NAME}</p>
+<p>告警项目:{TRIGGER.KEY1}</p>
+<p>问题详情:{ITEM.NAME}:{ITEM.VALUE}</p>
+<p>当前状态:{TRIGGER.STATUS}:{ITEM.VALUE1}</p>
+<p>事件 ID:{EVENT.ID}</p>
+<h4 id="触发器动作中加入钉钉报警"><a href="#触发器动作中加入钉钉报警" class="headerlink" title="触发器动作中加入钉钉报警"></a>触发器动作中加入钉钉报警</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059029.jpeg" alt="image.png"></p>
+<h4 id="给admin添加钉钉报警媒介"><a href="#给admin添加钉钉报警媒介" class="headerlink" title="给admin添加钉钉报警媒介"></a>给admin添加钉钉报警媒介</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231059359.jpeg" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/Zabbix_hexo/" data-id="ckxjra7ot0005r0v10uvagm2i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/23/HTTP_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HTTP
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/23/NFS_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">NFS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

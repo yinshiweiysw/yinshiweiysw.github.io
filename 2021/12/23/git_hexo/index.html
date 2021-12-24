@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>git | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介Git是一种是分布式代码版本控制系统。可以有效、高速地处理从很小到非常大的项目版本管理。也是Linus Torvalds为了帮助管理Linux内核开发而开发的一个开放源码的版本控制软件。 git和svn的区别：1.GIT是分布式的，SVN不是:这是GIT和其它非分布式的版本控制系统，例如SVN，CVS等，最核心的区别。2.GIT把内容按元数据方式存储，而SVN是按文件︰所有的资源控制系统都是把">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git">
+<meta property="og:url" content="http://example.com/2021/12/23/git_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介Git是一种是分布式代码版本控制系统。可以有效、高速地处理从很小到非常大的项目版本管理。也是Linus Torvalds为了帮助管理Linux内核开发而开发的一个开放源码的版本控制软件。 git和svn的区别：1.GIT是分布式的，SVN不是:这是GIT和其它非分布式的版本控制系统，例如SVN，CVS等，最核心的区别。2.GIT把内容按元数据方式存储，而SVN是按文件︰所有的资源控制系统都是把">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107486.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107572.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107468.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107491.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107595.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107479.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107803.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107034.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108174.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107216.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107267.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108205.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107774.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107828.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107040.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108089.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108427.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107419.jpeg">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.167Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107486.jpeg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-git_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/git_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Git是一种是分布式代码版本控制系统。可以有效、高速地处理从很小到非常大的项目版本管理。也是Linus Torvalds为了帮助管理Linux内核开发而开发的一个开放源码的版本控制软件。</p>
+<h1 id="git和svn的区别："><a href="#git和svn的区别：" class="headerlink" title="git和svn的区别："></a>git和svn的区别：</h1><p>1.GIT是分布式的，SVN不是:这是GIT和其它非分布式的版本控制系统，例如SVN，CVS<br>等，最核心的区别。<br>2.GIT把内容按元数据方式存储，而SVN是按文件︰所有的资源控制系统都是把文件的元信<br>息隐藏在一个类似.svn,.cvs等的文件夹里。<br>3.GIT分支和SVN的分支不同:分支在SVN中一点不特别，就是版本库中的另外的一个目<br>录。<br>4.GIT没有一个全局的版本号，而SVN有∶目前为止这是跟SVN相比GIT缺少的最大的一个特<br>征。<br>5.GIT的内容完整性要优于SVN:GIT的内容存储使用的是SHA-1哈希算法。这能确保代码内<br>容的完整性，确保在遇到磁盘故障和网络问题时降低对版本库的破坏。</p>
+<h1 id="git安装及使用"><a href="#git安装及使用" class="headerlink" title="git安装及使用"></a>git安装及使用</h1><h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><p>centos系统使用yum安装即可（ubantu则是apt-get），git本身对版本无过多需求，所以也无需在意版本号。</p>
+<p>yum -y install git //安装git</p>
+<h2 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h2><h3 id="配置git仓库"><a href="#配置git仓库" class="headerlink" title="配置git仓库"></a>配置git仓库</h3><p>Git提供了一个叫做git config 的工具，专门用来配置或读取相应的工作环境变量。<br>这些环境变量，决定了Git在各个环节的具体工作方式和行为。这些变量可以存放在以下三个不同的地方:<br>/etc/gitconfig文件:</p>
+<p>系统中对所有用户都普遍适用的配置。若使用git config时用–system选项，读写的就是这个文件。<br>~/.gitconfig文件:</p>
+<p>用户目录下的配置文件只适用于该用户。若使用git config时用-global选项，读写的就是这个文件。</p>
+<p>当前项目的Git目录中的配置文件（也就是工作目录中的.git/config文件)︰这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以<br>.git/config里的配置会覆盖/etc/gitconfig中的同名变量。</p>
+<p><strong>git config</strong></p>
+<p><strong>–global 使用全局配置文件</strong></p>
+<p><strong>–system 使用系统级配置文件</strong></p>
+<p><strong>–local</strong> <strong>使用版本库级配置文件</strong></p>
+<p>git config –global user.name “ysw” 配置使用用户</p>
+<p>git config –global user.email “<a href="mailto:1@qq.com">1@qq.com</a>“ 配置使用邮箱</p>
+<p>git config –global color.ui true 语法高亮</p>
+<p>[root@localhost ~]# git config –list</p>
+<p>user.name=ysw</p>
+<p><a href="mailto:user.email=1@11.com">user.email=1@11.com</a></p>
+<p>[root@localhost ~]# cat .gitconfig</p>
+<p>[user]</p>
+<p>name = ysw<br>email = <a href="mailto:1@11.com">1@11.com</a></p>
+<p>查看设置的用户和邮箱</p>
+<h3 id="git初始化"><a href="#git初始化" class="headerlink" title="git初始化"></a>git初始化</h3><p>mkdir git_data &amp;&amp; cd git_data</p>
+<p>git init //初始化 在git-server上应该使用用git –bare init</p>
+<p>git status //查看工作区状态</p>
+<p>//查看git创建的仓库文件</p>
+<p>[root@localhost git_data]# ll .git/</p>
+<p>总用量 12</p>
+<p>drwxr-xr-x 2 root root 6 5月 25 21:27 branches</p>
+<p>-rw-r–r– 1 root root 92 5月 25 21:27 config</p>
+<p>-rw-r–r– 1 root root 73 5月 25 21:27 description</p>
+<p>-rw-r–r– 1 root root 23 5月 25 21:27 HEAD</p>
+<p>drwxr-xr-x 2 root root 332 5月 25 21:27 hooks</p>
+<p>drwxr-xr-x 2 root root 21 5月 25 21:27 info</p>
+<p>drwxr-xr-x 4 root root 30 5月 25 21:27 objects</p>
+<p>drwxr-xr-x 4 root root 31 5月 25 21:27 refs</p>
+<p>branches //分支目录</p>
+<p>config //定义项目持有的配置选项</p>
+<p>description //仅供git web程序使用</p>
+<p>HEAD //指示当前的分支</p>
+<p>hooks //包含git钩子文件</p>
+<p>info // 包含一个全局排除文件（exclude文件）</p>
+<p>objects // 存放所有数据内容，有info和pack两个子文件</p>
+<p>refs // 存放指向（分支）的提交对象的指针</p>
+<p>index // 保存暂存区信息，在执行git init的时候，这个文件还没有</p>
+<h3 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h3><p>Git的几个区域:</p>
+<p><strong>工作区:就是你在电脑里能看到的目录。<br>暂存区:英文叫stage,或index。一般存放在”git目录”下的index文件(.git/index)中，所以我们把暂存区有时也叫作索引index).<br>版本库:工作区有一个隐藏目录git。这个不算工作区，而是Git的版本库。</strong></p>
+<p>git分为工作区域，暂存区域，本地仓库，远程仓库。在写代码时，代码首先是放到工作区域，然后上传到暂存区域，然后再是本地仓库，具体流程如下：</p>
+<p>工作目录 暂存区域 本地仓库 远程仓库</p>
+<p>git add –&gt; git commit–&gt; git push –&gt;</p>
+<p>git rm &lt;– git clone/git pull &lt;–</p>
+<p>git restore &lt;–</p>
+<p>git reset –hard 3de15d4 &lt;————-</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107486.jpeg" alt="image.png"></p>
+<h3 id="git命令介绍："><a href="#git命令介绍：" class="headerlink" title="git命令介绍："></a>git命令介绍：</h3><p>git add：将工作目录的代码提交至暂存区域</p>
+<p>git rm：从工作区和索引中删除文件</p>
+<p>git restore ：当工作区的文件删除时可通过该命令恢复,–staged为删除暂存区的文件 git –staged == git rm –cached</p>
+<p>git reset –hard xxx:将代码代码恢复到某个版本</p>
+<p>git commit :提交暂存仓库的代码到本地仓库</p>
+<p>git push / git clone/git pull :推拉远程仓库到本地仓库</p>
+<p>git mv : 移动或重命名一个文件、目录或符号链接</p>
+<p>git clone:克隆仓库到一个新目录</p>
+<p>git diff:显示提交之间、提交和工作区之间等的差异</p>
+<p>git show:显示各种类型的对象(仓库中的)和git log -p一样</p>
+<p>git log:查看仓库中的版本（只能看到已当前主版本为最新的历史版本）</p>
+<p>git log 查看提交的仓库信息</p>
+<p>git log –oneline 简略查看</p>
+<p>git log -p 查看详细提交的内容</p>
+<p>git reflog 查看所有仓库日志（git log只能看到当前主版本）</p>
+<p>git reflog：查看仓库中所有代码版本</p>
+<h3 id="Git使用示例："><a href="#Git使用示例：" class="headerlink" title="Git使用示例："></a>Git使用示例：</h3><p>[root@localhost git_data]# touch a b</p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>尚无提交</p>
+<p>未跟踪的文件:</p>
+<p>（使用 “git add &lt;文件&gt;…” 以包含要提交的内容）</p>
+<p>a<br>b</p>
+<p>提交为空，但是存在尚未跟踪的文件（使用 “git add” 建立跟踪）</p>
+<p>[root@localhost git_data]# git add a b</p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>尚无提交</p>
+<p>要提交的变更：</p>
+<p>（使用 “git rm –cached &lt;文件&gt;…” 以取消暂存）</p>
+<p>新文件： a<br>新文件： b</p>
+<p><strong>//此时a，b文件已经上传到暂存区域</strong></p>
+<p>[root@localhost git_data]# git commit -m “new” a b</p>
+<p>[master（根提交） 0958221] new</p>
+<p>2 files changed, 0 insertions(+), 0 deletions(-)</p>
+<p>create mode 100644 a</p>
+<p>create mode 100644 b</p>
+<p>[root@localhost git_data]# git log</p>
+<p>commit 0958221eeae14b91800e79af6e9056d202a7a22c (HEAD -&gt; master)</p>
+<p>Author: ysw <a href="mailto:1@11.com">1@11.com</a></p>
+<p>Date: Tue May 25 22:34:59 2021 -0400</p>
+<p>New</p>
+<p><strong>//Git仓库里面可以看到已提交的。</strong></p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>无文件要提交，干净的工作区</p>
+<p><strong>//提交完以后工作区就没有可以提交的了。</strong></p>
+<h4 id="删除工作区域并恢复："><a href="#删除工作区域并恢复：" class="headerlink" title="删除工作区域并恢复："></a>删除工作区域并恢复：</h4><p>[root@localhost git_data]# rm -rf a b</p>
+<p>[root@localhost git_data]# git restore a b</p>
+<p>//此时文件就恢复了</p>
+<p>用git rm删除：</p>
+<p>[root@localhost git_data]# git rm a145 b145</p>
+<p>rm ‘a145’</p>
+<p>rm ‘b145’</p>
+<p>[root@localhost git_data]# git reset –hard HEAD</p>
+<p>//这里无法通过restore进行恢复，因为git rm是直接将本地和暂存区的都删除了，只能去本地仓库拉取。</p>
+<h4 id="改名："><a href="#改名：" class="headerlink" title="改名："></a>改名：</h4><p>[root@localhost git_data]# git mv a a145</p>
+<p>[root@localhost git_data]# git mv b b145</p>
+<p>[root@localhost git_data]# ll</p>
+<p>总用量 0</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:41 a145</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:41 b145</p>
+<p>提交重命名的文件:</p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>要提交的变更：</p>
+<p>（使用 “git restore –staged &lt;文件&gt;…” 以取消暂存）</p>
+<p>重命名： a -&gt; a145<br>重命名： b -&gt; b145</p>
+<p>[root@localhost git_data]# git commit -m “145” a145 b145</p>
+<p>[master 9b2380a] 145</p>
+<p>2 files changed, 0 insertions(+), 0 deletions(-)</p>
+<p>create mode 100644 a145</p>
+<p>create mode 100644 b145</p>
+<h4 id="将工作区域更新到仓库某一版本："><a href="#将工作区域更新到仓库某一版本：" class="headerlink" title="将工作区域更新到仓库某一版本："></a>将工作区域更新到仓库某一版本：</h4><p>[root@localhost git_data]# git log –oneline</p>
+<p>9b2380a (HEAD -&gt; master) 145</p>
+<p>0958221 new</p>
+<p>[root@localhost git_data]# git reset –hard HEAD</p>
+<p>HEAD 现在位于 9b2380a 145</p>
+<h4 id="删除暂存区的代码文件："><a href="#删除暂存区的代码文件：" class="headerlink" title="删除暂存区的代码文件："></a>删除暂存区的代码文件：</h4><p>[root@localhost git_data]# echo 111 &gt; c</p>
+<p>[root@localhost git_data]# echo 222 &gt; d</p>
+<p>[root@localhost git_data]# git add c d</p>
+<p>[root@localhost git_data]# git status c d</p>
+<p>位于分支 master</p>
+<p>要提交的变更：</p>
+<p>（使用 “git restore –staged &lt;文件&gt;…” 以取消暂存）</p>
+<p>新文件： c<br>新文件： d</p>
+<p>[root@localhost git_data]# git restore –staged c d</p>
+<p>[root@localhost git_data]# git status c d</p>
+<p>位于分支 master</p>
+<p>未跟踪的文件:</p>
+<p>（使用 “git add &lt;文件&gt;…” 以包含要提交的内容）</p>
+<p>c<br>d</p>
+<p>提交为空，但是存在尚未跟踪的文件（使用 “git add” 建立跟踪）</p>
+<p>[root@localhost git_data]# git add c d</p>
+<p>[root@localhost git_data]# git rm –cached c d</p>
+<p>rm ‘c’</p>
+<p>rm ‘d’</p>
+<p>[root@localhost git_data]# git status</p>
+<p>位于分支 master</p>
+<p>未跟踪的文件:</p>
+<p>（使用 “git add &lt;文件&gt;…” 以包含要提交的内容）</p>
+<p>c<br>d</p>
+<p>提交为空，但是存在尚未跟踪的文件（使用 “git add” 建立跟踪）</p>
+<h4 id="git文件比对："><a href="#git文件比对：" class="headerlink" title="git文件比对："></a>git文件比对：</h4><p>git比对工作区和暂存区的区别 diff：</p>
+<p>[root@localhost git_data]# git diff a.txt1</p>
+<p>diff –git a/a.txt1 b/a.txt1</p>
+<p>index e69de29..2aaba2d 100644</p>
+<p>— a/a.txt1</p>
+<p>+++ b/a.txt1</p>
+<p>@@ -0,0 +1 @@</p>
+<p>+asdfasfasf</p>
+<p>[root@localhost git_data]# git commit -m “new2 “ a.txt1</p>
+<p>[master 4e17e88] new2</p>
+<p>1 file changed, 1 insertion(+)</p>
+<p>create mode 100644 a.txt1</p>
+<p>[root@localhost git_data]# git diff a.txt1</p>
+<p>对比暂存区和仓库的区别</p>
+<p>[root@localhost git_data]# git add a.txt1</p>
+<p>[root@localhost git_data]# git diff –cached a.txt1</p>
+<p>diff –git a/a.txt1 b/a.txt1</p>
+<p>index 2aaba2d..cc6fda8 100644</p>
+<p>— a/a.txt1</p>
+<p>+++ b/a.txt1</p>
+<p>@@ -1 +1 @@</p>
+<p>-asdfasfasf</p>
+<p>+1ds</p>
+<h3 id="git标签"><a href="#git标签" class="headerlink" title="git标签"></a>git标签</h3><p>git tag -a v1.0 -m “banben” //为当前版本库打上标签，如要为指定版本库打标签可先用git reflog找到对应版本的hash值，然后git tag -a v1.0 4e17e88 -m “banben”</p>
+<p>git tag //查看历史标签</p>
+<p>git reset –hard v1.0 //可以通过标签名回滚<br><strong>//git的使用本身并没有太多难度，大多数主要就是围绕着工作区域，暂存区域和本地仓库的工作，其流程无非就是在工作区域编写代码然后上传到暂存区域再上传到本地仓库，暂存区域和工作区域的代码文件即使删除也可以通过本地仓库找回来。需要注意的是如果将版本更新到仓库最新以前的版本之后使用git log是看不到最新的版本，只能看到当前主版本及以前的代码，使用log reflog可以看到所有的。</strong></p>
+<h3 id="git分支"><a href="#git分支" class="headerlink" title="git分支"></a>git分支</h3><p>分支即使平行空间，假设你在为某个手机系统研发拍照功能，代码已经完成了80%，但如果将这不完整的代码直接提供到git仓库中，又可能影响其他人的工作，此时我们便可以在该软件的项目上创建一个名叫“拍照功能”的分支，这个分支只属于你自己，而其他人看不到，等代码编写完成后再与原来的项目主分支合并下即可，这样既能保证代码不丢失，又不影响其他人的工作。</p>
+<p>git log –oneline –decorate 默认分支指向最后一次的master分支</p>
+<p>git branch testing 新增分支</p>
+<p>git branch 查看分支</p>
+<p>git checkout testing 切换分支</p>
+<p>git branch -d testing 删除分支</p>
+<p>git merge xxx 合并分支</p>
+<h4 id="合并例："><a href="#合并例：" class="headerlink" title="合并例："></a>合并例：</h4><p>[root@localhost git_data]# git branch testing // 添加分支</p>
+<p>[root@localhost git_data]# git checkout testing //切换分支</p>
+<p>A c</p>
+<p>A d</p>
+<p>切换到分支 ‘testing’</p>
+<p>[root@localhost git_data]# ll</p>
+<p>总用量 8</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 a</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 a145</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 b</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 b145</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:43 c</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:38 d</p>
+<p>[root@localhost git_data]# echo dfaf &gt; testing</p>
+<p>[root@localhost git_data]# git add testing</p>
+<p>[root@localhost git_data]# git commit -m “testing” testing</p>
+<p>[testing aed242b] testing</p>
+<p>1 file changed, 1 insertion(+)</p>
+<p>create mode 100644 testing</p>
+<p>[root@localhost git_data]# git log –oneline</p>
+<p>aed242b (HEAD -&gt; testing) testing</p>
+<p>9b2380a (master) 145</p>
+<p>0958221 new</p>
+<p>//在这个分支上新增代码并上传</p>
+<p>[root@localhost git_data]# git checkout master</p>
+<p>A c</p>
+<p>A d</p>
+<p>切换到分支 ‘master’</p>
+<p>[root@localhost git_data]# ll</p>
+<p>总用量 8</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 a</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 a145</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 b</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 b145</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:43 c</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:38 d</p>
+<p>[root@localhost git_data]# git merge testing</p>
+<p>更新 9b2380a..aed242b</p>
+<p>Fast-forward</p>
+<p>testing | 1 +</p>
+<p>1 file changed, 1 insertion(+)</p>
+<p>create mode 100644 testing</p>
+<p>//切换到主版本并合并分支</p>
+<p>[root@localhost git_data]# ll</p>
+<p>总用量 12</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 a</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 a145</p>
+<p>-rw-r–r– 1 root root 0 5月 25 22:52 b</p>
+<p>-rw-r–r– 1 root root 0 5月 25 23:31 b145</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:43 c</p>
+<p>-rw-r–r– 1 root root 4 5月 25 23:38 d</p>
+<p>-rw-r–r– 1 root root 5 5月 26 01:54 testing</p>
+<p>[root@localhost git_data]# git log –oneline</p>
+<p>aed242b (HEAD -&gt; master, testing) testing</p>
+<p>9b2380a 145</p>
+<p>0958221 new</p>
+<p>//<strong>新增分支时分支会复制主版本master的所有代码文件，此时分支与master一样，在分支上新增了代码后，这时分支上的代码比主版本新，可以通过merge合并分支。合并时如果代码冲突会合并失败，合并失败需手动修正冲突。</strong></p>
+<h1 id="git远程仓库："><a href="#git远程仓库：" class="headerlink" title="git远程仓库："></a>git远程仓库：</h1><p>这里有两台主机，分别是git-server和git-client，虽然git是分布式，但是为了区分一下就这样命名了。</p>
+<p>这里是git-server上已经建立好的仓库（master分支）：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107572.jpeg" alt="image.png"></p>
+<p>git-client：</p>
+<p>git clone <a href="ssh://10.10.10.85/root/git/.git">ssh://10.10.10.85/root/git/.git</a> //需要输入密码，如果不想输入密码可以通过ssh-keygen生成密钥将公钥传到server上这样client可以免密登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@ysw-virtual-machine:/git-core<span class="comment"># ll git/total 36</span></span><br><span class="line">drwxr-xr-x 3 root root 4096 Jun  4 01:43 ./</span><br><span class="line">drwxr-xr-x 4 root root 4096 Jun  4 01:43 ../</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  4 01:43 1</span><br><span class="line">-rw-r--r-- 1 root root    5 Jun  4 01:43 2</span><br><span class="line">-rw-r--r-- 1 root root    5 Jun  4 01:43 3</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  4 01:43 4</span><br><span class="line">-rw-r--r-- 1 root root    2 Jun  4 01:43 5</span><br><span class="line">drwxr-xr-x 8 root root 4096 Jun  4 01:43 .git/</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  4 01:43 ysw</span><br></pre></td></tr></table></figure>
+
+<p>此时便克隆成功了</p>
+<p>还有一种方式是通过git remote add：</p>
+<p>clone无需创建文件夹，可以直接把库复制过来，remote要麻烦一点,需要手动创建文件夹以及空库</p>
+<p>首先创建一个文件夹：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">root@ysw-virtual-machine:~ mkdir /yswroot@ysw-virtual-machine:~# cd /ysw</span><br><span class="line">root@ysw-virtual-machine:/ysw# git init</span><br><span class="line">Initialized empty Git repository in /ysw/.git/</span><br><span class="line">root@ysw-virtual-machine:/ysw# git remote add origin ssh://10.10.10.85/root/git/.git</span><br><span class="line">root@ysw-virtual-machine:/ysw# git pull origin master</span><br><span class="line">root@10.10.10.85&#x27;s password:</span><br><span class="line">remote: Enumerating objects: 11, done.</span><br><span class="line">remote: Counting objects: 100% (11/11), done.</span><br><span class="line">remote: Compressing objects: 100% (6/6), done.</span><br><span class="line">remote: Total 11 (delta 2), reused 0 (delta 0)</span><br><span class="line">Unpacking objects: 100% (11/11), 640 bytes | 128.00 KiB/s, done.</span><br><span class="line">From ssh://10.10.10.85/root/git/branch            master     -&gt; FETCH_HEAD[new branch]      master     -&gt; origin/master</span><br><span class="line">root@ysw-virtual-machine:/ysw# ll</span><br><span class="line">total 36</span><br><span class="line">drwxr-xr-x  3 root root 4096 Jun  4 01:49 ./</span><br><span class="line">drwxr-xr-x 23 root root 4096 Jun  4 01:48 ../</span><br><span class="line">-rw-r--r--  1 root root    8 Jun  4 01:49 1</span><br><span class="line">-rw-r--r--  1 root root    5 Jun  4 01:49 2</span><br><span class="line">-rw-r--r--  1 root root    5 Jun  4 01:49 3</span><br><span class="line">-rw-r--r--  1 root root    8 Jun  4 01:49 4</span><br><span class="line">-rw-r--r--  1 root root    2 Jun  4 01:49 5</span><br><span class="line">drwxr-xr-x  8 root root 4096 Jun  4 01:49 .git/</span><br><span class="line">-rw-r--r--  1 root root    8 Jun  4 01:49 ysw</span><br></pre></td></tr></table></figure>
+
+<p>此时就成功了</p>
+<h2 id="在本地创建新代码并推送至远程仓库："><a href="#在本地创建新代码并推送至远程仓库：" class="headerlink" title="在本地创建新代码并推送至远程仓库："></a>在本地创建新代码并推送至远程仓库：</h2><p><strong>首先将在本地创建测试代码并上传到本地仓库：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@ysw-virtual-machine:/ysw# echo ceshi &gt;ceshi</span><br><span class="line">root@ysw-virtual-machine:/ysw# git add ceshi</span><br><span class="line">root@ysw-virtual-machine:/ysw# git commit -m &quot;ceshi&quot; ceshi</span><br><span class="line">[master 9a3d5d5] ceshi</span><br><span class="line">1 file changed, 1 insertion(+)</span><br><span class="line">create mode 100644 ceshi</span><br></pre></td></tr></table></figure>
+
+<p><strong>然后上传到远程仓库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```root@ysw-virtual-machine:/ysw# git push -u origin master</span><br><span class="line">root@10.10.10.85&#x27;s password:</span><br><span class="line">Enumerating objects: 4, done.</span><br><span class="line">Counting objects: 100% (4/4), done.</span><br><span class="line">Delta compression using up to 2 threads</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 247 bytes | 247.00 KiB/s, done.</span><br><span class="line">Total 3 (delta 1), reused 0 (delta 0)</span><br><span class="line">To ssh://10.10.10.85/root/git/.git</span><br><span class="line">111c7d3..9a3d5d5  master -&gt; master</span><br><span class="line">Branch &#x27;master&#x27; set up to track remote branch &#x27;master&#x27; from &#x27;origin&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>git-server：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root@ysw-virtual-machine:~/git# git reflog</span><br><span class="line">9a3d5d5 (HEAD -&gt; master) HEAD@&#123;0&#125;: push</span><br><span class="line">111c7d3 HEAD@&#123;1&#125;: commit: new 3</span><br><span class="line">1412870 HEAD@&#123;2&#125;: reset: moving to HEAD</span><br><span class="line">1412870 HEAD@&#123;3&#125;: push</span><br><span class="line">76eca6c HEAD@&#123;4&#125;: commit (initial): new</span><br><span class="line">root@ysw-virtual-machine:~/git# git reset --hard</span><br><span class="line">HEAD is now at 9a3d5d5 ceshi</span><br><span class="line">root@ysw-virtual-machine:~/git# ll</span><br><span class="line">total 40</span><br><span class="line">drwxr-xr-x 3 root root 4096 Jun  4 01:53 ./</span><br><span class="line">drwx------ 5 root root 4096 Jun  3 20:59 ../</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  3 19:39 1</span><br><span class="line">-rw-r--r-- 1 root root    5 Jun  3 19:39 2</span><br><span class="line">-rw-r--r-- 1 root root    5 Jun  3 19:39 3</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  3 20:24 4</span><br><span class="line">-rw-r--r-- 1 root root    2 Jun  3 20:42 5</span><br><span class="line">-rw-r--r-- 1 root root    6 Jun  4 01:53 ceshi</span><br><span class="line">drwxr-xr-x 8 root root 4096 Jun  4 01:53 .git/</span><br><span class="line">-rw-r--r-- 1 root root    8 Jun  3 20:24 ysw</span><br></pre></td></tr></table></figure>
+
+<h1 id="gitlab"><a href="#gitlab" class="headerlink" title="gitlab"></a>gitlab</h1><p>GitLab是一个用于仓库管理系统的开源项目。使用Cit作为代码管理工具，并在此基础上搭建起来的web服务。可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用。</p>
+<h2 id="gitlab服务构成："><a href="#gitlab服务构成：" class="headerlink" title="gitlab服务构成："></a>gitlab服务构成：</h2><p>nginx静态web服务器<br>gitlab-workhorse:轻量级的反向代理服务器<br>logrotate：日志文件管理工具<br>postgresql：数据库<br>redis：缓存数据库<br>sidekiq：用在后台执行队列任务（异步执行）。（Ruby）<br>unicorn:an http server for rack applications .gitlab rails应用是托管在这个服务器上面的</p>
+<h2 id="gitlab安装"><a href="#gitlab安装" class="headerlink" title="gitlab安装:"></a>gitlab安装:</h2><h3 id="redhad"><a href="#redhad" class="headerlink" title="redhad:"></a>redhad:</h3><p>sudo dnf install -y curl policycoreutils openssh-server perl<br><a target="_blank" rel="noopener" href="https://packages.gitlab.com/gitlab/">https://packages.gitlab.com/gitlab/</a> //去官网下载包<br>curl -s <a target="_blank" rel="noopener" href="https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh">https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh</a> | sudo bash<br>sudo yum install gitlab-ce-13.11.4-ce.0.el8.x86_64</p>
+<h3 id="ubuntu安装-（换成国内源）"><a href="#ubuntu安装-（换成国内源）" class="headerlink" title="ubuntu安装:（换成国内源）"></a>ubuntu安装:（换成国内源）</h3><ol>
+<li>安装配置依赖项 sudo apt-get update<br> sudo apt-get install -y curl openssh-server ca-certificates</li>
+</ol>
+<p>2.安装发送邮件的（可以用自己熟悉的代替） sudo apt-get install -y postfix</p>
+<p>安装过程中会弹出对话框，按TAB键让按钮点亮后按Enter或者空格。填文字的地方随便写，是邮件中显示的发送者。</p>
+<p>3.下载安装脚本 curl <a target="_blank" rel="noopener" href="https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh">https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh</a> | sudo bash</p>
+<p>4.修改安装脚本 vim /etc/apt/sources.list.d/gitlab_gitlab-ce.list</p>
+<p>把原来的两行删除或者注释（#是行注释），然后增加<br>deb <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu</a> bionic main<br>deb-src <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu</a> bionic main</p>
+<p>再次执行<br>sudo apt-get update<br><a target="_blank" rel="noopener" href="http://t.zoukankan.com/whm-blog-p-11557498.html">http://t.zoukankan.com/whm-blog-p-11557498.html</a><br>5.安装<br>sudo apt-get install gitlab-ce=13.10.5-ce.0<br>完成后需要改一下external_url，将其改为本机的ip地址（访问地址）<br>vim /etc/gitlab/gitlab.rb：<br>external_url ‘<a target="_blank" rel="noopener" href="http://10.10.10.10/">http://10.10.10.10</a>‘</p>
+<p>sudo gitlab-ctl reconfigure<br>初始化完成以后<br>gitlab-ctl status //查看gitlab进程状态<br>gitlab-ctl start //启动，但初始化完成会自动启动，不用再启动。<br>访问地址：<a target="_blank" rel="noopener" href="http://ip/">http://ip</a><br>启动了以后访问出现报错：<br>Whoops, GitLab is taking too much time to respond. 502<br>可以free -h看一下内存，一般是内存不够</p>
+<h2 id="使用：-1"><a href="#使用：-1" class="headerlink" title="使用："></a>使用：</h2><p>第一次登录需要修改密码，账号为root。首页：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107468.jpeg" alt="image.png"></p>
+<h3 id="注册限制："><a href="#注册限制：" class="headerlink" title="注册限制："></a>注册限制：</h3><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107491.jpeg" alt="image.png"></p>
+<p>设置了注册限制以后无法在登录页面注册，只能通过管理员账号添加注册账号</p>
+<h3 id="中文设置："><a href="#中文设置：" class="headerlink" title="中文设置："></a>中文设置：</h3><p>首次登陆需要重置密码，用户为root，然后设置流程为<br>右上角的头像-preferences-Localization-language-简体中文</p>
+<h3 id="备份："><a href="#备份：" class="headerlink" title="备份："></a>备份：</h3><p>对gitlab进行备份将会创建一个包含所有库和附件的归档文件。对备份的恢复只能恢复到与备份时的gitlab相同的版本。将gitlab迁移到另一台服务器上的最佳方法就是通过备份和还原。<br>gitlab提供了一个简单的命令行来备份整个gitlab，并且能灵活的满足需求。<br>备份文件将保存在配置文件中定义的backup_path中，文件名为TIMESTAMP_gitlab_backup.tar,TIMESTAMP为备份时的时间。TIMESTAMP的格式为:EPOCH_YYYY_MM_DD_Gitlab-version.<br>如果自定义备份目录需要赋予git权限<br>配置文件中加入<br>gitlab_rails[‘backup_path’] = “/data/ backup/gitlab”<br>gitlab_rails[‘backup_keep_time’ = 604800</p>
+<p>备份保留的时间(以秒为单位，这个是七天默认值)，</p>
+<p>mkdir / data/ backup/gitlab<br>chown -R git.git /data/ backup/gitlab</p>
+<p>完成后执行gitlab-ctl reconfigure</p>
+<p>备份<br>gitlab-rake gitlab:backup:create<br>恢复<br>gitlab-rake gitlab:backup:restore BACKUP=1537261122_2018_09_18_9.2.5</p>
+<h3 id="gitlab配置smtp邮件功能："><a href="#gitlab配置smtp邮件功能：" class="headerlink" title="gitlab配置smtp邮件功能："></a>gitlab配置smtp邮件功能：</h3><p>vim /etc/gitlab/gitlab.rb:<br>gitlab_rails[‘smtp_enable’] = true<br>gitlab_rails[‘smtp_address’] = “smtp.qq.com”<br>gitlab_rails[‘smtp_port’] = 465<br>gitlab_rails[‘smtp_user_name’] = “<a href="mailto:1072023998@qq.com">1072023998@qq.com</a>“<br>gitlab_rails[‘smtp_password’] = “jlgwsbmvbedebfdf”<br>gitlab_rails[‘smtp_domain’] = “smtp.qq.com”<br>gitlab_rails[‘smtp_authentication’] = “login”<br>gitlab_rails[‘smtp_enable_starttls_auto’] = true<br>gitlab_rails[‘smtp_tls’] = true<br>gitlab_rails[‘smtp_pool’] = false<br>gitlab_rails[‘gitlab_email_enabled’]=true<br>gitlab_rails[‘gitlab_email_display_name’]=’gitlab’<br>gitlab_rails[‘gitlab_email_from’]<a href="mailto:='1072023998@qq.com">=‘1072023998@qq.com</a>‘<br>gitlab_rails[‘gitlab_email_reply_to’]<a href="mailto:='1072023998@qq.com">=‘1072023998@qq.com</a>‘<br>gitlab_rails[‘gitlab_email_subject_suffix’]=’[gitlab]’</p>
+<p>修改完成后初始化配置<br>gitlab-ctl reconfigure<br>gitlab-ctl stop &amp;&amp;gitlab-ctl start</p>
+<p>完成以后测试：<br>gitlab-rails console<br>irb(main):002:0&gt;<br>Notify.test_email(<a href="mailto:'1072023998@qq.com">‘1072023998@qq.com</a>‘,’Message Subject’,’Message Body’).deliver_now<br>测试邮件发送后前往邮箱查看</p>
+<h3 id="创建用户，组，项目："><a href="#创建用户，组，项目：" class="headerlink" title="创建用户，组，项目："></a>创建用户，组，项目：</h3><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107595.jpeg" alt="image.png"></p>
+<h4 id="新建用户："><a href="#新建用户：" class="headerlink" title="新建用户："></a>新建用户：</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107479.jpeg" alt="image.png"></p>
+<p>这里如果输入了正确的邮箱并设置了发送邮箱的服务器，便会在用户创建完成以后向该邮箱发送邮件</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107803.jpeg" alt="image.png"></p>
+<p>点击修改密码</p>
+<h4 id="创建群组："><a href="#创建群组：" class="headerlink" title="创建群组："></a>创建群组：</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107034.jpeg" alt="image.png"></p>
+<p>将用户加入群组并授予开发者权限</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108174.jpeg" alt="image.png"></p>
+<h4 id="新建项目："><a href="#新建项目：" class="headerlink" title="新建项目："></a>新建项目：</h4><p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107216.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107267.jpeg" alt="image.png"></p>
+<p>邀请成员或群组便可以使其加入该项目</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108205.jpeg" alt="image.png"></p>
+<p>此时就应该将gitlab作为git的远程仓库来进行使用了。</p>
+<h3 id="将gitlab作为git的远程仓库："><a href="#将gitlab作为git的远程仓库：" class="headerlink" title="将gitlab作为git的远程仓库："></a>将gitlab作为git的远程仓库：</h3><p>下面是创建完后gitlab自带的命令行指示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Git 全局设置</span><br><span class="line">git config --global user.name &quot;Administrator&quot;</span><br><span class="line">git config --global user.email &quot;admin@example.com&quot;</span><br><span class="line"></span><br><span class="line">创建一个新仓库</span><br><span class="line">git clone http://10.10.10.90/root/dev.git</span><br><span class="line">cd dev</span><br><span class="line">touch README.md</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;add README&quot;</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">推送现有文件夹</span><br><span class="line">cd existing_folder</span><br><span class="line">git init</span><br><span class="line">git remote add origin http://10.10.10.90/root/dev.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;Initial commit&quot;</span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">推送现有的 Git 仓库</span><br><span class="line">cd existing_repo</span><br><span class="line">git remote rename origin old-origin</span><br><span class="line">git remote add origin http://10.10.10.90/root/dev.git</span><br><span class="line">git push -u origin --all</span><br><span class="line">git push -u origin --tags</span><br></pre></td></tr></table></figure>
+
+<p>如果是gitlab有数据git上没有就在git上使用clone。如果是将git上的代码仓库推送到gitlab上就用推送现有文件夹或推送现有仓库。</p>
+<p>因git与gitlab传输时可以通过两种方式，http与ssh</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107774.jpeg" alt="image.png"></p>
+<p>这里我们使用ssh，首先在linux（git-server）上创建秘钥并把公钥传到gitlab上以实现免密传输。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br><span class="line">cat /root/.ssh/id_rsa.pub //将里面的内容复制到gitlab</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107828.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107040.jpeg" alt="image.png"></p>
+<p>粘贴复制的公钥</p>
+<p>由于这里git本地已有仓库，就通过remote设置远程仓库然后将代码推送过去</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108089.jpeg" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231108427.jpeg" alt="image.png"></p>
+<p>此时刷新一下gitlab可以看到</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231107419.jpeg" alt="image.png"></p>
+<p>所有代码文件都上传上来了！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/git_hexo/" data-id="ckxjra7oy000gr0v1h8tw5y1z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/23/ftp_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ftp
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/23/jdk%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">jdk环境变量</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

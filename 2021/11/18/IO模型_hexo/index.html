@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>IO模型 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="IO模型简介123456789101112131415161718192021&quot;&quot;&quot;我们这里研究的IO模型都是针对网络IO的Stevens在文章中一共比较了五种IO Model：    * blocking IO           阻塞IO    * nonblocking IO      非阻塞IO    * IO multiplexing      IO多路复用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO模型">
+<meta property="og:url" content="http://example.com/2021/11/18/IO%E6%A8%A1%E5%9E%8B_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="IO模型简介123456789101112131415161718192021&quot;&quot;&quot;我们这里研究的IO模型都是针对网络IO的Stevens在文章中一共比较了五种IO Model：    * blocking IO           阻塞IO    * nonblocking IO      非阻塞IO    * IO multiplexing      IO多路复用">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110813568-874888915.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110823926-1104935376.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110830667-163640114.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110837225-1379057547.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110843727-154944469.png">
+<meta property="article:published_time" content="2021-11-18T09:24:46.000Z">
+<meta property="article:modified_time" content="2021-11-19T03:54:22.666Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110813568-874888915.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-IO模型_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/11/18/IO%E6%A8%A1%E5%9E%8B_hexo/" class="article-date">
+  <time datetime="2021-11-18T09:24:46.000Z" itemprop="datePublished">2021-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IO模型
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="IO模型简介"><a href="#IO模型简介" class="headerlink" title="IO模型简介"></a>IO模型简介</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">我们这里研究的IO模型都是针对网络IO的</span></span><br><span class="line"><span class="string">Stevens在文章中一共比较了五种IO Model：</span></span><br><span class="line"><span class="string">    * blocking IO           阻塞IO</span></span><br><span class="line"><span class="string">    * nonblocking IO      非阻塞IO</span></span><br><span class="line"><span class="string">    * IO multiplexing      IO多路复用</span></span><br><span class="line"><span class="string">    * signal driven IO     信号驱动IO</span></span><br><span class="line"><span class="string">    * asynchronous IO    异步IO</span></span><br><span class="line"><span class="string">    由signal driven IO（信号驱动IO）在实际中并不常用，所以主要介绍其余四种IO Model。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment">#1）等待数据准备 (Waiting for the data to be ready)</span></span><br><span class="line"><span class="comment">#2）将数据从内核拷贝到进程中(Copying the data from the kernel to the process)</span></span><br><span class="line"></span><br><span class="line">同步异步</span><br><span class="line">阻塞非阻塞</span><br><span class="line">常见的网络阻塞状态:</span><br><span class="line">  	accept</span><br><span class="line">    recv</span><br><span class="line">    recvfrom</span><br><span class="line">    </span><br><span class="line">    send虽然它也有io行为 但是不在我们的考虑范围</span><br></pre></td></tr></table></figure>
+
+<h3 id="阻塞IO模型"><a href="#阻塞IO模型" class="headerlink" title="阻塞IO模型"></a>阻塞IO模型</h3><p>最广泛的模型是阻塞I/O模型，默认情况下，所有套接口都是阻塞的。 进程调用recvfrom系统调用，整个过程是阻塞的，直到数据复制到进程缓冲区时才返回（当然，系统调用被中断也会返回）。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110813568-874888915.png" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">我们之前写的都是阻塞IO模型  协程除外</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server = socket.socket()</span><br><span class="line">server.bind((<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="number">8080</span>))</span><br><span class="line">server.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    conn, addr = server.accept()</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = conn.recv(<span class="number">1024</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(data) == <span class="number">0</span>:<span class="keyword">break</span></span><br><span class="line">            <span class="built_in">print</span>(data)</span><br><span class="line">            conn.send(data.upper())</span><br><span class="line">        <span class="keyword">except</span> ConnectionResetError <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    conn.close()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 在服务端开设多进程或者多线程 进程池线程池 其实还是没有解决IO问题	</span></span><br><span class="line">该等的地方还是得等 没有规避</span><br><span class="line">只不过多个人等待的彼此互不干扰</span><br></pre></td></tr></table></figure>
+
+<h3 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h3><p>当我们把一个套接口设置为非阻塞时，就是在告诉内核，当请求的I/O操作无法完成时，不要将进程睡眠，而是返回一个错误。当数据没有准备好时，内核立即返回EWOULDBLOCK错误，第四次调用系统调用时，数据已经存在，这时将数据复制到进程缓冲区中。这其中有一个操作时轮询（polling）。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110823926-1104935376.png" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">要自己实现一个非阻塞IO模型</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server = socket.socket()</span><br><span class="line">server.bind((<span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="number">8081</span>))</span><br><span class="line">server.listen(<span class="number">5</span>)</span><br><span class="line">server.setblocking(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># 将所有的网络阻塞变为非阻塞</span></span><br><span class="line">r_list = []</span><br><span class="line">del_list = []</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        conn, addr = server.accept()</span><br><span class="line">        r_list.append(conn)</span><br><span class="line">    <span class="keyword">except</span> BlockingIOError:</span><br><span class="line">        <span class="comment"># time.sleep(0.1)</span></span><br><span class="line">        <span class="comment"># print(&#x27;列表的长度:&#x27;,len(r_list))</span></span><br><span class="line">        <span class="comment"># print(&#x27;做其他事&#x27;)</span></span><br><span class="line">        <span class="keyword">for</span> conn <span class="keyword">in</span> r_list:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                data = conn.recv(<span class="number">1024</span>)  <span class="comment"># 没有消息 报错</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(data) == <span class="number">0</span>:  <span class="comment"># 客户端断开链接</span></span><br><span class="line">                    conn.close()  <span class="comment"># 关闭conn</span></span><br><span class="line">                    <span class="comment"># 将无用的conn从r_list删除</span></span><br><span class="line">                    del_list.append(conn)</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                conn.send(data.upper())</span><br><span class="line">            <span class="keyword">except</span> BlockingIOError:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">except</span> ConnectionResetError:</span><br><span class="line">                conn.close()</span><br><span class="line">                del_list.append(conn)</span><br><span class="line">        <span class="comment"># 挥手无用的链接</span></span><br><span class="line">        <span class="keyword">for</span> conn <span class="keyword">in</span> del_list:</span><br><span class="line">            r_list.remove(conn)</span><br><span class="line">        del_list.clear()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 客户端</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">client = socket.socket()</span><br><span class="line">client.connect((<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="number">8081</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    client.send(<span class="string">b&#x27;hello world&#x27;</span>)</span><br><span class="line">    data = client.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">虽然非阻塞IO给你的感觉非常的牛逼</span></span><br><span class="line"><span class="string">但是该模型会	长时间占用着CPU并且不干活 让CPU不停的空转</span></span><br><span class="line"><span class="string">我们实际应用中也不会考虑使用非阻塞IO模型</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">任何的技术点都有它存在的意义 </span></span><br><span class="line"><span class="string">实际应用或者是思想借鉴</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h3><p>此模型用到select和poll函数，这两个函数也会使进程阻塞，select先阻塞，有活动套接字才返回，但是和阻塞I/O不同的是，<strong>这两个函数可以同时阻塞多个I/O操作</strong>，而且可以同时对多个读操作，多个写操作的I/O函数进行检测，直到有数据可读或可写（<strong>就是监听多个socket</strong>）。select被调用后，进程会被阻塞，内核监视所有select负责的socket，当有任何一个socket的数据准备好了，select就会返回套接字可读，我们就可以调用recvfrom处理数据。<br><strong>正因为阻塞I/O只能阻塞一个I/O操作，而I/O复用模型能够阻塞多个I/O操作，所以才叫做多路复用。</strong></p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110830667-163640114.png" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">当监管的对象只有一个的时候 其实IO多路复用连阻塞IO都比比不上！！！</span></span><br><span class="line"><span class="string">但是IO多路复用可以一次性监管很多个对象</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">server = socket.socket()</span></span><br><span class="line"><span class="string">conn,addr = server.accept()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">监管机制是操作系统本身就有的 如果你想要用该监管机制(select)</span></span><br><span class="line"><span class="string">需要你导入对应的select模块</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server = socket.socket()</span><br><span class="line">server.bind((<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="number">8080</span>))</span><br><span class="line">server.listen(<span class="number">5</span>)</span><br><span class="line">server.setblocking(<span class="literal">False</span>)</span><br><span class="line">read_list = [server]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    r_list, w_list, x_list = select.select(read_list, [], [])</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    帮你监管</span></span><br><span class="line"><span class="string">    一旦有人来了 立刻给你返回对应的监管对象</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># print(res)  # ([&lt;socket.socket fd=3, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=(&#x27;127.0.0.1&#x27;, 8080)&gt;], [], [])</span></span><br><span class="line">    <span class="comment"># print(server)</span></span><br><span class="line">    <span class="comment"># print(r_list)</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> r_list:  <span class="comment">#</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;针对不同的对象做不同的处理&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">is</span> server:</span><br><span class="line">            conn, addr = i.accept()</span><br><span class="line">            <span class="comment"># 也应该添加到监管的队列中</span></span><br><span class="line">            read_list.append(conn)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = i.recv(<span class="number">1024</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(res) == <span class="number">0</span>:</span><br><span class="line">                i.close()</span><br><span class="line">                <span class="comment"># 将无效的监管对象 移除</span></span><br><span class="line">                read_list.remove(i)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="built_in">print</span>(res)</span><br><span class="line">            i.send(<span class="string">b&#x27;heiheiheiheihei&#x27;</span>)</span><br><span class="line"></span><br><span class="line"> <span class="comment"># 客户端</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">client = socket.socket()</span><br><span class="line">client.connect((<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="number">8080</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line"></span><br><span class="line">    client.send(<span class="string">b&#x27;hello world&#x27;</span>)</span><br><span class="line">    data = client.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">监管机制其实有很多</span></span><br><span class="line"><span class="string">select机制  windows linux都有</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">poll机制    只在linux有   poll和select都可以监管多个对象 但是poll监管的数量更多</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">上述select和poll机制其实都不是很完美 当监管的对象特别多的时候</span></span><br><span class="line"><span class="string">可能会出现 极其大的延时响应</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">epoll机制   只在linux有</span></span><br><span class="line"><span class="string">	它给每一个监管对象都绑定一个回调机制</span></span><br><span class="line"><span class="string">	一旦有响应 回调机制立刻发起提醒</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">针对不同的操作系统还需要考虑不同检测机制 书写代码太多繁琐</span></span><br><span class="line"><span class="string">有一个人能够根据你跑的平台的不同自动帮你选择对应的监管机制</span></span><br><span class="line"><span class="string">selectors模块</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="信号驱动I-O模型"><a href="#信号驱动I-O模型" class="headerlink" title="信号驱动I/O模型"></a>信号驱动I/O模型</h3><p>　　首先我们允许套接口进行信号驱动I/O,并安装一个信号处理函数，进程继续运行并不阻塞。当数据准备好时，进程会收到一个SIGIO信号，可以在信号处理函数中调用I/O操作函数处理数据。当数据报准备好读取时，内核就为该进程产生一个SIGIO信号。我们随后既可以在信号处理函数中调用recvfrom读取数据报，并通知主循环数据已准备好待处理，也可以立即通知主循环，让它来读取数据报。无论如何处理SIGIO信号，这种模型的优势在于等待数据报到达(第一阶段)期间，进程可以继续执行，不被阻塞。免去了select的阻塞与轮询，当有活跃套接字时，由注册的handler处理。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110837225-1379057547.png" alt="img"></p>
+<h3 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h3><p>进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<p>　　这个模型工作机制是：告诉内核启动某个操作，并让内核在整个操作(包括第二阶段，即将数据从内核拷贝到进程缓冲区中)完成后通知我们。</p>
+<p>这种模型和前一种模型区别在于：信号驱动I/O是由内核通知我们何时可以启动一个I/O操作，而异步I/O模型是由内核通知我们I/O操作何时完成。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110843727-154944469.png" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">异步IO模型是所有模型中效率最高的 也是使用最广泛的</span></span><br><span class="line"><span class="string">相关的模块和框架</span></span><br><span class="line"><span class="string">	模块:asyncio模块</span></span><br><span class="line"><span class="string">	异步框架:sanic tronado twisted</span></span><br><span class="line"><span class="string">		速度快！！！</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@asyncio.coroutine</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello world %s&#x27;</span>%threading.current_thread())</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> asyncio.sleep(<span class="number">1</span>)  <span class="comment"># 换成真正的IO操作</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello world %s&#x27;</span> % threading.current_thread())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">tasks = [hello(),hello()]</span><br><span class="line">loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line">loop.close()</span><br></pre></td></tr></table></figure>
+
+<p><strong>高性能IO模型浅析</strong> </p>
+<p>服务器端编程经常需要构造高性能的IO模型，常见的IO模型有四种：</p>
+<p>（1）同步阻塞IO（Blocking IO）：即传统的IO模型。</p>
+<p>（2）同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。注意这里所说的NIO并非<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase">Java</a>的NIO（New IO）库。</p>
+<p>（3）IO多路复用（IO Multiplexing）：即经典的Reactor设计模式，Java中的Selector和<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/linux">Linux</a>中的epoll都是这种模型。</p>
+<p>（4）异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/11/18/IO%E6%A8%A1%E5%9E%8B_hexo/" data-id="ckxjra7oj0000r0v1abee60j1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/11/18/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          进程与线程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/18/mysql%20for%20python_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mysql for python</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

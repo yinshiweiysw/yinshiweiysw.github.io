@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>firewalld | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.简介firewalld是linux的防火墙命令工具，与iptables类似，本身和iptables一样只是命令行工具，真正实现防火墙是内置于linux内核里面的netfilter模块。但其命令无需理解netfilter的四表五链，相对于iptables会简单一些。也是centos7以后的默认防火墙命令行工具。 2 firewalld 和iptables的区别 firewalld可以动态修改单条">
+<meta property="og:type" content="article">
+<meta property="og:title" content="firewalld">
+<meta property="og:url" content="http://example.com/2021/12/23/firewalld_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.简介firewalld是linux的防火墙命令工具，与iptables类似，本身和iptables一样只是命令行工具，真正实现防火墙是内置于linux内核里面的netfilter模块。但其命令无需理解netfilter的四表五链，相对于iptables会简单一些。也是centos7以后的默认防火墙命令行工具。 2 firewalld 和iptables的区别 firewalld可以动态修改单条">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.109Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-firewalld_hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/23/firewalld_hexo/" class="article-date">
+  <time datetime="2021-12-23T09:12:59.000Z" itemprop="datePublished">2021-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      firewalld
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p>firewalld是linux的防火墙命令工具，与iptables类似，本身和iptables一样只是命令行工具，真正实现防火墙是内置于linux内核里面的netfilter模块。但其命令无需理解netfilter的四表五链，相对于iptables会简单一些。也是centos7以后的默认防火墙命令行工具。</p>
+<h1 id="2-firewalld-和iptables的区别"><a href="#2-firewalld-和iptables的区别" class="headerlink" title="2 firewalld 和iptables的区别"></a>2 firewalld 和iptables的区别</h1><ol>
+<li>firewalld可以动态修改单条规则，而不需要像iptables那样，在修改了规则后必须得全部刷新才可以生效;</li>
+<li>firewalld在使用上要比iptables人性化很多，即使不明白“五张表五条链”而且对TCPIP协议也不理解也可以实现大部分功能;</li>
+<li>firewalld跟iptables比起来，不好的地方是每个服务都需要去设置才能放行，因为默认是拒绝。而iptables里默认是每个服务是允许，需要拒绝的才去限制;</li>
+<li>firewalld加入了区域zone的概念。</li>
+</ol>
+<h1 id="3-区域"><a href="#3-区域" class="headerlink" title="3.区域"></a>3.区域</h1><p>firewalld有区域的概念，而其防火墙隔离操作也是通过区域来进行隔离的</p>
+<p>firewalld默认自带的区域：<br>trusted (信任)<br>允许所有的数据包流入与流出<br>home (家庭)<br>拒绝流入的流量，除非与流出的流量相关;而如果流量与ssh、mdns、 ipp-client、 amba-client与dhcpv6-client服务相关, 则允许流量<br>internal (内部)<br>等同于home区域<br>work (工作)<br>拒绝流入的流量,除非与流出的流量数相关;而如果流量与ssh、ipp-client与dhcpv6-client服务相关, 则允许流量<br>public (公共)<br>拒绝流入的流量，除非与流出的流量相关;而如果流量与ssh、dhcpv6-client服务相关， 则允许流量<br>external (外部)<br>拒绝流入的流量,除非与流出的流量相关;而如果流量与ssh服务相关,则允许流量<br>dmz (非军事区)<br>拒绝流入的流量,除非与流出的流量相关;而如果流量与5ssh服务相关,则允许流量<br>block (限制)<br>拒绝流入的流量，除非与流出的流量相关<br>drop (丢弃)<br>拒绝流入的流量，除非与流出的流量相关</p>
+<p>默认网卡都加入到了公共的区域，也就是public。区域内可以加入网卡或者网段，默认为public区域，如加入网卡表示该网卡的所有流量都遵循该区域的规则，例如默认drop丢弃所有包，将网卡设置为drop即该网卡丢弃所有包。但如果将网段设置为一个区域，例如trust，此时该网段的所有包将允许。<br>则如果想实现黑名单拒绝所有，只允许白名单可以将网卡先设置为drop并允许部分网段<br>如果想实现某网段的部分端口放行，例如10.0.0.0/24仅放行其ssh，可以将该网段加入external区域（因其区域本身只允许ssh），但因默认所有网卡为public，此时建议把网卡设置为drop区域，这样仅10网段可以访问ssh且其他所有网段无法访问（如设置为trusted区域为所有网段皆允许但仅10网段限定智能访问其ssh端口）</p>
+<h1 id="4-firewall-cmd"><a href="#4-firewall-cmd" class="headerlink" title="4.firewall-cmd"></a>4.firewall-cmd</h1><p>firewall-cmd是firewalld服务的命令行工具，在firewall-cmd执行命令时，有两种生效方式：</p>
+<p>runtime （运行时）：修改规则马上生效，但是临时生效</p>
+<p>permanent（持久配置）：需要reload才能生效 ，但是永久生效</p>
+<h2 id="firewall-cmd相关命令参数："><a href="#firewall-cmd相关命令参数：" class="headerlink" title="firewall-cmd相关命令参数："></a>firewall-cmd相关命令参数：</h2><p>zone区域相关指令：<br>–get-default-zone 查询默认的区域名称<br>–set-default-zone=xxx 设置默认的区域，使其永久生效<br>–get-active-zones 显示当前正在使用的区域与网卡名称<br>–get-zones 显示总共可用的区域<br>–new-zone= 新增区域</p>
+<p>services服务相关指令<br>–get-services 显示预先定义好的服务<br>–add-service= 设置默认区域允许该服务的流量<br>–remove-service= 设置默认区域不再允许该服务的流量</p>
+<p>port端口相关指令<br>-add-port=端口号/协议 设置默认区域允许该端口的流量<br>-remove-port=端口号/协议 设置默认区域不再允许该端口的流量</p>
+<p>interface网卡相关指令：<br>–add-interface=网卡名 将源自该网卡的所有流量都导向某个指定区域<br>–change-interface=网卡名 将某个网卡与区域进行关联</p>
+<p>其他相关指令：<br>–list-all 显示当前区域的网卡配置参数，资源，端口以及服务等信息<br>–reload 让永久生效的配置规则立即生效，并覆盖当前的配置规则<br>–zone 在对区域进行添加修改删除等配置时，指定对其某个区域进行操作。</p>
+<p>在对区域添加或更改配置时，如没有指明–zone,则默认设置为当前默认的区域。<br>例如 firewall-cmd –add-port=8080/tcp<br>这里给防火墙加了一个8080允许的规则，一般firewalld默认是public，所以这时，这个规则会加到public里面，如果是想把这条规则加到drop里面<br>则：firewall-cmd –add-port=8080/tcp –zone=drop</p>
+<h2 id="firewall-cmd-–list-all"><a href="#firewall-cmd-–list-all" class="headerlink" title="firewall-cmd –list-all"></a>firewall-cmd –list-all</h2><p>显示当前区域的网卡配置参数，资源，端口以及服务等信息<br>public (active)<br>target: default<br>icmp-block-inversion: no<br>interfaces: ens33 ens37 ens38<br>sources:<br>services: cockpit dhcpv6-client http ssh<br>ports:<br>protocols:<br>masquerade: no<br>forward-ports:<br>source-ports:<br>icmp-blocks:<br>rich rules:<br>默认所有网卡都会在public区域，可以通过zone相关参数修改。默认支持的服务（端口）在services里面，如要添加允许的服务，可以通过–add-port（–add-services）。<br>例如允许81端口 :<br>firewall-cmd –permanent –add-port=81/tcp<br>firewall-cmd –reload<br>删除直接把add换成remove</p>
+<p>禁用传统防火墙服务<br>systemctl mask iptables<br>systemctl mask ip6tables<br>systemctl mask ebtables</p>
+<p>启动firewalld防火墙，并加入开机自启动服务<br>systemctl start/enable firewalld</p>
+<p>备份firewalld配置文件<br>cp -rf /etc/firewalld/ /etc/firewalld_backup</p>
+<h2 id="案例："><a href="#案例：" class="headerlink" title="案例："></a>案例：</h2><p>案例一:<br>1.设定默认区域为drop (拒绝所有)<br>2.设置白名单IP访问，将源10.0.0.0/24网段加入trusted区域<br>//将当前默认区域修改为drop<br>[root@Firewalld ~]firewall-cmd –set-default-zone=drop<br>//将网络接口关联至drop区域<br>[root@Firewalld ~]firewall-cmd –permanent –change-interface=eth0 –zone=drop<br>将10.o.o.0/24网段加入trusted白名单<br>[root@Firewalld ~]# firewall-cmd –permanent –add-source=10.0.0.0/24 –zone=trusted<br>[rooteFirewalld ~]# firewall-cmd –reload<br>success<br>//查看当前处于活动的区域<br>firewall-cmd –get-active-zones<br>drop.默认区域,eth0接口流量都由drop区域过滤<br>interfaces: eth0<br>trusted.数据包的源IP是10.0.0.0网段走trusted区域<br>sources: 10.0.0.0/24<br>将网卡设置为drop区域以后，再将允许的网段加入trust区域，此时trust允许的网段能访问drop的网卡。</p>
+<p>防火墙端口转发：<br>firewall-cmd –permanent –zone=&lt;区域&gt; –add-forward-port=port=&lt;源端口号&gt;:proto=&lt;协议&gt;:toport=&lt;目标端口号&gt;:toaddr=&lt;目标ip地址&gt;<br>此功能对应iptables nat表功能<br>1.转发本机555/tcp端口的流量至22/tcp端口，要求当前和长期有效<br>[root@Firewalld ~]# firewall-cmd –permanent –zone=public –add-forward-port=port=555:proto=tcp:toport=22:toaddr=10.0.0.61<br>success<br>[ root@Firewalld ~]# firewall-cmd –reload<br>success<br>2.移除本机转发的555/tcp端口策略，要求当前和长期有效<br>[root@Firewalld -]firewall-cmd –remove-forward-port=port=555:proto=tcp:toport=22:toaddr=10.0.0.61<br>success<br>[ rooteFirewalld ~].firewall-cmd –reload<br>success<br>3.如果需要将本地的10.0.0.81:6666端口转发至后端172.16.1.8:22端口<br>1.开启IP伪装<br>[root@Firewalld ~]# firewall-cmd –add-masquerade –permanent<br>2.配置转发<br>[root@Firewalld ~]# firewall-cmd –permanent –zone=public<br>–add-forward-port=port=6666:proto=tcp:toport=22:toaddr=172.16.1.8<br>[ root@Firewalld ~].firewall-cmd –reload<br>此时ssh访问10 6666端口即连接到172.16.1.8:22</p>
+<h1 id="防火墙富规则策略："><a href="#防火墙富规则策略：" class="headerlink" title="防火墙富规则策略："></a>防火墙富规则策略：</h1><p>firewalld中的富规则表示更细致，更详细的防火墙策略配置，可以针对系统服务，端口号，源地址和目标地址等诸多信息进行更有针对性的策略配置，优先级在所有防火墙策略中也是最高的。</p>
+<p>帮助：man firewalld.richlanguage</p>
+<p>firewall-cmd –add-rich-rule=’rule’</p>
+<p>rule<br>[source]<br>[destination]<br>service|port|protocol|icmp-block|icmp-type|masquerade|forward-port|source-port<br>[log]<br>[audit]<br>[accept|reject|drop|mark]</p>
+<p>rule [ family=”ipv4 lipv6””]<br>source address=”address [ /rmask]”[invert=”True”]<br>destination address=”address [/mask] “ invert=”True”<br>service name=”service name”<br>port port=”port value” protocol=”tcp|udp”<br>protocol value=”protocoi value”<br>forward-port port=”port value” protocol=”tcp|udp” to-port=”port value” to-addr=”address”<br>log [prefix=”prefix text”] [level=”log level”] [limit value=”rate/duration”]<br>accept|reject [type=”reject type”] | drop<br>//区里的富规则按先后顺序匹配，按先匹配到的规则生效。<br>–add-rich-rule=KFUJLE&gt;’//在指定的区添加一条富规则<br>–remove-rich-rule=’’//在指定的区删除一条富规则<br>–query-rich-rule=’’ 1/找到规则返回0，找不到返回1<br>–iist-rich-rules/列出指定区里的所有富规则<br>–list-all 和 –list-all-zones也能列出存在的富规则</p>
+<p>1.允许10.0.0.0/24网段中10.0.0.1主机访问http服务,其他同网段主机无法访问，当前和永久生效<br>#1.加入10.0.0.0/24所有主机至public区域<br>[root@mo1 ~]# firewall-cmd –permanent –add-source=10.0.0.0/24 –zone=public<br>#2.仅允许public中的10.0.0.1主机访问http<br>[rootCmo1 ~]# firewall-cmd –permanent –zone=public –add-rich-rule= ‘rule family=ipv4 source address=10.0.0.1/32 port port=80 protocol=tcp accept”<br>#3.重载firewalld防火墙<br>[root@m01 ~]# firewall-cmd –reload</p>
+<p>2.拒绝10.0.0.0/24网段中的10.0.0.9主机发起的ssh请求,当前和永久生效<br>[rootCmo1 ~]# fireuall-cmd –permanent –zone=public –add-rich-rulem ‘rule family-ipv4 source address=10.0.0.9/32 service name=ssh drop’</p>
+<p>[ root@me1 ~]# firewall-cmd –reload<br>success</p>
+<p>3.将远程10.0.0.1主机请求firewalld的5551端口，转发至firewalld防火墙的22端口<br>[rootCmo ~]# firewall-cmd –permanent –zone=public –add-rich-rule= ‘rule family=ipv4 source address=10.0.0.1/32 forward-port port=5551 protocol=tcp to-port=22’<br>[ root@mo1 ~]# firewall-cmd –reload<br>success</p>
+<p>4.将远程10.0.0.1主机请求firewalld的6661端口，转发至后端主机10.0.0.9的22端口<br>[ root@mo1 ~]# firewall-cmd –add-masquerade –permanent<br>[ root@mo1 ]# firewall-cmd –permanent –zone=public –add-rich-rule=’rule family=ipv4 source address=10.0.0.1/32 forward-port port=6661 protocol=tcp to-port=22 to-addr=10.0.0.9’<br>success<br>[root@me1]# firewall-cmd –reload</p>
+<h1 id="防火墙开启内部上网："><a href="#防火墙开启内部上网：" class="headerlink" title="防火墙开启内部上网："></a>防火墙开启内部上网：</h1><p>环境<br>主机1（防火墙主机） 外网ip 内网ip<br>主机2 内网ip<br>主机2的内网ip需要与主机1的内网ip位于同一环境，此时主机2 的内网ip无法直接与互联网进行通信<br>主机2配置：<br>gateway指定其主机1的内网ip，dns需设置（114.114.114.114）。<br>然后重启网卡<br>nmcli c down ens33 &amp;&amp;nmcli c up ens33<br>主机1配置：<br>firewall-cmd –permanet –add-masquerade (开启主机转发)</p>
+<p>然后即可通信</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/23/firewalld_hexo/" data-id="ckxjra7ov000ar0v1cmcmhmco" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/23/NFS_hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          NFS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/23/ftp_hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ftp</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexoblog%E6%B7%BB%E5%8A%A0hexo%E6%A0%87%E7%AD%BE/">hexoblog添加hexo标签</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python%E4%BB%A3%E7%A0%81/">python代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E4%BB%A3%E7%A0%81/" rel="tag">python代码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 17.5px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/python%E4%BB%A3%E7%A0%81/" style="font-size: 12.5px;">python代码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/Linux%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1_hexo/">Linux用户行为日志审计</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/HTTP_hexo/">HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/Zabbix_hexo/">Zabbix</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/NFS_hexo/">NFS</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/firewalld_hexo/">firewalld</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
