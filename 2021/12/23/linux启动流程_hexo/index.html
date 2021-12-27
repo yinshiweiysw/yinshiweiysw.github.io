@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="linux启动流程 linux的启动流程为： POST-》-boot sequence》BOOTLOADER（BIOS）-》KERNEL-》INIT(SYSTEMD) 1.加电质检POST 上电自检过程中其实 Linux 没有什么也没做，上电自检主要由硬件的部分来完成，这对于所有操作系统都一样。当电脑接通电源，电脑开始执行 BIOS（基本输入输出系统Basic I&#x2F;O System）的 POST（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux启动流程">
+<meta property="og:url" content="http://example.com/2021/12/23/linux%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="linux启动流程 linux的启动流程为： POST-》-boot sequence》BOOTLOADER（BIOS）-》KERNEL-》INIT(SYSTEMD) 1.加电质检POST 上电自检过程中其实 Linux 没有什么也没做，上电自检主要由硬件的部分来完成，这对于所有操作系统都一样。当电脑接通电源，电脑开始执行 BIOS（基本输入输出系统Basic I&#x2F;O System）的 POST（">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.281Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>linux启动流程 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="linux启动流程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-23 17:12" pubdate>
+        December 23, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">linux启动流程</h1>
+            
+            <div class="markdown-body">
+              <p>linux启动流程</p>
+<p>linux的启动流程为：</p>
+<p>POST-》-boot sequence》BOOTLOADER（BIOS）-》KERNEL-》INIT(SYSTEMD)</p>
+<p>1.加电质检POST</p>
+<p>上电自检过程中其实 Linux 没有什么也没做，上电自检主要由硬件的部分来完成，这对于所有操作系统都一样。当电脑接通电源，电脑开始执行 BIOS（基本输入输出系统Basic I/O System）的 POST（上电自检Power On Self Test）过程。</p>
+<p>在 1981 年，IBM 设计的第一台个人电脑中，BIOS 被设计为用来初始化硬件组件。POST 作为 BIOS 的组成部分，用于检验电脑硬件基本功能是否正常。如果 POST 失败，那么这个电脑就不能使用，引导过程也将就此中断。</p>
+<p>上电自检POST(Power-on self test)：首先加载BIOS，然后BIOS对其系统硬件进行检查，主要负责检测系统外围关键设备（如：CPU、内存、显卡、I/O、键盘鼠标等）是否正常。例如，最常见的是内存松动的情况，BIOS自检阶段会报错，系统就无法启动起来。</p>
+<p>2..boot sequence</p>
+<p>当硬件检查完毕BIOS加载完硬件信息后，会根据BIOS设置中的硬盘（光盘，网络）启动顺序，根据定义好的顺序依次查找硬盘中第一个扇区（MBR引导扇区），实际上这里BIOS并不关心启动设备第一个扇区中是什么内容，它只是负责读取该扇区内容、并执行。</p>
+<p>3.boot loader</p>
+<p>boot loader为引导加载器，引导加载器会根据自身配置文件加载内核，但这里有个问题是MBR（主引导扇区），这里需要先说明一下MBR。</p>
+<p>MBR：MBR为主引导扇区（主引导记录），位于硬盘里面0磁道0柱面1扇区，大小为512kb，启动真正存放bootloader的空间为前446B（字节），后64B为存放分区信息（三个主分区一个扩展分区，每个各占16B），剩下2B为“55，AA”，是分区结束的标签。</p>
+<p>所以引导加载器实际的存储空间为446字节，对于现在的引导加载器存储空间肯定是不够的，所以现在的引导加载器一般存放于文件系统上，然后通过mbr去找到并加载它。这里以grub为例，下面是步骤：</p>
+<ul>
+<li>第一步：这个其实就是MBR，它的主要工作就是查找并加载第二段Bootloader程序(stage2)，但系统在没启动时，MBR根本找不到文件系统，也就找不到stage2所存放的位置，因此，就有了stage2</li>
+<li>第二步：第一步的mbr里面放置了bootloader的最小程序，用于找到并加载第二步，而第二部则是为了加载驱动，识别文件系统。</li>
+<li>第三步：GRUB程序会根据/boot/grub/grub.conf文件查找Kernel的信息，然后开始加载Kernel程序，当Kernel程序被检测并在加载到内存中，GRUB就将控制权交接给了Kernel程序</li>
+</ul>
+<p>下面是grub的配置文件：</p>
+<blockquote>
+<p>default=0 #设定默认启动的title的编号，从0开始<br>　　　　timeout=5 #等待用户选择的超时时间<br>　　　　splashimage=(hd0,0)/boot/grub/splash.xpm.gz #GRUB的背景图片<br>　　　　hiddenmenu #隐藏菜单<br>　　　　title CentOS (2.6.18-194.el5PAE) #内核标题<br>　　　　root (hd0,0) #内核文件所在的设备<br>　　　　kernel /vmlinuz-2.6.18-194.el5PAE ro root=LABEL=/ #内核文件路径以及传递给内核的参数　　　initrd /initrd-2.6.18-194.el5PAE.img #ramdisk文件路径</p>
+</blockquote>
+<p>4.kernel</p>
+<p>我们知道kernel是完成探索硬件及加载硬件驱动程序，并以读写的方式挂载根文件系统。那么这里就出现一个比较诡异的问题，是什么问题呢？<br><strong>我们又知道，要想访问真正的根文件系统（rootfs）的话，就必须加载根文件系统中的设备，这时根文件系统又没有挂载，要挂载根文件系统又得加载根文件系统中的驱动程序，哪怎么办呢？这是就用到了initrd文件了。<br>在来说下kernel初始化所要工作的内容做下简单总结：<br>探测硬件-&gt;加载驱动（initrd)-&gt;挂载根文件系统-&gt;rootfs(/sbin/init)</strong></p>
+<p><strong>initrd功能介绍<br>其实说白了initrd就是一个虚拟的文件系统，里面有/、lib、bin、sbin、usr、proc、sys、var、dev、boot等一些目录，其实你会发现里面的目录有点像真的/对吧，所以我们称之为虚拟的根文件系统，作用就是将kernel和真的根文件系统建立关联关系，让kernel去initrd中加载根文件系统所需要的驱动程序，并以读写的方式挂载根文件系统，并让执行用户当中第一个进程init。</strong></p>
+<p><strong>/sbin/init(/etc/inittab)</strong><br>/sbin/init启动会用到/etc/inittab所定义的条目，如：默认登陆级别id:3:initdefault:(这里就是默认启动3级别）<br><strong>下面就来说下/etc/inittab所工作那些内容：</strong><br>/etc/inittab<br>默认运行级别<br>0：halt<br>1: single user mode(单用户维护模式)<br>2：multi user mode, without NFS(不支持NFS功能）<br>3: multi user mode, text mode（字符界面）<br>4：reserved （系统保留）<br>5: multi user mode, graphic mode （图形化界面）<br>6: reboot （重启）<br>系统初始化(/etc/rc.d/rc.sysinit)<br>检测，并以读写方式挂载根文件系统<br>设定主机名<br>检测并挂载/etc/fstab中其它文件系统<br>启动swap分区<br>初始化外围硬件设备驱动<br>根据/etc/sysctl.conf设定内核参数<br>激活udev和selinux<br>激活LVM和RAID设备<br>清理过期锁文件和PID文件<br>装载键映射–&gt;键盘上每个键的功能<br>运行指定级别的服务脚本<br>/etc/rc.d/init.d/<br>/etc/rc.d/rc#.d<br>rc0-rc6<br>K* ##只要是以K开头的文件均执行stop工作<br>S* ##只要是以S开头的文件均执行start工作<br>0-99 (执行次序，数字越小越先被执行)<br>init执行/etc/rc.d/rc.local<br>init执行中断机模拟程序mingetty来启动login进程，最后等待用户登录**</p>
+<p><strong>下面在来说下/etc/inittab的语法及格式：</strong><br>/etc/inittab格式及语法(:)</p>
+<p>设置选项：<br>代表init主要工作选项<br>运行级别<br>0-6<br>init操作行为：<br>initdefault：代表默认运行级别<br>sysinit：代表系统初始化操作选项<br>ctrlaltdel：代表重启的相关设置<br>wait：代表上一个命令执行结束后方可执行下面的操作<br>respawn：代表后面字段可以无限制再生(reboot)<br>命令选项<br>一些命令，不过通常都是脚本<br>**</p>
+<p><strong>init处理流程：<br>根据/etc/inittab设置进行处理：以默认级别3说明：id:3:initdefault:<br>default runlevel-&gt;/etc/rc.d/rc.sysinit-&gt;/etc/rc.d/rc5.d-&gt;ctrlatdel-&gt;set “pf” and “pr”-&gt;mingetty-&gt;login</strong></p>
+<p>init处理系统初始化流程/etc/rc.d/rc.sysinit(设置系统环境)<br>取得网络环境与主机类型-&gt;/etc/sysconfig/network<br>测试与挂载内存设备/proc及/sys<br>SElinux<br>启动系统的随机数生成器<br>设置终端机字体<br>设置系统启动过程中的欢迎界面<br>设置系统时间与时区设置/etc/sysconfig/clock<br>接口设备检测<br>用户自定义模块加载-&gt;/etc/sysconfig/modules/.modules<br>根据/etc/sysctl.conf设置内核参数<br>初始化软件磁盘阵列-&gt;/etc/mdadm.conf<br>初始化LVM文件系统功能<br>fsck检测磁盘文件系统<br>磁盘配额<br>检测，并以读写方式重新挂载根文件系统<br>清除清除过程当中的临时文件<br>将启动的相关信息-&gt;/var/log/dmesg</p>
+<p>启动服务与相关启动配置文件(/etc/rc.d/rc # &amp;/etc/sysconfig )<br>以默认级别3说明：id:3:initdefault:<br>l3:3:wait:/etc/rc.d/rc 3<br>找到/etc/rc.d/rc3.d<br>以K<em>开头的文件，并运行/etc/rc.d/rc3.d/K</em> stop<br>以S<em>开头的文件，并运行/etc/rc.d/rc3.d/S</em> start<br>/etc/rc.d/rc#.d/里面的文件链接的都是/etc/rc.d/init.d的文件**</p>
+<p>**用户自定义开机启动程序(/etc/rc.d/rc.local)<br>**可以根据自己的需求将一些执行命令或是脚本写到/etc/rc.d/rc.local里，当开机时，就可以加载啦</p>
+<p>根据mingetty程序调用login让用户登录-&gt;用户登录（完成系统启动）</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/23/lvs_hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">lvs</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/23/nginx_hexo/">
+                        <span class="hidden-mobile">nginx</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

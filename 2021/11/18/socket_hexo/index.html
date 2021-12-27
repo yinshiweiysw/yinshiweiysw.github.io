@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SOCKET ：socket本质上来说就是位于应用层与传输层之间的逻辑层，下图为tcp&#x2F;ip四层，五层协议以及osi参考模型  一般现在用的就是五层模型，从两台计算机传输数据的角度来讲，物理层定义其计算机基本数据结构（0和1，也就是数据本身）。数据链路层定义了数据的传输（以mac地址为唯一标识），而这一层在局域网内通信方式也极其简单，就是通过广播发送到每一个局域网内的计算机上面，如非指定的接受者（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="socket">
+<meta property="og:url" content="http://example.com/2021/11/18/socket_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SOCKET ：socket本质上来说就是位于应用层与传输层之间的逻辑层，下图为tcp&#x2F;ip四层，五层协议以及osi参考模型  一般现在用的就是五层模型，从两台计算机传输数据的角度来讲，物理层定义其计算机基本数据结构（0和1，也就是数据本身）。数据链路层定义了数据的传输（以mac地址为唯一标识），而这一层在局域网内通信方式也极其简单，就是通过广播发送到每一个局域网内的计算机上面，如非指定的接受者（">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.socket/1036857-20161008145544426-736439132.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190718154523875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.socket/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.socket/image-20211104162346374.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.socket/image-20211104172547839.png">
+<meta property="article:published_time" content="2021-11-18T09:24:46.000Z">
+<meta property="article:modified_time" content="2021-11-19T03:54:22.948Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yinshiweiysw.github.io/images/assets.socket/1036857-20161008145544426-736439132.png">
+  
+  
+  <title>socket - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="socket">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-18 17:24" pubdate>
+        November 18, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      104 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">socket</h1>
+            
+            <div class="markdown-body">
+              <h1 id="SOCKET-："><a href="#SOCKET-：" class="headerlink" title="SOCKET ："></a>SOCKET ：</h1><p>socket本质上来说就是位于应用层与传输层之间的逻辑层，下图为tcp/ip四层，五层协议以及osi参考模型</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.socket/1036857-20161008145544426-736439132.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>一般现在用的就是五层模型，从两台计算机传输数据的角度来讲，物理层定义其计算机基本数据结构（0和1，也就是数据本身）。数据链路层定义了数据的传输（以mac地址为唯一标识），而这一层在局域网内通信方式也极其简单，就是通过广播发送到每一个局域网内的计算机上面，如非指定的接受者（mac地址），则丢弃。到网络层时就可以跨越其局域网的限制，通过网关设备的路由功能（通过ip地址进行路由），就可以找到互联网上的每一个设备进行传输通信，但其本质上还是数据链路层通信，网络层最主要是定位到互联网每一台主机（ARP协议最终将ip解析到mac地址）。到传输层时有两个协议（tcp和udp），tcp是稳定的传输协议，主要保证数据完整性，而udp是非稳定的传输协议，用于非重要数据传输，例如视频聊天，qq信息等。这里传输层定义了端口，可使用范围为1-65535。如果说网络层是用来定位到互联网中的某一台计算机的话，那么传输层则是定位到计算机中的某个应用且与其建立连接（三次握手，其建立连接本质上也是逻辑上的建立）。到应用层这里则是访问到应用中具体某个资源，例如/index.html。</p>
+<p>应用程序位于其应用层，在应用程序发送数据时，需要将其封装打包成一段段的数据段送到传输层，然后传输层再封装成网络包，到链路层时又封装成数据帧，到物理层又封装成数据位（二进制，0和1）。到目标主机以后从物理层开始又一层一层的拆包往上传递，所以正常情况下程序员在编写程序时，应该把客户端和目标服务器五层的封装以及拆包写好，但是这个步骤太过于麻烦且重复性工作，所以有了socket。</p>
+<p><u>socket起源于Unix，而Unix/Linux基本哲学之一就是“一切皆文件”，都可以用“打开open –&gt; 读写write/read –&gt; 关闭close”模式来操作。我的理解就是Socket就是该模式的一个实现，socket即是一种特殊的文件，一些socket函数就是对其进行的操作（读/写IO、打开、关闭）。</u></p>
+<p><u>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。</u></p>
+<p>有了socket接口以后程序员就只用关心程序本身，只要将C/S两边程序写好，直接调用已有的socket模块来帮程序员完成应用层以下真正实现传输的所有步骤。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190718154523875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="socket流程："><a href="#socket流程：" class="headerlink" title="socket流程："></a>socket流程：</h2><p><img src="https://yinshiweiysw.github.io/images/assets.socket/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhc2hhbmh1NjQwMg==,size_16,color_FFFFFF,t_70.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>图中每一个步骤就是socket的每一个提供函数（方法）。</p>
+<p>客户端：</p>
+<p>首先创建socket对象，连接服务器端，发送（请求）数据和接受数据，然后关闭套接字</p>
+<p>服务器端：<br>        首先也需要创建socket对象，然后绑定端口（服务器需要固定的端口绑定，客户端使用随机ip和端口进行通信即可），监听，监听完毕后accept等待客户端连接（这里可以设置半连接池），然后连接完毕以后发送数据，接受数据（发送接受先后顺序不定，看程序需要），最后关闭连接（关闭这个客户端的连接），但一般不会关闭服务器套接字连接。</p>
+<h2 id="socket-for-python"><a href="#socket-for-python" class="headerlink" title="socket for python:"></a>socket for python:</h2><h3 id="tcp流程"><a href="#tcp流程" class="headerlink" title="tcp流程"></a>tcp流程</h3><p>tcp客户端:<br>            创建客户端套接字对象<br>            和服务端套接字建立连接<br>            发送数据<br>            接收数据<br>            关闭客户端套接字<br>            socket() -&gt; connect() -&gt; send() -&gt; recv () -&gt;close()<br>      tcp服务器：<br>            创建服务端端套接字对象<br>            绑定端口号<br>            设置监听<br>            等待接受客户端的连接请求<br>            接收数据<br>            发送数据<br>            关闭套接字<br>            socket()-&gt;bind()-&gt;listen()-&gt;accept()-&gt;recv()-send()-&gt;close() </p>
+<p>tcp客户端开发：</p>
+<p>需要导入socket模块，然后根据步骤调用每一个方法即可，实例代码如下</p>
+<h3 id="tcp："><a href="#tcp：" class="headerlink" title="tcp："></a>tcp：</h3><p>客户端：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import socket<br>SOCKET=socket<span class="hljs-selector-class">.socket</span>(socket<span class="hljs-selector-class">.AF_INET</span>,socket.SOCK_STREAM)<br><br>SOCKET<span class="hljs-selector-class">.connect</span>((<span class="hljs-string">&#x27;localhost&#x27;</span>,<span class="hljs-number">8080</span>))<br><br>SOCKET<span class="hljs-selector-class">.send</span>(<span class="hljs-string">&#x27;你就是传说中的服务器吗？我是客户端&#x27;</span><span class="hljs-selector-class">.encode</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><br>information=SOCKET<span class="hljs-selector-class">.recv</span>(<span class="hljs-number">1024</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(information.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)</span></span>)<br>SOCKET<span class="hljs-selector-class">.close</span>()<br></code></pre></td></tr></table></figure>
+
+<p>服务器端：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import socket<br><br>SOCKET=socket<span class="hljs-selector-class">.socket</span>(socket<span class="hljs-selector-class">.AF_INET</span>,socket.SOCK_STREAM)<br><br>SOCKET<span class="hljs-selector-class">.bind</span>((<span class="hljs-string">&#x27;localhost&#x27;</span>,<span class="hljs-number">8080</span>))<br><br>SOCKET<span class="hljs-selector-class">.listen</span>()<br><br>user,user_addr=SOCKET<span class="hljs-selector-class">.accept</span>()<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&#x27;正在处理客户端消息，客户端ip为：&#x27;</span>,user_addr)</span></span><br>information=user<span class="hljs-selector-class">.recv</span>(<span class="hljs-number">1024</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(information.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)</span></span>)<br><br>user<span class="hljs-selector-class">.send</span>(<span class="hljs-string">&#x27;给客户端发送消息&#x27;</span><span class="hljs-selector-class">.encode</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><br>user<span class="hljs-selector-class">.close</span>()<br><br>SOCKET<span class="hljs-selector-class">.close</span>()<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="udp："><a href="#udp：" class="headerlink" title="udp："></a>udp：</h3><p>服务端：</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-keyword">import</span> socket<br><span class="hljs-title">server</span>=socket.socket(socket.<span class="hljs-type">AF_INET</span>,socket.<span class="hljs-type">SOCK_DGRAM</span>)<br><span class="hljs-title">server</span>.bind((&#x27;<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>&#x27;,<span class="hljs-number">8080</span>))<br><span class="hljs-title">while</span> <span class="hljs-type">True</span>:<br>    <span class="hljs-class"><span class="hljs-keyword">data</span>,ip_addr=server.recvfrom(1024)</span><br>    print(<span class="hljs-class"><span class="hljs-keyword">data</span>.decode(&#x27;<span class="hljs-title">utf</span>-8&#x27;))</span><br>    server.sendto(<span class="hljs-class"><span class="hljs-keyword">data</span>,ip_addr)</span><br><span class="hljs-title">server</span>.close()<br></code></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import socket<br>server = socket<span class="hljs-selector-class">.socket</span>(socket<span class="hljs-selector-class">.AF_INET</span>, socket.SOCK_DGRAM)<br>while True:<br>    msg=<span class="hljs-selector-tag">input</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;:&#x27;</span>)<span class="hljs-selector-class">.strip</span>()<br>    server<span class="hljs-selector-class">.sendto</span>(msg<span class="hljs-selector-class">.encode</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>),(<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">8080</span>))<br>    data, ip_addr = server<span class="hljs-selector-class">.recvfrom</span>(<span class="hljs-number">1024</span>)<br>    print(data<span class="hljs-selector-class">.decode</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>server<span class="hljs-selector-class">.close</span>()<br></code></pre></td></tr></table></figure>
+
+<h3 id="远程执行命令和粘包问题"><a href="#远程执行命令和粘包问题" class="headerlink" title="远程执行命令和粘包问题"></a>远程执行命令和粘包问题</h3><h4 id="粘包："><a href="#粘包：" class="headerlink" title="粘包："></a>粘包：</h4><p><img src="https://yinshiweiysw.github.io/images/assets.socket/image-20211104162346374.png" srcset="/img/loading.gif" lazyload alt="image-20211104162346374"></p>
+<p>发送端可以是一K一K地发送数据，而接收端的应用程序可以两K两K地提走数据，当然也有可能一次提走3K或6K数据，或者一次只提走几个字节的数据，也就是说，应用程序所看到的数据是一个整体，或说是一个流(stream)，一条消息有多少字节对应用程序是不可见的，因此TCP协议是面向流的协议，这也是容易出现粘包问题的原因。而UDP是面向消息的协议，每个UDP段都是一条消息，应用程序必须以消息为单位提取数据，不能一次提取任意字节的数据，这一点和TCP是很不同的。怎样定义消息呢?可以认为对方一次性write/send的数据为一个消息，需要明白的是当对方send一条信息的时候，无论底层怎样分段分片，TCP协议层会把构成整条消息的数据段排序完成后才呈现在内核缓冲区。<br>        例如基于tcp的套接字客户端往服务端上传文件，发送时文件内容是按照一段一段的字节流发送的，在接收方看了，根本不知道该文件的字节流从何处开始,在何处结束<br>所谓粘包问题主要还是因为接收方不知道消息之间的界限，不知道一次性提取多少字节的数据所造成的。<br>        此外，发送方引起的粘包是由TCP协议本身造成的，TCP为提高传输效率，发送方往往要收集到足够多的数据后才发送一个TCP段。若连续几次需要send的数据都很少，通常TCP会根据优化算法把这些数据合成一个TCP段后一次发送出去，这样接收方就收到了粘包数据。</p>
+<p>1.TCP (transport control protocol，传输控制协议）是面向连接的，面向流的，提供高可靠性服务。收发两端〈客户端和服务器端）都要有—一成对的socket，因此，发送端为了将多个发往接收端的包，更有效的发到对方，使用了优化方法(Nagle算法)，将多次间隔较小且数据量小的数据，合并成一个大的数据块，然后进行封包。这样，接收端，就难于分辨出来了，必须提供科学的拆包机制。即面向流的通信是无消息保护边界的。<br>        2.UDP(user datagram protocol，用户数据报协议）是无连接的，面向消息的，提供高效率服务。不会使用块的合并优化算法，,由于UDP支持的是一对多的模式，所以接收端的skbuff(套接字缓冲区）采用了链式结构来记录每一个到达的UDP包，在每个UDP包中就有了消息头〈消息来源地址，端口等信息)，这样,对于接收端来说，就容易进行区分处理了。即面向消息的通信是有消息保护边界的。<br>        3.tcp是基于数据流的，于是收发的消息不能为空，这就需要在客户端和服务端都添加空消息的处理机制，防止程序卡住，而udp是基于数据报的，即便是你输入的是空内容（直接回车)，那也不是空消息，udp协议会帮你封装上消息头.</p>
+<p>例如客户端在使用recv(1024)方法接受数据时，其最大接受数据为1024个字节，但服务器端发送的数据远远大于这个值，于是客户端的缓存就会有很多数据没拿到，只有1024是真正被网卡取出缓存的，其他数据会在下一次再向客户端请求数据时拿到，第二次很明显无法拿到想要的数据，而是第一次没有读取完的数据。</p>
+<p>客户端收数据没收干净，有残留，就会在下一次结果混淆在一起。</p>
+<p>解决办法：</p>
+<p>每次都将数据收完，不要让其残留在缓存里面。    </p>
+<p>1.拿到数据的总大小total_size</p>
+<p>2.recv_size=0,循环接收，每接收一次，recv_size+=接收的长度    </p>
+<p>3.直到recv_size=total_size，结束循环</p>
+<h4 id="python解决粘包（远程执行命令的代码）："><a href="#python解决粘包（远程执行命令的代码）：" class="headerlink" title="python解决粘包（远程执行命令的代码）："></a>python解决粘包（远程执行命令的代码）：</h4><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-number">1.</span>服务器端要传入其发送数据的具体字节大小到客户端（也就是头信息）<br><span class="hljs-number">2.</span>客户端接收数据时要先接收头部信息（字节大小），再根据其字节大小接收具体的数据<br><span class="hljs-meta">#subprocess为远程执行命令</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment">#服务器端</span><br><span class="hljs-comment">#本代码为客户端调用命令远程执行服务器端的命令</span><br>import subprocess<br><span class="hljs-built_in">from</span> <span class="hljs-built_in">socket</span> import *<br>import struct<br>server=<span class="hljs-built_in">socket</span>(AF_INET,SOCK_STREAM)<br>server.bind((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">8080</span>))<br>server.listen(<span class="hljs-number">5</span>)<br><span class="hljs-keyword">while</span> True:<br>    conn,client_addr=server.accept()<br><br>    <span class="hljs-keyword">while</span> True:<br>        <span class="hljs-keyword">try</span>:<br>            res=conn.recv(<span class="hljs-number">1024</span>)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:break <span class="hljs-comment">#如果客户端输入的命令为空则推出</span><br>            obj=subprocess.Popen(res.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>),<br>                             <span class="hljs-built_in">shell</span>=True,<br>                             <span class="hljs-keyword">stdout</span>=subprocess.PIPE,<br>                             <span class="hljs-keyword">stderr</span>=subprocess.PIPE)<br>           <span class="hljs-comment">#subprocess.Popen执行命令，stdout和stderr为其正确输出以及错误输出</span><br>            <span class="hljs-keyword">stdout</span>=obj.<span class="hljs-keyword">stdout</span>.<span class="hljs-built_in">read</span>()<br>            <span class="hljs-keyword">stderr</span>=obj.<span class="hljs-keyword">stderr</span>.<span class="hljs-built_in">read</span>()<br>            total_size=<span class="hljs-built_in">len</span>(<span class="hljs-keyword">stdout</span>)+<span class="hljs-built_in">len</span>(<span class="hljs-keyword">stderr</span>) <span class="hljs-comment">#统计其输出代码的字节长度</span><br>            <span class="hljs-comment">#stdout为命令执行成功输出，stderr为执行错误的输出</span><br>            header=struct.pack(<span class="hljs-string">&#x27;i&#x27;</span>,total_size) <span class="hljs-comment">#将其长度转换为字节bytes，struct.pack 中i的固定大小为4字节，表示其客户端在拿到头部信息时，先收取4字节并解码就可以得到其服务器端传输数据的大小</span><br>            conn.<span class="hljs-built_in">send</span>(header)<br>            conn.<span class="hljs-built_in">send</span>(<span class="hljs-keyword">stdout</span>+<span class="hljs-keyword">stderr</span>)<br>        except Exception:<br>            break<br>    conn.<span class="hljs-built_in">close</span>()	<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment">#客户端</span><br>import struct<br><span class="hljs-keyword">from</span> socket import *<br><span class="hljs-attribute">client</span>=socket(AF_INET,SOCK_STREAM)<br>client.connect((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,8080))<br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-attribute">msg</span>=input(&#x27;请输入命令&#x27;).strip()<br>    <span class="hljs-keyword">if</span> len(msg) == 0:continue<br>    client.send(msg.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>    <span class="hljs-attribute">header</span>=client.recv(4) #拿四个字节的数据大小<br>    <span class="hljs-attribute">total_size</span>=struct.unpack(&#x27;i&#x27;,header)[0] #拿到后解码<br>    <span class="hljs-attribute">recv_size</span>=0<br>    <span class="hljs-attribute">cmd_res</span>=b&#x27;&#x27;<br>    <span class="hljs-keyword">while</span>  recv_size &lt; total_size: #如果已拿到的数据大小recv_size小于服务器发送过来的总数据大小就继续拿数据。<br>        <span class="hljs-attribute">data</span>=client.recv(1024)<br>        recv_size+=len(data)<br>        cmd_res+=data<br>        <span class="hljs-builtin-name">print</span>(data.decode(<span class="hljs-string">&#x27;gbk&#x27;</span>),<span class="hljs-attribute">end</span>=<span class="hljs-string">&#x27;&#x27;</span>) #windows编码gbk<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-builtin-name">print</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>strut转换参数：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.socket/image-20211104172547839.png" srcset="/img/loading.gif" lazyload alt="image-20211104172547839"></p>
+<h4 id="解决粘包代码终极版："><a href="#解决粘包代码终极版：" class="headerlink" title="解决粘包代码终极版："></a>解决粘包代码终极版：</h4><p>（将其封装成一个字典，将字典作为头信息传递过去）</p>
+<p>服务器端：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">@作者: egon老湿</span><br><span class="hljs-string">@微信:18611453110</span><br><span class="hljs-string">@专栏: https://zhuanlan.zhihu.com/c_1189883314197168128</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-comment"># 服务端应该满足两个特点：</span><br><span class="hljs-comment"># 1、一直对外提供服务</span><br><span class="hljs-comment"># 2、并发地服务多个客户端</span><br><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">import</span> struct<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">from</span> socket <span class="hljs-keyword">import</span> *<br><br>server=socket(AF_INET,SOCK_STREAM)<br>server.setsockopt(SOL_SOCKET,SO_REUSEADDR,<span class="hljs-number">1</span>) <span class="hljs-comment">#就是它，在bind前加</span><br>server.bind((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">8083</span>))<br>server.listen(<span class="hljs-number">5</span>)<br><br><span class="hljs-comment">#  服务端应该做两件事</span><br><span class="hljs-comment"># 第一件事：循环地从板连接池中取出链接请求与其建立双向链接，拿到链接对象</span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    conn,client_addr=server.accept()<br><br>    <span class="hljs-comment"># 第二件事：拿到链接对象，与其进行通信循环</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-keyword">try</span>:<br>            cmd=conn.recv(<span class="hljs-number">1024</span>)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(cmd) == <span class="hljs-number">0</span>:<span class="hljs-keyword">break</span><br>            obj=subprocess.Popen(cmd.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>),<br>                             shell=<span class="hljs-literal">True</span>,<br>                             stdout=subprocess.PIPE,<br>                             stderr=subprocess.PIPE<br>                             )<br><br>            stdout_res=obj.stdout.read()<br>            stderr_res=obj.stderr.read()<br>            total_size=<span class="hljs-built_in">len</span>(stdout_res)+<span class="hljs-built_in">len</span>(stderr_res)<br><br>            <span class="hljs-comment"># 1、制作头</span><br>            header_dic=&#123;<br>                <span class="hljs-string">&quot;filename&quot;</span>:<span class="hljs-string">&quot;a.txt&quot;</span>,<br>                <span class="hljs-string">&quot;total_size&quot;</span>:total_size,<br>                <span class="hljs-string">&quot;md5&quot;</span>:<span class="hljs-string">&quot;123123xi12ix12&quot;</span><br>            &#125;<br><br>            json_str = json.dumps(header_dic)<br>            json_str_bytes = json_str.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br><br><br>            <span class="hljs-comment"># 2、先把头的长度发过去</span><br>            x=struct.pack(<span class="hljs-string">&#x27;i&#x27;</span>,<span class="hljs-built_in">len</span>(json_str_bytes))<br>            conn.send(x)<br><br>            <span class="hljs-comment"># 3、发头信息</span><br>            conn.send(json_str_bytes)<br>            <span class="hljs-comment"># 4、再发真实的数据</span><br>            conn.send(stdout_res)<br>            conn.send(stderr_res)<br><br>        <span class="hljs-keyword">except</span> Exception:<br>            <span class="hljs-keyword">break</span><br>    conn.close()<br></code></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">@作者: egon老湿</span><br><span class="hljs-string">@微信:18611453110</span><br><span class="hljs-string">@专栏: https://zhuanlan.zhihu.com/c_1189883314197168128</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br>import struct<br>import json<br><span class="hljs-keyword">from</span> socket import *<br><br><span class="hljs-attribute">client</span>=socket(AF_INET,SOCK_STREAM)<br>client.connect((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,8083))<br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-attribute">cmd</span>=input(&#x27;请输入命令&gt;&gt;：&#x27;).strip()<br>    <span class="hljs-keyword">if</span> len(cmd) == 0:continue<br>    client.send(cmd.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><br>    # 接收端<br>    # 1、先手4个字节，从中提取接下来要收的头的长度<br>    <span class="hljs-attribute">x</span>=client.recv(4)<br>    <span class="hljs-attribute">header_len</span>=struct.unpack(&#x27;i&#x27;,x)[0]<br><br>    # 2、接收头，并解析<br>    <span class="hljs-attribute">json_str_bytes</span>=client.recv(header_len)<br>    <span class="hljs-attribute">json_str</span>=json_str_bytes.decode(&#x27;utf-8&#x27;)<br>    <span class="hljs-attribute">header_dic</span>=json.loads(json_str)<br>    <span class="hljs-builtin-name">print</span>(header_dic)<br>    <span class="hljs-attribute">total_size</span>=header_dic[<span class="hljs-string">&quot;total_size&quot;</span>]<br><br>    # 3、接收真实的数据<br>    recv_size = 0<br>    <span class="hljs-keyword">while</span> recv_size &lt; total_size:<br>        <span class="hljs-attribute">recv_data</span>=client.recv(1024)<br>        recv_size+=len(recv_data)<br>        <span class="hljs-builtin-name">print</span>(recv_data.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>),<span class="hljs-attribute">end</span>=<span class="hljs-string">&#x27;&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-builtin-name">print</span>()<br><br><br><span class="hljs-comment"># 粘包问题出现的原因</span><br><span class="hljs-comment"># 1、tcp是流式协议，数据像水流一样粘在一起，没有任何边界区分</span><br><span class="hljs-comment"># 2、收数据没收干净，有残留，就会下一次结果混淆在一起</span><br><br><span class="hljs-comment"># 解决的核心法门就是：每次都收干净，不要任何残留</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="服务端为多个客户端提供服务"><a href="#服务端为多个客户端提供服务" class="headerlink" title="服务端为多个客户端提供服务"></a>服务端为多个客户端提供服务</h3><p>从上面的代码来说，当一个服务器端处于accept()等待连接的时候，一个客户端来了这个时候代码就会继续往下面走，此时如果再来一个客户端，在请求时就会堵塞住，因为服务器端的主线程已经用于服务第一个客户端去了，无法分身服务多个客户端</p>
+<p>解决办法：</p>
+<p>1.socketserver </p>
+<p>2.多线程（多进程）</p>
+<p>这两个模块都能解决单进程服务器端的问题，其实就是服务器端把处理客户端的服务交给其他进程或线程取处理，而自己只负责与客户端连接。类似于nginx，nginx一共两个进程，master和slave，master进程仅负责接收客户端的请求，而真正与客户端通信和返回数据的是slave端。 </p>
+<h4 id="socketserver"><a href="#socketserver" class="headerlink" title="socketserver:"></a>socketserver:</h4><p>这里用了socketserver模块，直接省略accpet以及以上监听绑定步骤（服务器端），直接用class类继承socketserver.BaseRequestHandler，然后定义handle函数，在恢复和发送数据时调用self.request.(recv or send)即可。最后生成对象，传入要监听的端口ip以及创建好的类名再运行对象即可。</p>
+<p><strong>这里只需要创建对象时传入bind的ip+port，已经通信时调用request方法。极其简单便捷。客户端无需改变，该如何通信还是一样，服务器端除了于客户端通信的那段代码其他均为固定格式</strong></p>
+<p>服务器端：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs lua">import subprocess<br>import socketserver<br>import struct<br>class MyRequestHandle(socketserver.BaseRequestHandler):<br>    def handle(<span class="hljs-built_in">self</span>):<br>        <span class="hljs-keyword">while</span> True:<br>            try:<br>                res=<span class="hljs-built_in">self</span>.request.recv(<span class="hljs-number">1024</span>)<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:<span class="hljs-keyword">break</span><br>                obj=subprocess.Popen(res.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>),<br>                                 shell=True,<br>                                 <span class="hljs-built_in">stdout</span>=subprocess.PIPE,<br>                                 <span class="hljs-built_in">stderr</span>=subprocess.PIPE)<br>                <span class="hljs-built_in">stdout</span>=obj.<span class="hljs-built_in">stdout</span>.<span class="hljs-built_in">read</span>()<br>                <span class="hljs-built_in">stderr</span>=obj.<span class="hljs-built_in">stderr</span>.<span class="hljs-built_in">read</span>()<br>                total_size=<span class="hljs-built_in">len</span>(<span class="hljs-built_in">stdout</span>)+<span class="hljs-built_in">len</span>(<span class="hljs-built_in">stderr</span>)<br>                #<span class="hljs-built_in">stdout</span>为命令执行成功输出，<span class="hljs-built_in">stderr</span>为执行错误的输出<br>                header=struct.pack(<span class="hljs-string">&#x27;i&#x27;</span>,total_size)<br>                <span class="hljs-built_in">self</span>.request.send(header)<br>                <span class="hljs-built_in">self</span>.request.send(<span class="hljs-built_in">stdout</span>+<span class="hljs-built_in">stderr</span>)<br>            except Exception:<br>                <span class="hljs-keyword">break</span><br>        <span class="hljs-built_in">self</span>.request.<span class="hljs-built_in">close</span>()<br>s=socketserver.ThreadingTCPServer((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">8080</span>),MyRequestHandle)<br>s.serve_forever()<br></code></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import struct<br><span class="hljs-keyword">from</span> socket import *<br><span class="hljs-attribute">client</span>=socket(AF_INET,SOCK_STREAM)<br>client.connect((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,8080))<br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-attribute">msg</span>=input(&#x27;请输入命令&#x27;).strip()<br>    <span class="hljs-keyword">if</span> len(msg) == 0:continue<br>    client.send(msg.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>    <span class="hljs-attribute">header</span>=client.recv(4)<br>    <span class="hljs-attribute">total_size</span>=struct.unpack(&#x27;i&#x27;,header)[0]<br>    <span class="hljs-attribute">recv_size</span>=0<br>    <span class="hljs-attribute">cmd_res</span>=b&#x27;&#x27;<br>    <span class="hljs-keyword">while</span>  recv_size &lt; total_size:<br>        <span class="hljs-attribute">data</span>=client.recv(1024)<br>        recv_size+=len(data)<br>        cmd_res+=data<br>        <span class="hljs-builtin-name">print</span>(data.decode(<span class="hljs-string">&#x27;gbk&#x27;</span>),<span class="hljs-attribute">end</span>=<span class="hljs-string">&#x27;&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-builtin-name">print</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h5 id="服务器端代码模板："><a href="#服务器端代码模板：" class="headerlink" title="服务器端代码模板："></a>服务器端代码模板：</h5><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">import</span> socketserver<br><span class="hljs-keyword">import</span> struct<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-type">MyRequestHandle</span>(<span class="hljs-title">socketserver</span>.<span class="hljs-type">BaseRequestHandler</span>):</span><br><span class="hljs-class">    def handle(<span class="hljs-title">self</span>):</span><br><span class="hljs-class">        while <span class="hljs-type">True</span>:</span><br><span class="hljs-class">				主代码（于客户端通信的代码）</span><br><span class="hljs-class">        self.request.close() #（关闭套接字代码）</span><br><span class="hljs-class">s=socketserver.<span class="hljs-type">ThreadingTCPServer</span>((&#x27;127.0.0.1&#x27;,8080),<span class="hljs-type">MyRequestHandle</span>)</span><br><span class="hljs-class">s.serve_forever()</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="多线程实现："><a href="#多线程实现：" class="headerlink" title="多线程实现："></a>多线程实现：</h4><p>多线程与多进程都可以实现，这里导入多线程模块，把accpet接收到的客户端对象以下代码全部交与线程来做就可以了。（多进程也可以实现，但一般用多线程即可。）这里用threading模块</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">import <span class="hljs-built_in">socket</span><br>import threading<br>import struct<br>import subprocess<br><span class="hljs-comment"># 处理客户端请求的任务</span><br>def handle_client_request(ip_port, new_client):<br>	print(<span class="hljs-string">&quot;客户端的ip和端口号为:&quot;</span>, ip_port)<br>	<span class="hljs-comment"># 5. 接收客户端的数据</span><br>	<span class="hljs-comment"># 收发消息都使用返回的这个新的套接字</span><br>	<span class="hljs-comment"># 循环接收客户端的消息</span><br>	<span class="hljs-keyword">while</span> True:<br>		recv_data = new_client.recv(<span class="hljs-number">1024</span>)<br>		<span class="hljs-keyword">if</span> recv_data == <span class="hljs-string">&#x27;quit&#x27;</span>:<br>			new_client.<span class="hljs-built_in">close</span>()<br>			break<br>		elif recv_data:<br>			obj = subprocess.Popen(recv_data.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>),<br>								   <span class="hljs-built_in">shell</span>=True,<br>								   <span class="hljs-keyword">stdout</span>=subprocess.PIPE,<br>								   <span class="hljs-keyword">stderr</span>=subprocess.PIPE)<br>			<span class="hljs-keyword">stdout</span> = obj.<span class="hljs-keyword">stdout</span>.<span class="hljs-built_in">read</span>()<br>			<span class="hljs-keyword">stderr</span> = obj.<span class="hljs-keyword">stderr</span>.<span class="hljs-built_in">read</span>()<br>			total_size = <span class="hljs-built_in">len</span>(<span class="hljs-keyword">stdout</span>) + <span class="hljs-built_in">len</span>(<span class="hljs-keyword">stderr</span>)<br>			total_size = struct.pack(<span class="hljs-string">&quot;i&quot;</span>,total_size)<br>			new_client.<span class="hljs-built_in">send</span>(total_size)<br>			new_client.<span class="hljs-built_in">send</span>(<span class="hljs-keyword">stdout</span>)<br>			new_client.<span class="hljs-built_in">send</span>(<span class="hljs-keyword">stderr</span>)<br>		<span class="hljs-keyword">else</span>:<br>			break<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>			<span class="hljs-comment"># 1. 创建tcp服务端套接字</span><br>			<span class="hljs-comment"># AF_INET: ipv4 , AF_INET6: ipv6</span><br>			tcp_server_socket = <span class="hljs-built_in">socket</span>.<span class="hljs-built_in">socket</span>(<span class="hljs-built_in">socket</span>.AF_INET, <span class="hljs-built_in">socket</span>.SOCK_STREAM)<br>			<span class="hljs-comment"># 设置端口号复用，表示意思： 服务端程序退出端口号立即释放</span><br>			<span class="hljs-comment"># 1. SOL_SOCKET: 表示当前套接字</span><br>			<span class="hljs-comment"># 2. SO_REUSEADDR： 表示复用端口号的选项</span><br>			<span class="hljs-comment"># 3. True： 确定复用</span><br>			tcp_server_socket.setsockopt(<span class="hljs-built_in">socket</span>.SOL_SOCKET, <span class="hljs-built_in">socket</span>.SO_REUSEADDR, True)<br>			<span class="hljs-comment"># 2. 绑定端口号</span><br>			<span class="hljs-comment"># 第一个参数表示ip地址，一般不用指定，表示本机的任何一个ip即可</span><br>			<span class="hljs-comment"># 第二个参数表示端口号</span><br>			tcp_server_socket.bind((<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">8080</span>))<br>			<span class="hljs-comment"># 3. 设置监听</span><br>			<span class="hljs-comment"># 128: 表示最大等待建立连接的个数</span><br>			tcp_server_socket.listen(<span class="hljs-number">128</span>)<br>			<span class="hljs-comment"># 4. 等待接受客户端的连接请求</span><br>			<span class="hljs-comment"># 注意点： 每次当客户端和服务端建立连接成功都会返回一个新的套接字</span><br>			<span class="hljs-comment"># tcp_server_socket只负责等待接收客户端的连接请求，收发消息不使用该套接字</span><br>			<span class="hljs-comment"># 循环等待接受客户端的连接请求</span><br>			<span class="hljs-keyword">while</span> True:<br>				new_client, ip_port = tcp_server_socket.accept()<br>				<span class="hljs-comment"># 代码执行到此，说明客户端和服务端建立连接成功</span><br>				<span class="hljs-comment"># 当客户端和服务端建立连接成功，创建子线程，让子线程专门负责接收客户端的消息</span><br>				sub_thread = threading.Thread(target=handle_client_request, args=(ip_port, new_client))<br>				<span class="hljs-comment"># 设置守护主线程，主线程退出子线程直接销毁</span><br>				sub_thread.setDaemon(True)<br>				<span class="hljs-comment"># 启动子线程执行对应的任务</span><br>				sub_thread.<span class="hljs-built_in">start</span>()<br>				<span class="hljs-comment"># 7. 关闭服务端套接字， 表示服务端以后不再等待接受客户端的连接请求</span><br>				<span class="hljs-comment"># tcp_server_socket.close()  # 因为服务端的程序需要一直运行，所以关闭服务端套接字的代码可以省略不写</span><br></code></pre></td></tr></table></figure>
+
+<p>上面为服务端代码，客户端不变，仅为实现服务端多线程</p>
+<h5 id="模板："><a href="#模板：" class="headerlink" title="模板："></a>模板：</h5><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> threading<br><span class="hljs-keyword">import</span> struct<br><span class="hljs-keyword">import</span> subprocess<br>def handle_client_request(ip_port, <span class="hljs-keyword">new</span><span class="hljs-type">_client</span>):<span class="hljs-type"></span><br>	<span class="hljs-keyword">while</span> True:<span class="hljs-type"></span><br>		<span class="hljs-meta">#主代码部分</span><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<span class="hljs-type"></span><br>			tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>			tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)<br>			tcp_server_socket.bind((<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">8080</span>))<br>			tcp_server_socket.listen(<span class="hljs-number">128</span>)<br>			<span class="hljs-keyword">while</span> True:<span class="hljs-type"></span><br>				<span class="hljs-keyword">new</span><span class="hljs-type">_client</span>, ip_port = tcp_server_socket.accept()<br>				sub_thread = threading.Thread(target=handle_client_request, args=(ip_port, <span class="hljs-keyword">new</span><span class="hljs-type">_client</span>))<br>				sub_thread.setDaemon(True)<br>				sub_thread.start()<br>				<span class="hljs-meta"># tcp_server_socket.close() </span><br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/18/mysql%20for%20python_hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">mysql for python</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/01/python%E5%BC%82%E5%B8%B8_hexo/">
+                        <span class="hidden-mobile">python异常</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

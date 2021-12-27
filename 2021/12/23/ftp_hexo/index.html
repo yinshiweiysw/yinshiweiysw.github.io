@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.ftp简介ftp是一种较为古老的文件传输服务，可实现文件的共享以及传输。其服务器端有两个端口，一个是控制端口（默认21），控制端口负责ftp的连接控制，还有一个端口是传输端口，其主动模式时，传输端口默认为20端口，在其为被动模式时，默认为1000以后的大端口号。ftp服务的版本服务很多，vsftp是其中一个分支,译为非常安全的文件服务。 2.主动模式与被动模式ftp其运行时有两种工作模式，主动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ftp">
+<meta property="og:url" content="http://example.com/2021/12/23/ftp_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.ftp简介ftp是一种较为古老的文件传输服务，可实现文件的共享以及传输。其服务器端有两个端口，一个是控制端口（默认21），控制端口负责ftp的连接控制，还有一个端口是传输端口，其主动模式时，传输端口默认为20端口，在其为被动模式时，默认为1000以后的大端口号。ftp服务的版本服务很多，vsftp是其中一个分支,译为非常安全的文件服务。 2.主动模式与被动模式ftp其运行时有两种工作模式，主动">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035913.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036826.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036139.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035051.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035069.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035032.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036198.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036194.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036816.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036277.jpeg">
+<meta property="article:published_time" content="2021-12-23T09:12:59.000Z">
+<meta property="article:modified_time" content="2021-12-23T09:12:59.163Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035913.jpeg">
+  
+  
+  <title>ftp - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ftp">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-23 17:12" pubdate>
+        December 23, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      13k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      109 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ftp</h1>
+            
+            <div class="markdown-body">
+              <h1 id="1-ftp简介"><a href="#1-ftp简介" class="headerlink" title="1.ftp简介"></a>1.ftp简介</h1><p>ftp是一种较为古老的文件传输服务，可实现文件的共享以及传输。其服务器端有两个端口，一个是控制端口（默认21），控制端口负责ftp的连接控制，还有一个端口是传输端口，其主动模式时，传输端口默认为20端口，在其为被动模式时，默认为1000以后的大端口号。ftp服务的版本服务很多，vsftp是其中一个分支,译为非常安全的文件服务。</p>
+<h1 id="2-主动模式与被动模式"><a href="#2-主动模式与被动模式" class="headerlink" title="2.主动模式与被动模式"></a>2.主动模式与被动模式</h1><p>ftp其运行时有两种工作模式，主动模式与被动模式。</p>
+<h3 id="1-PORT（主动模式）"><a href="#1-PORT（主动模式）" class="headerlink" title="(1) PORT（主动模式）"></a>(1) PORT（主动模式）</h3><p>PORT中文称为主动模式，工作的原理： FTP客户端连接到FTP服务器的21端口，发送用户名和密码登录，登录成功后要list列表或者读取数据时，客户端随机开放一个端口（1024以上），发送 PORT命令到FTP服务器，告诉服务器客户端采用主动模式并开放端口；FTP服务器收到PORT主动模式命令和端口号后，通过服务器的20端口和客户端开放的端口连接，发送数据，原理如下图：<br><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035913.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="2-PASV（被动模式）"><a href="#2-PASV（被动模式）" class="headerlink" title="(2) PASV（被动模式）"></a>(2) PASV（被动模式）</h3><p>PASV是Passive的缩写，中文成为被动模式，工作原理：FTP客户端连接到FTP服务器的21端口，发送用户名和密码登录，登录成功后要list列表或者读取数据时，发送PASV命令到FTP服务器， 服务器在本地随机开放一个端口（1024以上），然后把开放的端口告诉客户端， 客户端再连接到服务器开放的端口进行数据传输，原理如下图：<br><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036826.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="3-两种模式对于防火墙的影响"><a href="#3-两种模式对于防火墙的影响" class="headerlink" title="3.两种模式对于防火墙的影响"></a>3.两种模式对于防火墙的影响</h1><p>主动模式之所以称为主动模式，是因为在两端传输端口通道建立时，是服务器端（21端口）主动与客户端（1024+随机端口）请求建立连接。这其中可能出现的问题是，我们都知道，防火墙是有入口和出口的，通常客户端的入端口在防火墙策略里面是关闭的，故也无法成功连接客户端的传输接口。而在被动模式中，是服务器端开放一个大于1024的随机接口，然后通过控制接口告知客户端，让客户端来主动请求建立连接。在这里，客户端的防火墙不会是问题所在，因为客户端出端口一般默认不会做限制，而两个连接请求也都是客户端发起的，但此时，服务器端除了开放自己21的控制端口以外，还需要特别开放一个随机端口范围（这个范围由ftp启动被动模式时定义的范围）。</p>
+<p>综上所述，在服务器端需要面对大量客户端时，最好选择被动模式，这样不会让客户端因为自己的防火墙入口关闭而受到影响。</p>
+<h1 id="4-vsftpd"><a href="#4-vsftpd" class="headerlink" title="4.vsftpd"></a>4.vsftpd</h1><p>vsftpd安装很简单 redhad 或centos直接使用</p>
+<figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs v">yum -y install vsftpd<br></code></pre></td></tr></table></figure>
+
+<p>rpm -ql vsftpd #查看vsftpd安装的所有文件</p>
+<h3 id="4-1配置文件"><a href="#4-1配置文件" class="headerlink" title="4.1配置文件"></a>4.1配置文件</h3><p>vsftpd配置文件目录：/etc/vsftpd/vsftpd.conf</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 是否允许匿名登录FTP服务器，默认设置为YES允许</span><br><span class="hljs-meta"># 用户可使用用户名ftp或anonymous进行ftp登录，口令为用户的E-mail地址。</span><br><span class="hljs-meta"># 如不允许匿名访问则设置为NO</span><br>anonymous_enable=YES<br><span class="hljs-meta"># 是否允许本地用户(即linux系统中的用户帐号)登录FTP服务器，默认设置为YES允许</span><br><span class="hljs-meta"># 本地用户登录后会进入用户主目录，而匿名用户登录后进入匿名用户的下载目录/var/ftp/pub</span><br><span class="hljs-meta"># 若只允许匿名用户访问，前面加上#注释掉即可阻止本地用户访问FTP服务器</span><br>local_enable=YES<br><span class="hljs-meta"># 是否允许本地用户对FTP服务器文件具有写权限，默认设置为YES允许</span><br>write_enable=YES <br><span class="hljs-meta"># 掩码，本地用户默认掩码为077</span><br><span class="hljs-meta"># 你可以设置本地用户的文件掩码为缺省022，也可根据个人喜好将其设置为其他值</span><br><span class="hljs-meta">#local_umask=022</span><br><span class="hljs-meta"># 是否允许匿名用户上传文件，须将全局的write_enable=YES。默认为YES</span><br><span class="hljs-meta">#anon_upload_enable=YES</span><br><span class="hljs-meta"># 是否允许匿名用户创建新文件夹</span><br><span class="hljs-meta">#anon_mkdir_write_enable=YES </span><br><span class="hljs-meta"># 是否激活目录欢迎信息功能</span><br><span class="hljs-meta"># 当用户用CMD模式首次访问服务器上某个目录时，FTP服务器将显示欢迎信息</span><br><span class="hljs-meta"># 默认情况下，欢迎信息是通过该目录下的.message文件获得的</span><br><span class="hljs-meta"># 此文件保存自定义的欢迎信息，由用户自己建立</span><br><span class="hljs-meta">#dirmessage_enable=YES</span><br><span class="hljs-meta"># 是否让系统自动维护上传和下载的日志文件</span><br><span class="hljs-meta"># 默认情况该日志文件为/var/log/vsftpd.log,也可以通过下面的xferlog_file选项对其进行设定</span><br><span class="hljs-meta"># 默认值为NO</span><br>xferlog_enable=YES<br><span class="hljs-meta"># Make sure PORT transfer connections originate from port 20 (ftp-data).</span><br><span class="hljs-meta"># 是否设定FTP服务器将启用FTP数据端口的连接请求</span><br><span class="hljs-meta"># ftp-data数据传输，21为连接控制端口</span><br>connect_from_port_20=YES<br><span class="hljs-meta"># 设定是否允许改变上传文件的属主，与下面一个设定项配合使用</span><br><span class="hljs-meta"># 注意，不推荐使用root用户上传文件</span><br><span class="hljs-meta">#chown_uploads=YES</span><br><span class="hljs-meta"># 设置想要改变的上传文件的属主，如果需要，则输入一个系统用户名</span><br><span class="hljs-meta"># 可以把上传的文件都改成root属主。whoever：任何人</span><br><span class="hljs-meta">#chown_username=whoever</span><br><span class="hljs-meta"># 设定系统维护记录FTP服务器上传和下载情况的日志文件</span><br><span class="hljs-meta"># /var/log/vsftpd.log是默认的，也可以另设其它</span><br><span class="hljs-meta">#xferlog_file=/var/log/vsftpd.log</span><br><span class="hljs-meta"># 是否以标准xferlog的格式书写传输日志文件</span><br><span class="hljs-meta"># 默认为/var/log/xferlog，也可以通过xferlog_file选项对其进行设定</span><br><span class="hljs-meta"># 默认值为NO</span><br><span class="hljs-meta">#xferlog_std_format=YES</span><br><span class="hljs-meta"># 以下是附加配置，添加相应的选项将启用相应的设置</span><br><span class="hljs-meta"># 是否生成两个相似的日志文件</span><br><span class="hljs-meta"># 默认在/var/log/xferlog和/var/log/vsftpd.log目录下</span><br><span class="hljs-meta"># 前者是wu_ftpd类型的传输日志，可以利用标准日志工具对其进行分析；后者是vsftpd类型的日志</span><br><span class="hljs-meta">#dual_log_enable</span><br><span class="hljs-meta"># 是否将原本输出到/var/log/vsftpd.log中的日志，输出到系统日志</span><br><span class="hljs-meta">#syslog_enable</span><br><span class="hljs-meta"># 设置数据传输中断间隔时间，此语句表示空闲的用户会话中断时间为600秒</span><br><span class="hljs-meta"># 即当数据传输结束后，用户连接FTP服务器的时间不应超过600秒。可以根据实际情况对该值进行修改</span><br><span class="hljs-meta">#idle_session_timeout=600</span><br><span class="hljs-meta"># 设置数据连接超时时间，该语句表示数据连接超时时间为120秒，可根据实际情况对其个修改</span><br><span class="hljs-meta">#data_connection_timeout=120</span><br><span class="hljs-meta"># 运行vsftpd需要的非特权系统用户，缺省是nobody</span><br><span class="hljs-meta">#nopriv_user=ftpsecure</span><br><span class="hljs-meta"># 是否识别异步ABOR请求。</span><br><span class="hljs-meta"># 如果FTP client会下达“async ABOR”这个指令时，这个设定才需要启用</span><br><span class="hljs-meta"># 而一般此设定并不安全，所以通常将其取消</span><br><span class="hljs-meta">#async_abor_enable=YES</span><br><span class="hljs-meta"># 是否以ASCII方式传输数据。默认情况下，服务器会忽略ASCII方式的请求。</span><br><span class="hljs-meta"># 启用此选项将允许服务器以ASCII方式传输数据</span><br><span class="hljs-meta"># 不过，这样可能会导致由&quot;SIZE /big/file&quot;方式引起的DoS攻击</span><br><span class="hljs-meta">#ascii_upload_enable=YES</span><br><span class="hljs-meta">#ascii_download_enable=YES</span><br><span class="hljs-meta"># 登录FTP服务器时显示的欢迎信息</span><br><span class="hljs-meta"># 如有需要，可在更改目录欢迎信息的目录下创建名为.message的文件，并写入欢迎信息保存后</span><br><span class="hljs-meta">#ftpd_banner=Welcome to blah FTP service.</span><br><span class="hljs-meta"># 黑名单设置。如果很讨厌某些email address，就可以使用此设定来取消他的登录权限</span><br><span class="hljs-meta"># 可以将某些特殊的email address抵挡住。</span><br><span class="hljs-meta">#deny_email_enable=YES</span><br><span class="hljs-meta"># 当上面的deny_email_enable=YES时，可以利用这个设定项来规定哪些邮件地址不可登录vsftpd服务器</span><br><span class="hljs-meta"># 此文件需用户自己创建，一行一个email address即可</span><br><span class="hljs-meta">#banned_email_file=/etc/vsftpd/banned_emails</span><br><span class="hljs-meta"># 用户登录FTP服务器后是否具有访问自己目录以外的其他文件的权限</span><br><span class="hljs-meta"># 设置为YES时，用户被锁定在自己的home目录中，vsftpd将在下面chroot_list_file选项值的位置寻找chroot_list文件</span><br><span class="hljs-meta"># 必须与下面的设置项配合</span><br><span class="hljs-meta">#chroot_list_enable=YES</span><br><span class="hljs-meta"># 被列入此文件的用户，在登录后将不能切换到自己目录以外的其他目录</span><br><span class="hljs-meta"># 从而有利于FTP服务器的安全管理和隐私保护。此文件需自己建立</span><br><span class="hljs-meta">#chroot_list_file=/etc/vsftpd/chroot_list</span><br><span class="hljs-meta"># 是否允许递归查询。默认为关闭，以防止远程用户造成过量的I/O</span><br><span class="hljs-meta">#ls_recurse_enable=YES</span><br><span class="hljs-meta"># 是否允许监听。</span><br><span class="hljs-meta"># 如果设置为YES，则vsftpd将以独立模式运行，由vsftpd自己监听和处理IPv4端口的连接请求</span><br>listen=YES<br><span class="hljs-meta"># 设定是否支持IPV6。如要同时监听IPv4和IPv6端口，</span><br><span class="hljs-meta"># 则必须运行两套vsftpd，采用两套配置文件</span><br><span class="hljs-meta"># 同时确保其中有一个监听选项是被注释掉的</span><br><span class="hljs-meta">#listen_ipv6=YES</span><br><span class="hljs-meta"># 设置PAM外挂模块提供的认证服务所使用的配置文件名，即/etc/pam.d/vsftpd文件</span><br><span class="hljs-meta"># 此文件中file=/etc/vsftpd/ftpusers字段，说明了PAM模块能抵挡的帐号内容来自文件/etc/vsftpd/ftpusers中</span><br><span class="hljs-meta">#pam_service_name=vsftpd</span><br><span class="hljs-meta"># 是否允许ftpusers文件中的用户登录FTP服务器，默认为NO</span><br><span class="hljs-meta"># 若此项设为YES，则user_list文件中的用户允许登录FTP服务器</span><br><span class="hljs-meta"># 而如果同时设置了userlist_deny=YES，则user_list文件中的用户将不允许登录FTP服务器，甚至连输入密码提示信息都没有</span><br><span class="hljs-meta">#userlist_enable=YES/NO</span><br><span class="hljs-meta"># 设置是否阻扯user_list文件中的用户登录FTP服务器，默认为YES</span><br><span class="hljs-meta">#userlist_deny=YES/NO</span><br><span class="hljs-meta"># 是否使用tcp_wrappers作为主机访问控制方式。</span><br><span class="hljs-meta"># tcp_wrappers可以实现linux系统中网络服务的基于主机地址的访问控制</span><br><span class="hljs-meta"># 在/etc目录中的hosts.allow和hosts.deny两个文件用于设置tcp_wrappers的访问控制</span><br><span class="hljs-meta"># 前者设置允许访问记录，后者设置拒绝访问记录。</span><br><span class="hljs-meta"># 如想限制某些主机对FTP服务器192.168.57.2的匿名访问，编缉/etc/hosts.allow文件，如在下面增加两行命令：</span><br><span class="hljs-meta"># vsftpd:192.168.57.1:DENY 和vsftpd:192.168.57.9:DENY</span><br><span class="hljs-meta"># 表明限制IP为192.168.57.1/192.168.57.9主机访问IP为192.168.57.2的FTP服务器</span><br><span class="hljs-meta"># 此时FTP服务器虽可以PING通，但无法连接</span><br>tcp_wrappers=YES<br></code></pre></td></tr></table></figure>
+
+<p>VSFTPD登录方式：</p>
+<p>vsftpd的配置项较多，但都是”配置项”=”xx”这种格式，其本身有三种登录方式</p>
+<p>：匿名用户登录，本地用户登录，虚拟用户登录</p>
+<h3 id="1-匿名用户登录"><a href="#1-匿名用户登录" class="headerlink" title="1.匿名用户登录"></a>1.匿名用户登录</h3><p>anonymous_enable=YES</p>
+<p>只要设置这行就表示允许匿名用户登录了</p>
+<p>匿名用户使用的登陆名为ftp或anonymous，口令为空</p>
+<p>匿名用户（anonymous）设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs text">#控制是否允许匿名用户登入，YES 为允许匿名登入，NO 为不允许。默认值为 YES。<br>anonymous_enable=YES/NO（YES）<br><br>#是否允许登陆用户有写权限。属于全局设置，默认值为 YES。<br>write_enable=YES/NO（YES）<br><br>#若是启动这项功能，则使用匿名登入时，不会询问密码。默认值为 NO。<br>no_anon_password=YES/NO（NO）<br><br>#定义匿名登入的使用者名称。默认值为 ftp。<br>ftp_username=ftp<br><br>#使用匿名登入时，所登入的目录。默认值为/var/ftp。注意 ftp目录不能是 777的权限属性，即匿名用户的家目录不能有 777的权限。<br>anon_root=/var/ftp<br><br>#如果设为 YES，则允许匿名登入者有上传文件（非目录）的权限，只有在 write_enable=YES时，此项才有效。当然，匿名用户必须要有对上层目录的写入权。默认值为 NO<br>anon_upload_enable=YES/NO（NO）<br><br>#如果设为 YES，则允许匿名登入者下载可阅读的档案（可以下载到本机阅读，不能直接在 FTP服务器中打开阅读）。默认值为 YES。<br>anon_world_readable_only=YES/NO（YES）<br><br>#如果设为 YES，则允许匿名登入者有新增目录的权限，只有在 write_enable=YES时，此项才有效。当然，匿名用户必须要有对上层目录的写入权。默认值为 NO。<br>anon_mkdir_write_enable=YES/NO（NO）<br><br>#如果设为 YES，则允许匿名登入者更多于上传或者建立目录之外的权限，譬如删除或者重命名。（如<br>果 anon_upload_enable=NO，则匿名用户不能上传文件，但可以删除或者重命名已经存在的文件；如<br>果 anon_mkdir_write_enable=NO，则匿名用户不能上传或者新建文件夹，但可以删除或者重命名已经<br>存在的文件夹。）默认值为 NO。<br>anon_other_write_enable=YES/NO（NO）<br><br>#设置是否改变匿名用户上传文件（非目录）的属主。默认值为 NO。<br>chown_uploads=YES/NO（NO）<br><br>#设置匿名用户上传文件（非目录）的属主名。建议不要设置为 root。<br>chown_username=username<br><br>#设置匿名登入者新增或上传档案时的 umask 值。默认值为 077，则新建档案的对应权限为 700。<br>anon_umask=077<br><br>#若是启动这项功能，则必须提供一个档案/etc/vsftpd/banner_emails，内容为 email address。若是<br>使用匿名登入，则会要求输入 email address，若输入的 email address 在此档案内，则不允许进入。<br>默认值为 NO。<br>deny_email_enable=YES/NO（NO）<br><br>#此文件用来输入 email address，只有在 deny_email_enable=YES时，才会使用到此档案。若是使用匿名登入，则会要求输入 email address，若输入的 email address 在此档案内，则不允许进入。<br>banned_email_file=/etc/vsftpd/banner_emails<br></code></pre></td></tr></table></figure>
+
+<p>匿名登录最重要的还是anonymous_enable=YES这个配置，表示启用了匿名</p>
+<p>下面是我配置好的匿名登录配置文件：vsftpd.conf</p>
+<blockquote>
+<p>allow_writeable_chroot=YES<br>anonymous_enable=YES<br>no_anon_password=YES<br>ftp_username=ftp<br>anon_root=/var/ftp<br>anon_upload_enable=YES<br>anon_world_readable_only=YES<br>anon_mkdir_write_enable=YES<br>anon_other_write_enable=YES<br>chown_uploads=YES<br>chown_username=nobody<br>anon_umask=077<br>#local_enable=YES<br>#write_enable=YES<br>local_umask=022<br>dirmessage_enable=YES<br>xferlog_enable=YES<br>connect_from_port_20=YES<br>xferlog_std_format=YES<br>listen=YES<br>listen_ipv6=NO<br>pam_service_name=vsftpd<br>userlist_enable=YES<br>tcp_wrappers=YES</p>
+</blockquote>
+<p>其中local_enable表示的是本地用户登录，no表示本地用户不能登录，需要注意的是ftp服务的读写权限首先是配置文件里面定义的权限，然后是本地文件夹本身的权限。我这里发现一个问题是这个报错：500 OOPS: vsftpd: refusing to run with writable root inside chroot()，我去网上搜索了一下，网上基本都说是这个问题：</p>
+<blockquote>
+<p>从2.3.5之后，vsftpd增强了安全检查，如果用户被限定在了其主目录下，则该用户的主目录不能再具有写权限了！如果检查发现还有写权限，就会报该错误。要修复这个错误，可以用命令chmod a-w /home/user去除用户主目录的写权限，注意把目录替换成你自己的。或者你可以在vsftpd的配置文件中增加下列两项中的一项：allow_writeable_chroot=YES</p>
+</blockquote>
+<p>但根据我测试，只能将根目录取消写权限。加这一行配置并没用，但根目录里面的文件或文件夹加上写权限并不会影响使用。</p>
+<p>如测试连接出现这个报错，去掉tcp_wrappers配置重启即可：</p>
+<p>500 OOPS: tcp_wrappers is set to YES but no tcp wrapper support compiled in</p>
+<h3 id="2-本地用户登录"><a href="#2-本地用户登录" class="headerlink" title="2.本地用户登录"></a>2.本地用户登录</h3><p><strong>本地用户设置</strong></p>
+<p><strong>local_enable=YES/NO****（YES）</strong></p>
+<p>控制是否允许本地用户登入，YES 为允许本地用户登入，NO为不允许。默认值为YES。</p>
+<p><strong>local_root=/home/username</strong></p>
+<p>当本地用户登入时，将被更换到定义的目录下。默认值为各用户的家目录。</p>
+<p><strong>write_enable=YES/NO****（YES）</strong></p>
+<p>是否允许登陆用户有写权限。属于全局设置，默认值为YES。</p>
+<p><strong>local_umask=022</strong></p>
+<p>本地用户新增档案时的umask 值。默认值为077。</p>
+<p><strong>file_open_mode=0755</strong></p>
+<p>本地用户上传档案后的档案权限，与chmod 所使用的数值相同。默认值为0666</p>
+<p>目录锁定配置：</p>
+<p>在默认配置下，本地用户登入FTP后可以使用cd命令切换到其他目录，这样会对系统带来安全隐患。可以通过以下三条配置文件来控制用户切换目录。</p>
+<p><strong>chroot_list_enable=YES/NO****（NO）</strong></p>
+<p>设置是否启用chroot_list_file配置项指定的用户列表文件。默认值为NO。</p>
+<p><strong>chroot_list_file=/etc/vsftpd.chroot_list</strong></p>
+<p>用于指定用户列表文件，该文件用于控制哪些用户可以切换到用户家目录的上级目录。</p>
+<p><strong>chroot_local_user=YES/NO****（NO）</strong></p>
+<p>用于指定用户列表文件中的用户是否允许切换到上级目录。默认值为NO。</p>
+<p><strong>通过搭配能实现以下几种效果：</strong></p>
+<p><strong>①</strong>当chroot_list_enable=YES，chroot_local_user=YES时，在/etc/vsftpd.chroot_list文件中列出的用户，可以切换到其他目录；未在文件中列出的用户，不能切换到其他目录。</p>
+<p><strong>②</strong>当chroot_list_enable=YES，chroot_local_user=NO时，在/etc/vsftpd.chroot_list文件中列出的用户，不能切换到其他目录；未在文件中列出的用户，可以切换到其他目录。</p>
+<p><strong>③</strong>当chroot_list_enable=NO，chroot_local_user=YES时，所有的用户均不能切换到其他目录。</p>
+<p><strong>④</strong>当chroot_list_enable=NO，chroot_local_user=NO时，所有的用户均可以切换到其他目录。</p>
+<p><strong>控制用户访问：</strong></p>
+<p>对于用户的访问控制可以通过/etc目录下的vsftpd.user_list和ftpusers文件来实现。</p>
+<p><strong>userlist_file=/etc/vsftpd.user_list</strong></p>
+<p>控制用户访问FTP的文件，里面写着用户名称。一个用户名称一行。</p>
+<p><strong>userlist_enable=YES/NO****（NO）</strong></p>
+<p>是否启用vsftpd.user_list文件。</p>
+<p><strong>userlist_deny=YES/NO****（YES）</strong></p>
+<p>决定vsftpd.user_list文件中的用户是否能够访问FTP服务器。若设置为YES，则vsftpd.user_list文件中的用户不允许访问FTP，若设置为NO，则只有vsftpd.user_list文件中的用户才能访问FTP。</p>
+<p><strong>/etc/vsftpd/ftpusers</strong>文件专门用于定义不允许访问FTP服务器的用户列表（<strong>注意</strong>:如果userlist_enable=YES,userlist_deny=NO,此时如果在vsftpd.user_list和ftpusers中都有某个用户时，那么这个用户是不能够访问FTP的，即ftpusers的优先级要高）。默认情况下vsftpd.user_list和ftpusers，这两个文件已经预设置了一些不允许访问FTP服务器的系统内部账户。如果系统没有这两个文件，那么新建这两个文件，将用户添加进去即可。</p>
+<p>下面是我配置好的本地用户登录配置文件 vsftpd.conf:</p>
+<blockquote>
+<p>anonymous_enable=NO<br>local_enable=YES<br>write_enable=YES<br>local_umask=022<br>dirmessage_enable=YES<br>xferlog_enable=YES<br>connect_from_port_20=YES<br>xferlog_std_format=YES<br>listen=YES<br>listen_ipv6=NO<br>pam_service_name=vsftpd<br>userlist_enable=YES<br>chroot_local_user=YES<br>local_root=/home/ftp/static<br>userlist_enable=YES<br>userlist_deny=YES</p>
+</blockquote>
+<p>这个配置文件匿名用户无法登录，切user_list和ftpusers里面的用户不能登录 user_list是userlist_enable启用的，ftpusers这个配置文件我没找到其定义的配置项，我怀疑应该是/etc/pam.d/vsftpd里面定义的，但这个不用深究。local_root锁定了用户家目录。</p>
+<p>记得做完mkdir /home/ftp/static</p>
+<h3 id="3-虚拟用户登录"><a href="#3-虚拟用户登录" class="headerlink" title="3.虚拟用户登录"></a>3.虚拟用户登录</h3><p>虚拟用户登录其登录的验证文件是/etc/pam.d/vsftpd，与本地登录不同的是，虚拟用户其本身也需要映射到一个本地用户，以本地用户来做为其权限载体，但可将多个虚拟用户映射为一个本地用户，然后在pam.d/vsftpd里面指定其用户账号密码文件，还需单独指定其虚拟用户配置文件，定义其ftp权限，ftp文件路径等。</p>
+<p><strong>虚拟用户设置</strong></p>
+<p>虚拟用户使用PAM认证方式。</p>
+<p><strong>pam_service_name=vsftpd</strong></p>
+<p>设置PAM使用的名称，默认值为/etc/pam.d/vsftpd。</p>
+<p><strong>guest_enable= YES/NO****（NO）</strong></p>
+<p>启用虚拟用户。默认值为NO。</p>
+<p><strong>guest_username=ftp</strong></p>
+<p>这里用来映射虚拟用户。默认值为ftp。</p>
+<p><strong>virtual_use_local_privs=YES/NO****（NO）</strong></p>
+<p>当该参数激活（YES）时，虚拟用户使用与本地用户相同的权限。当此参数关闭（NO）时，虚拟用户使用与匿名用户相同的权限。默认情况下此参数是关闭的（NO）。</p>
+<p>首先把虚拟用户的配置文件配置好/etc/vsftpd/vsftpd.conf:</p>
+<blockquote>
+<p>anonymous_enable=NO<br>local_enable=YES<br>write_enable=YES<br>local_umask=022<br>dirmessage_enable=YES<br>xferlog_enable=YES<br>connect_from_port_20=YES<br>xferlog_std_format=YES<br>listen=YES<br>listen_ipv6=NO<br><strong>pam_service_name=vsftpd</strong><br>userlist_enable=YES<br>chroot_local_user=YES<br>local_root=/home/ftp/static<br>userlist_enable=YES<br>userlist_deny=YES<br><strong>guest_enable=YES<br>guest_username=vsftpd<br>anon_upload_enable=NO<br>anon_mkdir_write_enable=NO<br>anon_other_write_enable=NO<br>user_config_dir=/etc/vsftpd/vusers</strong></p>
+</blockquote>
+<p>guest_enable启用虚拟用户，guest_username是虚拟用户映射到本地用户的用户名，anon的三个配置项代表匿名用户与虚拟用户的权限，因每个虚拟用户权限不一致，所以先关闭权限。user_config_dir表示虚拟用户的配置文件夹，这里需要注意的是:</p>
+<p><strong>/etc/vsftpd/vusers里面一个配置文件代表一个虚拟用户，且文件名需以虚拟用户名称来表示。</strong></p>
+<p><strong>/etc/vsftpd/vusers/ftpuser:</strong></p>
+<blockquote>
+<p>local_root=/home/ftp/static<br>write_enable=YES<br>anon_world_readable_only=NO<br>anon_upload_enable=YES<br>anon_mkdir_write_enable=YES<br>anon_other_write_enable=YES</p>
+</blockquote>
+<p>虚拟用户配置文件有了以后，就可以生成虚拟用户认证文件了，首先上面vsftpd.conf里面guest_username=vsftpd代表虚拟用户映射为vsftpd,pam_service_name=vsftpd表示其登录认证文件为/etc/pam.d/vsftpd这个认证文件，首先先创建虚拟用户账号密码文件，然后再用pam.d/vsftpd配置文件中指定这个虚拟用户文件。</p>
+<p>配置完的/etc/pam.d/vsftpd:</p>
+<blockquote>
+<p><strong>auth sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/virtualusers<br>account sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/virtualusers</strong><br>session optional pam_keyinit.so force revoke<br>auth required pam_listfile.so item=user sense=deny file=/etc/vsftpd/ftpusers onerr=succeed<br>auth required pam_shells.so<br>auth include password-auth<br>account include password-auth<br>session required pam_loginuid.so<br>session include password-auth</p>
+</blockquote>
+<p>上面两行为指定的虚拟用户认证文件，所以接下来需要创建virtualusers</p>
+<p>echo -e “ftpuser\n123456” &gt; /etc/vsftpd/virtualusers</p>
+<p>db_load -T -t hash -f /etc/vsftpd/virtualusers /etc/vsftpd/virtualusers.db</p>
+<p>chmod 600 /etc/vsftpd/virtualusers*</p>
+<p>mkdir /home/ftp/static;chown -R vsftpd.vsftpd /home/ftp/static</p>
+<p>这个时候用ftp测试工具测试一下可以登录就OK了。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036139.jpeg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>容易出现的报错：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035051.jpeg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在ftp根目录如果用户拥有写权限的话便会报错</p>
+<p>421 Service not available, remote server has closed connection</p>
+<h3 id="目前最容易遇到的坑："><a href="#目前最容易遇到的坑：" class="headerlink" title="目前最容易遇到的坑："></a>目前最容易遇到的坑：</h3><p>1.文件夹加了写权限导致ftp账号无法登录</p>
+<p>2.虚拟用户的配置文件得在user_config_dir=/etc/vsftpd/vusers指定文件夹下面且每个虚拟用户一个配置文件，其文件名为自己的虚拟用户用户名</p>
+<p>3.无法启动vsftpd，基本上都是配置文件文件，建议用vsftpd默认自带的来进行修改，或者复制文中已经写好的配置文件。</p>
+<p>4.测试ftp连接性时尽量使用linux下的ftp工具:yum -y install ftp即可安装，因其出错时报错信息都比较准确，如果在windows直接测试的话可能直接就是无法登录，但没有对应的报错信息。</p>
+<h1 id="5-vsftpd主动模式与被动模式"><a href="#5-vsftpd主动模式与被动模式" class="headerlink" title="5.vsftpd主动模式与被动模式"></a>5.vsftpd主动模式与被动模式</h1><p>这里主要是讲主动模式与被动模式的实现，首先是最常用的被动模式</p>
+<h3 id="1-被动模式"><a href="#1-被动模式" class="headerlink" title="1.被动模式"></a>1.被动模式</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">pasv_enable</span>=<span class="hljs-literal">yes</span> （Default: <span class="hljs-literal">YES</span>） 设置是否允许pasv模式<br><span class="hljs-attr">pasv_max_port</span>=<span class="hljs-number">10240</span> （Default: <span class="hljs-number">0</span> (use any port)） pasv使用的最大端口<br><span class="hljs-attr">pasv_min_port</span>=<span class="hljs-number">20480</span> （Default: <span class="hljs-number">0</span> (use any port)） pasv使用的最小端口<br></code></pre></td></tr></table></figure>
+
+<p>被动模式为这三个选项，因pasv默认为yes，所以在vsftpd中，默认也是使用被动模式来运行的。</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035069.jpeg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>定义好最大最小端口后重启并测试</p>
+<p>systemctl restart vsftpd</p>
+<p>然后找一个windows或linux的ftp客户端进行测试（浏览器也行）：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231035032.jpeg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>服务器中ftp没连接时的信息<img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036198.jpeg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>然后用浏览器去访问ftp时的端口情况</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036194.jpeg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>可以知道，此时vsftpd开启了1408来作为传输端口，与我们配置的无异，被动模式成功运行。</p>
+<h3 id="2-主动模式"><a href="#2-主动模式" class="headerlink" title="2.主动模式"></a>2.主动模式</h3><p>pasv_enable=NO #关闭被动模式<br>port_enable=YES #启用主动模式<br>connect_from_port_20=YES #主动式连接使用的数据通道</p>
+<p>#Ftp_date_port=%portnumber% 上一选项使用NO参数是 指定数据传输端口</p>
+<blockquote>
+<p>anonymous_enable=NO<br>local_enable=YES<br>write_enable=YES<br>local_umask=022<br>dirmessage_enable=YES<br>xferlog_enable=YES<br>#connect_from_port_20=YES<br>xferlog_std_format=YES<br>listen=YES<br>listen_ipv6=NO<br>pam_service_name=vsftpd<br>userlist_enable=YES<br>chroot_local_user=YES<br>local_root=/home/ftp/static<br>userlist_enable=YES<br>userlist_deny=YES<br>guest_enable=YES<br>guest_username=vsftpd<br>anon_upload_enable=NO<br>anon_mkdir_write_enable=NO<br>anon_other_write_enable=NO<br>user_config_dir=/etc/vsftpd/vusers<br>#pasv_min_port=1380<br>#pasv_max_port=1500<br><strong>pasv_enable=NO<br>port_enable=YES<br>connect_from_port_20=YES</strong></p>
+</blockquote>
+<p>下面是测试：</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036816.jpeg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>可以看到20端口启用了，所以主动模式成功运行了。但像浏览器，ftp命令行工具默认会使用被动模式进行连接，启用主动模式后便无法连接</p>
+<p>所以最好用ftp工具连接，连接时还需指定用主动模式连接</p>
+<p><img src="https://raw.githubusercontent.com/yinshiweiysw/images/master/assets/202111231036277.jpeg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>当然，如不关闭被动模式，则主动模式将于被动模式共存。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/23/firewalld_hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">firewalld</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/23/git_hexo/">
+                        <span class="hidden-mobile">git</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

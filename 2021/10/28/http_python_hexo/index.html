@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="—-http get请求报文—-请求行—–GET &#x2F; HTTP&#x2F;1.1 &#x3D;&gt; 请求方法(方式) 请求的资源路径 http协议的版本—-请求头—-Host: www.itcast.cn  &#x3D;&gt; 服务器的主机ip地址和端口号，提示如果看不到端口号默认是80Connection: keep-alive &#x3D;&gt; 和服务端程序保存长连接，当客户端和服务端有一段时间(3-5)没有进行通信，那么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http for python">
+<meta property="og:url" content="http://example.com/2021/10/28/http_python_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="—-http get请求报文—-请求行—–GET &#x2F; HTTP&#x2F;1.1 &#x3D;&gt; 请求方法(方式) 请求的资源路径 http协议的版本—-请求头—-Host: www.itcast.cn  &#x3D;&gt; 服务器的主机ip地址和端口号，提示如果看不到端口号默认是80Connection: keep-alive &#x3D;&gt; 和服务端程序保存长连接，当客户端和服务端有一段时间(3-5)没有进行通信，那么">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-28T01:47:04.000Z">
+<meta property="article:modified_time" content="2021-12-24T01:58:53.751Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="http">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>http for python - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="http for python">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-28 09:47" pubdate>
+        October 28, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      93 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">http for python</h1>
+            
+            <div class="markdown-body">
+              <p>—-http get请求报文<br>—-请求行—–<br>GET / HTTP/1.1 =&gt; 请求方法(方式) 请求的资源路径 http协议的版本<br>—-请求头—-<br>Host: <a target="_blank" rel="noopener" href="http://www.itcast.cn/">www.itcast.cn</a>  =&gt; 服务器的主机ip地址和端口号，提示如果看不到端口号默认是80<br>Connection: keep-alive =&gt; 和服务端程序保存长连接，当客户端和服务端有一段时间(3-5)没有进行通信，那么服务器程序会主动向客户端断开连接<br>Upgrade-Insecure-Requests: 1 =&gt; 让客户端请求不安全请求，以后要使用https<br>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36 =&gt; 用户代理，客户端程序名称，当后续讲爬虫的时候可以根据是否有User-Agent进行反爬机制<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8,application/signed-exchange;v=b3 =&gt; 告诉服务端程序可以接受的数据类型<br>Accept-Encoding: gzip, deflate =&gt; 告诉服务端程序支持的压缩算法<br>Accept-Language: zh-CN,zh;q=0.9,en;q=0.8 =&gt; 告诉服务端程序支持的语言<br>Cookie: UM_distinctid=169f06ab9d21a-0a52d93224ce3-12376d57-13c680-169f06ab9d571a; accessId=22bdcd10-6250-11e8-917f-9fb8db4dc43c; bad_id22bdcd10-6250-11e8-917f-9fb8db4dc43c=5c8a5a11-5811-11e9-975d-5932d6370ce7; parent_qimo_sid_22bdcd10-6250-11e8-917f-9fb8db4dc43c=69928890-5811-11e9-ac5b-eb2506ccad9a; CNZZDATA4617777=cnzz_eid%3D324231225-1554516145-%26ntime%3D1554521548; href=http%3A%2F%2F<a href="http://www.itcast.cn%2F">www.itcast.cn%2F</a>; pageViewNum=5; Hm_lvt_0cb375a2e834821b74efffa6c71ee607=1554516722,1554523431; Hm_lpvt_0cb375a2e834821b74efffa6c71ee607=1554523431; nice_id22bdcd10-6250-11e8-917f-9fb8db4dc43c=fc5f90f1-5820-11e9-b896-dba72e2578c0; openChat22bdcd10-6250-11e8-917f-9fb8db4dc43c=true =&gt; 客户端用户身份的标识<br>—–空行—–<br>\r\n</p>
+<p>—–http get请求的原始报文数据————</p>
+<p>—-请求行—–<br>GET / HTTP/1.1\r\n<br>—-请求头—-<br>Host: <a target="_blank" rel="noopener" href="http://www.itcast.cn/r/n">www.itcast.cn\r\n</a><br>Connection: keep-alive\r\n<br>Upgrade-Insecure-Requests: 1\r\n<br>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36\r\n<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8,application/signed-exchange;v=b3\r\n<br>Accept-Encoding: gzip, deflate\r\n<br>Accept-Language: zh-CN,zh;q=0.9,en;q=0.8\r\n<br>Cookie: UM_distinctid=169f06ab9d21a-0a52d93224ce3-12376d57-13c680-169f06ab9d571a; accessId=22bdcd10-6250-11e8-917f-9fb8db4dc43c; bad_id22bdcd10-6250-11e8-917f-9fb8db4dc43c=5c8a5a11-5811-11e9-975d-5932d6370ce7; parent_qimo_sid_22bdcd10-6250-11e8-917f-9fb8db4dc43c=69928890-5811-11e9-ac5b-eb2506ccad9a; CNZZDATA4617777=cnzz_eid%3D324231225-1554516145-%26ntime%3D1554521548; href=http%3A%2F%2F<a href="http://www.itcast.cn%2F">www.itcast.cn%2F</a>; pageViewNum=5; Hm_lvt_0cb375a2e834821b74efffa6c71ee607=1554516722,1554523431; Hm_lpvt_0cb375a2e834821b74efffa6c71ee607=1554523431; nice_id22bdcd10-6250-11e8-917f-9fb8db4dc43c=fc5f90f1-5820-11e9-b896-dba72e2578c0; openChat22bdcd10-6250-11e8-917f-9fb8db4dc43c=true\r\n<br>—–空行—–<br>\r\n</p>
+<p>—–http get请求报文的格式—-<br>请求行\r\n<br>请求头\r\n<br>空行(\r\n)</p>
+<p>提示: 每项信息之间都需要一个\r\n，是要http协议规定</p>
+<p>—–http post请求报文的格式—-<br>请求行\r\n<br>请求头\r\n<br>空行(\r\n)<br>请求体</p>
+<p>提示: 请求体就是浏览器发送给服务器的数据</p>
+<p>—-http 响应报文解析—-<br>—- 响应行(状态行) ——–<br>HTTP/1.1 200 OK =&gt; http协议版本 状态码 状态描述<br>—- 响应头 ———-<br>Server: Tengine =&gt; 服务器的名称<br>Content-Type: text/html; charset=UTF-8  =&gt; 服务器发送给浏览器的内容类型及编码格式<br>Transfer-Encoding: chunked =&gt; 服务器发送给客户端程序(浏览器)的数据不确定数据长度， 数据发送结束的接收标识: 0\r\n，Content-Length: 200（字节），服务器发送给客户端程序的数据确定长度。 内容长度这两个选项只能二选一<br>Connection: keep-alive  =&gt; 和客户端保持长连接<br>Date: Sat, 06 Apr 2019 08:49:57 GMT =&gt; 服务器的时间<br>— 以下都是自定义响应头信息，字节定义响应头的名字和响应头的值，比如: is_login: True<br>Accept-Ranges: bytes<br>Ali-Swift-Global-Savetime: 1554540597<br>Via: cache45.l2nu29-1[3,200-0,M], cache11.l2nu29-1[4,0], kunlun2.cn249[30,200-0,M], kunlun2.cn249[33,0]<br>X-Cache: MISS TCP_MISS dirn:-2:-2<br>X-Swift-SaveTime: Sat, 06 Apr 2019 08:49:57 GMT<br>X-Swift-CacheTime: 0<br>Timing-Allow-Origin: *<br>EagleId: 2a51041615545405973986157e<br>—– 空行 —-<br>\r\n<br>—– 响应体 就是真正意义上给浏览器解析使用的数据—-<br>网页数据</p>
+<p>提示： 对于请求头和响应头信息程序员都可以进行自定义，按照客户端和服务器约定好的方式来制定即可。</p>
+<p>—-http 响应原始报文解析—-<br>—- 响应行(状态行) ——–<br>HTTP/1.1 200 OK\r\n<br>—- 响应头 ———-<br>Server: Tengine\r\n<br>Content-Type: text/html; charset=UTF-8\r\n<br>Transfer-Encoding: chunked\r\n<br>Connection: keep-alive\r\n<br>Date: Sat, 06 Apr 2019 08:49:57 GMT\r\n<br>— 以下都是自定义响应头信息，字节定义响应头的名字和响应头的值，比如: is_login: True<br>Accept-Ranges: bytes\r\n<br>Ali-Swift-Global-Savetime: 1554540597\r\n<br>Via: cache45.l2nu29-1[3,200-0,M], cache11.l2nu29-1[4,0], kunlun2.cn249[30,200-0,M], kunlun2.cn249[33,0]\r\n<br>X-Cache: MISS TCP_MISS dirn:-2:-2\r\n<br>X-Swift-SaveTime: Sat, 06 Apr 2019 08:49:57 GMT\r\n<br>X-Swift-CacheTime: 0\r\n<br>Timing-Allow-Origin: *\r\n<br>EagleId: 2a51041615545405973986157e\r\n<br>—– 空行 —-<br>\r\n<br>—– 响应体 就是真正意义上给浏览器解析使用的数据—-<br>网页数据</p>
+<p>—- http响应报文的格式 —–</p>
+<p>响应行\r\n<br>响应头\r\n<br>空行\r\n<br>响应体\r\n</p>
+<p>提示: 每项信息之间都要有一个\r\n进行分割</p>
+<p>http编程：<br>    http编程大体与网络编程一致，下面是网络编程步骤：<br>        tcp客户端:<br>            创建客户端套接字对象<br>            和服务端套接字建立连接<br>            发送数据<br>            接收数据<br>            关闭客户端套接字<br>            socket() -&gt; connect() -&gt; send() -&gt; recv () -&gt;close()<br>        tcp服务器：<br>            创建服务端端套接字对象<br>            绑定端口号<br>            设置监听<br>            等待接受客户端的连接请求<br>            接收数据<br>            发送数据<br>            关闭套接字<br>            socket()-&gt;bind()-&gt;listen()-&gt;accept()-&gt;recv()-send()-&gt;close()<br>    由于程序员在编程时基本只用考虑服务器端的编程，所以这里以服务器端为主。<br>    步骤对应的代码为：<br>        创建服务端端套接字对象：<br>            tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>            一般创建套接字后为了让程序退出端口后立即释放会加上复用端口号<br>                复用端口号：<br>                     tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)<br>        绑定端口号：<br>            tcp_server_socket.bind((“”, 9000))<br>        设置监听：<br>            tcp_server_socket.listen(128)<br>        等待接受客户端的连接请求：<br>            new_socket, ip_port = self.tcp_server_socket.accept()<br>            #这里的new_socket为接受到的新套接字，ip_port为其请求的ip以及端口<br>        接收数据：<br>            recv_client_data = new_socket.recv(4096)<br>        发送数据：<br>            new_socket.send(response_data)<br>        关闭套接字：<br>            new_socket.close()<br>    http编程时其发送数据时应发送为http响应报文，其步骤与socket编程一致（因http本身基于socket）</p>
+<pre><code>实例代码：
+import socket
+import threading
+
+import framework
+
+
+class Lei():
+    def __init__(self):
+        # 创建tcp服务端套接字
+        tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # 设置端口号复用, 程序退出端口立即释放
+        tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+        # 绑定端口号
+        tcp_server_socket.bind((&quot;&quot;, 9000))
+        # 设置监听
+        tcp_server_socket.listen(128)
+        self.tcp_server_socket = tcp_server_socket
+
+    @staticmethod
+    def thead_http(new_socket):
+        recv_client_data = new_socket.recv(4096)
+        # 对二进制数据进行解码
+        if len(recv_client_data) == 0:
+            print(&quot;关闭浏览器了&quot;)
+            new_socket.close()
+            return
+        recv_client_content = recv_client_data.decode(&quot;utf-8&quot;)
+        #print(recv_client_content)
+        qiege = recv_client_content.split(&quot; &quot;,maxsplit=5)
+        uri = qiege[1]
+        if uri == &quot;/&quot;:
+            uri = &quot;/index.html&quot;
+        if uri.endswith(&quot;.html&quot;):
+             env = &#123;
+                 &quot;uri&quot; : uri,
+                 &quot;host&quot; : host,
+             &#125;
+             status,response_header,response_body=framework.handle_request(env)
+             print(&quot;返还给客户端的请求报文&quot;,status,response_header,response_body)
+             response_line = &quot;HTTP/1.1 %s\r\n&quot; %status
+             headers = &quot;&quot;
+             for header in response_header:
+                 headers += &quot;%s: %s\r\n&quot; % header
+             response_data = (response_line + headers + &quot;\r\n&quot; + response_body).encode(&quot;utf-8&quot;)
+             new_socket.send(response_data)
+             new_socket.close()
+        else:
+            try:
+                with open(&quot;static&quot; + uri, &quot;rb&quot;) as file:
+                    # 读取文件数据
+                    file_data = file.read()
+            except Exception as e:
+                with open(&quot;static/error.html&quot;,&quot;rb&quot;) as file:
+                    # 读取文件数据
+                    file_data = file.read()
+                # 响应行
+                response_line = &quot;HTTP/1.1 404 not found\r\n&quot;
+                # 响应头
+                response_header = &quot;Server: PWS1.0\r\n&quot;
+                # 响应体
+                response_body = file_data
+                # 拼接响应报文
+                response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+                # 发送数据
+                new_socket.send(response_data)
+            else:
+                # 响应行
+                response_line = &quot;HTTP/1.1 200 OK\r\n&quot;
+                # 响应头
+                response_header = &quot;Server: PWS1.0\r\n&quot;
+                # 响应体
+                response_body = file_data
+                # 拼接响应报文
+                response_data = (response_line + response_header + &quot;\r\n&quot;).encode(&quot;utf-8&quot;) + response_body
+                # 发送数据
+                new_socket.send(response_data)
+                # 关闭服务与客户端的套接字
+            finally:
+                new_socket.close()
+
+    def start(self):
+            while True:
+                # 等待接受客户端的连接请求
+                new_socket, ip_port = self.tcp_server_socket.accept()
+                # 代码执行到此，说明连接建立成功
+                threading_http = threading.Thread(target=self.thead_http, args=(new_socket,))
+                threading_http.start()
+def main():
+    duixiang=Lei()
+    duixiang.start()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+
+
+该代码步骤：
+    1.首先定义了两个类 Lei(),和main（），将Lei定义成对象，调用其start方法。if name等于main魔法方法则执行main()表示其需要是主文件才会执行。
+    2.首先定义了对象方法，将创建tcp服务端套接字，绑定端口号，设置监听都直接定义在init魔法方法中，则在对象执行时，就会直接监听到端口，并把socket定义成了self.socket，以便于对象中其他类可以直接调用套接字。
+    3.此时因为main中执行了start方法，所以应该是从lei()中的start开始执行，首先执行类对象属性（init），然后此时创建套接字连接请求，并将其赋给new_socket,这里用while true死循环是因为可以（一直接受请求），多线程实现接收多个请求（同时）。此时调用多线程与thead_http上（也就是真正处理客户端请求的类），将接受到的数据参数传递到该类中，并启动该线程。
+    4.thead_http：建立连接后recv接受请求，首先判断其长度是否为0，如为0直接关闭套接字。decode将其转码，然后切割（split）拿到请求的uri，如果是/则重写为/index.html，然后当期为.html结尾（endswith取其拓展名）。此处html请求这里成为动态请求，因这里有index.html和center.html两个文件，所以会涉及两种请求，并且数据取自数据库。还需要建立一个framework.py的文件来写入其处理方法，并在这里调用，具体后面解释。
+    5.这里用了if else，并在里面套用了try，except，else，finally。如果不是html文件，则进入else，并执行try模块，这里则以其uri作为路径读取文件内容，如果有该文件则以http报文形式进行返回（如果有该文件进入else）。如果没有该文件则进入except，读取了error.html并封装为http响应报文，返回其错误信息。finally最后关闭这个套接字（执行完也相当于关闭这个线程）
+    6.最后是html动态请求，这里是framework.py
+    import pymysql
+
+    def index():
+        #返回的状态码以及请求头请求体
+        status = &quot;200 ok&quot;
+        response_header = [(&quot;server&quot;, &quot;PWS/1.1&quot;)]
+        with open(&quot;template/index.html&quot;, &quot;rb&quot;) as file:
+            file_data = file.read()
+        conn = pymysql.connect(host=&quot;10.10.10.85&quot;,
+                               port=3306,
+                               user=&quot;root&quot;,
+                               password=&quot;123456&quot;,
+                               database=&quot;python&quot;,
+                               charset=&quot;utf8&quot;)
+        cursor = conn.cursor()
+        sql = &quot;select * from info;&quot;
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        data = &quot;&quot;
+        for row in result:
+            data += &quot;&quot;&quot;&lt;tr&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;&lt;input type=&quot;button&quot; value=&quot;添加&quot; id=&quot;toAdd&quot; name=&quot;toAdd&quot; systemidvaule=&quot;000007&quot;&gt;&lt;/td&gt;
+                      &lt;/tr&gt;&quot;&quot;&quot; %row
+        response_body = file_data.decode().replace(&quot;&#123;%content%&#125;&quot;, data)
+        return status, response_header, response_body
+    def center():
+        #返回的状态码以及请求头请求体
+        status = &quot;200 ok&quot;
+        response_header = [(&quot;server&quot;, &quot;PWS/1.1&quot;)]
+        with open(&quot;template/center.html&quot;, &quot;rb&quot;) as file:
+            file_data = file.read()
+        conn = pymysql.connect(host=&quot;10.10.10.85&quot;,
+                               port=3306,
+                               user=&quot;root&quot;,
+                               password=&quot;123456&quot;,
+                               database=&quot;python&quot;,
+                               charset=&quot;utf8&quot;)
+        cursor = conn.cursor()
+        sql = &quot;select a.code,a.short,a.chg,a.turnover,a.price,a.highs,b.note_info from info as a inner join focus as b on a.id = b.info_id;&quot;
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        data = &quot;&quot;
+        for row in result:
+            data += &quot;&quot;&quot;&lt;tr&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;td&gt;%s&lt;/td&gt;
+                      &lt;/tr&gt;&quot;&quot;&quot; %row
+        response_body = file_data.decode().replace(&quot;&#123;%content%&#125;&quot;, data)
+        return status, response_header, response_body
+    def notfound():
+        status = &quot;404 notfound&quot;
+        response_header = [(&quot;server&quot;,&quot;PWS/1.1&quot;)]
+        response_body = &quot;not found&quot;
+        return  status,response_header,response_body
+    def handle_request(env):
+        uri = env[&quot;uri&quot;]
+        print (&quot;动态资源请求uri:&quot;, uri )
+        for path,func in route_list:
+             if uri == path:
+                 result = func()
+                 return  result
+
+       # if uri == &quot;/index.html&quot;:
+         #   #如果是index.html则返回index（）
+         #   result = index()
+         #   return result
+        else:
+            result = notfound()
+            return result
+    route_list = [
+         (&quot;/index.html&quot;, index),
+         (&quot;/center.html&quot;, center),
+    ]
+</code></pre>
+<p>​<br>​          这里其实总结为三种处理方式，一种是没找到的，则返回notfound，一种是index.html,还有一种是center.html,所以这里一共4个类，index请求处理方式为一个类，center为一个类，notfound处理方式为一个类，最后handle_request是对这三种方式进行分发的方法类。<br>​            首先取到uri（这个uri首先是通过split切割得到然后再动态请求类中定义为字典并传递到framework.py中的）<br>​            然后if方法分析uri，这里if后面将route_list分隔为两个变量，route_list为集合，里面有两个元组，其数据有两个，第一个为uri，第二个则是其处理的类。则在这里赋给path和func，当uri变量等于path则执行器方法func。如果不等于，则else执行notefound，则三个类书写完毕。<br>​            需要注意的是center和index都使用了pymsql模块，在其本身html文件中有一处是”content”，这里则通过调用mysql查询将其替换为查询语句。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/http/">http</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/28/%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8_hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">闭包与装饰器</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

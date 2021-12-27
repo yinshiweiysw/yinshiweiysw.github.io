@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="IO模型简介123456789101112131415161718192021&quot;&quot;&quot;我们这里研究的IO模型都是针对网络IO的Stevens在文章中一共比较了五种IO Model：    * blocking IO           阻塞IO    * nonblocking IO      非阻塞IO    * IO multiplexing      IO多路复用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO模型">
+<meta property="og:url" content="http://example.com/2021/11/18/IO%E6%A8%A1%E5%9E%8B_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="IO模型简介123456789101112131415161718192021&quot;&quot;&quot;我们这里研究的IO模型都是针对网络IO的Stevens在文章中一共比较了五种IO Model：    * blocking IO           阻塞IO    * nonblocking IO      非阻塞IO    * IO multiplexing      IO多路复用">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110813568-874888915.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110823926-1104935376.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110830667-163640114.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110837225-1379057547.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110843727-154944469.png">
+<meta property="article:published_time" content="2021-11-18T09:24:46.000Z">
+<meta property="article:modified_time" content="2021-11-19T03:54:22.666Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110813568-874888915.png">
+  
+  
+  <title>IO模型 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="IO模型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-18 17:24" pubdate>
+        November 18, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">IO模型</h1>
+            
+            <div class="markdown-body">
+              <h3 id="IO模型简介"><a href="#IO模型简介" class="headerlink" title="IO模型简介"></a>IO模型简介</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">我们这里研究的IO模型都是针对网络IO的</span><br><span class="hljs-string">Stevens在文章中一共比较了五种IO Model：</span><br><span class="hljs-string">    * blocking IO           阻塞IO</span><br><span class="hljs-string">    * nonblocking IO      非阻塞IO</span><br><span class="hljs-string">    * IO multiplexing      IO多路复用</span><br><span class="hljs-string">    * signal driven IO     信号驱动IO</span><br><span class="hljs-string">    * asynchronous IO    异步IO</span><br><span class="hljs-string">    由signal driven IO（信号驱动IO）在实际中并不常用，所以主要介绍其余四种IO Model。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-comment">#1）等待数据准备 (Waiting for the data to be ready)</span><br><span class="hljs-comment">#2）将数据从内核拷贝到进程中(Copying the data from the kernel to the process)</span><br><br>同步异步<br>阻塞非阻塞<br>常见的网络阻塞状态:<br>  	accept<br>    recv<br>    recvfrom<br>    <br>    send虽然它也有io行为 但是不在我们的考虑范围<br></code></pre></td></tr></table></figure>
+
+<h3 id="阻塞IO模型"><a href="#阻塞IO模型" class="headerlink" title="阻塞IO模型"></a>阻塞IO模型</h3><p>最广泛的模型是阻塞I/O模型，默认情况下，所有套接口都是阻塞的。 进程调用recvfrom系统调用，整个过程是阻塞的，直到数据复制到进程缓冲区时才返回（当然，系统调用被中断也会返回）。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110813568-874888915.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">我们之前写的都是阻塞IO模型  协程除外</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">import</span> socket<br><br><br>server = socket.socket()<br>server.bind((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">8080</span>))<br>server.listen(<span class="hljs-number">5</span>)<br><br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    conn, addr = server.accept()<br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-keyword">try</span>:<br>            data = conn.recv(<span class="hljs-number">1024</span>)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) == <span class="hljs-number">0</span>:<span class="hljs-keyword">break</span><br>            <span class="hljs-built_in">print</span>(data)<br>            conn.send(data.upper())<br>        <span class="hljs-keyword">except</span> ConnectionResetError <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-keyword">break</span><br>    conn.close()<br>    <br><span class="hljs-comment"># 在服务端开设多进程或者多线程 进程池线程池 其实还是没有解决IO问题	</span><br>该等的地方还是得等 没有规避<br>只不过多个人等待的彼此互不干扰<br></code></pre></td></tr></table></figure>
+
+<h3 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h3><p>当我们把一个套接口设置为非阻塞时，就是在告诉内核，当请求的I/O操作无法完成时，不要将进程睡眠，而是返回一个错误。当数据没有准备好时，内核立即返回EWOULDBLOCK错误，第四次调用系统调用时，数据已经存在，这时将数据复制到进程缓冲区中。这其中有一个操作时轮询（polling）。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110823926-1104935376.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">要自己实现一个非阻塞IO模型</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> time<br><br><br>server = socket.socket()<br>server.bind((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">8081</span>))<br>server.listen(<span class="hljs-number">5</span>)<br>server.setblocking(<span class="hljs-literal">False</span>)<br><span class="hljs-comment"># 将所有的网络阻塞变为非阻塞</span><br>r_list = []<br>del_list = []<br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-keyword">try</span>:<br>        conn, addr = server.accept()<br>        r_list.append(conn)<br>    <span class="hljs-keyword">except</span> BlockingIOError:<br>        <span class="hljs-comment"># time.sleep(0.1)</span><br>        <span class="hljs-comment"># print(&#x27;列表的长度:&#x27;,len(r_list))</span><br>        <span class="hljs-comment"># print(&#x27;做其他事&#x27;)</span><br>        <span class="hljs-keyword">for</span> conn <span class="hljs-keyword">in</span> r_list:<br>            <span class="hljs-keyword">try</span>:<br>                data = conn.recv(<span class="hljs-number">1024</span>)  <span class="hljs-comment"># 没有消息 报错</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 客户端断开链接</span><br>                    conn.close()  <span class="hljs-comment"># 关闭conn</span><br>                    <span class="hljs-comment"># 将无用的conn从r_list删除</span><br>                    del_list.append(conn)<br>                    <span class="hljs-keyword">continue</span><br>                conn.send(data.upper())<br>            <span class="hljs-keyword">except</span> BlockingIOError:<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">except</span> ConnectionResetError:<br>                conn.close()<br>                del_list.append(conn)<br>        <span class="hljs-comment"># 挥手无用的链接</span><br>        <span class="hljs-keyword">for</span> conn <span class="hljs-keyword">in</span> del_list:<br>            r_list.remove(conn)<br>        del_list.clear()<br><br><span class="hljs-comment"># 客户端</span><br><span class="hljs-keyword">import</span> socket<br><br><br>client = socket.socket()<br>client.connect((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">8081</span>))<br><br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    client.send(<span class="hljs-string">b&#x27;hello world&#x27;</span>)<br>    data = client.recv(<span class="hljs-number">1024</span>)<br>    <span class="hljs-built_in">print</span>(data)<br></code></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">虽然非阻塞IO给你的感觉非常的牛逼</span><br><span class="hljs-string">但是该模型会	长时间占用着CPU并且不干活 让CPU不停的空转</span><br><span class="hljs-string">我们实际应用中也不会考虑使用非阻塞IO模型</span><br><span class="hljs-string"></span><br><span class="hljs-string">任何的技术点都有它存在的意义 </span><br><span class="hljs-string">实际应用或者是思想借鉴</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h3><p>此模型用到select和poll函数，这两个函数也会使进程阻塞，select先阻塞，有活动套接字才返回，但是和阻塞I/O不同的是，<strong>这两个函数可以同时阻塞多个I/O操作</strong>，而且可以同时对多个读操作，多个写操作的I/O函数进行检测，直到有数据可读或可写（<strong>就是监听多个socket</strong>）。select被调用后，进程会被阻塞，内核监视所有select负责的socket，当有任何一个socket的数据准备好了，select就会返回套接字可读，我们就可以调用recvfrom处理数据。<br><strong>正因为阻塞I/O只能阻塞一个I/O操作，而I/O复用模型能够阻塞多个I/O操作，所以才叫做多路复用。</strong></p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110830667-163640114.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">当监管的对象只有一个的时候 其实IO多路复用连阻塞IO都比比不上！！！</span><br><span class="hljs-string">但是IO多路复用可以一次性监管很多个对象</span><br><span class="hljs-string"></span><br><span class="hljs-string">server = socket.socket()</span><br><span class="hljs-string">conn,addr = server.accept()</span><br><span class="hljs-string"></span><br><span class="hljs-string">监管机制是操作系统本身就有的 如果你想要用该监管机制(select)</span><br><span class="hljs-string">需要你导入对应的select模块</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> select<br><br><br>server = socket.socket()<br>server.bind((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">8080</span>))<br>server.listen(<span class="hljs-number">5</span>)<br>server.setblocking(<span class="hljs-literal">False</span>)<br>read_list = [server]<br><br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    r_list, w_list, x_list = select.select(read_list, [], [])<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    帮你监管</span><br><span class="hljs-string">    一旦有人来了 立刻给你返回对应的监管对象</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># print(res)  # ([&lt;socket.socket fd=3, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=(&#x27;127.0.0.1&#x27;, 8080)&gt;], [], [])</span><br>    <span class="hljs-comment"># print(server)</span><br>    <span class="hljs-comment"># print(r_list)</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> r_list:  <span class="hljs-comment">#</span><br>        <span class="hljs-string">&quot;&quot;&quot;针对不同的对象做不同的处理&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> i <span class="hljs-keyword">is</span> server:<br>            conn, addr = i.accept()<br>            <span class="hljs-comment"># 也应该添加到监管的队列中</span><br>            read_list.append(conn)<br>        <span class="hljs-keyword">else</span>:<br>            res = i.recv(<span class="hljs-number">1024</span>)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:<br>                i.close()<br>                <span class="hljs-comment"># 将无效的监管对象 移除</span><br>                read_list.remove(i)<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-built_in">print</span>(res)<br>            i.send(<span class="hljs-string">b&#x27;heiheiheiheihei&#x27;</span>)<br><br> <span class="hljs-comment"># 客户端</span><br><span class="hljs-keyword">import</span> socket<br><br><br>client = socket.socket()<br>client.connect((<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">8080</span>))<br><br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br><br>    client.send(<span class="hljs-string">b&#x27;hello world&#x27;</span>)<br>    data = client.recv(<span class="hljs-number">1024</span>)<br>    <span class="hljs-built_in">print</span>(data)<br></code></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">监管机制其实有很多</span><br><span class="hljs-string">select机制  windows linux都有</span><br><span class="hljs-string"></span><br><span class="hljs-string">poll机制    只在linux有   poll和select都可以监管多个对象 但是poll监管的数量更多</span><br><span class="hljs-string"></span><br><span class="hljs-string">上述select和poll机制其实都不是很完美 当监管的对象特别多的时候</span><br><span class="hljs-string">可能会出现 极其大的延时响应</span><br><span class="hljs-string"></span><br><span class="hljs-string">epoll机制   只在linux有</span><br><span class="hljs-string">	它给每一个监管对象都绑定一个回调机制</span><br><span class="hljs-string">	一旦有响应 回调机制立刻发起提醒</span><br><span class="hljs-string"></span><br><span class="hljs-string">针对不同的操作系统还需要考虑不同检测机制 书写代码太多繁琐</span><br><span class="hljs-string">有一个人能够根据你跑的平台的不同自动帮你选择对应的监管机制</span><br><span class="hljs-string">selectors模块</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="信号驱动I-O模型"><a href="#信号驱动I-O模型" class="headerlink" title="信号驱动I/O模型"></a>信号驱动I/O模型</h3><p>　　首先我们允许套接口进行信号驱动I/O,并安装一个信号处理函数，进程继续运行并不阻塞。当数据准备好时，进程会收到一个SIGIO信号，可以在信号处理函数中调用I/O操作函数处理数据。当数据报准备好读取时，内核就为该进程产生一个SIGIO信号。我们随后既可以在信号处理函数中调用recvfrom读取数据报，并通知主循环数据已准备好待处理，也可以立即通知主循环，让它来读取数据报。无论如何处理SIGIO信号，这种模型的优势在于等待数据报到达(第一阶段)期间，进程可以继续执行，不被阻塞。免去了select的阻塞与轮询，当有活跃套接字时，由注册的handler处理。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110837225-1379057547.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h3><p>进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<p>　　这个模型工作机制是：告诉内核启动某个操作，并让内核在整个操作(包括第二阶段，即将数据从内核拷贝到进程缓冲区中)完成后通知我们。</p>
+<p>这种模型和前一种模型区别在于：信号驱动I/O是由内核通知我们何时可以启动一个I/O操作，而异步I/O模型是由内核通知我们I/O操作何时完成。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets.IO%E6%A8%A1%E5%9E%8B/137084-20180611110843727-154944469.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">异步IO模型是所有模型中效率最高的 也是使用最广泛的</span><br><span class="hljs-string">相关的模块和框架</span><br><span class="hljs-string">	模块:asyncio模块</span><br><span class="hljs-string">	异步框架:sanic tronado twisted</span><br><span class="hljs-string">		速度快！！！</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">import</span> threading<br><span class="hljs-keyword">import</span> asyncio<br><br><br><span class="hljs-meta">@asyncio.coroutine</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello</span>():</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hello world %s&#x27;</span>%threading.current_thread())<br>    <span class="hljs-keyword">yield</span> <span class="hljs-keyword">from</span> asyncio.sleep(<span class="hljs-number">1</span>)  <span class="hljs-comment"># 换成真正的IO操作</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hello world %s&#x27;</span> % threading.current_thread())<br><br><br>loop = asyncio.get_event_loop()<br>tasks = [hello(),hello()]<br>loop.run_until_complete(asyncio.wait(tasks))<br>loop.close()<br></code></pre></td></tr></table></figure>
+
+<p><strong>高性能IO模型浅析</strong> </p>
+<p>服务器端编程经常需要构造高性能的IO模型，常见的IO模型有四种：</p>
+<p>（1）同步阻塞IO（Blocking IO）：即传统的IO模型。</p>
+<p>（2）同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。注意这里所说的NIO并非<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/javase">Java</a>的NIO（New IO）库。</p>
+<p>（3）IO多路复用（IO Multiplexing）：即经典的Reactor设计模式，Java中的Selector和<a target="_blank" rel="noopener" href="http://lib.csdn.net/base/linux">Linux</a>中的epoll都是这种模型。</p>
+<p>（4）异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。 </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/18/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B_hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">进程与线程</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/18/mysql%20for%20python_hexo/">
+                        <span class="hidden-mobile">mysql for python</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

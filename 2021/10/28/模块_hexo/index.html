@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="时间相关命令时间分为三种格式 1.时间戳：从1970年到现在的秒数 ​            time.time 2.格式化的字符串形式 ​            time.strftime(‘%Y-%m-%d %H:%M%S %p’) 3.结构化的时间 ​            res&#x3D;time.localtime ​            print(res) ​            pri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模块">
+<meta property="og:url" content="http://example.com/2021/10/28/%E6%A8%A1%E5%9D%97_hexo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="时间相关命令时间分为三种格式 1.时间戳：从1970年到现在的秒数 ​            time.time 2.格式化的字符串形式 ​            time.strftime(‘%Y-%m-%d %H:%M%S %p’) 3.结构化的时间 ​            res&#x3D;time.localtime ​            print(res) ​            pri">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20210924160248941.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20210927145134605.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20210927151042187.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/1036857-20180410101832069-1144106861.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211008145648843.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211008151019274.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211008151301307.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211009154143282.png">
+<meta property="og:image" content="https://yinshiweiysw.github.io/images/assets/image-20211009154312364.png">
+<meta property="article:published_time" content="2021-10-28T01:47:05.000Z">
+<meta property="article:modified_time" content="2021-11-19T03:54:23.383Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yinshiweiysw.github.io/images/assets/image-20210924160248941.png">
+  
+  
+  <title>模块 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="模块">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-28 09:47" pubdate>
+        October 28, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      19k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      163 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">模块</h1>
+            
+            <div class="markdown-body">
+              <h3 id="时间相关命令"><a href="#时间相关命令" class="headerlink" title="时间相关命令"></a>时间相关命令</h3><p>时间分为三种格式</p>
+<p>1.时间戳：从1970年到现在的秒数</p>
+<p>​            time.time</p>
+<p>2.格式化的字符串形式</p>
+<p>​            time.strftime(‘%Y-%m-%d %H:%M%S %p’)</p>
+<p>3.结构化的时间</p>
+<p>​            res=time.localtime</p>
+<p>​            print(res)</p>
+<p>​            print(res.tm_year)</p>
+<p>4.datetime</p>
+<p>​    import datetime</p>
+<p>​    print(datetime.datetime.now())</p>
+<p>​    直接获取到格式化的时间格式</p>
+<h3 id="时间格式的转换"><a href="#时间格式的转换" class="headerlink" title="时间格式的转换"></a>时间格式的转换</h3><p>时间格式转换是其三种时间格式的相互转换，结构化时间（struct_time）,时间戳（timestamp）,格式化的字符串（format_string）</p>
+<h4 id="struct-time转换成时间戳"><a href="#struct-time转换成时间戳" class="headerlink" title="struct_time转换成时间戳"></a>struct_time转换成时间戳</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import <span class="hljs-selector-tag">time</span><br>s_time=<span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.localtime</span>()<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(time.mktime(s_time)</span></span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="时间戳转换成struct-time"><a href="#时间戳转换成struct-time" class="headerlink" title="时间戳转换成struct_time"></a>时间戳转换成struct_time</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">tp_time=<span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.time</span>()<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(time.localtime(tp_time)</span></span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="strcut-time转换成格式化的字符串"><a href="#strcut-time转换成格式化的字符串" class="headerlink" title="strcut_time转换成格式化的字符串"></a>strcut_time转换成格式化的字符串</h4><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cos">s_time=time.localtime()<br>time.strftime(&#x27;<span class="hljs-built_in">%Y</span>-<span class="hljs-built_in">%m</span>-<span class="hljs-built_in">%d</span> <span class="hljs-built_in">%H</span>:<span class="hljs-built_in">%M</span><span class="hljs-built_in">%S</span> <span class="hljs-built_in">%p</span>&#x27;,s_time)<br></code></pre></td></tr></table></figure>
+
+<p>真正需要掌握的是format string &lt;—&gt; timestamp</p>
+<h2 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a>random模块</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">import <span class="hljs-built_in">random</span><br><br>print(<span class="hljs-built_in">random</span>.<span class="hljs-built_in">random</span>()) <span class="hljs-comment">#的到0到1之间的小数</span><br>	  <span class="hljs-built_in">random</span>.randint(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>) <span class="hljs-comment">#大于等于1小于等于3的数</span><br>	  <span class="hljs-built_in">random</span>.randrange(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>) <span class="hljs-comment">#大于等于1 小于3 </span><br>	  	   ~.choice(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;aaa&#x27;</span>,[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]) <span class="hljs-comment">#定义几个数随机取一个</span><br>	  	   ~.sample(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;23131d&#x27;</span>,[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]) <span class="hljs-comment">#列表元素任意2个组合</span><br>	  	   ~.uniform(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>) <span class="hljs-comment">#大于1小于3 的小树</span><br>	  	   <span class="hljs-keyword">item</span> =[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br>	  	   <span class="hljs-built_in">random</span>.shuffle(<span class="hljs-keyword">item</span>)<span class="hljs-comment">#打乱顺序</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a>os模块</h2><p>os模块是与操作系统交互的一个接口</p>
+<blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-built_in">os</span>.getcwd() 获取当前工作目录，即当前python脚本工作的目录路径<br><span class="hljs-built_in">os</span>.chdir(<span class="hljs-string">&quot;dirname&quot;</span>)  改变当前脚本工作目录；相当于shell下cd<br><span class="hljs-built_in">os</span>.curdir  返回当前目录: (<span class="hljs-string">&#x27;.&#x27;</span>)<br><span class="hljs-built_in">os</span>.pardir  获取当前目录的父目录字符串名：(<span class="hljs-string">&#x27;..&#x27;</span>)<br><span class="hljs-built_in">os</span>.makedirs(<span class="hljs-string">&#x27;dirname1/dirname2&#x27;</span>)    可生成多层递归目录<br><span class="hljs-built_in">os</span>.removedirs(<span class="hljs-string">&#x27;dirname1&#x27;</span>)    若目录为空，则删除，并递归到上一级目录，如若也为空，则删除，依此类推<br><span class="hljs-built_in">os</span>.mkdir(<span class="hljs-string">&#x27;dirname&#x27;</span>)    生成单级目录；相当于shell中mkdir dirname<br><span class="hljs-built_in">os</span>.rmdir(<span class="hljs-string">&#x27;dirname&#x27;</span>)    删除单级空目录，若目录不为空则无法删除，报错；相当于shell中rmdir dirname<br><span class="hljs-built_in">os</span>.listdir(<span class="hljs-string">&#x27;dirname&#x27;</span>)    列出指定目录下的所有文件和子目录，包括隐藏文件，并以列表方式打印<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">remove</span>()  删除一个文件<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">rename</span>(<span class="hljs-string">&quot;oldname&quot;</span>,<span class="hljs-string">&quot;newname&quot;</span>)  重命名文件/目录<br><span class="hljs-built_in">os</span>.stat(<span class="hljs-string">&#x27;path/filename&#x27;</span>)  获取文件/目录信息<br><span class="hljs-built_in">os</span>.sep    输出操作系统特定的路径分隔符，win下为<span class="hljs-string">&quot;\\&quot;</span>,Linux下为<span class="hljs-string">&quot;/&quot;</span><br><span class="hljs-built_in">os</span>.linesep    输出当前平台使用的行终止符，win下为<span class="hljs-string">&quot;\t\n&quot;</span>,Linux下为<span class="hljs-string">&quot;\n&quot;</span><br><span class="hljs-built_in">os</span>.pathsep    输出用于分割文件路径的字符串 win下为;,Linux下为:<br><span class="hljs-built_in">os</span>.name    输出字符串指示当前使用平台。win-&gt;<span class="hljs-string">&#x27;nt&#x27;</span>; Linux-&gt;<span class="hljs-string">&#x27;posix&#x27;</span><br><span class="hljs-built_in">os</span>.system(<span class="hljs-string">&quot;bash command&quot;</span>)  运行shell命令，直接显示<br><span class="hljs-built_in">os</span>.environ  获取系统环境变量<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.abspath(<span class="hljs-built_in">path</span>)  返回<span class="hljs-built_in">path</span>规范化的绝对路径<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.split(<span class="hljs-built_in">path</span>)  将<span class="hljs-built_in">path</span>分割成目录和文件名二元组返回<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.dirname(<span class="hljs-built_in">path</span>)  返回<span class="hljs-built_in">path</span>的目录。其实就是<span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.split(<span class="hljs-built_in">path</span>)的第一个元素<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.basename(<span class="hljs-built_in">path</span>)  返回<span class="hljs-built_in">path</span>最后的文件名。如何<span class="hljs-built_in">path</span>以／或\结尾，那么就会返回空值。即<span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.split(<span class="hljs-built_in">path</span>)的第二个元素<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.exists(<span class="hljs-built_in">path</span>)  如果<span class="hljs-built_in">path</span>存在，返回True；如果<span class="hljs-built_in">path</span>不存在，返回False<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.isabs(<span class="hljs-built_in">path</span>)  如果<span class="hljs-built_in">path</span>是绝对路径，返回True<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.isfile(<span class="hljs-built_in">path</span>)  如果<span class="hljs-built_in">path</span>是一个存在的文件，返回True。否则返回False<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.isdir(<span class="hljs-built_in">path</span>)  如果<span class="hljs-built_in">path</span>是一个存在的目录，则返回True。否则返回False<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.join(path1[, path2[, ...]])  将多个路径组合后返回，第一个绝对路径之前的参数将被忽略<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.getatime(<span class="hljs-built_in">path</span>)  返回<span class="hljs-built_in">path</span>所指向的文件或者目录的最后存取时间<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.getmtime(<span class="hljs-built_in">path</span>)  返回<span class="hljs-built_in">path</span>所指向的文件或者目录的最后修改时间<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.getsize(<span class="hljs-built_in">path</span>) 返回<span class="hljs-built_in">path</span>的大小<br></code></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua">在Linux和Mac平台上，该函数会原样返回<span class="hljs-built_in">path</span>，在windows平台上会将路径中所有字符转换为小写，并将所有斜杠转换为饭斜杠。<br>&gt;&gt;&gt; <span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.normcase(<span class="hljs-string">&#x27;c:/windows\\system32\\&#x27;</span>)   <br><span class="hljs-string">&#x27;c:\\windows\\system32\\&#x27;</span>   <br>   <br><br>规范化路径，如..和/<br>&gt;&gt;&gt; <span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.normpath(<span class="hljs-string">&#x27;c://windows\\System32\\../Temp/&#x27;</span>)   <br><span class="hljs-string">&#x27;c:\\windows\\Temp&#x27;</span>   <br><br>&gt;&gt;&gt; a=<span class="hljs-string">&#x27;/Users/jieli/test1/\\\a1/\\\\aa.py/../..&#x27;</span><br>&gt;&gt;&gt; <span class="hljs-built_in">print</span>(<span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.normpath(a))<br>/Users/jieli/test1<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-built_in">os</span>路径处理<br>#方式一：推荐使用<br>import <span class="hljs-built_in">os</span><br>#具体应用<br>import <span class="hljs-built_in">os</span>,sys<br>possible_topdir = <span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.normpath(<span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.join(<br>    <span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.abspath(__file__),<br>    <span class="hljs-built_in">os</span>.pardir, #上一级<br>    <span class="hljs-built_in">os</span>.pardir,<br>    <span class="hljs-built_in">os</span>.pardir<br>))<br>sys.<span class="hljs-built_in">path</span>.<span class="hljs-built_in">insert</span>(<span class="hljs-number">0</span>,possible_topdir)<br><br><br>#方式二：不推荐使用<br><span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.dirname(<span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.dirname(<span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.dirname(<span class="hljs-built_in">os</span>.<span class="hljs-built_in">path</span>.abspath(__file__))))<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a>sys模块</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import sys<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(sys.argv)</span></span><br></code></pre></td></tr></table></figure>
+
+<p>sys.argv用于获取向文件传递的参数</p>
+<p>例如：</p>
+<p>python3 run.py 1 2 3</p>
+<p>其中的1, 2,3就分别是三个参数</p>
+<p>sys.argv[0]为文件名， 123，分别就是后面对应的位置参数。</p>
+<p>例如:</p>
+<p>以argv来实现cp命令（cp 源文件 目标文件），实现复制粘贴文件的效果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br>cs_1=sys.argv[<span class="hljs-number">1</span>]<br>cs_2=sys.argv[<span class="hljs-number">2</span>]<br><br><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;%s&#x27;</span> %cs_1,mode=<span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> file1:<br>        a=file1.read()<br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;%s&#x27;</span> %cs_2,mode=<span class="hljs-string">&quot;wb+&quot;</span>) <span class="hljs-keyword">as</span> file2:<br>            b=file2.write(a)<br><span class="hljs-keyword">except</span> IOError:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;没有该文件&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;内容写入文件成功&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>执行效果：（得在Windows命令行console执行）</p>
+<p>(pyproject) E:\pyproject\py_study1&gt;python study1.py upload_file.py 2.py<br>内容写入文件成功</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210924160248941.png" srcset="/img/loading.gif" lazyload alt="image-20210924160248941"></p>
+<h2 id="打印进度条："><a href="#打印进度条：" class="headerlink" title="打印进度条："></a>打印进度条：</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vim">import time<br><span class="hljs-keyword">res</span> = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">for</span> i in <span class="hljs-built_in">range</span>(<span class="hljs-number">50</span>):<br>	<span class="hljs-keyword">res</span>+=<span class="hljs-string">&#x27;#&#x27;</span><br>	time.<span class="hljs-keyword">sleep</span>(<span class="hljs-number">0.5</span>)<br>	<span class="hljs-keyword">print</span>(<span class="hljs-string">&#x27;\r[%-50s]&#x27;</span> % <span class="hljs-keyword">res</span>,end=<span class="hljs-string">&#x27;&#x27;</span>)<br>	#%s 为百分号替代符号，中间的-<span class="hljs-number">50</span>，-为左对齐，<span class="hljs-number">50</span>为其长度固定为<span class="hljs-number">50</span>，由于只输出一行，让其为每次叠加一个#的进度条，所以其换行符为空，并且\r跳到其行首，使其覆盖<br></code></pre></td></tr></table></figure>
+
+<h3 id="模拟打印下载进度条："><a href="#模拟打印下载进度条：" class="headerlink" title="模拟打印下载进度条："></a>模拟打印下载进度条：</h3><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs mel">import time<br>recv_size=<span class="hljs-number">0</span><br><br>total_size=<span class="hljs-number">30000</span><br><br><span class="hljs-keyword">while</span> recv_size &lt; total_size:<br>	time.sleep(<span class="hljs-number">0.1</span>)<br>	recv_size+=<span class="hljs-number">1024</span><br>	<br>	<span class="hljs-keyword">percent</span>= recv_size / total_size<br>	<span class="hljs-keyword">if</span> <span class="hljs-keyword">percent</span> &gt; <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">percent</span> = <span class="hljs-number">1</span><br>	res= <span class="hljs-keyword">int</span>(<span class="hljs-number">50</span> * <span class="hljs-keyword">percent</span>) * <span class="hljs-string">&#x27;#&#x27;</span><br>	<span class="hljs-keyword">print</span>(<span class="hljs-string">&#x27;\r[%-50s] %d%%&#x27;</span>) % (res,<span class="hljs-keyword">int</span>(<span class="hljs-number">100</span>*<span class="hljs-keyword">percent</span>)),end=<span class="hljs-string">&#x27;&#x27;</span>)<br>	#recv_size和total_size模拟其文件大小以及已下载的数据大小<br>	#sleep模拟下载速度，使其不会太快加载完。<br>	#recv_size/total_size得到的分数为其下载进度，\r[%-<span class="hljs-number">50</span>s]为其打印进度条，%d%%显示百分比，百分比为其下载进度分数x100.但recv_size一直累加可能会超出总大小本身，其比例也会超过<span class="hljs-number">100</span>%，这是可以用<span class="hljs-keyword">if</span> 判断其大于<span class="hljs-number">1</span>时使其等于<span class="hljs-number">1.</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a>shutil模块</h2><p>引入： import shutil</p>
+<p>copy()<br>功能：复制文件<br>格式：shutil.copy(‘来源文件’,’目标地址’)<br>返回值：复制之后的路径</p>
+<p>copy2()<br>功能：复制文件，保留元数据<br>格式：shutil.copy2(‘来源文件’,’目标地址’)<br>返回值：复制之后的路径</p>
+<p>copyfileobj()<br>将一个文件的内容拷贝的另外一个文件当中<br>格式：shutil.copyfileobj(open(来源文件,’r’),open（’目标文件’,’w’）)<br>返回值：无</p>
+<p>copyfile()<br>功能：将一个文件的内容拷贝的另外一个文件当中<br>格式:shutil.copyfile(来源文件,目标文件)<br>返回值：目标文件的路径</p>
+<p>copytree()<br>功能：复制整个文件目录<br>格式:shutil.copytree(来源目录,目标目录)<br>返回值：目标目录的路径<br>注意：无论文件夹是否为空，均可以复制，而且会复制文件夹中的所有内容</p>
+<p>copymode()<br>功能：拷贝权限</p>
+<p>copystat()<br>功能：拷贝元数据（状态）</p>
+<p>rmtree()<br>功能：移除整个目录，无论是否空<br>格式：shutil.rmtree(目录路径)<br>返回值：无</p>
+<p>move()<br>功能：移动文件或者文件夹<br>格式：shutil.move(来源地址,目标地址)<br>返回值：目标地址</p>
+<p>which()<br>功能：检测命令对应的文件路径<br>格式：shutil.which(‘命令字符串’)<br>返回值：命令文件所在位置<br>注意：window和linux不太一样。 window的命令都是.exe结尾，linux则不是</p>
+<p>disk_usage()<br>功能：检测磁盘使用信息<br>格式：disk_usage(‘盘符’)<br>返回值：元组</p>
+<p>归档和解包操作<br>归档：将多个文件合并到一个文件当中，这种操作方式就是归档。</p>
+<p>解包：将归档的文件进行释放。</p>
+<p>压缩：压缩时将多个文件进行有损或者无损的合并到一个文件当中。</p>
+<p>解压缩：就是压缩的反向操作，将压缩文件中的多个文件，释放出来。</p>
+<p>注意：压缩属于归档！<br>        make_archive()<br>功能：归档函数，归档操作<br>格式：shutil.make_archive(‘目标文件路径’,’归档文件后缀’,’需要归档的目录’)<br>返回值：归档文件的最终路径</p>
+<p>unpack_archive()<br>功能：解包操作<br>格式：shutil.unpack_archive(‘归档文件路径’,’解包目标文件夹’)<br>返回值:None<br>注意：文件夹不存在会新建文件夹</p>
+<p>get_archive_formats()<br>功能：获取当前系统已注册的归档文件格式（后缀）<br>格式：shutil.get_archive_formats()</p>
+<p>get_unpack_formats()<br>功能：获取当前系统已经注册的解包文件格式(后缀)<br>格式:shutil.get_unpack_formats()<br>返回值：列表   [(后缀,解释),(后缀,解释),(后缀,解释)…]</p>
+<h2 id="json-amp-pickle模块"><a href="#json-amp-pickle模块" class="headerlink" title="json&amp;pickle模块"></a>json&amp;pickle模块</h2><p>之前我们学习过用eval内置方法可以将一个字符串转成python对象，不过，eval方法是有局限性的，对于普通的数据类型，json.loads和eval都能用，但遇到特殊类型的时候，eval就不管用了,所以eval的重点还是通常用来执行一个字符串表达式，并返回表达式的值。</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>import json<br><span class="hljs-symbol">2 </span>x=<span class="hljs-string">&quot;[null,true,false,1]&quot;</span><br><span class="hljs-symbol">3 </span><span class="hljs-keyword">print</span>(eval(x)) #报错，无法解析null类型，而json就可以<br><span class="hljs-symbol">4 </span><span class="hljs-keyword">print</span>(json.loads(x)) <br></code></pre></td></tr></table></figure>
+
+<p><strong>什么是序列化？</strong></p>
+<p>我们把对象(变量)从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等，都是一个意思。</p>
+<p><strong>为什么要序列化？</strong></p>
+<p>1：持久保存状态</p>
+<p>需知一个软件/程序的执行就在处理一系列状态的变化，在编程语言中，’状态’会以各种各样有结构的数据类型(也可简单的理解为变量)的形式被保存在内存中。</p>
+<p>内存是无法永久保存数据的，当程序运行了一段时间，我们断电或者重启程序，内存中关于这个程序的之前一段时间的数据（有结构）都被清空了。</p>
+<p>在断电或重启程序之前将程序当前内存中所有的数据都保存下来（保存到文件中），以便于下次程序执行能够从文件中载入之前的数据，然后继续执行，这就是序列化。</p>
+<p>具体的来说，你玩使命召唤闯到了第13关，你保存游戏状态，关机走人，下次再玩，还能从上次的位置开始继续闯关。或如，虚拟机状态的挂起等。</p>
+<p>2：跨平台数据交互</p>
+<p>序列化之后，不仅可以把序列化后的内容写入磁盘，还可以通过网络传输到别的机器上，如果收发的双方约定好实用一种序列化的格式，那么便打破了平台/语言差异化带来的限制，实现了跨平台数据交互。</p>
+<p>反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。</p>
+<h3 id="json"><a href="#json" class="headerlink" title="json"></a><strong>json</strong></h3><p>如果我们要在不同的编程语言之间传递对象，就必须把对象序列化为标准格式，比如XML，但更好的方法是序列化为JSON，因为JSON表示出来就是一个字符串，可以被所有语言读取，也可以方便地存储到磁盘或者通过网络传输。JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。</p>
+<p>JSON表示的对象就是标准的JavaScript语言的对象，JSON和Python内置的数据类型对应如下：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210927145134605.png" srcset="/img/loading.gif" lazyload alt="image-20210927145134605"></p>
+<h3 id="如何序列化与反序列化"><a href="#如何序列化与反序列化" class="headerlink" title="如何序列化与反序列化"></a>如何序列化与反序列化</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import json<br><span class="hljs-attribute">res</span>=json.dumps([1,<span class="hljs-string">&#x27;aaa&#x27;</span>,<span class="hljs-literal">True</span>,<span class="hljs-literal">False</span>])<br><span class="hljs-builtin-name">print</span>(res.type(res))<br><span class="hljs-attribute">l</span>=json.loads(res)<br><span class="hljs-builtin-name">print</span>(l,type(l))<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>[1, “aaa”, true, false] &lt;class ‘str’&gt;<br>        [1, ‘aaa’, True, False] &lt;class ‘list’&gt;</p>
+<p>json.dumps是序列化转换，将列表转换为json格式，其格式变为了str。</p>
+<p>json.loads是反序列化转换，将其又转回了原来的列表格式。</p>
+<p>示例2：存储为json格式</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">import json<br><span class="hljs-keyword">res</span>=json.dumps([<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;aaa&#x27;</span>,True,False])<br>with <span class="hljs-keyword">open</span>(<span class="hljs-string">&quot;1.json&quot;</span>,<span class="hljs-keyword">mode</span>=<span class="hljs-string">&quot;wt&quot;</span>,encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">file</span>:<br>    <span class="hljs-keyword">file</span>.<span class="hljs-keyword">write</span>(<span class="hljs-keyword">res</span>)<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20210927151042187.png" srcset="/img/loading.gif" lazyload alt="image-20210927151042187"></p>
+<p>再读取json格式将其反序列化转换成原格式：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">import json<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;1.json&quot;</span>,mode=<span class="hljs-string">&#x27;rt&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-built_in">file</span>:<br>    <span class="hljs-keyword">a</span>=<span class="hljs-built_in">file</span>.<span class="hljs-built_in">read</span>()<br>    b=json.loads(<span class="hljs-keyword">a</span>)<br>    print(b)<br></code></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>[1, ‘aaa’, True, False]</p>
+<p>简单方法实现：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">import</span> json<br>with open(<span class="hljs-string">&quot;1.json&quot;</span>,mode=<span class="hljs-string">&quot;wt&quot;</span>,encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) as <span class="hljs-keyword">file</span>:<br>    json.<span class="hljs-keyword">dump</span>([<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;aaa&#x27;</span>, <span class="hljs-keyword">True</span>, <span class="hljs-keyword">False</span>],<span class="hljs-keyword">file</span>)<br>    <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">import json<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;1.json&quot;</span>,mode=<span class="hljs-string">&#x27;rt&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-built_in">file</span>:<br>    l=json.<span class="hljs-built_in">load</span>(<span class="hljs-built_in">file</span>)<br>    print(l)<br></code></pre></td></tr></table></figure>
+
+<p>dump和load可以省略其文件的write和read方法</p>
+<h3 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">import</span> pickle<br><span class="hljs-attribute">res</span>=pickle.dumps(&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>&#125;)<br><span class="hljs-attribute">print</span>(res,type(res))<br></code></pre></td></tr></table></figure>
+
+<p>将python序列化转换成pickle形式，反序列化为loads，与json一致。</p>
+<h2 id="configparser模块"><a href="#configparser模块" class="headerlink" title="configparser模块"></a>configparser模块</h2><p><strong>配置文件如下：</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 注释1</span><br>; 注释2<br><br>[section1]<br>k1 = v1<br>k2:v2<br><span class="hljs-attribute">user</span>=egon<br><span class="hljs-attribute">age</span>=18<br><span class="hljs-attribute">is_admin</span>=<span class="hljs-literal">true</span><br><span class="hljs-attribute">salary</span>=31<br>[section2]<br>k1 = v1<br></code></pre></td></tr></table></figure>
+
+<p><strong>读取</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import configparser<br><br>config=configparser<span class="hljs-selector-class">.ConfigParser</span>()<br>config<span class="hljs-selector-class">.read</span>(<span class="hljs-string">&#x27;a.cfg&#x27;</span>)<br><br>#查看所有的标题<br>res=config<span class="hljs-selector-class">.sections</span>() #<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;section1&#x27;</span>, <span class="hljs-string">&#x27;section2&#x27;</span>]</span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(res)</span></span><br><br>#查看标题section1下所有key=value的key<br>options=config<span class="hljs-selector-class">.options</span>(<span class="hljs-string">&#x27;section1&#x27;</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(options)</span></span> #<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;k1&#x27;</span>, <span class="hljs-string">&#x27;k2&#x27;</span>, <span class="hljs-string">&#x27;user&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;is_admin&#x27;</span>, <span class="hljs-string">&#x27;salary&#x27;</span>]</span><br><br>#查看标题section1下所有key=value的(key,value)格式<br>item_list=config<span class="hljs-selector-class">.items</span>(<span class="hljs-string">&#x27;section1&#x27;</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(item_list)</span></span> #<span class="hljs-selector-attr">[(<span class="hljs-string">&#x27;k1&#x27;</span>, <span class="hljs-string">&#x27;v1&#x27;</span>), (<span class="hljs-string">&#x27;k2&#x27;</span>, <span class="hljs-string">&#x27;v2&#x27;</span>), (<span class="hljs-string">&#x27;user&#x27;</span>, <span class="hljs-string">&#x27;egon&#x27;</span>), (<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;18&#x27;</span>), (<span class="hljs-string">&#x27;is_admin&#x27;</span>, <span class="hljs-string">&#x27;true&#x27;</span>), (<span class="hljs-string">&#x27;salary&#x27;</span>, <span class="hljs-string">&#x27;31&#x27;</span>)]</span><br><br>#查看标题section1下user的值=&gt;字符串格式<br>val=config<span class="hljs-selector-class">.get</span>(<span class="hljs-string">&#x27;section1&#x27;</span>,<span class="hljs-string">&#x27;user&#x27;</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(val)</span></span> <span class="hljs-selector-id">#egon</span><br><br>#查看标题section1下age的值=&gt;整数格式<br>val1=config<span class="hljs-selector-class">.getint</span>(<span class="hljs-string">&#x27;section1&#x27;</span>,<span class="hljs-string">&#x27;age&#x27;</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(val1)</span></span> #<span class="hljs-number">18</span><br><br>#查看标题section1下is_admin的值=&gt;布尔值格式<br>val2=config<span class="hljs-selector-class">.getboolean</span>(<span class="hljs-string">&#x27;section1&#x27;</span>,<span class="hljs-string">&#x27;is_admin&#x27;</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(val2)</span></span> <span class="hljs-selector-id">#True</span><br><br>#查看标题section1下salary的值=&gt;浮点型格式<br>val3=config<span class="hljs-selector-class">.getfloat</span>(<span class="hljs-string">&#x27;section1&#x27;</span>,<span class="hljs-string">&#x27;salary&#x27;</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(val3)</span></span> #<span class="hljs-number">31.0</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>改写</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import configparser<br><br><span class="hljs-attribute">config</span>=configparser.ConfigParser()<br>config.read(<span class="hljs-string">&#x27;a.cfg&#x27;</span>,<span class="hljs-attribute">encoding</span>=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br><br><br><span class="hljs-comment">#删除整个标题section2</span><br>config.remove_section(<span class="hljs-string">&#x27;section2&#x27;</span>)<br><br><span class="hljs-comment">#删除标题section1下的某个k1和k2</span><br>config.remove_option(<span class="hljs-string">&#x27;section1&#x27;</span>,<span class="hljs-string">&#x27;k1&#x27;</span>)<br>config.remove_option(<span class="hljs-string">&#x27;section1&#x27;</span>,<span class="hljs-string">&#x27;k2&#x27;</span>)<br><br><span class="hljs-comment">#判断是否存在某个标题</span><br><span class="hljs-builtin-name">print</span>(config.has_section(<span class="hljs-string">&#x27;section1&#x27;</span>))<br><br><span class="hljs-comment">#判断标题section1下是否有user</span><br><span class="hljs-builtin-name">print</span>(config.has_option(<span class="hljs-string">&#x27;section1&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>))<br><br><br><span class="hljs-comment">#添加一个标题</span><br>config.add_section(<span class="hljs-string">&#x27;egon&#x27;</span>)<br><br><span class="hljs-comment">#在标题egon下添加name=egon,age=18的配置</span><br>config.<span class="hljs-builtin-name">set</span>(<span class="hljs-string">&#x27;egon&#x27;</span>,<span class="hljs-string">&#x27;name&#x27;</span>,<span class="hljs-string">&#x27;egon&#x27;</span>)<br>config.<span class="hljs-builtin-name">set</span>(<span class="hljs-string">&#x27;egon&#x27;</span>,<span class="hljs-string">&#x27;age&#x27;</span>,18) #报错,必须是字符串<br><br><br><span class="hljs-comment">#最后将修改的内容写入文件,完成最终的修改</span><br>config.write(open(<span class="hljs-string">&#x27;a.cfg&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>基于上述方法添加一个ini文档</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs lua">import configparser<br>  <br><span class="hljs-built_in">config</span> = configparser.ConfigParser()<br><span class="hljs-built_in">config</span>[<span class="hljs-string">&quot;DEFAULT&quot;</span>] = &#123;<span class="hljs-string">&#x27;ServerAliveInterval&#x27;</span>: <span class="hljs-string">&#x27;45&#x27;</span>,<br>                      <span class="hljs-string">&#x27;Compression&#x27;</span>: <span class="hljs-string">&#x27;yes&#x27;</span>,<br>                     <span class="hljs-string">&#x27;CompressionLevel&#x27;</span>: <span class="hljs-string">&#x27;9&#x27;</span>&#125;<br>  <br><span class="hljs-built_in">config</span>[<span class="hljs-string">&#x27;bitbucket.org&#x27;</span>] = &#123;&#125;<br><span class="hljs-built_in">config</span>[<span class="hljs-string">&#x27;bitbucket.org&#x27;</span>][<span class="hljs-string">&#x27;User&#x27;</span>] = <span class="hljs-string">&#x27;hg&#x27;</span><br><span class="hljs-built_in">config</span>[<span class="hljs-string">&#x27;topsecret.server.com&#x27;</span>] = &#123;&#125;<br>topsecret = <span class="hljs-built_in">config</span>[<span class="hljs-string">&#x27;topsecret.server.com&#x27;</span>]<br>topsecret[<span class="hljs-string">&#x27;Host Port&#x27;</span>] = <span class="hljs-string">&#x27;50022&#x27;</span>     # mutates the parser<br>topsecret[<span class="hljs-string">&#x27;ForwardX11&#x27;</span>] = <span class="hljs-string">&#x27;no&#x27;</span>  # same here<br><span class="hljs-built_in">config</span>[<span class="hljs-string">&#x27;DEFAULT&#x27;</span>][<span class="hljs-string">&#x27;ForwardX11&#x27;</span>] = <span class="hljs-string">&#x27;yes&#x27;</span><br>with <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;example.ini&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) as configfile:<br>   <span class="hljs-built_in">config</span>.<span class="hljs-built_in">write</span>(configfile)<br></code></pre></td></tr></table></figure>
+
+<h2 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a>hashlib模块</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 1、什么叫<span class="hljs-built_in">hash</span>:<span class="hljs-built_in">hash</span>是一种算法（3.x里代替了md5模块和sha模块，主要提供 SHA1, SHA224, SHA256, SHA384, SHA512 ，MD5 算法），该算法接受传入的内容，经过运算得到一串<span class="hljs-built_in">hash</span>值</span><br><span class="hljs-meta">#</span><span class="bash"> 2、<span class="hljs-built_in">hash</span>值的特点是：</span><br><span class="hljs-meta">#</span><span class="bash">2.1 只要传入的内容一样，得到的<span class="hljs-built_in">hash</span>值必然一样=====&gt;要用明文传输密码文件完整性校验</span><br><span class="hljs-meta">#</span><span class="bash">2.2 不能由<span class="hljs-built_in">hash</span>值返解成内容=======》把密码做成<span class="hljs-built_in">hash</span>值，不应该在网络传输明文密码</span><br><span class="hljs-meta">#</span><span class="bash">2.3 只要使用的<span class="hljs-built_in">hash</span>算法不变，无论校验的内容有多大，得到的<span class="hljs-built_in">hash</span>值长度是固定的</span><br></code></pre></td></tr></table></figure>
+
+<p> hash算法就像一座工厂，工厂接收你送来的原材料（可以用m.update()为工厂运送原材料），经过加工返回的产品就是hash值</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/1036857-20180410101832069-1144106861.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs apache"> <span class="hljs-attribute">1</span> import hashlib<br> <span class="hljs-attribute">2</span>  <br> <span class="hljs-attribute">3</span> m=hashlib.md<span class="hljs-number">5</span>()# m=hashlib.sha<span class="hljs-number">256</span>()<br> <span class="hljs-attribute">4</span>  <br> <span class="hljs-attribute">5</span> m.update(&#x27;hello&#x27;.encode(&#x27;utf<span class="hljs-number">8</span>&#x27;))<br> <span class="hljs-attribute">6</span> print(m.hexdigest())  #<span class="hljs-number">5</span>d<span class="hljs-number">41402</span>abc<span class="hljs-number">4</span>b<span class="hljs-number">2</span>a<span class="hljs-number">76</span>b<span class="hljs-number">9719</span>d<span class="hljs-number">911017</span>c<span class="hljs-number">592</span><br> <span class="hljs-attribute">7</span>  <br> <span class="hljs-attribute">8</span> m.update(&#x27;alvin&#x27;.encode(&#x27;utf<span class="hljs-number">8</span>&#x27;))<br> <span class="hljs-attribute">9</span>  <br><span class="hljs-attribute">10</span> print(m.hexdigest())  #<span class="hljs-number">92</span>a<span class="hljs-number">7</span>e<span class="hljs-number">713</span>c<span class="hljs-number">30</span>abbb<span class="hljs-number">0319</span>fa<span class="hljs-number">07</span>da<span class="hljs-number">2</span>a<span class="hljs-number">5</span>c<span class="hljs-number">4</span>af<br><span class="hljs-attribute">11</span>  <br><span class="hljs-attribute">12</span> m<span class="hljs-number">2</span>=hashlib.md<span class="hljs-number">5</span>()<br><span class="hljs-attribute">13</span> m<span class="hljs-number">2</span>.update(&#x27;helloalvin&#x27;.encode(&#x27;utf<span class="hljs-number">8</span>&#x27;))<br><span class="hljs-attribute">14</span> print(m<span class="hljs-number">2</span>.hexdigest()) #<span class="hljs-number">92</span>a<span class="hljs-number">7</span>e<span class="hljs-number">713</span>c<span class="hljs-number">30</span>abbb<span class="hljs-number">0319</span>fa<span class="hljs-number">07</span>da<span class="hljs-number">2</span>a<span class="hljs-number">5</span>c<span class="hljs-number">4</span>af<br><span class="hljs-attribute">15</span> <br><span class="hljs-attribute">16</span> &#x27;&#x27;&#x27;<br><span class="hljs-attribute">17</span> 注意：把一段很长的数据update多次，与一次update这段长数据，得到的结果一样<br><span class="hljs-attribute">18</span> 但是update多次为校验大文件提供了可能。<br><span class="hljs-attribute">19</span> &#x27;&#x27;&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>以上加密算法虽然依然非常厉害，但时候存在缺陷，即：通过撞库可以反解。所以，有必要对加密算法中添加自定义key再来做加密。</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>import hashlib<br><span class="hljs-symbol">2 </span> <br><span class="hljs-symbol">3 </span># ######## <span class="hljs-number">256</span> ########<br><span class="hljs-symbol">4 </span> <br><span class="hljs-symbol">5 </span>hash = hashlib.sha256(<span class="hljs-comment">&#x27;898oaFs09f&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="hljs-symbol">6 </span>hash.update(<span class="hljs-comment">&#x27;alvin&#x27;.encode(&#x27;utf8&#x27;))</span><br><span class="hljs-symbol">7 </span><span class="hljs-keyword">print</span> (hash.hexdigest())#e79e68f070cdedcfe63eaf1a2e92c83b4cfb1b5c6bc452d214c1b7e77cdfd1c7<br></code></pre></td></tr></table></figure>
+
+<p>python 还有一个 hmac 模块，它内部对我们创建 key 和 内容 进行进一步的处理然后再加密:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import hmac<br>h1=hmac<span class="hljs-selector-class">.new</span>(<span class="hljs-string">&#x27;hello&#x27;</span><span class="hljs-selector-class">.encode</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>),digestmod=<span class="hljs-string">&#x27;md5&#x27;</span>)<br><span class="hljs-selector-tag">h1</span><span class="hljs-selector-class">.update</span>(<span class="hljs-string">&#x27;world&#x27;</span><span class="hljs-selector-class">.encode</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(h1.hexdigest()</span></span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="suprocess模块"><a href="#suprocess模块" class="headerlink" title="suprocess模块"></a>suprocess模块</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"> <span class="hljs-number">1</span> <span class="hljs-keyword">import</span>  subprocess<br> <span class="hljs-number">2</span> <br> <span class="hljs-number">3</span> <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string"> 4 sh-3.2# ls /Users/egon/Desktop |grep txt$</span><br><span class="hljs-string"> 5 mysql.txt</span><br><span class="hljs-string"> 6 tt.txt</span><br><span class="hljs-string"> 7 事物.txt</span><br><span class="hljs-string"> 8 &#x27;&#x27;&#x27;</span><br> <span class="hljs-number">9</span> <br><span class="hljs-number">10</span> res1=subprocess.Popen(<span class="hljs-string">&#x27;ls /Users/jieli/Desktop&#x27;</span>,shell=<span class="hljs-literal">True</span>,stdout=subprocess.PIPE)<br><span class="hljs-number">11</span> res=subprocess.Popen(<span class="hljs-string">&#x27;grep txt$&#x27;</span>,shell=<span class="hljs-literal">True</span>,stdin=res1.stdout,<br><span class="hljs-number">12</span>                  stdout=subprocess.PIPE)<br><span class="hljs-number">13</span> <br><span class="hljs-number">14</span> <span class="hljs-built_in">print</span>(res.stdout.read().decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><span class="hljs-number">15</span> <br><span class="hljs-number">16</span> <br><span class="hljs-number">17</span> <span class="hljs-comment">#等同于上面,但是上面的优势在于,一个数据流可以和另外一个数据流交互,可以通过爬虫得到结果然后交给grep</span><br><span class="hljs-number">18</span> res1=subprocess.Popen(<span class="hljs-string">&#x27;ls /Users/jieli/Desktop |grep txt$&#x27;</span>,shell=<span class="hljs-literal">True</span>,stdout=subprocess.PIPE)<br><span class="hljs-number">19</span> <span class="hljs-built_in">print</span>(res1.stdout.read().decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><span class="hljs-number">20</span> <br><span class="hljs-number">21</span> <br><span class="hljs-number">22</span> <span class="hljs-comment">#windows下:</span><br><span class="hljs-number">23</span> <span class="hljs-comment"># dir | findstr &#x27;test*&#x27;</span><br><span class="hljs-number">24</span> <span class="hljs-comment"># dir | findstr &#x27;txt$&#x27;</span><br><span class="hljs-number">25</span> <span class="hljs-keyword">import</span> subprocess<br><span class="hljs-number">26</span> res1=subprocess.Popen(<span class="hljs-string">r&#x27;dir C:\Users\Administrator\PycharmProjects\test\函数备课&#x27;</span>,shell=<span class="hljs-literal">True</span>,stdout=subprocess.PIPE)<br><span class="hljs-number">27</span> res=subprocess.Popen(<span class="hljs-string">&#x27;findstr test*&#x27;</span>,shell=<span class="hljs-literal">True</span>,stdin=res1.stdout,<br><span class="hljs-number">28</span>                  stdout=subprocess.PIPE)<br><span class="hljs-number">29</span> <br><span class="hljs-number">30</span> <span class="hljs-built_in">print</span>(res.stdout.read().decode(<span class="hljs-string">&#x27;gbk&#x27;</span>)) <span class="hljs-comment">#subprocess使用当前系统默认编码，得到结果为bytes类型，在windows下需要用gbk解码</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="logging模块"><a href="#logging模块" class="headerlink" title="logging模块"></a>logging模块</h2><h3 id="1-日志级别以及模块"><a href="#1-日志级别以及模块" class="headerlink" title="1.日志级别以及模块"></a>1.日志级别以及模块</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import<span class="hljs-built_in"> logging</span><br><span class="hljs-built_in"></span>logging.<span class="hljs-builtin-name">debug</span>(<span class="hljs-string">&quot;调试&quot;</span>)<br>logging.<span class="hljs-builtin-name">info</span>(<span class="hljs-string">&quot;消息信息&quot;</span>)<br>logging.<span class="hljs-builtin-name">warning</span>(<span class="hljs-string">&quot;警告信息&quot;</span>)<br>logging.<span class="hljs-builtin-name">error</span>(<span class="hljs-string">&quot;错误error信息&quot;</span>)<br>logging.critical(<span class="hljs-string">&quot;严重信息&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>logging为模块名，有5种输出级别，对应调试，信息，警告，错误，严重错误。</p>
+<p>该段代码运行效果：</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008145648843.png" srcset="/img/loading.gif" lazyload alt="image-20211008145648843"></p>
+<p>logging.告警级别 本质上就是直接在对应位置输出对应信息，信息内容包含在括号里面，这里打印时默认只输出了warning及其以上的信息，说明默认输出日志级别为warning。</p>
+<h3 id="logging-basicConfig"><a href="#logging-basicConfig" class="headerlink" title="logging.basicConfig"></a>logging.basicConfig</h3><p>#======介绍<br>    可在logging.basicConfig()函数中可通过具体参数来更改logging模块默认行为，可用参数有<br>    filename：用指定的文件名创建FiledHandler（后边会具体讲解handler的概念），这样日志会被存储在指定的文件中。<br>    filemode：文件打开方式，在指定了filename时使用这个参数，默认值为“a”还可指定为“w”。<br>    format：指定handler使用的日志显示格式。<br>    datefmt：指定日期时间格式。<br>    level：设置rootlogger（后边会讲解具体概念）的日志级别<br>    stream：用指定的stream创建StreamHandler。可以指定输出到    sys.stderr,sys.stdout或者文件，默认为sys.stderr。若同时列出了filename和stream两个参数，则stream参数会被忽略。</p>
+<p>format参数中可能用到的格式化串：<br>%(name)s Logger的名字<br>%(levelno)s 数字形式的日志级别<br>%(levelname)s 文本形式的日志级别<br>%(pathname)s 调用日志输出函数的模块的完整路径名，可能没有<br>%(filename)s 调用日志输出函数的模块的文件名<br>%(module)s 调用日志输出函数的模块名<br>%(funcName)s 调用日志输出函数的函数名<br>%(lineno)d 调用日志输出函数的语句所在的代码行<br>%(created)f 当前时间，用UNIX标准的表示时间的浮 点数表示<br>%(relativeCreated)d 输出日志信息时的，自Logger创建以 来的毫秒数<br>%(asctime)s 字符串形式的当前时间。默认格式是 “2003-07-08 16:49:45,896”。逗号后面的是毫秒<br>%(thread)d 线程ID。可能没有<br>%(threadName)s 线程名。可能没有<br>%(process)d 进程ID。可能没有<br>%(message)s用户输出的消息</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><br><br><br><br><span class="hljs-comment">#========使用</span><br>import<span class="hljs-built_in"> logging</span><br><span class="hljs-built_in"></span>logging.basicConfig(<span class="hljs-attribute">filename</span>=<span class="hljs-string">&#x27;access.log&#x27;</span>,<br>                    <span class="hljs-attribute">format</span>=<span class="hljs-string">&#x27;%(asctime)s - %(name)s - %(levelname)s -%(module)s:  %(message)s&#x27;</span>,<br>                    <span class="hljs-attribute">datefmt</span>=<span class="hljs-string">&#x27;%Y-%m-%d %H:%M:%S %p&#x27;</span>,<br>                    <span class="hljs-attribute">level</span>=10)<br><br>logging.<span class="hljs-builtin-name">debug</span>(<span class="hljs-string">&#x27;调试debug&#x27;</span>)<br>logging.<span class="hljs-builtin-name">info</span>(<span class="hljs-string">&#x27;消息info&#x27;</span>)<br>logging.<span class="hljs-builtin-name">warning</span>(<span class="hljs-string">&#x27;警告warn&#x27;</span>)<br>logging.<span class="hljs-builtin-name">error</span>(<span class="hljs-string">&#x27;错误error&#x27;</span>)<br>logging.critical(<span class="hljs-string">&#x27;严重critical&#x27;</span>)<br><br><br>part2: 可以为logging模块指定模块级的配置,即所有logger的配置<br></code></pre></td></tr></table></figure>
+
+<p>filename指定了日志文件，format指定其日志输出格式，datefmt指定日志输出时间的格式，level指定其日志输出级别，默认为30</p>
+<p><strong>level为10,20,30,40,50，对应调试，信息，警告，错误和严重错误。</strong></p>
+<h4 id="日志输出结果："><a href="#日志输出结果：" class="headerlink" title="日志输出结果："></a>日志输出结果：</h4><p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008151019274.png" srcset="/img/loading.gif" lazyload alt="image-20211008151019274"></p>
+<p>如果这里不指定filename则默认输出到pycharm屏幕（python屏幕）</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211008151301307.png" srcset="/img/loading.gif" lazyload alt="image-20211008151301307"></p>
+<h3 id="日志字典"><a href="#日志字典" class="headerlink" title="日志字典"></a>日志字典</h3><p>其作用为让日志在读取格式时直接通过自身模块从字典里读取形成多种格式的方法，字典本身多个key固定的名称。</p>
+<h4 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py:"></a>settings.py:</h4><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs clean">standard_format = <span class="hljs-string">&#x27;%(asctime)s - %(threadName)s:%(thread)d - 日志名字:%(name)s - %(filename)s:%(lineno)d -&#x27;</span> \<br>                  <span class="hljs-string">&#x27;%(levelname)s - %(message)s&#x27;</span><br><br>simple_format = <span class="hljs-string">&#x27;[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)s&#x27;</span><br><br>test_format = <span class="hljs-string">&#x27;%(asctime)s] %(message)s&#x27;</span><br><br># <span class="hljs-number">3</span>、日志配置字典<br>LOGGING_DIC = &#123;<br>    <span class="hljs-string">&#x27;version&#x27;</span>: <span class="hljs-number">1</span>,  #版本，可以随意定义<br>    <span class="hljs-string">&#x27;disable_existing_loggers&#x27;</span>: <span class="hljs-literal">False</span>,  # 禁用已经存在的logger实例，固定格式<br>    <span class="hljs-string">&#x27;formatters&#x27;</span>: &#123;<br>        <span class="hljs-string">&#x27;standard&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;format&#x27;</span>: standard_format<br>        &#125;,<br>        <span class="hljs-string">&#x27;simple&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;format&#x27;</span>: simple_format<br>        &#125;,<br>        <span class="hljs-string">&#x27;test&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;format&#x27;</span>: test_format<br>        &#125;,<br>    &#125;, # 定义日志 格式化的 工具，上面定义的standard_format，simple_format，test_format对应三种输出格式<br>    <span class="hljs-string">&#x27;filters&#x27;</span>: &#123;&#125;,# 过滤<br>    # handlers是日志的接收者，不同的handler会将日志输出到不同的位置<br>    <span class="hljs-string">&#x27;handlers&#x27;</span>: &#123;<br>        #打印到终端的日志<br>        <span class="hljs-string">&#x27;console&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;level&#x27;</span>: <span class="hljs-string">&#x27;DEBUG&#x27;</span>,<br>            <span class="hljs-string">&#x27;class&#x27;</span>: <span class="hljs-string">&#x27;logging.StreamHandler&#x27;</span>,  # 打印到屏幕<br>            <span class="hljs-string">&#x27;formatter&#x27;</span>: <span class="hljs-string">&#x27;simple&#x27;</span><br>        &#125;,<br>        <span class="hljs-string">&#x27;default&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;level&#x27;</span>: <span class="hljs-string">&#x27;DEBUG&#x27;</span>,<br>            <span class="hljs-string">&#x27;class&#x27;</span>: <span class="hljs-string">&#x27;logging.handlers.RotatingFileHandler&#x27;</span>,  # 保存到文件<br>            # <span class="hljs-string">&#x27;maxBytes&#x27;</span>: <span class="hljs-number">1024</span>*<span class="hljs-number">1024</span>*<span class="hljs-number">5</span>,  # 日志大小 <span class="hljs-number">5</span>M<br>            <span class="hljs-string">&#x27;maxBytes&#x27;</span>: <span class="hljs-number">1000</span>,<br>            <span class="hljs-string">&#x27;backupCount&#x27;</span>: <span class="hljs-number">5</span>,<br>            <span class="hljs-string">&#x27;filename&#x27;</span>: <span class="hljs-string">&#x27;a1.log&#x27;</span>,  # os.path.join(os.path.dirname(os.path.dirname(__file__)),<span class="hljs-string">&#x27;log&#x27;</span>,<span class="hljs-string">&#x27;a2.log&#x27;</span>)<br>            <span class="hljs-string">&#x27;encoding&#x27;</span>: <span class="hljs-string">&#x27;utf-8&#x27;</span>,<br>            <span class="hljs-string">&#x27;formatter&#x27;</span>: <span class="hljs-string">&#x27;standard&#x27;</span>,<br><br>        &#125;,<br>        #打印到文件的日志,收集info及以上的日志<br>        <span class="hljs-string">&#x27;other&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;level&#x27;</span>: <span class="hljs-string">&#x27;DEBUG&#x27;</span>,<br>            <span class="hljs-string">&#x27;class&#x27;</span>: <span class="hljs-string">&#x27;logging.FileHandler&#x27;</span>,  # 保存到文件<br>            <span class="hljs-string">&#x27;filename&#x27;</span>: <span class="hljs-string">&#x27;a2.log&#x27;</span>, # os.path.join(os.path.dirname(os.path.dirname(__file__)),<span class="hljs-string">&#x27;log&#x27;</span>,<span class="hljs-string">&#x27;a2.log&#x27;</span>)<br>            <span class="hljs-string">&#x27;encoding&#x27;</span>: <span class="hljs-string">&#x27;utf-8&#x27;</span>,<br>            <span class="hljs-string">&#x27;formatter&#x27;</span>: <span class="hljs-string">&#x27;test&#x27;</span>,<br><br>        &#125;,<br>    &#125;,<br>    # loggers是日志的产生者，产生的日志会传递给handler然后控制输出<br>    <span class="hljs-string">&#x27;loggers&#x27;</span>: &#123;<br>        #logging.getLogger(__name__)拿到的logger配置<br>        <span class="hljs-string">&#x27;kkk&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;handlers&#x27;</span>: [<span class="hljs-string">&#x27;console&#x27;</span>,<span class="hljs-string">&#x27;other&#x27;</span>],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕<br>            <span class="hljs-string">&#x27;level&#x27;</span>: <span class="hljs-string">&#x27;DEBUG&#x27;</span>, # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)<br>            <span class="hljs-string">&#x27;propagate&#x27;</span>: <span class="hljs-literal">False</span>,  # 默认为<span class="hljs-literal">True</span>，向上（更高level的logger）传递，通常设置为<span class="hljs-literal">False</span>即可，否则会一份日志向上层层传递<br>        &#125;,<br>        <span class="hljs-string">&#x27;终端提示&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;handlers&#x27;</span>: [<span class="hljs-string">&#x27;console&#x27;</span>,],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕<br>            <span class="hljs-string">&#x27;level&#x27;</span>: <span class="hljs-string">&#x27;DEBUG&#x27;</span>,  # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)<br>            <span class="hljs-string">&#x27;propagate&#x27;</span>: <span class="hljs-literal">False</span>,  # 默认为<span class="hljs-literal">True</span>，向上（更高level的logger）传递，通常设置为<span class="hljs-literal">False</span>即可，否则会一份日志向上层层传递<br>        &#125;,<br>        <span class="hljs-string">&#x27;&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;handlers&#x27;</span>: [<span class="hljs-string">&#x27;default&#x27;</span>, ],  # 这里把上面定义的两个handler都加上，即log数据既写入文件又打印到屏幕<br>            <span class="hljs-string">&#x27;level&#x27;</span>: <span class="hljs-string">&#x27;DEBUG&#x27;</span>,  # loggers(第一层日志级别关限制)---&gt;handlers(第二层日志级别关卡限制)<br>            <span class="hljs-string">&#x27;propagate&#x27;</span>: <span class="hljs-literal">False</span>,  # 默认为<span class="hljs-literal">True</span>，向上（更高level的logger）传递，通常设置为<span class="hljs-literal">False</span>即可，否则会一份日志向上层层传递<br>        &#125;,<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="src-py-主文件-："><a href="#src-py-主文件-：" class="headerlink" title="src.py(主文件)："></a>src.py(主文件)：</h4><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> logging #导入logging模块<br><br><span class="hljs-keyword">import</span> settings #导入settings文件，上面定义的settings.py<br><span class="hljs-keyword">from</span> logging <span class="hljs-keyword">import</span> config,getLogger  #导入config和getlogger 这里需要单独导入<br><br>config.dictConfig(settings.LOGGING_DIC) #LOGGING_DIC为字典名，这里settings导入字典名，然后dictconfig解析。固定格式，只需将LOGGING_DIC替换为需要的字典名即可<br>logger4=getLogger(<span class="hljs-string">&#x27;终端提示&#x27;</span>) #loggers为发送者，这里也是将日志输出者定义为对应的loggers，并将其定义成一个变量。<br>logger4.info(<span class="hljs-string">&#x27;logger4产生的info日志&#x27;</span>)#调用info发送日志。<br></code></pre></td></tr></table></figure>
+
+<h4 id="代码步骤"><a href="#代码步骤" class="headerlink" title="代码步骤:"></a>代码步骤:</h4><h5 id="settings-py-1"><a href="#settings-py-1" class="headerlink" title="settings.py:"></a>settings.py:</h5><p>standard_format,simple_format,test_format定义三种输出格式</p>
+<p><strong>LOGGING_DIC</strong>:</p>
+<p>​    字典定义了日志输出相关配置</p>
+<p>1.version，disable_existing_loggers 其格式固定就行</p>
+<p>2.formatters 其中key也是固定的，里面定义了三种日志输出格式，这里里面的key和value都是自己定义的，其三种value也对应一开始定义的三种变量。</p>
+<p>3.filters 略（过滤）</p>
+<p>4.handlers：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs aspectj">handlers是日志的接收者，不同的<span class="hljs-keyword">handler</span>会将日志输出到不同的位置<br></code></pre></td></tr></table></figure>
+
+<p>这里定义了两种输出位置。level为输出级别，class为输出方式，formatter为其对应输出格式,filename输出文件,encoding输出字符。这里相当于定义其日志输出位置以及将上面定义的日志输出格式赋给日志这个日志输出位置。</p>
+<p>5.loggers：</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># loggers是日志的产生者，产生的日志会传递给handler然后控制输出</span><br></code></pre></td></tr></table></figure>
+
+<p>这里loggers与handlers相当于是下级对上级，loggers产生日志，handlers接受日志，两边都可以设置其level，如果loggers的level低于handlers，那么实际日志输出只会根据handlers的level来进行输出（因为loggers发送了低于handlers的日志，但handlers只会接受并输出自己的level以上的。），正常情况两边level应一致。</p>
+<p>handlers定义其输出位置（方式），level为其输出级别，propagate固定false。</p>
+<p>如果定义的loggers为空 ‘’ 的话，后面在使用getlogger找不到loggers的所有日志名都会匹配到空。</p>
+<h5 id="src-py"><a href="#src-py" class="headerlink" title="src.py"></a>src.py</h5><p>如上备注所示。</p>
+<p><strong>其本身格式基本上为固定，直接拿着两个文件稍作修改就可以用于各种工作场景，无需过分理解，能看懂代码格式即可</strong></p>
+<p><strong>日志字典本身就算是python日志的功能之一，所以其字典里面需要定义固定的key让其logging模块去解析它。而非自己定义一个字典再自己去解析，其格式固定。</strong></p>
+<p>字典顺序：</p>
+<p>loggers（日志输出者）-》handlers（接受者）-》formatters（日志输出格式（standard_format,simple_format,test_format）</p>
+<h3 id="日志轮转："><a href="#日志轮转：" class="headerlink" title="日志轮转："></a>日志轮转：</h3><p>相当于日志备份，logging自带日志备份，可以设置日志最大大小和备份日志最大个数</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211009154143282.png" srcset="/img/loading.gif" lazyload alt="image-20211009154143282"></p>
+<p>在字典handlers中有两个设置：maxbytes和backupcount</p>
+<p>maxbytes为最大大小，其格式为字节</p>
+<p>backupcount是最大备份文件为多少</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> settings #导入settings文件，上面定义的settings.py<br><span class="hljs-keyword">from</span> logging <span class="hljs-keyword">import</span> config,getLogger  #导入config和getlogger 这里需要单独导入<br><br>config.dictConfig(settings.LOGGING_DIC) #LOGGING_DIC为字典名，这里settings导入字典名，然后dictconfig解析。固定格式，只需将LOGGING_DIC替换为需要的字典名即可<br>logger4=getLogger(<span class="hljs-string">&#x27;随便输入&#x27;</span>) #loggers为发送者，这里也是将日志输出者定义为对应的loggers，并将其定义成一个变量。<br>logger4.info(<span class="hljs-string">&#x27;logger4产生的info日志&#x27;</span>)#调用info发送日志。<br></code></pre></td></tr></table></figure>
+
+<p>运行主代码程序输出日志以后，当日志大小大于5字节，就会备份成”文件名.1”,然后如果再执行程序，则会将1备份成2，将源文件备份成1，依次类推到5。</p>
+<p><img src="https://yinshiweiysw.github.io/images/assets/image-20211009154312364.png" srcset="/img/loading.gif" lazyload alt="image-20211009154312364"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/28/%E5%BD%A2%E5%8F%82%E4%B8%8E%E5%AE%9E%E5%8F%82%E4%BB%8B%E7%BB%8D_hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">形参与实参介绍</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/28/%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5_hexo/">
+                        <span class="hidden-mobile">模块导入</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
